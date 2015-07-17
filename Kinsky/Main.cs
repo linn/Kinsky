@@ -9,7 +9,7 @@ namespace KinskyTouch
 {
     public class Application
     {
-        private readonly string kApiKey = "7898d7061464381703ade7e3c9c305f64a9db1c4";
+        private readonly string kApiKey = "129c76d1b4043e568d19a9fea8a1f5534cdae703";
 
         static void Main (string[] args)
         {

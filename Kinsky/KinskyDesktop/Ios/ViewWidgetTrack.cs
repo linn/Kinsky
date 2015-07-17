@@ -643,7 +643,7 @@ namespace KinskyTouch
         {
             if(aImage == KinskyTouch.Properties.ResourceManager.Loading)
             {
-                iButton.SetImage(KinskyTouch.Properties.ResourceManager.Button, UIControlState.Normal);
+                iButton.SetImage(aImage, UIControlState.Normal);
             }
             else
             {
