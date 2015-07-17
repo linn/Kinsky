@@ -57,5 +57,9 @@
 	<false/>
 	<key>CFBundleShortVersionString</key>
 	<string>4.3.16</string>
+	<key>XSLaunchImageAssets</key>
+	<string>Resources/Images.xcassets/LaunchImage.launchimage</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>
