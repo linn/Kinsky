@@ -131,7 +131,6 @@
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <None Include="packages.config" />
-    <None Include="KinskyDesktop\Ios\Info.plist" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Linn\AssemblyInfoModel.cs" />
@@ -331,7 +330,6 @@
     </Compile>
     <Compile Include="KinskyDesktop\Ios\ConfigController.cs" />
     <Compile Include="KinskyDesktop\Ios\HelperKinskyTouch.cs" />
-    <Compile Include="KinskyDesktop\Ios\Main.cs" />
     <Compile Include="KinskyDesktop\Ios\MainWindowIpad.xib.designer.cs">
       <DependentUpon>MainWindowIpad.xib</DependentUpon>
     </Compile>
@@ -375,6 +373,7 @@
       <DependentUpon>VolumeRotary.xib</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Main.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
