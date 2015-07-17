@@ -68,7 +68,6 @@ namespace KinskyTouch
 		{
 			iScheduler = new Scheduler("StackScheduler", 1);
             iQueryOptions = new QueryOptions();
-            Xamarin.Insights.Identify(Helper.OptionInstallId.Value, null);
 		}
 
         public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
