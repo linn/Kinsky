@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinsky", "Kinsky\Kinsky.csproj", "{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.Debug|iPhone.Build.0 = Debug|iPhone
+		{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.Release|iPhone.ActiveCfg = Release|iPhone
+		{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.Release|iPhone.Build.0 = Release|iPhone
+		{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+EndGlobal
