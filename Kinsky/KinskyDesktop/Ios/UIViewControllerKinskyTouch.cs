@@ -296,7 +296,7 @@ namespace KinskyTouch
             buttonArtwork.ImageView.ContentMode = UIViewContentMode.ScaleAspectFit;
 
             iView = new UIView(new CGRect(0.0f, 0.0f, 45.0f, 29.0f));
-            iView.AddSubview(buttonArtwork);
+            //iView.AddSubview(buttonArtwork);
             iView.AddSubview(buttonList);
 
             UIBarButtonItem b = new UIBarButtonItem(iView);

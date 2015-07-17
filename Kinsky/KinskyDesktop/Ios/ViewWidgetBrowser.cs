@@ -1377,6 +1377,7 @@ namespace KinskyTouch
 					}
                     TableView.DataSource = iDataSource;
                     TableView.Delegate = new ViewWidgetBrowser.Delegate(this, iLocation, iPlaySupport, iDataSource, iConfigController, iOptionInsertMode, iOptionBreadcrumbTrail);
+                    TableView.SectionIndexBackgroundColor = UIColor.Clear;
 
                     UILongPressGestureRecognizer gesture = new UILongPressGestureRecognizer(LongPressGesture);
                     gesture.MinimumPressDuration = 1.0f;
@@ -1399,6 +1400,7 @@ namespace KinskyTouch
                     iSearchController.Delegate = new SearchDisplayDelegate(dataSource, container, gesture);
                     iSearchController.SearchResultsDataSource = dataSource;
                     iSearchController.SearchResultsDelegate = new Delegate(this, iLocation, iPlaySupport, dataSource, iConfigController, iOptionInsertMode, iOptionBreadcrumbTrail);
+                    iSearchController.SearchResultsTableView.SectionIndexBackgroundColor = UIColor.Clear;
 
                     /*iSearchController.Active = iSearchWasActive;
                     if(!string.IsNullOrEmpty(iSearchString))

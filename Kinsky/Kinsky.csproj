@@ -487,6 +487,7 @@
     <BundleResource Include="Resources\Track.png" />
     <BundleResource Include="Resources\UPNP.png" />
     <BundleResource Include="Resources\Video.png" />
+    <BundleResource Include="Resources\Library.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork" />
