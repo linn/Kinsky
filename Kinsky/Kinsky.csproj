@@ -81,8 +81,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhone' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\AdHoc</OutputPath>
-    <IntermediateOutputPath>..\obj\AdHoc</IntermediateOutputPath>
+    <OutputPath>..\bin\iPhone\AdHoc</OutputPath>
+    <IntermediateOutputPath>..\obj\iPhone\AdHoc</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Distribution</CodesignKey>
@@ -99,8 +99,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\AppStore</OutputPath>
-    <IntermediateOutputPath>..\obj\AppStore</IntermediateOutputPath>
+    <OutputPath>..\bin\iPhone\AppStore</OutputPath>
+    <IntermediateOutputPath>..\obj\iPhone\AppStore</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Distribution</CodesignKey>

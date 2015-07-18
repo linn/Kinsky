@@ -56,10 +56,12 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>CFBundleShortVersionString</key>
-	<string>4.3.16</string>
+	<string>4.3.17</string>
 	<key>XSLaunchImageAssets</key>
 	<string>Resources/Images.xcassets/LaunchImage.launchimage</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>CFBundleVersion</key>
+	<string>4.3.17</string>
 </dict>
 </plist>
