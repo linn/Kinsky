@@ -9,6 +9,8 @@ Global
 		Release|iPhone = Release|iPhone
 		Release|iPhoneSimulator = Release|iPhoneSimulator
 		Debug|iPhone = Debug|iPhone
+                AdHoc|iPhone = AdHoc|iPhone
+                AppStore|iPhone = AppStore|iPhone
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.Debug|iPhone.ActiveCfg = Debug|iPhone
@@ -19,5 +21,9 @@ Global
 		{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.Release|iPhone.Build.0 = Release|iPhone
 		{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+                {BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.AdHoc|iPhone.ActiveCfg = AdHoc|iPhone
+                {BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.AdHoc|iPhone.Build.0 = AdHoc|iPhone
+                {BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+                {BE8AB759-0C3E-4965-921F-CC2EFE4F5645}.AppStore|iPhone.Build.0 = AppStore|iPhone
 	EndGlobalSection
 EndGlobal
