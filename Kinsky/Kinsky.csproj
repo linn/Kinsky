@@ -14,8 +14,8 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\iPhoneSimulator\Debug</OutputPath>
-    <IntermediateOutputPath>..\obj\iPhoneSimulator\Debug</IntermediateOutputPath>
+    <OutputPath>..\bin\Kinsky\iPhoneSimulator\Debug</OutputPath>
+    <IntermediateOutputPath>..\obj\Kinsky\iPhoneSimulator\Debug</IntermediateOutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -32,8 +32,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\iPhone\Release</OutputPath>
-    <IntermediateOutputPath>..\obj\iPhone\Release</IntermediateOutputPath>
+    <OutputPath>..\bin\Kinsky\iPhone\Release</OutputPath>
+    <IntermediateOutputPath>..\obj\Kinsky\iPhone\Release</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
@@ -49,8 +49,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\iPhoneSimulator\Release</OutputPath>
-    <IntermediateOutputPath>..\obj\iPhoneSimulator\Release</IntermediateOutputPath>
+    <OutputPath>..\bin\Kinsky\iPhoneSimulator\Release</OutputPath>
+    <IntermediateOutputPath>..\obj\Kinsky\iPhoneSimulator\Release</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchArch>i386</MtouchArch>
@@ -61,8 +61,8 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\iPhone\Debug</OutputPath>
-    <IntermediateOutputPath>..\obj\iPhone\Debug</IntermediateOutputPath>
+    <OutputPath>..\bin\Kinsky\iPhone\Debug</OutputPath>
+    <IntermediateOutputPath>..\obj\Kinsky\iPhone\Debug</IntermediateOutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -81,8 +81,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhone' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\iPhone\AdHoc</OutputPath>
-    <IntermediateOutputPath>..\obj\iPhone\AdHoc</IntermediateOutputPath>
+    <OutputPath>..\bin\Kinsky\iPhone\AdHoc</OutputPath>
+    <IntermediateOutputPath>..\obj\Kinsky\iPhone\AdHoc</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Distribution</CodesignKey>
@@ -100,8 +100,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\iPhone\AppStore</OutputPath>
-    <IntermediateOutputPath>..\obj\iPhone\AppStore</IntermediateOutputPath>
+    <OutputPath>..\bin\Kinsky\iPhone\AppStore</OutputPath>
+    <IntermediateOutputPath>..\obj\Kinsky\iPhone\AppStore</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Distribution</CodesignKey>
