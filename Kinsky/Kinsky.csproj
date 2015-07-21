@@ -153,6 +153,9 @@
     <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default~iphone.png" />
     <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default%402x~iphone.png" />
     <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default-568h%402x~iphone.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoIphone6.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoIpad2.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoIpad5.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="KinskyDesktop\Ios\ArtworkTileView.xib" />
