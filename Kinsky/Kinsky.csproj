@@ -156,6 +156,7 @@
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoIphone6.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoIpad2.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoIpad5.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoSpotlightIpad2.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="KinskyDesktop\Ios\ArtworkTileView.xib" />
