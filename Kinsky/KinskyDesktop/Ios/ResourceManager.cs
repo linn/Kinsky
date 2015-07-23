@@ -438,19 +438,6 @@ namespace KinskyTouch.Properties
                 return iImageStandby;
             }
         }
-
-        private static UIImage iImageTableViewBackground;
-        internal static UIImage TableViewBackground
-		{
-            get
-            {
-                if(iImageTableViewBackground == null)
-                {
-                    iImageTableViewBackground = GetObject("UITableViewBackground");
-                }
-                return iImageTableViewBackground;
-             }
-        }
     }
 }
 
