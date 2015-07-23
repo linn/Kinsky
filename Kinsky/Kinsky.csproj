@@ -109,6 +109,7 @@
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <IpaPackageName>InstallerKinsky</IpaPackageName>
+    <IpaIncludeArtwork>false</IpaIncludeArtwork>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
