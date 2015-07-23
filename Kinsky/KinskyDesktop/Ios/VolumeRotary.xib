@@ -69,7 +69,7 @@
 						<string key="NSFrameSize">{196, 196}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<object class="NSColor" key="IBUIBackgroundColor" id="150403938">
+						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
@@ -79,7 +79,10 @@
 				<string key="NSFrame">{{0, 20}, {768, 1004}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="IBUIBackgroundColor" ref="150403938"/>
+				<object class="NSColor" key="IBUIBackgroundColor">
+					<int key="NSColorSpace">3</int>
+					<bytes key="NSWhite">MC4xODQyMTA1MjYzIDAuNzUAA</bytes>
+				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
 					<int key="IBUIStatusBarStyle">2</int>
 				</object>

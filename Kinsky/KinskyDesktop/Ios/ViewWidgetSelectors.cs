@@ -136,7 +136,7 @@ namespace KinskyTouch
 				navigationController.View.BackgroundColor = UIColor.Clear;
 				navigationController.NavigationBar.BarStyle = UIBarStyle.BlackTranslucent;
 
-				iPopover.BackgroundColor = UIColor.Clear;//new UIColor(0.10f, 0.10f, 0.10f, 1.0f); //UIColor.Black;
+				iPopover.BackgroundColor = UIColor.FromRGBA(0.18f, 0.18f, 0.18f, 0.85f);//UIColor.Clear;//new UIColor(0.10f, 0.10f, 0.10f, 1.0f); //UIColor.Black;
 
                 iRefreshButton.Clicked += RefreshClicked;
 

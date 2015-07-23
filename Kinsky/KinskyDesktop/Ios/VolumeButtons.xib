@@ -116,7 +116,7 @@
 				<reference key="NSNextKeyView" ref="753697978"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MCAwAA</bytes>
+					<bytes key="NSWhite">MC4xODQyMTA1MjYzIDAuNzUAA</bytes>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
 					<int key="IBUIStatusBarStyle">2</int>

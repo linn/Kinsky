@@ -121,7 +121,7 @@ namespace KinskyTouch
                     view.BackgroundColor = UIColor.FromRGBA(0.0f, 0.0f, 0.0f, 0.6f);
 
 					iViewWidgetTimeRotary.View.Frame = new CGRect((nfloat)((view.Bounds.Width - 196.0f) * 0.5f), (nfloat)((view.Bounds.Height - 196.0f) * 0.5), (nfloat)(196.0f), (nfloat)(196.0f));
-                    iViewWidgetTimeRotary.View.BackgroundColor = UIColor.Clear;
+					iViewWidgetTimeRotary.View.BackgroundColor = UIColor.Clear;
                     view.AddSubview(iViewWidgetTimeRotary.View);
 
                     iViewController.View.AddSubview(view);
