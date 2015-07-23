@@ -109,7 +109,6 @@
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <IpaPackageName>InstallerKinsky</IpaPackageName>
-    <IpaIncludeArtwork>false</IpaIncludeArtwork>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
@@ -397,6 +396,7 @@
     <BundleResource Include="Resources\UPNP.png" />
     <BundleResource Include="Resources\Video.png" />
     <BundleResource Include="Resources\Library.png" />
+    <BundleResource Include="Resources\KinskyLogoAbout.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork" />
