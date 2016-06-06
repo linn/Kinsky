@@ -1,0 +1,45 @@
+﻿<Window x:Class="KinskyDesktopWpf.UpdateDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    Title="Update Kinsky" Height="140" Width="600"
+    ShowInTaskbar="False"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None" 
+    ResizeMode="NoResize"
+    Background="Transparent" 
+    AllowsTransparency="True"
+    Cursor="{DynamicResource Cursor}"
+    Closed="Window_Closed"
+>
+    <Window.Resources>
+
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        CanExecute="CloseCanExecute"
+                        Executed="CloseExecuted" />
+
+    </Window.CommandBindings>
+    <kd:WindowChrome Title="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=Title}">
+        <DockPanel LastChildFill="False">
+            <Button x:Name="btnStatus" Style="{StaticResource HiddenContentButton}" Click="txtStatus_Click" DockPanel.Dock="Top" Height="30" Margin="5,0,0,0">
+                <TextBlock x:Name="txtStatus" Text="Checking for updates..." />
+            </Button>
+            <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" HorizontalAlignment="Stretch" Margin="0,0,5,5">
+                <Button x:Name="btnClose" Click="btnClose_Click" HorizontalContentAlignment="Stretch" DockPanel.Dock="Right">
+                    <Label Margin="1" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBlock x:Name="txtClose" Margin="10,0,10,0" Text="Close" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Label>
+                </Button>
+                <Button x:Name="btnInstall" Click="btnInstall_Click" HorizontalContentAlignment="Stretch" DockPanel.Dock="Right" Visibility="Collapsed">
+                    <Label Margin="1" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBlock Margin="10,0,10,0" Text="Install" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Label>
+                </Button>
+            </DockPanel>
+            <ProgressBar x:Name="progressBar" DockPanel.Dock="Top" IsIndeterminate="True" Height="20" Margin="5" />
+        </DockPanel>
+    </kd:WindowChrome>
+</Window>

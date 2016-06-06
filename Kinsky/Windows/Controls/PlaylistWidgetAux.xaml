@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="KinskyDesktopWpf.PlaylistWidgetAux"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf">
+    <UserControl.Resources>
+
+    </UserControl.Resources>
+    <Image Height="128" Source="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                           AncestorType={x:Type kd:PlaylistWidgetAux}},
+                                                        Path=AuxImageSource}" />
+</UserControl>

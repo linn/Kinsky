@@ -1,0 +1,50 @@
+﻿<Window x:Class="KinskyDesktopWpf.DetailsDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:upnp="clr-namespace:Upnp;assembly=OssDidlLite"
+    Title="Item Details:" Height="320" Width="450" MinHeight="300" MinWidth="400"
+    ShowInTaskbar="False"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None" 
+    ResizeMode="CanResize"
+    Background="Transparent" 
+    AllowsTransparency="True"
+    Cursor="{DynamicResource Cursor}"
+>
+    <Window.Resources>
+
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        CanExecute="CloseCanExecute"
+                        Executed="CloseExecuted" />
+
+    </Window.CommandBindings>
+    <kd:WindowChrome Title="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=Title}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Border BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1" CornerRadius="4"  Margin="5">
+                <ScrollViewer DockPanel.Dock="Top" Margin="0,5,0,5">
+                    <kd:UpnpObjectDetailsDisplay x:Name="details" />
+                </ScrollViewer>
+            </Border>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,5,10,10" HorizontalAlignment="Right">
+                <Button x:Name="CopyToClipboard" Click="ClipboardButton_Click" Margin="0,0,10,0" ToolTip="Copies the item's Xml to the clipboard">
+                    <Label Margin="1" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBlock Margin="10,0,10,0" Text="Copy to clipboard" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Label>
+                </Button>
+                <Button Command="ApplicationCommands.Close" Grid.Row="1" HorizontalContentAlignment="Stretch" >
+                    <Label Margin="1" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBlock Margin="10,0,10,0" Text="Close" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Label>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </kd:WindowChrome>
+</Window>

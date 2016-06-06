@@ -1,0 +1,15 @@
+<ResourceDictionary 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:kd="clr-namespace:KinskyDesktopWpf">
+    
+    <Style x:Key="{x:Type kd:TileView}" TargetType="{x:Type ListView}" BasedOn="{StaticResource {x:Type ListBox}}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="ItemContainerStyle" 
+            Value="{Binding (ListView.View).ItemContainerStyle,
+            RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="ItemTemplate" 
+            Value="{Binding (ListView.View).ItemTemplate,
+            RelativeSource={RelativeSource Self}}"/>
+    </Style>
+</ResourceDictionary>

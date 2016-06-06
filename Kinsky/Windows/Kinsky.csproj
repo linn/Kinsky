@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DAEEC201-AEE9-48DC-8606-9DA049663E01}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KinskyDesktopWpf</RootNamespace>
+    <AssemblyName>Kinsky</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\Kinsky\bin\Windows\Debug\</OutputPath>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\Windows\Debug\</IntermediateOutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\Kinsky\bin\Windows\Release\</OutputPath>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\Windows\Release\</IntermediateOutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\packages\Linn.SharpZipLib.0.86.0.7\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TagLib.Portable, Version=2.2.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\TagLib.Portable.1.0.4\lib\portable-net45+win+wpa81+wp8+MonoAndroid10+xamarinios10+MonoTouch10\TagLib.Portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="Xamarin.Insights, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Insights.1.10.4.112\lib\portable-win+net45+wp80+windows8+wpa+MonoAndroid10+MonoTouch10\Xamarin.Insights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AboutDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\BookmarkNotFoundDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CrashLogDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DetailsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\IndeterminateProgressBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\OptionsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PlaylistWidget.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PlaylistWidgetAux.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RockerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RotaryControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SavePlaylistDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\StringInputDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ThreekArray.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\UpdateDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\UpnpObjectDetailsDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\UserLogDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ViewKinsky.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ViewWidgetBreadcrumb.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ViewWidgetBrowser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ViewWidgetTrackDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>Resources/ComboBox</CustomToolNamespace>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ControlStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\MenuItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ScrollBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Shared.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\KinskyDesktop.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Slider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\TileViewStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\WindowChromeStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\CrashLogDumperForm.cs" />
+    <Compile Include="Classes\ImageLoader.cs" />
+    <Compile Include="Classes\ViewModels.cs" />
+    <Compile Include="Controls\BookmarkNotFoundDialog.xaml.cs">
+      <DependentUpon>BookmarkNotFoundDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CrashLogDialog.xaml.cs">
+      <DependentUpon>CrashLogDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DistributingWrapPanel.cs" />
+    <Compile Include="Controls\KinskyDesktop.xaml.cs">
+      <DependentUpon>KinskyDesktop.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\AppRestartHandler.cs" />
+    <Compile Include="Classes\Commands.cs" />
+    <Compile Include="Classes\DragHelper.cs" />
+    <Compile Include="Classes\DropConverter.cs" />
+    <Compile Include="Classes\Extensions.cs" />
+    <Compile Include="Classes\IPlaylistWidget.cs" />
+    <Compile Include="Classes\LazyLoadingList.cs" />
+    <Compile Include="Classes\MediaProviderSupport.cs" />
+    <Compile Include="Classes\StackStatusHandlerWpf.cs" />
+    <Compile Include="Classes\UIOptions.cs" />
+    <Compile Include="Classes\ValueConverters.cs" />
+    <Compile Include="Controls\AboutDialog.xaml.cs">
+      <DependentUpon>AboutDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BreadcrumbPanel.cs" />
+    <Compile Include="Controls\DetailsDialog.xaml.cs">
+      <DependentUpon>DetailsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IndeterminateProgressBar.xaml.cs">
+      <DependentUpon>IndeterminateProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Kontrol.cs" />
+    <Compile Include="Controls\KontrolInnerRing.cs" />
+    <Compile Include="Controls\OptionsDialog.xaml.cs">
+      <DependentUpon>OptionsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PlaylistWidget.xaml.cs">
+      <DependentUpon>PlaylistWidget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PlaylistWidgetAux.xaml.cs">
+      <DependentUpon>PlaylistWidgetAux.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RockerControl.xaml.cs">
+      <DependentUpon>RockerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RotaryControl.xaml.cs">
+      <DependentUpon>RotaryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SavePlaylistDialog.xaml.cs">
+      <DependentUpon>SavePlaylistDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StringInputDialog.xaml.cs">
+      <DependentUpon>StringInputDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SystrayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\SystrayForm.designer.cs">
+      <DependentUpon>SystrayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ThreekArray.xaml.cs">
+      <DependentUpon>ThreekArray.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TileView.cs" />
+    <Compile Include="Controls\UpdateDialog.xaml.cs">
+      <DependentUpon>UpdateDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UpnpObjectDetailsDisplay.xaml.cs">
+      <DependentUpon>UpnpObjectDetailsDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserLogDialog.xaml.cs">
+      <DependentUpon>UserLogDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ViewKinsky.xaml.cs">
+      <DependentUpon>ViewKinsky.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Views.cs" />
+    <Compile Include="Controls\ViewWidgetBreadcrumb.xaml.cs">
+      <DependentUpon>ViewWidgetBreadcrumb.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ViewWidgetBrowser.xaml.cs">
+      <DependentUpon>ViewWidgetBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ViewWidgetTrackDisplay.xaml.cs">
+      <DependentUpon>ViewWidgetTrackDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\VirtualizingTilePanel.cs">
+    </Compile>
+    <Compile Include="Controls\WindowChrome.cs">
+    </Compile>
+    <Compile Include="..\Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Resources\ControlStyles.xaml.cs">
+      <DependentUpon>ControlStyles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\TileViewStyle.xaml.cs">
+      <DependentUpon>TileViewStyle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\WindowChromeStyle.xaml.cs">
+      <DependentUpon>WindowChromeStyle.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="..\Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Linn\Kinsky\BookmarkManager.cs">
+      <Link>Linn\Kinsky\BookmarkManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Browser.cs">
+      <Link>Linn\Kinsky\Browser.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Container.cs">
+      <Link>Linn\Kinsky\Container.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ContentCollector.cs">
+      <Link>Linn\Kinsky\ContentCollector.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ContentDirectoryLocator.cs">
+      <Link>Linn\Kinsky\ContentDirectoryLocator.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Controllers.cs">
+      <Link>Linn\Kinsky\Controllers.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\FileItc2.cs">
+      <Link>Linn\Kinsky\FileItc2.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\HelperKinsky.cs">
+      <Link>Linn\Kinsky\HelperKinsky.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\HttpClient.cs">
+      <Link>Linn\Kinsky\HttpClient.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\HttpServer.cs">
+      <Link>Linn\Kinsky\HttpServer.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\IconResolver.cs">
+      <Link>Linn\Kinsky\IconResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ItemInfo.cs">
+      <Link>Linn\Kinsky\ItemInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Library.cs">
+      <Link>Linn\Kinsky\Library.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\LocalPlaylists.cs">
+      <Link>Linn\Kinsky\LocalPlaylists.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\MediaProvider.cs">
+      <Link>Linn\Kinsky\MediaProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\MediaRetriever.cs">
+      <Link>Linn\Kinsky\MediaRetriever.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Mediators.cs">
+      <Link>Linn\Kinsky\Mediators.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Models.cs">
+      <Link>Linn\Kinsky\Models.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\MultipusSourceList.cs">
+      <Link>Linn\Kinsky\MultipusSourceList.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\OptionStartupRoom.cs">
+      <Link>Linn\Kinsky\OptionStartupRoom.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Playlist.cs">
+      <Link>Linn\Kinsky\Playlist.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\PlaylistDisplayHelper.cs">
+      <Link>Linn\Kinsky\PlaylistDisplayHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\PlaylistSupport.cs">
+      <Link>Linn\Kinsky\PlaylistSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\PluginManager.cs">
+      <Link>Linn\Kinsky\PluginManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\RotaryControlTracker.cs">
+      <Link>Linn\Kinsky\RotaryControlTracker.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\SaveSupport.cs">
+      <Link>Linn\Kinsky\SaveSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\SharedPlaylists.cs">
+      <Link>Linn\Kinsky\SharedPlaylists.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Support.cs">
+      <Link>Linn\Kinsky\Support.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ViewMasters.cs">
+      <Link>Linn\Kinsky\ViewMasters.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Views.cs">
+      <Link>Linn\Kinsky\Views.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Linn\Kinsky\DropConverter.cs">
+      <Link>Linn\Kinsky\DropConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\UpnpObjectFactory.cs">
+      <Link>Linn\Kinsky\UpnpObjectFactory.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\linnOssLib\Windows\linnOssLib.csproj">
+      <Project>{8475CD6A-A901-4D38-BCB4-BA2B160B6D04}</Project>
+      <Name>linnOssLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

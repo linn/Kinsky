@@ -1,0 +1,31 @@
+<ResourceDictionary 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:s="clr-namespace:System;assembly=mscorlib">
+
+    <Style x:Key="{x:Type ListBox}" TargetType="{x:Type ListBox}">
+        <Setter Property="ToolTipService.InitialShowDelay" Value="{DynamicResource ToolTipInitialShowDelay}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <ScrollViewer Padding="{TemplateBinding Control.Padding}" Focusable="False">
+                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                    </ScrollViewer>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ItemsControl.IsGrouping">
+                            <Setter Property="ScrollViewer.CanContentScroll">
+                                <Setter.Value>
+                                    <s:Boolean>False</s:Boolean>
+                                </Setter.Value>
+                            </Setter>
+                            <Trigger.Value>
+                                <s:Boolean>True</s:Boolean>
+                            </Trigger.Value>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

@@ -1,0 +1,98 @@
+﻿<Window x:Class="KinskyDesktopWpf.KinskyDesktop"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf"
+    Title="Kinsky" Height="600" Width="800"
+    Closed="window_Closed"
+    WindowStyle="None" 
+    Background="Transparent" 
+    AllowsTransparency="True"
+    Cursor="{DynamicResource Cursor}"
+    Icon="{Binding Source={x:Static kd:StaticImages.KinskyIcon}, Converter={StaticResource BitmapToBitmapFrameConverter}}"
+    LocationChanged="Window_LocationChanged"
+    StateChanged="Window_StateChanged"
+    ContentRendered="Window_ContentRendered"
+    MinWidth="800"
+    DragEnter="Window_DragEnter"
+    DragLeave="Window_DragLeave"
+    DragOver="Window_DragOver"
+    Drop="Window_Drop"
+    AllowDrop="True"
+    SnapsToDevicePixels="True"
+    SizeChanged="Window_SizeChanged">
+    <Window.Resources>
+        <Style x:Key="KompactMenuItem" TargetType="{x:Type MenuItem}">
+            <Setter Property="Background" Value="Green" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding  Path=IsMiniModeActive, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type kd:WindowChrome}}}" Value="True">
+                    <Setter Property="MenuItem.IsChecked" Value="True" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="File">
+                <MenuItem Header="Exit" Command="Close"/>
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem x:Name="kompactMenuItem" Command="kd:Commands.KompactCommand" IsCheckable="True" />
+                <MenuItem Command="kd:Commands.RescanCommand"/>
+            </MenuItem>
+            <MenuItem Header="Tools">
+                <MenuItem Command="kd:Commands.OptionsCommand"/>
+                <MenuItem Command="kd:Commands.UpdateCheckCommand"/>
+                <MenuItem Command="kd:Commands.DebugConsoleCommand"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="Online Help"  Command="Help" />
+                <MenuItem Command="kd:Commands.AboutCommand"/>
+            </MenuItem>
+            <ContextMenu.CommandBindings>
+                <CommandBinding Command="Close"
+                                CanExecute="CloseCanExecute"
+                                Executed="CloseExecuted" />
+                <CommandBinding Command="kd:Commands.KompactCommand"
+                                CanExecute="KompactCanExecute"
+                                Executed="KompactExecuted" />
+                <CommandBinding Command="kd:Commands.RescanCommand"
+                                CanExecute="RescanCanExecute"
+                                Executed="RescanExecuted" />
+                <CommandBinding Command="kd:Commands.OptionsCommand"
+                                CanExecute="OptionsCanExecute"
+                                Executed="OptionsExecuted" />
+                <CommandBinding Command="kd:Commands.DebugConsoleCommand"
+                                CanExecute="DebugConsoleCanExecute"
+                                Executed="DebugConsoleExecuted" />
+                <CommandBinding Command="Help"
+                                CanExecute="HelpCanExecute"
+                                Executed="HelpExecuted" />
+                <CommandBinding Command="kd:Commands.AboutCommand"
+                                CanExecute="HelpAboutCanExecute"
+                                Executed="HelpAboutExecuted" />
+                <CommandBinding Command="kd:Commands.UpdateCheckCommand"
+                                CanExecute="UpdateCheckCanExecute"
+                                Executed="UpdateCheckExecuted" />
+            </ContextMenu.CommandBindings>
+        </ContextMenu>
+    </Window.ContextMenu>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        CanExecute="CloseCanExecute"
+                        Executed="CloseExecuted" />
+        <CommandBinding Command="Help"
+                        CanExecute="HelpCanExecute"
+                        Executed="HelpExecuted" />
+        <CommandBinding Command="kd:Commands.RescanCommand"
+                        CanExecute="RescanCanExecute"
+                        Executed="RescanExecuted" />
+    </Window.CommandBindings>
+    <kd:WindowChrome x:Name="mainWindowChrome" 
+                     IsMiniModeEnabled="True" 
+                     ShowMaximiseAndRestoreButtons="True"
+                     Style="{StaticResource KinskyWindowChrome}">
+        <Grid Background="Transparent">
+            <kd:ViewKinsky x:Name="viewKinsky"  Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        </Grid>
+    </kd:WindowChrome>
+</Window>

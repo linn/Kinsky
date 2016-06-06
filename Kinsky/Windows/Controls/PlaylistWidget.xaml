@@ -1,0 +1,232 @@
+﻿<UserControl x:Class="KinskyDesktopWpf.PlaylistWidget"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf">
+    <UserControl.Resources>
+
+        <kd:PlaylistPositionConverter x:Key="PlaylistPositionConverter" />
+
+        <DataTemplate DataType="{x:Type kd:PlaylistListItem}">
+            <Grid>
+                <StackPanel x:Name="stackPanel" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollContentPresenter}}}" Margin="1,1,0,1">
+                    <DockPanel LastChildFill="True" Margin="5,0,0,0" MinHeight="35">
+                        <Grid x:Name="gridImages" DockPanel.Dock="Left"  Width="60" Height="60" Margin="5,0,5,0" VerticalAlignment="Top">
+                            <Image x:Name="imgArtwork" Source="{Binding Path=ImageSource}" />
+                            <Image x:Name="imgIsPlaying" Width="25" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceIconPlaying}}" Visibility="Collapsed" />
+                        </Grid>
+                        <Grid Height="{Binding ElementName=txtTitle, Path=ActualHeight}" DockPanel.Dock="Right" VerticalAlignment="Top">
+                            <TextBlock x:Name="txtDuration" VerticalAlignment="Center" TextElement.FontSize="{DynamicResource SmallFontSize}" Text="{Binding Path=WrappedItem, Converter={StaticResource MrItemConverter}, ConverterParameter=Duration}" Margin="10,0,5,0" DockPanel.Dock="Right" 
+                                    Foreground="{DynamicResource TextMutedBrush}" />
+                        </Grid>
+                        <StackPanel Margin="5,0,0,0" VerticalAlignment="Top">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="txtPosition" TextElement.FontSize="{DynamicResource SemiLargeFontSize}" Text="{Binding Path=Position, Converter={StaticResource PlaylistPositionConverter}}" DockPanel.Dock="Left" VerticalAlignment="Top" Foreground="{DynamicResource TextMutedBrush}"  />
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock x:Name="txtTitle" TextElement.FontSize="{DynamicResource SemiLargeFontSize}" Text="{Binding Path=WrappedItem, Converter={StaticResource MrItemConverter}, ConverterParameter=Title}" Margin="5,0,0,0" HorizontalAlignment="Left" />
+                                    <TextBlock x:Name="txtAlbum" TextElement.FontSize="{DynamicResource SmallFontSize}" Text="{Binding Path=WrappedItem, Converter={StaticResource MrItemConverter}, ConverterParameter=Album}" Margin="5,0,0,0" HorizontalAlignment="Left" />
+                                    <TextBlock x:Name="txtArtist" TextElement.FontSize="{DynamicResource SmallFontSize}" Text="{Binding Path=WrappedItem, Converter={StaticResource MrItemConverter}, ConverterParameter=Artist}"  Margin="5,0,0,0" HorizontalAlignment="Left"
+                                       Visibility="{Binding Path=WrappedItem, Converter={StaticResource ArtistVisibilityConverter}}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=IsPlaying}" Value="True">
+                    <Setter TargetName="imgArtwork" Property="Visibility" Value="Collapsed"  />
+                    <Setter TargetName="imgIsPlaying" Property="Visibility" Value="Visible"  />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" Value="True">
+                    <Setter TargetName="stackPanel" Property="Control.Background" Value="{DynamicResource HighlightBrush}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type kd:PlaylistWidget}}, Path=GroupByAlbum}" Value="True">
+                    <Setter TargetName="imgArtwork" Property="Visibility" Value="Collapsed" />
+                    <Setter TargetName="gridImages" Property="Height" Value="25" />
+                    <Setter TargetName="txtAlbum" Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type kd:PlaylistWidget}}, Path=GroupByAlbum}" Value="False">
+                    <Setter TargetName="txtArtist" Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type kd:RadioListItem}">
+            <Grid>
+                <StackPanel x:Name="stackPanel" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollContentPresenter}}}" Margin="1,1,0,1">
+                    <DockPanel LastChildFill="True" Margin="5,0,0,5" MinHeight="35">
+                        <Grid x:Name="gridImages" DockPanel.Dock="Left"  Width="60" Height="60" Margin="5,0,5,0" VerticalAlignment="Top">
+                            <Image x:Name="imgArtwork" Source="{Binding Path=ImageSource}" />
+                            <Image x:Name="imgIsPlaying" Width="25" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceIconPlaying}}" Visibility="Collapsed" />
+                        </Grid>
+                        <Grid Height="{Binding ElementName=txtTitle, Path=ActualHeight}" DockPanel.Dock="Right" VerticalAlignment="Top">
+                            <TextBlock x:Name="txtBitrate" TextElement.FontSize="{DynamicResource SmallFontSize}" Text="{Binding Path=WrappedItem, Converter={StaticResource MrItemConverter}, ConverterParameter=Bitrate}" Margin="10,0,5,0" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="{DynamicResource TextMutedBrush}" />
+                        </Grid>
+
+                        <TextBlock x:Name="txtPosition" TextElement.FontSize="{DynamicResource SemiLargeFontSize}" Text="{Binding Path=Position, Converter={StaticResource PlaylistPositionConverter}}" Margin="5,0,0,0" DockPanel.Dock="Left" VerticalAlignment="Top" Foreground="{DynamicResource TextMutedBrush}" />
+                        <TextBlock x:Name="txtTitle" TextElement.FontSize="{DynamicResource SemiLargeFontSize}" FontWeight="Medium" Text="{Binding Path=WrappedItem, Converter={StaticResource MrItemConverter}, ConverterParameter=Title}" VerticalAlignment="Top" Margin="5,0,0,0" />
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=IsPlaying}" Value="True">
+                    <Setter TargetName="imgArtwork" Property="Visibility" Value="Collapsed"  />
+                    <Setter TargetName="imgIsPlaying" Property="Visibility" Value="Visible"  />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" Value="True">
+                    <Setter TargetName="stackPanel" Property="Control.Background" Value="{DynamicResource HighlightBrush}" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type kd:PlaylistGroupHeaderItem}">
+            <Grid x:Name="outerPanel" Margin="1,1,0,1">
+                <StackPanel x:Name="stackPanel"  Margin="5,5,0,5" MinHeight="35" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollContentPresenter}}}" >
+                    <DockPanel>
+                        <Grid x:Name="gridImages" DockPanel.Dock="Left"  Width="60" Height="60" Margin="5,0,5,0" VerticalAlignment="Top">
+                            <Image x:Name="imgArtwork" Source="{Binding Path=ImageSource}" />
+                            <Image x:Name="imgIsPlaying" Width="25" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceIconPlaying}}" Visibility="Collapsed" />
+                        </Grid>
+                        <StackPanel Margin="5,0,0,0" VerticalAlignment="Top">
+                            <TextBlock x:Name="txtAlbum" TextElement.FontSize="{DynamicResource LargeFontSize}" Text="{Binding Path=WrappedItem, Converter={StaticResource MrItemConverter}, ConverterParameter=Album}" Margin="0,0,0,0" HorizontalAlignment="Left" />
+                            <TextBlock x:Name="txtArtist" TextElement.FontSize="{DynamicResource MediumFontSize}" Text="{Binding Path=WrappedItem, Converter={StaticResource MrItemConverter}, ConverterParameter=AlbumArtist}" Margin="0,0,0,0" HorizontalAlignment="Left" />
+                        </StackPanel>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" Value="True">
+                    <Setter TargetName="outerPanel" Property="Control.Background" Value="{DynamicResource HighlightBrush}" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type kd:CollapsedPlaylistListItem}">
+            <Grid x:Name="outerPanel" Margin="1,1,0,1">
+                <StackPanel Orientation="Vertical" x:Name="stackPanel"  Margin="5,0,0,5" MinHeight="35" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollContentPresenter}}}">
+                    <DockPanel Margin="0,0,6,0">
+                        <Grid x:Name="gridImages" DockPanel.Dock="Left"  Width="60" Height="60" Margin="5,0,5,0" VerticalAlignment="Top">
+                            <Image x:Name="imgArtwork" Source="{Binding Path=ImageSource}" />
+                            <Image x:Name="imgIsPlaying" Width="25" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceIconPlaying}}" Visibility="Collapsed" />
+                        </Grid>
+                        <Grid Height="{Binding ElementName=txtTitle, Path=ActualHeight}" DockPanel.Dock="Right" VerticalAlignment="Top">
+                            <TextBlock x:Name="txtDuration" VerticalAlignment="Center" TextElement.FontSize="{DynamicResource SmallFontSize}" Text="{Binding Path=WrappedItem, Converter={StaticResource MrItemConverter}, ConverterParameter=Duration}" Margin="10,0,5,0" DockPanel.Dock="Right" 
+                                    Foreground="{DynamicResource TextMutedBrush}" />
+                        </Grid>
+                        <StackPanel Margin="5,0,0,0" VerticalAlignment="Top">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="txtPosition" TextElement.FontSize="{DynamicResource SemiLargeFontSize}" Text="{Binding Path=Position, Converter={StaticResource PlaylistPositionConverter}}" DockPanel.Dock="Left" VerticalAlignment="Top" Foreground="{DynamicResource TextMutedBrush}"  />
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock x:Name="txtTitle" TextElement.FontSize="{DynamicResource SemiLargeFontSize}" Text="{Binding Path=WrappedItem, Converter={StaticResource MrItemConverter}, ConverterParameter=Title}" Margin="5,0,0,0" HorizontalAlignment="Left" />
+                                    <TextBlock x:Name="txtAlbum" TextElement.FontSize="{DynamicResource SmallFontSize}" Text="{Binding Path=WrappedItem, Converter={StaticResource MrItemConverter}, ConverterParameter=Album}" Margin="5,0,0,0" HorizontalAlignment="Left" />
+                                    <TextBlock x:Name="txtArtist" TextElement.FontSize="{DynamicResource SmallFontSize}" Text="{Binding Path=WrappedItem, Converter={StaticResource MrItemConverter}, ConverterParameter=Artist}"  Margin="5,0,0,0" HorizontalAlignment="Left" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=IsPlaying}" Value="True">
+                    <Setter TargetName="imgArtwork" Property="Visibility" Value="Collapsed"  />
+                    <Setter TargetName="imgIsPlaying" Property="Visibility" Value="Visible"  />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" Value="True">
+                    <Setter TargetName="outerPanel" Property="Control.Background" Value="{DynamicResource HighlightBrush}" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type kd:SenderListItem}">
+            <Grid>
+                <StackPanel x:Name="stackPanel" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollContentPresenter}}}" Margin="1,1,0,1">
+                    <DockPanel LastChildFill="True" Margin="5,0,0,5" MinHeight="70">
+                        <Grid x:Name="gridImages" DockPanel.Dock="Left"  Width="60" Height="60" Margin="5,0,5,0" VerticalAlignment="Top">
+                            <Image x:Name="imgArtwork" Source="{Binding Path=ImageSource}"  />
+                            <Image x:Name="imgIsPlaying" Width="25" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceIconPlaying}}" Visibility="Collapsed" />
+                        </Grid>
+                        <Button x:Name="btnNavigateToSender" Click="SenderButton_Click" DockPanel.Dock="Right" VerticalAlignment="Top" HorizontalAlignment="Center" Visibility="Collapsed">
+                            <Image Source="{Binding Source={x:Static kd:StaticImages.ImageSourceIconRoom}}" Height="20" />
+                        </Button>
+                        <TextBlock x:Name="txtTitle" TextElement.FontSize="{DynamicResource SemiLargeFontSize}" FontWeight="Medium" Text="{Binding Path=Name}" VerticalAlignment="Top" Margin="5,0,0,0" />
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=IsPlaying}" Value="True">
+                    <Setter TargetName="imgArtwork" Property="Visibility" Value="Collapsed"  />
+                    <Setter TargetName="imgIsPlaying" Property="Visibility" Value="Visible"  />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=HasRoom}" Value="True">
+                    <Setter TargetName="btnNavigateToSender" Property="Visibility" Value="Visible" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" Value="True">
+                    <Setter TargetName="stackPanel" Property="Control.Background" Value="{DynamicResource HighlightBrush}" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        <Style x:Key="MediaRendererContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <ContentPresenter  />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <kd:ListViewFix x:Name="lstPlaylist" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ItemContainerStyle="{StaticResource MediaRendererContainerStyle}" 
+                 ScrollViewer.CanContentScroll="False"
+                 ListView.MouseDoubleClick ="ListBox_MouseDoubleClick"
+                 PreviewMouseRightButtonDown="ListBox_PreviewRightMouseButtonDown"
+                 SelectionChanged="ListBox_SelectionChanged"
+                 VirtualizingStackPanel.IsVirtualizing="False"
+                 VirtualizingStackPanel.VirtualizationMode="Recycling"
+                 Background="{DynamicResource BackgroundBrush}"
+                 BorderBrush="Transparent"
+                 KeyUp="lstPlaylist_KeyUp" 
+                 Image.ImageFailed="ImageFailed"
+            >
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Play" Command="kd:Commands.PlayNowCommand" />
+                    <Separator/>
+                    <MenuItem Command="kd:Commands.MoveUpCommand" />
+                    <MenuItem Command="kd:Commands.MoveDownCommand" />
+                    <Separator/>
+                    <MenuItem Command="kd:Commands.SaveCommand" />
+                    <MenuItem Command="kd:Commands.DeleteCommand" />
+                    <Separator/>
+                    <MenuItem Command="kd:Commands.DetailsCommand" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.CommandBindings>
+                <CommandBinding Command="kd:Commands.PlayNowCommand"
+                        CanExecute="PlayCanExecute"
+                        Executed="PlayExecuted" />
+                <CommandBinding Command="kd:Commands.MoveUpCommand"
+                        CanExecute="MoveUpCanExecute"
+                        Executed="MoveUpExecuted" />
+                <CommandBinding Command="kd:Commands.MoveDownCommand"
+                        CanExecute="MoveDownCanExecute"
+                        Executed="MoveDownExecuted" />
+                <CommandBinding Command="kd:Commands.SaveCommand"
+                        CanExecute="SaveCanExecute"
+                        Executed="SaveExecuted" />
+                <CommandBinding Command="kd:Commands.DeleteCommand"
+                        CanExecute="DeleteCanExecute"
+                        Executed="DeleteExecuted" />
+                <CommandBinding Command="kd:Commands.DetailsCommand"
+                        CanExecute="DetailsCanExecute"
+                        Executed="DetailsExecuted" />
+            </ListView.CommandBindings>
+        </kd:ListViewFix>
+        <DockPanel x:Name="pnlProgress" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <kd:IndeterminateProgressBar x:Name="progressBar" Width="71" Height="71" DockPanel.Dock="Top" />
+            <TextBlock DockPanel.Dock="Bottom" HorizontalAlignment="Center" Text="Subscribing..."/>
+        </DockPanel>
+    </Grid>
+</UserControl>

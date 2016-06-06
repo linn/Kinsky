@@ -1,0 +1,44 @@
+﻿<ContentControl x:Class="KinskyDesktopWpf.UpnpObjectDetailsDisplay"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:upnp="clr-namespace:Upnp;assembly=OssDidlLite"
+>
+    <ContentControl.Resources>
+    </ContentControl.Resources>
+    <ContentControl.ContentTemplate>
+        <DataTemplate>
+            <Grid Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Image Source="{Binding Path=ImageSource}" VerticalAlignment="Top" HorizontalAlignment="Center"
+                           MaxWidth="50"
+                           MaxHeight="50"/>
+                <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type kd:UpnpObjectDetailsDisplay}}, Path=ItemInfo.AllItems}" Grid.ColumnSpan="2" Grid.Column="1">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="White">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Key}" Grid.Column="0" />
+                                    <TextBox Text="{Binding Value, Mode=OneTime}" IsReadOnly="True" Grid.Column="1" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </DataTemplate>
+    </ContentControl.ContentTemplate>
+
+</ContentControl>

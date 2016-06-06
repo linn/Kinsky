@@ -1,0 +1,298 @@
+﻿<UserControl x:Class="KinskyDesktopWpf.ViewWidgetBrowser"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf"
+    xmlns:upnp="clr-namespace:Upnp;assembly=OssDidlLite">
+    <UserControl.Resources>
+        <s:Double x:Key="BrowserImageHeight">50</s:Double>
+
+        <DataTemplate x:Key="AlbumViewItem" DataType="{x:Type kd:BrowserItem}">
+            <StackPanel x:Name="stackPanel" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollContentPresenter}}}" Margin="1,1,0,1">
+                <DockPanel x:Name="pnlContainer" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollContentPresenter}}, Path=ActualWidth}" MinHeight="35">
+                    <Grid Height="{Binding ElementName=txtDisplay1, Path=ActualHeight}" DockPanel.Dock="Right" VerticalAlignment="Top">
+                        <TextBlock x:Name="txtDuration" TextElement.FontSize="{DynamicResource SmallFontSize}" Text="{Binding Path=WrappedItem, Converter={StaticResource DidlLiteConverter}, ConverterParameter=Duration}" Foreground="{DynamicResource TextMutedBrush}" Margin="0,0,5,0" />
+                    </Grid>
+                    <StackPanel DockPanel.Dock="Left" Margin="70,0,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="txtTrackNumber" TextElement.FontSize="{DynamicResource SemiLargeFontSize}" Text="{Binding Path=WrappedItem, Converter={StaticResource DidlLiteConverter}, ConverterParameter=OriginalTrackNumber}" Foreground="{DynamicResource TextMutedBrush}" Margin="0,0,0,0" />
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock x:Name="txtDisplay1" TextElement.FontSize="{DynamicResource SemiLargeFontSize}" Text="{Binding Path=DisplayField1}" />
+                                <TextBlock x:Name="txtDisplay2" 
+                                   TextElement.FontSize="{DynamicResource SmallFontSize}" 
+                                   Text="{Binding Path=DisplayField2}" />
+                            </StackPanel>
+                            <ContentControl x:Name="placeholderTitleEditor" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed" Focusable="False" />
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+            </StackPanel>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding IsEditing}" Value="True">
+                    <Setter TargetName="placeholderTitleEditor" Property="Template" Value="{DynamicResource TitleEditor}" />
+                    <Setter TargetName="placeholderTitleEditor" Property="Visibility" Value="Visible" />
+                    <Setter TargetName="txtDisplay1" Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListViewItem}},Path=IsSelected}" Value="True">
+                    <Setter TargetName="pnlContainer" Property="Control.Background" Value="{DynamicResource HighlightBrush}" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <!-- LIST VIEW -->
+
+        <DataTemplate DataType="{x:Type kd:BrowserItem}">
+            <Grid x:Name="grid" Margin="1">
+                <DockPanel Margin="5">
+                    <Grid Height="{DynamicResource BrowserImageHeight}" DockPanel.Dock="Left" VerticalAlignment="Top">
+                        <Image x:Name="image" Source="{Binding Path=ImageSource}" 
+                           MaxWidth="{DynamicResource BrowserImageHeight}"
+                           MaxHeight="{DynamicResource BrowserImageHeight}" VerticalAlignment="Top" />
+                    </Grid>
+                    <kd:ClippingPanel Margin="5,0,0,0" DockPanel.Dock="Left" VerticalAlignment="Top" MaxHeight="{DynamicResource BrowserImageHeight}">
+                        <TextBlock x:Name="txtDisplay1" 
+                               FontSize="{DynamicResource MediumFontSize}"
+                               Text="{Binding Path=DisplayField1}"
+                               DockPanel.Dock="Top"
+                               TextElement.FontSize="{DynamicResource SemiLargeFontSize}"
+                               Visibility="{Binding Path=IsEditing, Converter={StaticResource InverseBooleanVisibilityValueConverter}}"
+                               />
+                        <TextBlock x:Name="txtDisplay2" 
+                               FontSize="{DynamicResource MediumFontSize}"
+                               Text="{Binding Path=DisplayField2}"
+                               DockPanel.Dock="Top"  
+                               TextElement.FontSize="{DynamicResource SmallFontSize}"
+                               Visibility="{Binding Path=IsEditing, Converter={StaticResource InverseBooleanVisibilityValueConverter}}"
+                               />
+                        <TextBlock x:Name="txtDisplay3" 
+                               FontSize="{DynamicResource MediumFontSize}"
+                               Text="{Binding Path=DisplayField3}"
+                               DockPanel.Dock="Top"
+                               TextElement.FontSize="{DynamicResource SmallFontSize}"
+                               Visibility="{Binding Path=IsEditing, Converter={StaticResource InverseBooleanVisibilityValueConverter}}"
+                               />
+                        <TextBlock x:Name="txtDisplay4" 
+                               FontSize="{DynamicResource MediumFontSize}"
+                               Text="{Binding Path=DisplayField4}"
+                               DockPanel.Dock="Top" 
+                               TextElement.FontSize="{DynamicResource SmallFontSize}" 
+                               Visibility="{Binding Path=IsEditing, Converter={StaticResource InverseBooleanVisibilityValueConverter}}"
+                               />
+                        <TextBlock x:Name="txtDisplay5" 
+                               FontSize="{DynamicResource MediumFontSize}"
+                               Text="{Binding Path=DisplayField5}"
+                               DockPanel.Dock="Top"
+                               TextElement.FontSize="{DynamicResource SmallFontSize}" 
+                               Visibility="{Binding Path=IsEditing, Converter={StaticResource InverseBooleanVisibilityValueConverter}}"
+                               />
+                        <ContentControl x:Name="placeholderTitleEditor" HorizontalAlignment="Left" DockPanel.Dock="Top"  Focusable="False"  />
+                    </kd:ClippingPanel>
+                </DockPanel>
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding IsEditing}" Value="True">
+                    <Setter TargetName="placeholderTitleEditor" Property="Template" Value="{DynamicResource TitleEditor}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListViewItem}},Path=IsSelected}" Value="True">
+                    <Setter TargetName="grid" Property="Control.Background" Value="{DynamicResource HighlightBrush}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListViewItem}},Path=IsSelected}" Value="False">
+                    <Setter TargetName="txtDisplay1" Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <Style x:Key="BrowserListItemContainerStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="TitleEditor">
+            <TextBox x:Name="txtTitleEditor" VerticalContentAlignment="Top" Visibility="{Binding Path=IsEditing, Converter={StaticResource BooleanVisibilityValueConverter}}"
+                                                           Text="{Binding Path=WrappedItem, Converter={StaticResource DidlLiteConverter}, ConverterParameter=Title, Mode=OneWay}" 
+                                                           HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                                                           VerticalAlignment="Top"
+                                                           FontSize="{DynamicResource SemiLargeFontSize}" TextWrapping="Wrap"
+                                                           LostFocus="txtTitleEditor_LostFocus"
+                                                           TextBox.TextInput="txtTitleEditor_TextInput"
+                                                           PreviewKeyUp="txtTitleEditor_PreviewKeyUp"
+                                                           >
+                <TextBox.Foreground>
+                    <SolidColorBrush Color="{DynamicResource TextColour}" />
+                </TextBox.Foreground>
+            </TextBox>
+        </ControlTemplate>
+
+        <!-- TILE VIEW -->
+        <DataTemplate x:Key="BrowserTileDataTemplate">
+            <Grid x:Name="grid" Width="{DynamicResource BrowserTileSize}" Height="{DynamicResource BrowserTileSize}"
+                            Margin="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="{Binding Path=ImageSource}" Margin="5"   />
+
+                <TextBlock x:Name="txtDisplay1"  Grid.Row="1" 
+                               Text="{Binding Path=DisplayField1}" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Top"
+                               FontSize="{DynamicResource SemiLargeFontSize}" TextWrapping="Wrap"
+                               Visibility="{Binding Path=IsEditing, Converter={StaticResource InverseBooleanVisibilityValueConverter}}"
+                               >
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{DynamicResource TextColour}" />
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <ContentControl x:Name="placeholderTitleEditor" HorizontalAlignment="Center" Grid.Row="1" Focusable="False" />
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding IsEditing}" Value="True">
+                    <Setter TargetName="placeholderTitleEditor" Property="Template" Value="{DynamicResource TitleEditor}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListViewItem}},Path=IsSelected}" Value="True">
+                    <Setter TargetName="grid" Property="Control.Background" Value="{DynamicResource HighlightBrush}" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <kd:TileView x:Key="BrowserTileView"
+                     ItemTemplate="{StaticResource BrowserTileDataTemplate}">
+        </kd:TileView>
+
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel Width="Auto" x:Name="pnlBrowser">
+            <DockPanel x:Name="pnlError" DockPanel.Dock="Top" Margin="20">
+                <Image x:Name="imgIcon" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceIconError}}" 
+                   Height="80" DockPanel.Dock="Left" VerticalAlignment="Top" />
+                <StackPanel DockPanel.Dock="Right">
+                    <TextBlock  Text="A problem occurred retrieving content from the specified location." 
+                       FontSize="{DynamicResource LargeFontSize}" Margin="10"
+                        />
+                    <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Left">
+                        <Button HorizontalAlignment="Right" x:Name="btnRetry" Click="btnRetry_Click" Margin="5">
+                            <TextBlock Text="Retry" Margin="5,5,5,0" />
+                        </Button>
+                        <Button HorizontalAlignment="Right" x:Name="btnHome" Click="btnHome_Click" Margin="5">
+                            <TextBlock Text="Home" Margin="5,5,5,0" />
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+            <ContentControl x:Name="pnlContainerInfo" DockPanel.Dock="Top"
+                            PreviewMouseDown="ContainerInfo_PreviewMouseDown">
+                <ContentControl.ContentTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                                <Image Source="{Binding ImageSource}" 
+                                       Height="60" 
+                                       HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,5,0" />
+                                <StackPanel VerticalAlignment="Top">
+                                    <TextBlock Margin="5,0,0,0" x:Name="txtDisplay1" Text="{Binding DisplayField1}" 
+                                       FontSize="{DynamicResource LargeFontSize}"
+                                       HorizontalAlignment="Left">
+                                    </TextBlock>
+                                    <TextBlock Margin="5,0,0,0" x:Name="txtDisplay2" Text="{Binding DisplayField2}" 
+                                       FontSize="{DynamicResource MediumFontSize}" 
+                                       HorizontalAlignment="Left">
+                                    </TextBlock>
+                                    <TextBlock Margin="5,0,0,0" x:Name="txtDisplay3" Text="{Binding DisplayField3}" 
+                                       FontSize="{DynamicResource MediumFontSize}" 
+                                       HorizontalAlignment="Left">
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <Grid.Style>
+                                <Style TargetType="{x:Type Grid}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type kd:ViewWidgetBrowser}},Path=ContainerInfoSelected}" Value="True">
+                                            <Setter Property="Control.Background" Value="{DynamicResource HighlightBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                        </Grid>
+                    </DataTemplate>
+                </ContentControl.ContentTemplate>
+            </ContentControl>
+            <kd:ListViewFix x:Name="lstBrowser"  DockPanel.Dock="Bottom"
+              BorderThickness="0" ScrollViewer.CanContentScroll="True"
+              BorderBrush="{DynamicResource BackgroundBrush}" 
+              Background="{DynamicResource BackgroundBrush}"
+              AllowDrop="True"
+              DragEnter="ListView_DragEnter"
+              Drop="ListView_Drop"
+              DragOver="ListView_DragOver"
+              DragLeave="ListView_DragLeave"
+              ListView.MouseDoubleClick ="ListView_MouseDoubleClick"
+              PreviewMouseRightButtonDown="ListView_PreviewRightMouseButtonDown"
+              SelectionChanged="ListView_SelectionChanged"
+              VirtualizingStackPanel.IsVirtualizing="True" 
+              VirtualizingStackPanel.VirtualizationMode="Recycling"
+              PreviewTextInput="lstBrowser_PreviewTextInput"
+              ScrollViewer.HorizontalScrollBarVisibility="Disabled"         
+              MouseDown="lstBrowser_MouseDown"
+              KeyUp="lstBrowser_KeyUp"
+              PreviewKeyDown="lstBrowser_PreviewKeyDown"
+              Image.ImageFailed="ImageFailed"  
+              >
+            </kd:ListViewFix>
+
+            <DockPanel.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="kd:Commands.OpenCommand" />
+                    <Separator/>
+                    <MenuItem Command="kd:Commands.PlayNowCommand" />
+                    <MenuItem Command="kd:Commands.PlayNextCommand" />
+                    <MenuItem Command="kd:Commands.PlayLaterCommand" />
+                    <Separator/>
+                    <MenuItem Command="kd:Commands.DeleteCommand" />
+                    <MenuItem Command="kd:Commands.RenameCommand" />
+                    <MenuItem Command="kd:Commands.BookmarkCommand" />
+                    <Separator/>
+                    <MenuItem Command="kd:Commands.DetailsCommand" />
+                </ContextMenu>
+            </DockPanel.ContextMenu>
+            <DockPanel.CommandBindings>
+                <CommandBinding Command="kd:Commands.OpenCommand"
+                        CanExecute="OpenCanExecute"
+                        Executed="OpenExecuted" />
+                <CommandBinding Command="kd:Commands.PlayNowCommand"
+                        CanExecute="PlayNowCanExecute"
+                        Executed="PlayNowExecuted" />
+                <CommandBinding Command="kd:Commands.PlayNextCommand"
+                        CanExecute="PlayNextCanExecute"
+                        Executed="PlayNextExecuted" />
+                <CommandBinding Command="kd:Commands.PlayLaterCommand"
+                        CanExecute="PlayLaterCanExecute"
+                        Executed="PlayLaterExecuted" />
+                <CommandBinding Command="kd:Commands.DeleteCommand"
+                        CanExecute="DeleteCanExecute"
+                        Executed="DeleteExecuted" />
+                <CommandBinding Command="kd:Commands.RenameCommand"
+                        CanExecute="RenameCanExecute"
+                        Executed="RenameExecuted" />
+                <CommandBinding Command="kd:Commands.BookmarkCommand"
+                        CanExecute="BookmarkCanExecute"
+                        Executed="BookmarkExecuted" />
+                <CommandBinding Command="kd:Commands.DetailsCommand"
+                        CanExecute="DetailsCanExecute"
+                        Executed="DetailsExecuted" />
+            </DockPanel.CommandBindings>
+        </DockPanel>
+        <DockPanel Width="Auto" x:Name="pnlLoading" Visibility="Collapsed">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <kd:IndeterminateProgressBar x:Name="pnlProgress" Width="50" />
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

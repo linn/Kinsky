@@ -1,0 +1,46 @@
+﻿<Window x:Class="KinskyDesktopWpf.AboutDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    Title="About Kinsky" Height="160" Width="440"
+    ShowInTaskbar="False"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None" 
+    ResizeMode="CanResize"
+    Background="Transparent" 
+    AllowsTransparency="True"
+    Cursor="{DynamicResource Cursor}"
+>
+    <Window.Resources>
+
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        CanExecute="CloseCanExecute"
+                        Executed="CloseExecuted" />
+
+    </Window.CommandBindings>
+    <kd:WindowChrome Title="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=Title}">
+        <DockPanel LastChildFill="True">
+            <Button Command="ApplicationCommands.Close"  DockPanel.Dock="Bottom"  HorizontalContentAlignment="Stretch" HorizontalAlignment="Right" Margin="0,5,5,5">
+                <Label Margin="1" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                    <TextBlock Margin="10,0,10,0" Text="Close" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Label>
+            </Button>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <Image Source="{Binding Source={x:Static kd:StaticImages.ImageSourceKinskyIcon}}" VerticalAlignment="Top" Margin="5,5,0,0"                     
+                       />
+                <StackPanel VerticalAlignment="Top" Margin="25,3,0,0">
+                    <TextBlock x:Name="txtProduct" />
+                    <TextBlock x:Name="txtVersion" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="txtCopyright" Margin="0,0,5,0" />
+                        <TextBlock x:Name="txtCompany" />
+                    </StackPanel>
+                    <TextBlock x:Name="txtDescription" />
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+    </kd:WindowChrome>
+</Window>

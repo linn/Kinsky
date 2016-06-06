@@ -1,0 +1,79 @@
+﻿<Window x:Class="KinskyDesktopWpf.CrashLogDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    Title="Kinsky" Height="238" Width="523"
+    ShowInTaskbar="False"
+    WindowStartupLocation="CenterOwner"
+    WindowStyle="None" 
+    ResizeMode="NoResize"
+    Background="Transparent" 
+    AllowsTransparency="True"
+    Cursor="{DynamicResource Cursor}"
+>
+    <Window.Resources>
+        <s:Double x:Key="FontSize">12</s:Double>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        CanExecute="CloseCanExecute"
+                        Executed="CloseExecuted" />
+
+    </Window.CommandBindings>
+    <kd:WindowChrome Title="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=Title}">
+        <DockPanel LastChildFill="True">
+            <DockPanel DockPanel.Dock="Top">
+                <Label DockPanel.Dock="Bottom">
+                    <TextBlock x:Name="txtMessage2" 
+                               TextWrapping="Wrap"
+                               FontSize="{StaticResource FontSize}"/>
+                </Label>
+                <Label DockPanel.Dock="Bottom"
+                       Margin="0">
+                    <TextBlock FontWeight="Bold" 
+                               TextWrapping="Wrap" 
+                               Text="Please tell Linn about this problem."
+                               FontSize="{StaticResource FontSize}"
+                               />
+                </Label>
+                <Label DockPanel.Dock="Bottom">
+                    <TextBlock TextWrapping="Wrap" 
+                               Text="If you were in the middle of something, the information you were working on might be lost."
+                               FontSize="{StaticResource FontSize}"/>
+                </Label>
+                <Image DockPanel.Dock="Left" 
+                       Source="{Binding Source={x:Static kd:StaticImages.ImageSourceIconError}}" 
+                       Height="60" />
+                <Label DockPanel.Dock="Right">
+                    <TextBlock x:Name="txtMessage" 
+                               TextWrapping="Wrap"
+                               FontSize="{StaticResource FontSize}"
+                               FontWeight="Bold" />
+                </Label>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top"  Margin="5,0,0,0">
+                <Button Click="btnToggleDetails_Click"  DockPanel.Dock="Left"  HorizontalContentAlignment="Stretch" HorizontalAlignment="Right" Margin="0,5,10,10">
+                    <Label Margin="1" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBlock Margin="10,0,10,0" Text="Details" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Label>
+                </Button>
+                <Button Command="ApplicationCommands.Close"  DockPanel.Dock="Right"  HorizontalContentAlignment="Stretch" HorizontalAlignment="Right" Margin="0,5,10,10">
+                    <Label Margin="1" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBlock Margin="10,0,10,0" Text="Don't Send" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Label>
+                </Button>
+                <Button x:Name="btnSendReport" Click="btnSendReport_Click"  DockPanel.Dock="Right"  HorizontalContentAlignment="Stretch" HorizontalAlignment="Right" Margin="0,5,10,10">
+                    <Label Margin="1" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                        <TextBlock Margin="10,0,10,0" Text="Send Error Report" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Label>
+                </Button>
+            </DockPanel>
+            <Grid>
+                <ScrollViewer>
+                    <TextBox x:Name="txtErrorDetails" Visibility="Collapsed" TextWrapping="Wrap"  />
+                </ScrollViewer>
+            </Grid>
+        </DockPanel>
+    </kd:WindowChrome>
+</Window>

@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{BE8AB759-0C3E-4965-921F-CC2EFE4F5645}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>KinskyTouch</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>Kinsky</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\Kinsky\bin\iPhoneSimulator\Debug</OutputPath>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\iPhoneSimulator\Debug</IntermediateOutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>i386</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchProfiling>true</MtouchProfiling>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <MtouchI18n>
+    </MtouchI18n>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\Kinsky\bin\iPhone\Release</OutputPath>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\iPhone\Release</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <IpaPackageName>InstallerKinsky</IpaPackageName>
+    <MtouchI18n>
+    </MtouchI18n>
+    <BuildIpa>true</BuildIpa>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\Kinsky\bin\iPhoneSimulator\Release</OutputPath>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\iPhoneSimulator\Release</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>i386</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\Kinsky\bin\iPhone\Debug</OutputPath>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\iPhone\Debug</IntermediateOutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchProfiling>true</MtouchProfiling>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <MtouchI18n>
+    </MtouchI18n>
+    <IpaPackageName>InstallerKinsky</IpaPackageName>
+    <BuildIpa>true</BuildIpa>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\Kinsky\bin\iPhone\AdHoc</OutputPath>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\iPhone\AdHoc</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <BuildIpa>true</BuildIpa>
+    <ConsolePause>false</ConsolePause>
+    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <IpaPackageName>InstallerKinsky</IpaPackageName>
+    <IpaIncludeArtwork>true</IpaIncludeArtwork>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\Kinsky\bin\iPhone\AppStore</OutputPath>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\iPhone\AppStore</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <ConsolePause>false</ConsolePause>
+    <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <BuildIpa>true</BuildIpa>
+    <IpaPackageName>InstallerKinsky</IpaPackageName>
+    <IpaIncludeArtwork>false</IpaIncludeArtwork>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchI18n>
+    </MtouchI18n>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="Xamarin.Insights">
+      <HintPath>..\packages\Xamarin.Insights.1.10.4.112\lib\Xamarin.iOS10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+    <Reference Include="PLCrashReporterUnifiedBinding">
+      <HintPath>..\packages\Xamarin.Insights.1.10.4.112\lib\Xamarin.iOS10\PLCrashReporterUnifiedBinding.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\Linn.SharpZipLib.0.86.0.7\lib\Xamarin.iOS10\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoIpad.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoIpad3.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoIphone.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoIphone4.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoSpotlightIpad.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoSpotlightIpad3.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoSpotlightIphone.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoSpotlightIphone4.png" />
+    <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default-Portrait.png" />
+    <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default-Landscape.png" />
+    <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default-Portrait%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default-Landscape%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default~iphone.png" />
+    <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default%402x~iphone.png" />
+    <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default-568h%402x~iphone.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoIphone6.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoIpad2.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoIpad5.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\KinskyLogoSpotlightIpad2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="KinskyDesktop\Ios\ArtworkTileView.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\CellBrowser.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\CellBrowserHeader.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\CellBrowserItem.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\CellDefault.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\CellLazyLoadDefault.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\CellPlaylist.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\CellPlaylistItem.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\CellRoom.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\CellSender.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\MainWindowIpad.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\MainWindowIphone.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\SaveDialog.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\TimeButtons.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\TimeRotary.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\VolumeButtons.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\VolumeRotary.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="KinskyDesktop\Ios\AppDelegate.cs" />
+    <Compile Include="KinskyDesktop\Ios\AppDelegateIpad.cs" />
+    <Compile Include="KinskyDesktop\Ios\AppDelegateIphone.cs" />
+    <Compile Include="KinskyDesktop\Ios\AppRestartHandler.cs" />
+    <Compile Include="KinskyDesktop\Ios\ArtworkCache.cs" />
+    <Compile Include="KinskyDesktop\Ios\ArtworkTileView.cs" />
+    <Compile Include="KinskyDesktop\Ios\ArtworkTileView.xib.designer.cs">
+      <DependentUpon>ArtworkTileView.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\BrowserToolbar.cs" />
+    <Compile Include="KinskyDesktop\Ios\CellBrowser.cs" />
+    <Compile Include="KinskyDesktop\Ios\CellBrowser.xib.designer.cs">
+      <DependentUpon>CellBrowser.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\CellBrowserHeader.cs" />
+    <Compile Include="KinskyDesktop\Ios\CellBrowserHeader.xib.designer.cs">
+      <DependentUpon>CellBrowserHeader.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\CellBrowserItem.cs" />
+    <Compile Include="KinskyDesktop\Ios\CellBrowserItem.xib.designer.cs">
+      <DependentUpon>CellBrowserItem.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\CellDefault.cs" />
+    <Compile Include="KinskyDesktop\Ios\CellDefault.xib.designer.cs">
+      <DependentUpon>CellDefault.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\CellLazyLoadDefault.cs" />
+    <Compile Include="KinskyDesktop\Ios\CellLazyLoadDefault.xib.designer.cs">
+      <DependentUpon>CellLazyLoadDefault.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\CellLazyLoadImage.cs" />
+    <Compile Include="KinskyDesktop\Ios\CellPlaylist.cs" />
+    <Compile Include="KinskyDesktop\Ios\CellPlaylist.xib.designer.cs">
+      <DependentUpon>CellPlaylist.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\CellPlaylistItem.cs" />
+    <Compile Include="KinskyDesktop\Ios\CellPlaylistItem.xib.designer.cs">
+      <DependentUpon>CellPlaylistItem.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\CellRoom.cs" />
+    <Compile Include="KinskyDesktop\Ios\CellRoom.xib.designer.cs">
+      <DependentUpon>CellRoom.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\CellSender.cs" />
+    <Compile Include="KinskyDesktop\Ios\CellSender.xib.designer.cs">
+      <DependentUpon>CellSender.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\ConfigController.cs" />
+    <Compile Include="KinskyDesktop\Ios\HelperKinskyTouch.cs" />
+    <Compile Include="KinskyDesktop\Ios\MainWindowIpad.xib.designer.cs">
+      <DependentUpon>MainWindowIpad.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\MainWindowIphone.xib.designer.cs">
+      <DependentUpon>MainWindowIphone.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\MediaProviderSupport.cs" />
+    <Compile Include="KinskyDesktop\Ios\OptionInsertMode.cs" />
+    <Compile Include="KinskyDesktop\Ios\OptionPageGeneral.cs" />
+    <Compile Include="KinskyDesktop\Ios\Reachability.cs" />
+    <Compile Include="KinskyDesktop\Ios\ResourceManager.cs" />
+    <Compile Include="KinskyDesktop\Ios\SaveDialog.xib.designer.cs">
+      <DependentUpon>SaveDialog.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\SaveViewController.cs" />
+    <Compile Include="KinskyDesktop\Ios\SourceToolbar.cs" />
+    <Compile Include="KinskyDesktop\Ios\TimeButtons.xib.designer.cs">
+      <DependentUpon>TimeButtons.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\TimeController.cs" />
+    <Compile Include="KinskyDesktop\Ios\TimeRotary.xib.designer.cs">
+      <DependentUpon>TimeRotary.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\UIControlRotary.cs" />
+    <Compile Include="KinskyDesktop\Ios\UIViewControllerKinskyTouch.cs" />
+    <Compile Include="KinskyDesktop\Ios\UIViewInfo.cs" />
+    <Compile Include="KinskyDesktop\Ios\ViewWidgetBrowser.cs" />
+    <Compile Include="KinskyDesktop\Ios\ViewWidgetButtons.cs" />
+    <Compile Include="KinskyDesktop\Ios\ViewWidgetPlaylist.cs" />
+    <Compile Include="KinskyDesktop\Ios\ViewWidgetSelectors.cs" />
+    <Compile Include="KinskyDesktop\Ios\ViewWidgetSenderReceiver.cs" />
+    <Compile Include="KinskyDesktop\Ios\ViewWidgetTime.cs" />
+    <Compile Include="KinskyDesktop\Ios\ViewWidgetTrack.cs" />
+    <Compile Include="KinskyDesktop\Ios\ViewWidgetVolume.cs" />
+    <Compile Include="KinskyDesktop\Ios\Views.cs" />
+    <Compile Include="KinskyDesktop\Ios\VolumeButtons.xib.designer.cs">
+      <DependentUpon>VolumeButtons.xib</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\VolumeController.cs" />
+    <Compile Include="KinskyDesktop\Ios\VolumeRotary.xib.designer.cs">
+      <DependentUpon>VolumeRotary.xib</DependentUpon>
+    </Compile>
+    <Compile Include="..\Properties\AssemblyInfo.cs" />
+    <Compile Include="Main.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Linn\Kinsky\BookmarkManager.cs">
+      <Link>Linn\Kinsky\BookmarkManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Browser.cs">
+      <Link>Linn\Kinsky\Browser.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Container.cs">
+      <Link>Linn\Kinsky\Container.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ContentCollector.cs">
+      <Link>Linn\Kinsky\ContentCollector.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ContentDirectoryLocator.cs">
+      <Link>Linn\Kinsky\ContentDirectoryLocator.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Controllers.cs">
+      <Link>Linn\Kinsky\Controllers.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\FileItc2.cs">
+      <Link>Linn\Kinsky\FileItc2.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\HelperKinsky.cs">
+      <Link>Linn\Kinsky\HelperKinsky.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\HttpClient.cs">
+      <Link>Linn\Kinsky\HttpClient.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\HttpServer.cs">
+      <Link>Linn\Kinsky\HttpServer.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\IconResolver.cs">
+      <Link>Linn\Kinsky\IconResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ItemInfo.cs">
+      <Link>Linn\Kinsky\ItemInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Library.cs">
+      <Link>Linn\Kinsky\Library.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\LocalPlaylists.cs">
+      <Link>Linn\Kinsky\LocalPlaylists.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\MediaProvider.cs">
+      <Link>Linn\Kinsky\MediaProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\MediaRetriever.cs">
+      <Link>Linn\Kinsky\MediaRetriever.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Mediators.cs">
+      <Link>Linn\Kinsky\Mediators.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Models.cs">
+      <Link>Linn\Kinsky\Models.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\MultipusSourceList.cs">
+      <Link>Linn\Kinsky\MultipusSourceList.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\OptionStartupRoom.cs">
+      <Link>Linn\Kinsky\OptionStartupRoom.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Playlist.cs">
+      <Link>Linn\Kinsky\Playlist.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\PlaylistDisplayHelper.cs">
+      <Link>Linn\Kinsky\PlaylistDisplayHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\PlaylistSupport.cs">
+      <Link>Linn\Kinsky\PlaylistSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\PluginManager.cs">
+      <Link>Linn\Kinsky\PluginManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\RotaryControlTracker.cs">
+      <Link>Linn\Kinsky\RotaryControlTracker.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\SaveSupport.cs">
+      <Link>Linn\Kinsky\SaveSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\SharedPlaylists.cs">
+      <Link>Linn\Kinsky\SharedPlaylists.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Support.cs">
+      <Link>Linn\Kinsky\Support.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ViewMasters.cs">
+      <Link>Linn\Kinsky\ViewMasters.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Views.cs">
+      <Link>Linn\Kinsky\Views.cs</Link>
+    </Compile>
+  </ItemGroup>  
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="KinskyDesktop\" />
+    <Folder Include="KinskyDesktop\Ios\" />
+    <Folder Include="..\Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\Resources\Array.png">
+        <Link>Resources\Array.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\BottomFiller.png">
+        <Link>Resources\BottomFiller.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\BottomLeftEdge.png">
+        <Link>Resources\BottomLeftEdge.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\BottomRightEdge.png">
+        <Link>Resources\BottomRightEdge.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Button.png">
+        <Link>Resources\Button.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\ClockIcon.png">
+        <Link>Resources\ClockIcon.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\ClockIconElapsed.png">
+        <Link>Resources\ClockIconElapsed.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\ClockIconRemaining.png">
+        <Link>Resources\ClockIconRemaining.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\FfwdButton.png">
+        <Link>Resources\FfwdButton.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\FrwdButton.png">
+        <Link>Resources\FrwdButton.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\LeftFiller.png">
+        <Link>Resources\LeftFiller.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Mute.png">
+        <Link>Resources\Mute.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\MuteActive.png">
+        <Link>Resources\MuteActive.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\MuteIcon.png">
+        <Link>Resources\MuteIcon.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Pause.png">
+        <Link>Resources\Pause.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\PauseOver.png">
+        <Link>Resources\PauseOver.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Play.png">
+        <Link>Resources\Play.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\PlayOver.png">
+        <Link>Resources\PlayOver.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\RightFiller.png">
+        <Link>Resources\RightFiller.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Screws.png">
+        <Link>Resources\Screws.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\ScrewsLarge.png">
+        <Link>Resources\ScrewsLarge.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\SkipBack.png">
+        <Link>Resources\SkipBack.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\SkipBackDown.png">
+        <Link>Resources\SkipBackDown.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\SkipForward.png">
+        <Link>Resources\SkipForward.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\SkipForwardDown.png">
+        <Link>Resources\SkipForwardDown.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Stop.png">
+        <Link>Resources\Stop.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\StopOver.png">
+        <Link>Resources\StopOver.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\TopFiller.png">
+        <Link>Resources\TopFiller.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\TopLeftEdge.png">
+        <Link>Resources\TopLeftEdge.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\TopRightEdge.png">
+        <Link>Resources\TopRightEdge.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Wheel.png">
+        <Link>Resources\Wheel.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\WheelLarge.png">
+        <Link>Resources\WheelLarge.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\WheelLargeOver.png">
+        <Link>Resources\WheelLargeOver.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\WheelOver.png">
+        <Link>Resources\WheelOver.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\LinnLogo.png">
+        <Link>Resources\LinnLogo.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\PauseDown.png">
+        <Link>Resources\PauseDown.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\PlayDown.png">
+        <Link>Resources\PlayDown.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\RoomSource.png">
+        <Link>Resources\RoomSource.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\SkipBackOver.png">
+        <Link>Resources\SkipBackOver.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\SkipForwardOver.png">
+        <Link>Resources\SkipForwardOver.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\StopDown.png">
+        <Link>Resources\StopDown.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\TramLines.png">
+        <Link>Resources\TramLines.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\WheelMute.png">
+        <Link>Resources\WheelMute.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Delete.png">
+        <Link>Resources\Delete.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\DeleteDown.png">
+        <Link>Resources\DeleteDown.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\HourGlass.png">
+        <Link>Resources\HourGlass.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\HourGlass2.png">
+        <Link>Resources\HourGlass2.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\List.png">
+        <Link>Resources\List.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Repeat.png">
+        <Link>Resources\Repeat.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\RepeatDown.png">
+        <Link>Resources\RepeatDown.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\RepeatOn.png">
+        <Link>Resources\RepeatOn.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\RepeatOnDown.png">
+        <Link>Resources\RepeatOnDown.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Settings.png">
+        <Link>Resources\Settings.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Shuffle.png">
+        <Link>Resources\Shuffle.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\ShuffleDown.png">
+        <Link>Resources\ShuffleDown.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\ShuffleOn.png">
+        <Link>Resources\ShuffleOn.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\ShuffleOnDown.png">
+        <Link>Resources\ShuffleOnDown.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Standby.png">
+        <Link>Resources\Standby.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\StandbyDown.png">
+        <Link>Resources\StandbyDown.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\StandbyOn.png">
+        <Link>Resources\StandbyOn.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\StandbyOnDown.png">
+        <Link>Resources\StandbyOnDown.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Album.png">
+        <Link>Resources\Album.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\AlbumArtError.png">
+        <Link>Resources\AlbumArtError.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Artist.png">
+        <Link>Resources\Artist.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\CD.png">
+        <Link>Resources\CD.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Directory.png">
+        <Link>Resources\Directory.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\DisclosureIndicator.png">
+        <Link>Resources\DisclosureIndicator.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Error.png">
+        <Link>Resources\Error.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Folder.png">
+        <Link>Resources\Folder.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Loading.png">
+        <Link>Resources\Loading.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Playing.png">
+        <Link>Resources\Playing.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Playlist.png">
+        <Link>Resources\Playlist.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\PlaylistItem.png">
+        <Link>Resources\PlaylistItem.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\PlaylistSource.png">
+        <Link>Resources\PlaylistSource.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Radio.png">
+        <Link>Resources\Radio.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Room.png">
+        <Link>Resources\Room.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Sender.png">
+        <Link>Resources\Sender.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\SenderNoSend.png">
+        <Link>Resources\SenderNoSend.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Source.png">
+        <Link>Resources\Source.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Track.png">
+        <Link>Resources\Track.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\UPNP.png">
+        <Link>Resources\UPNP.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Video.png">
+        <Link>Resources\Video.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\Library.png">
+        <Link>Resources\Library.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\KinskyLogoAbout.png">
+        <Link>Resources\KinskyLogoAbout.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="iTunesArtwork" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\linnOssLib\Ios\linnOssLib.csproj">
+      <Project>{9C7B8EF1-DDC4-4361-AF7E-72E3F70A3CAF}</Project>
+      <Name>linnOssLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

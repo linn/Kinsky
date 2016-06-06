@@ -1,0 +1,539 @@
+;--------------------------------
+;Include Modern UI
+
+
+  !include "MUI.nsh"
+  !include "LogicLib.nsh"
+  !include "WordFunc.nsh"
+  !include "FileFunc.nsh"
+  !include "nsDialogs.nsh"
+
+  !insertmacro VersionCompare
+
+  !define DOTNETURI "http://download.microsoft.com/download/0/6/1/061F001C-8752-4600-A198-53214C69B51F/dotnetfx35setup.exe"
+  !define PRODUCT "%(product)s"
+  !define VERSION "%(version)s"
+  !define LAUNCHFILE "%(launch)s"
+  !define LAUNCHFILEDIR "%(launchDir)s"
+  !define OUTFILE "%(outfile)s"
+  !define ICON "%(icon)s"
+
+  !define PATH "Linn"
+
+
+
+;--------------------------------
+;General
+
+  ;Name and file
+  Name ${PRODUCT}
+  OutFile "${OUTFILE}"
+  BrandingText " "
+  XPStyle on
+
+  ; next line required to allow removal of startmenu items on VISTA
+  ;  but it doesn't work on our Linux version of makensis.exe
+  ;RequestExecutionLevel admin
+
+;--------------------------------
+;Variables
+
+  Var InstallDotNET
+
+;--------------------------------
+;Default installation folder
+
+  InstallDir "$PROGRAMFILES\Linn\${PRODUCT}"
+
+
+;--------------------------------
+;Interface Configuration
+
+  !define MUI_ICON %(icon)s
+  !define MUI_UNICON %(icon)s
+
+  !define MUI_HEADERIMAGE
+  !define MUI_HEADERIMAGE_BITMAP %(header)s
+  !define MUI_WELCOMEFINISHPAGE_BITMAP %(finish)s
+  !define MUI_UNWELCOMEFINISHPAGE_BITMAP %(finish)s
+
+  !define MUI_ABORTWARNING
+
+
+;--------------------------------
+;Pages
+
+  !insertmacro MUI_PAGE_LICENSE %(license)s
+  !define MUI_PAGE_CUSTOMFUNCTION_LEAVE PageDirectoryLeave
+  !insertmacro MUI_PAGE_DIRECTORY
+  !insertmacro MUI_PAGE_INSTFILES  
+
+  ;FINISH page settings
+  !define MUI_FINISHPAGE_TITLE "Completing the Setup Wizard for ${PRODUCT}"
+  !define MUI_FINISHPAGE_TEXT "${PRODUCT} has been installed on your computer.\n\nClick Finish to close this wizard."
+  
+  !define MUI_FINISHPAGE_SHOWREADME
+  !define MUI_FINISHPAGE_SHOWREADME_TEXT "Launch ${PRODUCT}"
+  !define MUI_FINISHPAGE_SHOWREADME_FUNCTION LaunchLink
+
+  !define MUI_FINISHPAGE_RUN
+  !define MUI_FINISHPAGE_RUN_TEXT "Create desktop shortcut"
+  !define MUI_FINISHPAGE_RUN_FUNCTION CreateDesktopShortcut
+
+  !insertmacro MUI_PAGE_FINISH
+  
+  !insertmacro MUI_UNPAGE_CONFIRM
+  !insertmacro MUI_UNPAGE_INSTFILES
+  
+  !define MUI_FINISHPAGE_TITLE "Uninstall Application Settings"
+  !define MUI_FINISHPAGE_TEXT "Do you wish to uninstall all ${PRODUCT} application settings (e.g. User option files, plugins, etc)"
+  
+  !define MUI_FINISHPAGE_RUN
+  !define MUI_FINISHPAGE_RUN_TEXT "Uninstall application settings"
+  !define MUI_FINISHPAGE_RUN_FUNCTION un.RemoveApplicationData
+  !define MUI_FINISHPAGE_RUN_NOTCHECKED
+  !define MUI_FINISHPAGE_NOREBOOTSUPPORT
+  
+  !insertmacro MUI_UNPAGE_FINISH
+
+Function LaunchLink
+    ExecShell "open" "$INSTDIR\${LAUNCHFILE}"
+FunctionEnd
+
+Function CreateDesktopShortcut
+    CreateShortCut "$DESKTOP\${PRODUCT}.lnk" "$INSTDIR\${LAUNCHFILE}" ""
+FunctionEnd
+
+Function un.RemoveApplicationData
+    RMDir /r "$LOCALAPPDATA\${PRODUCT}"
+FunctionEnd
+
+Function IsDotNETInstalled
+  Push $0
+  Push $1
+  
+  ReadRegDWORD $1 HKLM 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v3.5' Install
+  
+  ${If} $1 == ''
+    StrCpy $0 "not installed"
+  ${Else}
+    StrCpy $0 "installed"
+  ${EndIf}
+
+  Pop $1
+  Exch $0
+FunctionEnd
+
+Function AddToFirewallExceptions
+    SimpleFC::AllowDisallowExceptionsNotAllowed 0 ; enable exceptions
+    Pop $0
+	;Uninstall other versions of the app potentially kicking around
+    SimpleFC::RemoveApplication "$INSTDIR\KinskyDesktop.exe"
+    Pop $0
+    SimpleFC::RemoveApplication "$INSTDIR\KinskyDesktopWinForms.exe"
+    Pop $0
+    SimpleFC::AddApplication "${PRODUCT}" "$INSTDIR\${LAUNCHFILE}" 0 2 "" 1 ; add to exceptions list
+    Pop $0
+    SimpleFC::EnableDisableApplication "$INSTDIR\${LAUNCHFILE}"  1 ; enable in exceptions list
+    Pop $0
+FunctionEnd
+
+Function un.RemoveFromFirewallExceptions
+    SimpleFC::RemoveApplication "$INSTDIR\${LAUNCHFILE}"
+    Pop $0
+	;Uninstall other versions of the app potentially kicking around
+    SimpleFC::RemoveApplication "$INSTDIR\KinskyDesktop.exe"
+    Pop $0
+    SimpleFC::RemoveApplication "$INSTDIR\KinskyDesktopWinForms.exe"
+    Pop $0
+FunctionEnd
+
+;------------------------------------------------------------------------------
+; NextVersionString
+;
+; returns substring of $1 contents - from 1st char upto (but not inc) delimiter
+; returns substring in $1
+; $2 and $3 are rserved
+;
+!macro SHARINGMACRO un
+Function ${un}NextVersionString
+    Pop $1
+    Pop $0
+    Push $2
+    Push $3
+
+    StrCpy $1 ""
+    StrCpy $3 0             ;reset char count
+
+    ${If} $0 == ""          ;if supplied buffer is empty...
+        ;MessageBox MB_OK|MB_ICONSTOP "GFS: suplied buffer is empty - exiting"
+        Goto GFSexit        ;exit
+    ${Endif}
+
+GFSstartloop:
+    ;MessageBox MB_OK|MB_ICONSTOP "GFS:$0"
+    StrCpy $2 $0 1 $3       ;copy next char from $0 into $2
+    ;MessageBox MB_OK|MB_ICONSTOP "GFS:read 1 char:$2"
+    ${If} $2 == ","         ;if the char is delimiter
+        ;MessageBox MB_OK|MB_ICONSTOP "GFS:read delimiter - about to copy $3 chars then exit"
+        StrCpy $1 $0 $3 ""  ;copy all chars upto (but not inc delimiter)
+        ;MessageBox MB_OK|MB_ICONSTOP "GFS:read delimiter - $1"
+        IntOp $3 $3 + 1     ;increment value in $3 (to discard the delimiter)
+        StrCpy $0 $0 "" $3  ;copy into $0 contents of $0 (no max length) offset by count ($3) from start of string
+        ;MessageBox MB_OK|MB_ICONSTOP "GFS:read delimiter - $0"
+        Goto GFSexit
+    ${Endif}
+
+    IntOp $3 $3 + 1         ;increase char count...
+    ;MessageBox MB_OK|MB_ICONSTOP "GFS:increased char count to $3 - now looping"
+    Goto GFSstartloop       ;and loop back
+
+GFSexit:
+    ;MessageBox MB_OK|MB_ICONSTOP "GFS:exiting"
+    
+    Pop $3
+    Pop $2
+    Push $0
+    Push $1
+FunctionEnd
+!macroend
+;------------------------------------------------------------------------------
+
+Function GetParent
+ 
+  Exch $R0
+  Push $R1
+  Push $R2
+  Push $R3
+ 
+  StrCpy $R1 0
+  StrLen $R2 $R0
+ 
+  loop:
+    IntOp $R1 $R1 + 1
+    IntCmp $R1 $R2 get 0 get
+    StrCpy $R3 $R0 1 -$R1
+    StrCmp $R3 "\" get
+  Goto loop
+ 
+  get:
+    StrCpy $R0 $R0 -$R1
+ 
+    Pop $R3
+    Pop $R2
+    Pop $R1
+    Exch $R0
+ 
+FunctionEnd
+
+;------------------------------------------------------------------------------
+; UninstallPreviousVersions
+;
+; uninstall all previously installed versions
+;
+; The "InstalledVersions" reg entry contains a list of all installed versions in the form
+; "${PRODUCT}-w.x-y.z,${PRODUCT}-a.b-c.d,..." etc (comma separated)
+;
+; There are various "MessageBox..." lines in this function, which were used for debugging - They been commented out.
+;
+; "InstalledVersions" string is read into $1
+; GetFirstSubstring is called. This reads string in $1 and returns (in $1) the first substring
+; This substring consists of a version for a single installation in the form "LinnGui-w.x-y.z"
+; This is used to identify and locate a specific "UninstallString" reg entry.
+; This reg entry contains the path to the location of the uninstall.exe for that installed version
+; The uninstall.exe is then called to remove this version of the application.
+; This process is repeated until GetFirstSubstring returns an empty string.
+; Each time round the loop we read "InstalledVersions" with an increasing offset stored in $2
+; The offset defines how many chars to discrd from the beginning of the string.
+; At the end of each loop $2 is increased by length of substring +1 (+1 is for the delimiter)
+;
+Function UninstallPreviousVersions
+    Exch $4 
+    
+    Push $0
+    Push $1
+    Push $2
+    Push $3
+    
+    StrCpy $2 0 ; reset counter
+
+    ReadRegStr $0 HKLM "Software\Linn\$4" "InstalledVersions"
+Loop:
+    ;MessageBox MB_OK|MB_ICONSTOP "About to read registry list $0 for $4"
+    
+    Push $0
+    Push $1
+    Call NextVersionString
+    Pop $1
+    Pop $0
+
+    ;MessageBox MB_OK|MB_ICONSTOP "Parser returned:$1"
+    ;MessageBox MB_OK|MB_ICONSTOP "Parser returned list:$0"
+
+    StrCmp $1 "" Exit 0 ; if previous versions list is empty exit
+
+    ;MessageBox MB_OK|MB_ICONSTOP "Checking reg key for $1"
+    ReadRegStr $3 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$4-$1" "UninstallString"
+    ;MessageBox MB_OK|MB_ICONSTOP "$3"
+    StrCmp $3 "" +3 0 ; jump 3 lines if string is empty, jump 0 lines if it's not
+    Push $3
+    Call GetParent
+    Pop $R0
+    ExecWait '"$3" /S _?=$R0'
+    ;MessageBox MB_OK|MB_ICONSTOP "Uninstalled $3"
+    DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$4-$1"
+    Goto Loop
+
+Exit:
+    ;MessageBox MB_OK|MB_ICONSTOP "<UninstallPreviousVersions"
+    
+    Pop $4
+    
+    Pop $3
+    Pop $2
+    Pop $1
+    Pop $0
+    ;Sleep 5000
+FunctionEnd
+;------------------------------------------------------------------------------
+
+Function un.CleanInstalledVersions
+    Push $0
+    Push $1
+    Push $2
+    
+    ReadRegStr $0 HKLM "Software\Linn\${PRODUCT}" "InstalledVersions"
+    
+Loop:
+    Push $0
+    Push $1
+    Call un.NextVersionString
+    Pop $1
+    Pop $0
+    
+    StrCmp $1 "" Exit 0 ; if previous versions list is empty exit
+    
+    StrCmp $1 ${VERSION} Loop 0 ; remove uninstalled version string
+    
+    StrCpy $2 "$2$1," "" 0 ; concatenate versions that are still installed
+    
+Exit:
+    ;MessageBox MB_OK|MB_ICONSTOP "New InstalledVersion string is $2"
+    WriteRegStr HKLM "Software\Linn\${PRODUCT}" "InstalledVersions" '$2'
+
+    Pop $0
+    Pop $1
+    Pop $2
+FunctionEnd
+
+Function .onInit
+  ; check version of .Net installed
+  ;
+  Call IsDotNetInstalled
+  Pop $0
+  ${If} $0 == "not installed"
+    StrCpy $InstallDotNET "Yes"
+  ${Else}
+    StrCpy $InstallDotNET "No"
+  ${EndIf}
+  
+retry:
+  ; The next code block tries to find if the application is currently running and alerts the user to close the app before retrying.
+  ; FindWindow : 2nd param=window "class name" for the app, 3rd param="window caption" for the app 
+  ; Any releases made in the past with a non generic title (window caption) need a dedicated 2 line code block of the format shown below
+
+  System::Call 'kernel32::OpenMutex(i 0x100000, b 0, t "KinskyDesktopMutex") i .R0'
+    IntCmp $R0 0 notRunning
+        System::Call 'kernel32::CloseHandle(i $R0)'
+        GoTo retrydialog
+    notRunning:  
+  
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn ${PRODUCT}"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn ${PRODUCT} (RC3)"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn ${PRODUCT} (RC2)"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn ${PRODUCT} (RC1)"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn ${PRODUCT} (Beta)"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn ${PRODUCT} (Development)"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn ${PRODUCT} (Alpha)"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn ${PRODUCT} (NightlyBuild)"
+  StrCmp $0 0 0 retrydialog
+    
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn KinskyDesktop"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn KinskyDesktop (RC3)"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn KinskyDesktop (RC2)"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn KinskyDesktop (RC1)"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn KinskyDesktop (Beta)"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn KinskyDesktop (Development)"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn KinskyDesktop (Alpha)"
+  StrCmp $0 0 0 retrydialog
+
+  FindWindow $0 "WindowsForms10.Window.8.app.0.33c0d9d" "Linn KinskyDesktop (NightlyBuild)"
+  StrCmp $0 0 0 retrydialog
+
+  Goto continueInstall
+retrydialog:
+      MessageBox MB_ICONSTOP|MB_RETRYCANCEL "${PRODUCT} is currently running. Please close the application and retry." IDRETRY retry
+      Abort
+continueInstall:
+FunctionEnd
+
+Function PageDirectoryLeave
+    ; Uninstall any versions using the old name
+    Push "KinskyDesktop"
+    Call UninstallPreviousVersions
+    Push ${PRODUCT}
+    Call UninstallPreviousVersions
+FunctionEnd
+
+!insertmacro SHARINGMACRO ""
+!insertmacro SHARINGMACRO "un."
+
+;--------------------------------
+;Languages
+
+  !insertmacro MUI_LANGUAGE "English"
+
+
+;--------------------------------
+;Installer Sections
+
+Section "Linn" SecLinn 
+  SectionIn RO
+  
+  ${If} $InstallDotNet == "Yes"
+     SetDetailsView hide
+     inetc::get /caption "Downloading .NET Framework 3.5" /canceltext "Cancel" ${DOTNETURI} "$TEMP\dotnetfx35setup.exe" /end
+     Pop $1
+ 
+     ${If} $1 != "OK"
+        Delete "$TEMP\dotnetfx35setup.exe"
+        Abort "Installation cancelled."
+     ${EndIf}
+ 
+     ExecWait "$TEMP\dotnetfx35setup.exe"
+     Delete "$TEMP\dotnetfx35setup.exe"
+ 
+     SetDetailsView show
+  ${EndIf}
+  
+  Call IsDotNetInstalled
+  Pop $0
+  ${If} $0 == "not installed"
+    Abort "Failed to install .NET framework."
+  ${EndIf}
+
+  ; next line required to allow removal of startmenu items on VISTA
+  SetShellVarContext all
+
+  ; remove standard plugins that could be left behind due to disappearing uninstaller
+  Delete "$INSTDIR\\Plugins\OssKinskyMppFinder.dll"
+  Delete "$INSTDIR\\Plugins\OssKinskyMppLibrary.dll"
+  Delete "$INSTDIR\\Plugins\OssKinskyMppLocalPlaylist.dll"
+  
+  %(install)s
+
+  ;Store installation folder
+  WriteRegStr HKCU "${PATH}" "" "$INSTDIR"
+
+  ;Create uninstaller
+  WriteUninstaller "$INSTDIR\Uninstall.exe"
+
+  ;Create shortcuts
+
+  SetOutPath "$INSTDIR"
+  CreateDirectory "$SMPROGRAMS\${PATH}"
+  CreateShortCut "$SMPROGRAMS\${PATH}\${PRODUCT}.lnk" "$INSTDIR\${LAUNCHFILE}" ""
+
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT}-${VERSION}" "DisplayName" "${PRODUCT} ${VERSION}"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT}-${VERSION}" "UninstallString" "$INSTDIR\Uninstall.exe"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT}-${VERSION}" "Publisher" "Linn"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT}-${VERSION}" "DisplayIcon" "$INSTDIR\${LAUNCHFILE}"
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT}-${VERSION}" "NoModify" 1
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT}-${VERSION}" "NoRepair" 1
+
+  Call AddToFirewallExceptions
+  
+  ; add this version to the list of installed versions
+  ReadRegStr $0 HKLM "Software\Linn\${PRODUCT}" "InstalledVersions"
+  StrCpy $0 "$0${VERSION}," "" "" ; copy string, no max len, no offset
+  WriteRegStr HKLM "Software\Linn\${PRODUCT}" "InstalledVersions" '$0'
+
+  ;MessageBox MB_OK|MB_ICONSTOP "The following versions are installed : $0"
+
+SectionEnd
+
+
+;--------------------------------
+;Descriptions
+
+  ;Language strings
+  LangString DESC_SecLinn ${LANG_ENGLISH} "Linn"
+
+  ;Assign language strings to sections
+  !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+  !insertmacro MUI_DESCRIPTION_TEXT ${SecLinn} $(DESC_SecLinn)
+  !insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+
+;--------------------------------
+;Uninstaller Section
+
+Section "Uninstall"
+
+  Call un.RemoveFromFirewallExceptions
+
+  ; next line required to allow removal of startmenu items on VISTA
+  SetShellVarContext all
+
+  ;delete the installed files
+  %(delete)s
+
+  Delete "$INSTDIR\*.log"
+  Delete "$INSTDIR\*.crash"
+  Delete "$INSTDIR\Uninstall.exe"
+
+  ;delete the install folder if it's empty
+  RMDir  "$INSTDIR"
+
+  ; now delete the Start Menu files and folders
+  Delete "$SMPROGRAMS\${PATH}\${PRODUCT}.lnk"
+  RMDir "$SMPROGRAMS\${PRODUCT}"
+  RMDir "$SMPROGRAMS\${PATH}"
+  
+  ;delete the desktop shortcut
+  Delete "$DESKTOP\${PRODUCT}.lnk"
+  
+  Call un.CleanInstalledVersions
+
+  DeleteRegKey HKCU "${PATH}"
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT}-${VERSION}"
+
+
+
+SectionEnd

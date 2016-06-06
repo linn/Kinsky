@@ -1,0 +1,8 @@
+﻿<kd:BreadcrumbPanel x:Class="KinskyDesktopWpf.ViewWidgetBreadcrumb"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf">
+    <kd:BreadcrumbPanel.Resources>
+    </kd:BreadcrumbPanel.Resources>
+</kd:BreadcrumbPanel>

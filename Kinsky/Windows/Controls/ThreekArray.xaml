@@ -1,0 +1,310 @@
+﻿<UserControl x:Class="KinskyDesktopWpf.ThreekArray"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf"
+    >
+    <UserControl.Resources>
+
+        <!-- BACKGROUND IMAGE -->
+
+        <Style x:Key="ThreekArrayBackgroundImage" TargetType="Image">
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- LEFT BUTTON -->
+
+        <Style x:Key="ThreekArrayLeftButton" TargetType="{x:Type UserControl}">
+            <Setter Property="Canvas.Top" Value="43"/>
+            <Setter Property="Canvas.Left" Value="102"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type UserControl}">
+                        <Button x:Name="hitBoxLeftButton" Click="hitBoxLeftButton_Click" Style="{StaticResource HiddenContentButton}">
+                            <Grid>
+                                <Image x:Name="imgLeft" Opacity="1" Width="50" Height="39" />
+                                <Image x:Name="imgLeftMouse" Opacity="0" Width="50" Height="39" />
+                            </Grid>
+                        </Button>
+                        <ControlTemplate.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=hitBoxLeftButton,Path=IsMouseOver}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=ControlLeftEnabled}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="imgLeft">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                            From="1"  To="0" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="imgLeftMouse">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                            From="0"  To="1" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="imgLeft">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                            From="0"  To="1" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="imgLeftMouse">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                            From="1"  To="0" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+                            <!-- SKIP BACK CONTROLS -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self},Path=IsEnabled}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=ControlLeftEnabled}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="imgLeft"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourceSkipBack}}" />
+                                <Setter TargetName="imgLeftMouse"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourceSkipBackOver}}" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self},Path=IsEnabled}" Value="True" />
+                                    <Condition Binding="{Binding ElementName=hitBoxLeftButton,Path=IsPressed}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=ControlLeftEnabled}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="imgLeft"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourceSkipBackDown}}" />
+                                <Setter TargetName="imgLeftMouse"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourceSkipBackDown}}" />
+                            </MultiDataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+        <!-- MIDDLE BUTTON -->
+
+        <Style x:Key="ThreekArrayMiddleButton" TargetType="{x:Type UserControl}">
+            <Setter Property="Canvas.Top" Value="21"/>
+            <Setter Property="Canvas.Left" Value="152"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type UserControl}">
+                        <Button x:Name="hitBoxMiddleButton" AllowDrop="True" Click="hitBoxMiddleButton_Click" Style="{StaticResource HiddenContentButton}">
+                            <Grid>
+                                <Image x:Name="imgMiddle" Opacity="1"  Width="84" Height="84"  />
+                                <Image x:Name="imgMiddleMouse" Opacity="0" Width="84" Height="84" />
+                            </Grid>
+                        </Button>
+                        <ControlTemplate.Triggers>
+
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=hitBoxMiddleButton,Path=IsMouseOver}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=ControlMiddleEnabled}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="imgMiddle">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                            From="1"  To="0" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="imgMiddleMouse">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                            From="0"  To="1" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard TargetName="imgMiddle">
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                            From="0"  To="1" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                        <BeginStoryboard>
+                                            <Storyboard TargetName="imgMiddleMouse">
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                            From="1"  To="0" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>                           
+                            <!-- PLAY CONTROLS -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self},Path=IsEnabled}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=ControlMiddleEnabled}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="imgMiddle"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourcePlay}}" />
+                                <Setter TargetName="imgMiddleMouse"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourcePlayRollover}}" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self},Path=IsEnabled}" Value="True" />
+                                    <Condition Binding="{Binding ElementName=hitBoxMiddleButton,Path=IsPressed}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=ControlMiddleEnabled}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="imgMiddle"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourcePlayDown}}" />
+                                <Setter TargetName="imgMiddleMouse"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourcePlayDown}}" />
+                            </MultiDataTrigger>
+
+                            <!-- STOP CONTROLS -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self},Path=IsEnabled}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type kd:ThreekArray}},Path=IsPlaying}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=ControlMiddleEnabled}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="imgMiddle"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourceStop}}" />
+                                <Setter TargetName="imgMiddleMouse"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourceStopRollover}}" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self},Path=IsEnabled}" Value="True" />
+                                    <Condition Binding="{Binding ElementName=hitBoxMiddleButton,Path=IsPressed}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type kd:ThreekArray}},Path=IsPlaying}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=ControlMiddleEnabled}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="imgMiddle"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourceStopDown}}" />
+                                <Setter TargetName="imgMiddleMouse"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourceStopDown}}" />
+                            </MultiDataTrigger>
+
+                            <!-- PAUSE CONTROLS -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self},Path=IsEnabled}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type kd:ThreekArray}},Path=IsPlaying}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type kd:ThreekArray}},Path=IsUsingPauseButton}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=ControlMiddleEnabled}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="imgMiddle"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourcePause}}" />
+                                <Setter TargetName="imgMiddleMouse"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourcePauseRollover}}" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self},Path=IsEnabled}" Value="True" />
+                                    <Condition Binding="{Binding ElementName=hitBoxMiddleButton,Path=IsPressed}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type kd:ThreekArray}},Path=IsPlaying}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type kd:ThreekArray}},Path=IsUsingPauseButton}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=ControlMiddleEnabled}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="imgMiddle"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourcePauseDown}}" />
+                                <Setter TargetName="imgMiddleMouse"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourcePauseDown}}" />
+                            </MultiDataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+        <Style x:Key="ThreekArrayRightButton" TargetType="{x:Type UserControl}">
+            <Setter Property="Canvas.Top" Value="43"/>
+            <Setter Property="Canvas.Left" Value="236"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type UserControl}">
+                        <Button x:Name="hitBoxRightButton" AllowDrop="True" Click="hitBoxRightButton_Click" Style="{StaticResource HiddenContentButton}">
+                            <Grid>
+                                <Image x:Name="imgRight" Opacity="1"  Width="50" Height="39" />
+                                <Image x:Name="imgRightMouse" Opacity="0"  Width="50" Height="39" />
+                            </Grid>
+                        </Button>
+                        <ControlTemplate.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=hitBoxRightButton,Path=IsMouseOver}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=ControlRightEnabled}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="imgRight">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                            From="1"  To="0" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="imgRightMouse">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                            From="0"  To="1" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                                <MultiDataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="imgRight">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                      From="0" To="1" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="imgRightMouse">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                            From="1"  To="0" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.ExitActions>
+                            </MultiDataTrigger>
+                            <!-- SKIP FORWARD CONTROLS -->
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self},Path=IsEnabled}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=ControlRightEnabled}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="imgRight"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourceSkipForward}}" />
+                                <Setter TargetName="imgRightMouse"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourceSkipForwardOver}}" />
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self},Path=IsEnabled}" Value="True" />
+                                    <Condition Binding="{Binding ElementName=hitBoxRightButton,Path=IsPressed}" Value="True" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=ControlRightEnabled}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="imgRight"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourceSkipForwardDown}}" />
+                                <Setter TargetName="imgRightMouse"
+                                        Property="Source" Value="{Binding Source={x:Static kd:StaticImages.ImageSourceSkipForwardDown}}" />
+                            </MultiDataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+    </UserControl.Resources>
+    <Canvas>
+        <Image Style="{StaticResource ThreekArrayBackgroundImage}" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceArray}}" Width="388" Height="121" />
+        <Image Style="{StaticResource ThreekArrayBackgroundImage}" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceTramlines}}" Width="388" Height="121" />
+        <UserControl x:Name="btnLeft"  Style="{StaticResource ThreekArrayLeftButton}" DragOver="ThreekArray_DragOver" Drop="ThreekArray_Drop" AllowDrop="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=PlaylistLeftEnabled}" KeyboardNavigation.TabIndex="20" />
+        <UserControl x:Name="btnMiddle" Style="{StaticResource ThreekArrayMiddleButton}" DragOver="ThreekArray_DragOver" Drop="ThreekArray_Drop" AllowDrop="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=PlaylistMiddleEnabled}" KeyboardNavigation.TabIndex="21" />
+        <UserControl x:Name="btnRight" Style="{StaticResource ThreekArrayRightButton}" DragOver="ThreekArray_DragOver" Drop="ThreekArray_Drop" AllowDrop="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType=kd:ThreekArray},Path=PlaylistRightEnabled}" KeyboardNavigation.TabIndex="22" />
+    </Canvas>
+</UserControl>

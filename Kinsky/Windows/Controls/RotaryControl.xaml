@@ -1,0 +1,112 @@
+﻿<kd:Kontrol x:Class="KinskyDesktopWpf.RotaryControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf">
+    <kd:Kontrol.Resources>
+        <Style TargetType="{x:Type kd:RotaryControl}">
+            <Setter Property="ToolTipService.InitialShowDelay" Value="{DynamicResource ToolTipInitialShowDelay}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type kd:RotaryControl}">
+                        <Grid>
+                            <Image x:Name="wheel" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceWheel}}" />
+                            <Image x:Name="wheelOver" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceWheelOver}}" Opacity="0" />
+                            <kd:KontrolInnerRing 
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"
+                                                 Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                                                AncestorType={x:Type kd:Kontrol}}, 
+                                                                 Path=MiddleCircleDiameter}" 
+                                                 Height="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                                                AncestorType={x:Type kd:Kontrol}}, 
+                                                                 Path=MiddleCircleDiameter}"
+                                                 ValueBrush="{StaticResource InnerRingBrush}"
+                                                 UpdatingValueBrush="{StaticResource InnerRingUpdatingBrush}">
+                                <FrameworkElement.RenderTransform>
+                                    <TranslateTransform Y="-0.5" />
+                                </FrameworkElement.RenderTransform>
+                            </kd:KontrolInnerRing>
+                            <Image x:Name="wheelGrip" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceScrews}}" RenderTransformOrigin="0.5,0.5">
+                                <Image.RenderTransform>
+                                    <RotateTransform Angle="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                                                AncestorType={x:Type kd:RotaryControl}}, 
+                                                                 Path=Angle, Converter={StaticResource WheelControlAngleValueConverter}}" />
+                                </Image.RenderTransform>
+                            </Image>
+                            <kd:IndeterminateProgressBar Width="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                                                AncestorType={x:Type kd:Kontrol}}, 
+                                                                 Path=MiddleCircleDiameter}"  
+                                                         Height="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                                                AncestorType={x:Type kd:Kontrol}}, 
+                                                                 Path=MiddleCircleDiameter}" 
+                                   kd:IndeterminateProgressBar.IsAnimating="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                                                AncestorType={x:Type kd:Kontrol}},
+                                                        Path=IsIndeterminate}"
+                                   Visibility="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                                                AncestorType={x:Type kd:Kontrol}},
+                                                        Path=IsIndeterminate, Converter={StaticResource BooleanVisibilityValueConverter}}" />
+
+                            <Image x:Name="wheelMute" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceWheelMute}}" Visibility="Collapsed" />
+
+                            <Label HorizontalAlignment="Stretch"  
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center">
+                                <TextBlock     x:Name="txtContent"
+                                           Background="Transparent"  
+                                           Foreground="#FFF"
+                                           Text="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                          AncestorType={x:Type kd:Kontrol}}, Path=Text}" />
+                            </Label>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                    <Condition Property="kd:Kontrol.OuterRingEnabled" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="wheel">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                      From="1"  To="0" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="wheelOver">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                      From="0"  To="1" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="wheel">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                      From="0"  To="1" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetName="wheelOver">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                      From="1" To="0" Duration="{x:Static kd:AnimationExtensions.kImageRolloverAnimationDuration}" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="wheelMute" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="txtContent" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="IsDimmed" Value="True">
+                                <Setter TargetName="wheelMute" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="txtContent" Property="Foreground" Value="#AAA" />                                
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </kd:Kontrol.Resources>
+
+</kd:Kontrol>

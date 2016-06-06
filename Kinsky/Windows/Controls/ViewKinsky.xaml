@@ -1,0 +1,468 @@
+﻿<UserControl x:Class="KinskyDesktopWpf.ViewKinsky"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Width="300" Height="300" Focusable="False">
+    <UserControl.Resources>
+
+        <sys:String x:Key="NoRoomText">No room</sys:String>
+        <sys:String x:Key="NoSourceText">No source</sys:String>
+        <sys:String x:Key="SelectSourceText">Select a source</sys:String>
+        <sys:String x:Key="SelectRoomText">Select a room</sys:String>
+
+        <DataTemplate DataType="{x:Type kd:RoomViewModel}">
+            <Grid x:Name="grid" Margin="6,10,10,10" Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}}" >
+                <DockPanel Margin="0,0,20,0">
+                    <Grid Margin="0,0,5,0" VerticalAlignment="Center" >
+                        <Button x:Name="btnStandby" IsEnabled="{Binding Path=WrappedItem.Standby, Converter={StaticResource BooleanNegatingConverter}}" Style="{DynamicResource StandbyButtonStyle}" Click="btnStandby_Click" />
+                    </Grid>
+                    <Image x:Name="tick" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceTick}}" Width="20" DockPanel.Dock="Right" Visibility="{Binding Path=IsSelected, Converter={StaticResource BooleanVisibilityValueConverter}}" />
+                    <TextBlock x:Name="txtName"
+                                    Text="{Binding Path=Name}"    
+                                    Foreground="{DynamicResource TextBrush}"
+                                    TextAlignment="Left" 
+                                    VerticalAlignment="Center"
+                                    Margin="5"
+                                    TextWrapping="Wrap"
+                                    Height="30"
+                                    DockPanel.Dock="Left"
+                                />
+                </DockPanel>
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=IsVisible}" Value="False">
+                    <Setter Property="Control.Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type kd:SourceViewModel}">
+            <Grid x:Name="grid" Margin="10" Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}}" >
+                <DockPanel Margin="0,0,20,0">
+                    <Image Source="{Binding ImageSource}" Width="40" DockPanel.Dock="Left" />
+                    <Image x:Name="tick" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceTick}}" Width="20" DockPanel.Dock="Right" Visibility="{Binding Path=IsSelected, Converter={StaticResource BooleanVisibilityValueConverter}}" />
+                    <TextBlock x:Name="txtName"
+                                    Text="{Binding Path=Name}"    
+                                    Foreground="{DynamicResource TextBrush}"
+                                    TextAlignment="Left" 
+                                    VerticalAlignment="Center"
+                                    Margin="5"
+                                    TextWrapping="Wrap"
+                                    Height="30"
+                                    DockPanel.Dock="Left"
+                                />
+                </DockPanel>
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=IsVisible}" Value="False">
+                    <Setter Property="Control.Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type kd:BookmarkViewModel}">
+            <Grid  x:Name="grid" Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}}" MouseDown="Bookmark_MouseDown">
+                <DockPanel HorizontalAlignment="Stretch" Margin="0,10,0,10">
+                    <Image Source="{Binding ImageSource}" MaxWidth="30" MaxHeight="30" DockPanel.Dock="Left" Margin="5,0,0,0" />
+                    <StackPanel DockPanel.Dock="Left" Margin="5,0,5,5" VerticalAlignment="Top">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="txtName"
+                                    Text="{Binding Path=WrappedItem.Title}"    
+                                    Foreground="{DynamicResource TextBrush}"
+                                    TextAlignment="Left" 
+                                    VerticalAlignment="Center"
+                                />
+                            <TextBox x:Name="txtTitleEditor" VerticalContentAlignment="Top"
+                                                           Text="{Binding Path=WrappedItem.Title}" 
+                                                           HorizontalAlignment="{TemplateBinding HorizontalAlignment}" 
+                                                           VerticalAlignment="Top"
+                                                           FontSize="{DynamicResource SemiLargeFontSize}" TextWrapping="Wrap"
+                                                           Visibility="Collapsed"
+                                                           >
+                                <TextBox.Foreground>
+                                    <SolidColorBrush Color="{DynamicResource TextColour}" />
+                                </TextBox.Foreground>
+                            </TextBox>
+                        </StackPanel>
+                        <TextBlock x:Name="txtBreadcrumb"
+                                    Text="{Binding Path=WrappedItem, Converter={StaticResource BookmarkBreadcrumbTextValueConverter}}"    
+                                    FontSize="{DynamicResource SmallFontSize}"
+                                    Foreground="{DynamicResource TextBrush}"
+                                    TextAlignment="Left" 
+                                    VerticalAlignment="Center"
+                                />
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding IsEditing}" Value="True">
+                    <Setter TargetName="txtTitleEditor" Property="Visibility" Value="Visible" />
+                    <Setter TargetName="txtName" Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        
+    </UserControl.Resources>
+    <!-- MAIN PAGE -->
+    <Grid>
+        <!-- ROOM LIST POPUP -->
+        <Popup x:Name="popupRoomSelection" Width="400" Height="{Binding Path=ActualHeight, ElementName=pnlPlaylist}" kd:PopupExtensions.DesiredHorizontalPlacement="{x:Static Dock.Right}">
+            <HeaderedContentControl Style="{StaticResource PopupFrame}" Margin="0,0,0,10">
+                <HeaderedContentControl.Header>
+                    <DockPanel LastChildFill="True" Margin="0,-8,0,0">
+                        <Button x:Name="btnStandbyAll" Style="{DynamicResource StandbyButtonStyle}" DockPanel.Dock="Left" HorizontalAlignment="Center" ToolTip="Put all rooms into standby" Margin="7,0,10,0" />
+                        <Button x:Name="btnRefreshRooms" Style="{DynamicResource RefreshButtonStyle}" HorizontalAlignment="Center" DockPanel.Dock="Right" Margin="10,0,4,0" Click="btnRefresh_Click" />
+                        <kd:IndeterminateProgressBar x:Name="progressRefreshRooms" Width="30" DockPanel.Dock="Right" Margin="3,0,1,0" Visibility="Collapsed" />
+                        <TextBlock Text="Rooms" FontSize="{DynamicResource LargeFontSize}" HorizontalAlignment="Center" Margin="0,13,0,0" />
+                    </DockPanel>
+                </HeaderedContentControl.Header>
+                <HeaderedContentControl.Content>
+                    <ListView x:Name="lstRooms" Grid.Row="1"  Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,5" BorderThickness="0" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel HorizontalAlignment="Left" />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </HeaderedContentControl.Content>
+            </HeaderedContentControl>
+        </Popup>
+        <!-- SOURCE LIST / RECEIVERS POPUP -->
+        <Popup x:Name="popupSourceSelection" Width="400" Height="{Binding Path=ActualHeight, ElementName=pnlPlaylist}">
+            <HeaderedContentControl Style="{StaticResource PopupFrame}" Margin="0,0,0,10">
+                <HeaderedContentControl.Header>
+                    <DockPanel LastChildFill="True" Margin="0,-8,0,0">
+                        <Button x:Name="btnRefreshSources" Style="{DynamicResource RefreshButtonStyle}"  DockPanel.Dock="Right" Margin="10,0,4,0" Click="btnRefresh_Click" />
+                        <kd:IndeterminateProgressBar x:Name="progressRefreshSources" Width="30" DockPanel.Dock="Right" Margin="3,0,1,0" Visibility="Collapsed" />
+                        <TextBlock x:Name="sourceSelectionHeader" Text="Sources" FontSize="{DynamicResource LargeFontSize}" HorizontalAlignment="Center" Margin="0,13,0,0" />
+                    </DockPanel>
+                </HeaderedContentControl.Header>
+                <HeaderedContentControl.Content>
+                    <Grid Background="{DynamicResource BackgroundBrush}" Margin="0,0,0,5">
+                        <ListView x:Name="lstSources" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel HorizontalAlignment="Left" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+                    </Grid>
+                </HeaderedContentControl.Content>
+            </HeaderedContentControl>
+        </Popup>
+        <!-- ADD BOOKMARK POPUP -->
+        <Popup x:Name="popupAddBookmark" Width="400" Height="150" kd:PopupExtensions.DesiredHorizontalPlacement="{x:Static Dock.Left}" kd:PopupExtensions.DesiredVerticalPlacement="{x:Static Dock.Bottom}" FocusManager.FocusedElement="{Binding ElementName=buttonAddBookmark}">
+            <HeaderedContentControl Style="{StaticResource PopupFrame}" Margin="0,0,0,10">
+                <HeaderedContentControl.Header>
+                    <TextBlock DockPanel.Dock="Left" Text="Add Bookmark" FontSize="{DynamicResource LargeFontSize}" HorizontalAlignment="Center" Margin="0,10,0,0" />
+                </HeaderedContentControl.Header>
+                <HeaderedContentControl.Content>
+                    <DockPanel Width="385" Margin="0" LastChildFill="True" x:Name="pnlAddBookmark">
+                        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,-5,0">
+                            <Button x:Name="buttonAddBookmark" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="3">
+                                <TextBlock Text="Add" VerticalAlignment="Center" Margin="2" />
+                            </Button>
+                            <Button x:Name="buttonCancelAddBookmark" HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="3">
+                                <TextBlock Text="Close" VerticalAlignment="Center" Margin="2" />
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Stretch">
+                            <Image Source="{Binding ImageSource}" MaxWidth="30" MaxHeight="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,8,0,0"  />
+                            <StackPanel HorizontalAlignment="Stretch" Margin="5">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                    <TextBlock Text="Title: " Width="70"/>
+                                    <Border BorderThickness="0.5" HorizontalAlignment="Stretch" Width="283" Margin="-3,0,0,0">
+                                        <TextBox x:Name="txtTitle"
+                                        Foreground="{DynamicResource TextBrush}"
+                                        TextAlignment="Left" 
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Stretch" MaxLength="70"
+                                    />
+                                    </Border>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Location:"  Width="70"/>
+                                    <TextBlock x:Name="txtBreadcrumb"  Width="283"
+                                        Text="{Binding Path=WrappedItem, Converter={StaticResource BookmarkBreadcrumbTextValueConverter}}"  
+                                        Foreground="{DynamicResource TextBrush}"
+                                        TextAlignment="Left" 
+                                        VerticalAlignment="Center"
+                                    />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </DockPanel>
+                </HeaderedContentControl.Content>
+            </HeaderedContentControl>
+        </Popup>
+        <!-- BOOKMARKS LIST POPUP -->
+        <Popup x:Name="popupBookmarksList" Width="400" Height="{Binding Path=ActualHeight, ElementName=pnlPlaylist}" kd:PopupExtensions.DesiredHorizontalPlacement="{x:Static Dock.Left}" kd:PopupExtensions.DesiredVerticalPlacement="{x:Static Dock.Bottom}">
+            <HeaderedContentControl Style="{StaticResource PopupFrame}" Margin="0,0,0,10">
+                <HeaderedContentControl.Header>
+                    <TextBlock DockPanel.Dock="Left" Text="Bookmarks" FontSize="{DynamicResource LargeFontSize}" HorizontalAlignment="Center" Margin="0,10,0,0" />
+                </HeaderedContentControl.Header>
+                <HeaderedContentControl.Content>
+                    <ListView x:Name="lstBookmarks" DockPanel.Dock="Bottom" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,5" BorderThickness="0" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel HorizontalAlignment="Left" />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Command="kd:Commands.DeleteCommand" />
+                                <MenuItem Command="kd:Commands.RenameCommand" />
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                    </ListView>
+                </HeaderedContentControl.Content>
+            </HeaderedContentControl>
+        </Popup>
+        <DockPanel x:Name="mainView" LastChildFill="True" Background="Transparent">
+            <!-- TOP CONTROLS -->
+            <Grid DockPanel.Dock="Top" Name="topPanel" Margin="5,0,5,0" Height="120" MouseLeftButtonDown="topPanel_MouseLeftButtonDown">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor,
+                                                    AncestorType={x:Type kd:KinskyDesktop}}, Converter={StaticResource ControlsWidthValueConverter}}" />
+                </Grid.ColumnDefinitions>
+                <!-- TRACK DISPLAY -->
+                <kd:ViewWidgetTrackDisplay x:Name="viewWidgetTrackDisplay" Margin="1,5,5,5" Background="Transparent" Grid.Column="0" kd:ViewWidgetTrackDisplay.OpenTrackDialogClick="OpenTrackDialog_Click"/>
+                <!-- TRANSPORT/VOLUME CONTROLS -->
+                <Canvas HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent" Grid.Column="1" Margin="0,0,45,0"  Width="388" Height="121" ContextMenu="{x:Null}">
+                    <kd:ThreekArray x:Name="threeKArray" Width="388" Height="121"
+                              ToolTipService.ToolTip="Playback controls" />
+                    <kd:RockerControl x:Name="rockerControlMediaTime" Canvas.Left="-10" Focusable="False"
+                                  Width="106"
+                                  Height="86"                                  
+                                  OuterCircleDiameter="95"
+                                  MiddleCircleDiameter="59"
+                                  InnerCircleDiameter="36"
+                                  Canvas.Top="20"
+                                  kd:RockerControl.TimerInterval = "50"
+                                  Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                    AncestorType={x:Type kd:KinskyDesktop}}, 
+                                                    Path=UseRotaryControls, 
+                                                    Converter={StaticResource InverseBooleanVisibilityValueConverter}}"
+                              ToolTipService.ToolTip="Track control (Click center to toggle time display, click left and right to seek within track)">
+                    </kd:RockerControl>
+                    <kd:RotaryControl x:Name="rotaryControlMediaTime"  Focusable="False"
+                              Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                    AncestorType={x:Type kd:KinskyDesktop}}, 
+                                                    Path=UseRotaryControls, 
+                                                    Converter={StaticResource BooleanVisibilityValueConverter}}"
+                              ToolTipService.ToolTip="Track control (Click center to toggle time display, rotate ring to seek within track)"
+                                  Width="86"
+                                  Height="86"
+                                  OuterCircleDiameter="95"
+                                  MiddleCircleDiameter="59"
+                                  InnerCircleDiameter="36"
+                                  IsEnabled="False" Canvas.Top="20"/>
+                    <kd:RotaryControl x:Name="rotaryControlVolume" Focusable="False"
+                              Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                    AncestorType={x:Type kd:KinskyDesktop}}, 
+                                                    Path=UseRotaryControls, 
+                                                    Converter={StaticResource BooleanVisibilityValueConverter}}"
+                              ToolTipService.ToolTip="Volume control (click center to toggle mute, rotate ring to adjust volume)"
+                                  Width="86"
+                                  Height="86"
+                                  OuterCircleDiameter="95"
+                                  MiddleCircleDiameter="59"
+                                  InnerCircleDiameter="36"
+                                  IsEnabled="False"  Canvas.Top="20" Canvas.Right="0"/>
+                    <kd:RockerControl x:Name="rockerControlVolume" Focusable="False"
+                                  Width="106"
+                                  Height="86"                                  
+                                  OuterCircleDiameter="95"
+                                  MiddleCircleDiameter="59"
+                                  InnerCircleDiameter="36"
+                                  kd:RockerControl.TimerInterval = "100"
+                                  Canvas.Top="20" Canvas.Right="-10"
+                              Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                    AncestorType={x:Type kd:KinskyDesktop}}, 
+                                                    Path=UseRotaryControls, 
+                                                    Converter={StaticResource InverseBooleanVisibilityValueConverter}}" 
+                              ToolTipService.ToolTip="Volume control (click center to toggle mute, click left or right to adjust volume)">
+                    </kd:RockerControl>
+                </Canvas>
+            </Grid>
+            <!-- BOTTOM PANEL -->
+            <Grid DockPanel.Dock="Bottom" Margin="5,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="43" />
+                </Grid.RowDefinitions>
+                <!-- BACKGROUND -->
+                <Image Stretch="Fill" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceBottomFiller}}" Margin="4,0,4,0" />
+                <Image Source="{Binding Source={x:Static kd:StaticImages.ImageSourceLogo}}" Height="33" HorizontalAlignment="Center" Margin="0,-4,0,0" />
+                <DockPanel Margin="0,5,0,0">
+                    <!-- BUTTONS ON LEFT -->
+                    <DockPanel HorizontalAlignment="Left" Grid.Column="0" x:Name="pnlPlaylistButtonsDragging" Visibility="{Binding IsDragging, Converter={StaticResource BooleanVisibilityValueConverter}}">
+                        <Button Style="{StaticResource PlayNowButtonStyle}" x:Name="buttonPlayNow" DockPanel.Dock="Left" AllowDrop="True" Margin="5,0,5,0"  />
+                        <Button Style="{StaticResource PlayNextButtonStyle}" x:Name="buttonPlayNext" DockPanel.Dock="Left" AllowDrop="True" Margin="5,0,5,0" />
+                        <Button Style="{StaticResource PlayLaterButtonStyle}" x:Name="buttonPlayLater" DockPanel.Dock="Left" AllowDrop="True" Margin="5,0,5,0" />
+                    </DockPanel>
+                    <DockPanel LastChildFill="False" HorizontalAlignment="Left" x:Name="pnlBrowserButtons" Grid.Column="0" Visibility="{Binding IsDragging, Converter={StaticResource InverseBooleanVisibilityValueConverter}}">
+                        <ToggleButton x:Name="buttonToggleListView" DockPanel.Dock="Left" Style="{StaticResource ToggleListViewButtonStyle}" Margin="5,0,3,0" KeyboardNavigation.TabIndex="70"  />
+                        <ToggleButton x:Name="buttonChangeSize" DockPanel.Dock="Left" Click="buttonChangeSize_Click" Style="{StaticResource SizeButtonStyle}" Margin="5,0,5,0" KeyboardNavigation.TabIndex="71" />
+                        <Popup x:Name="popupSlider" Placement="Right" PlacementTarget="{Binding ElementName=buttonChangeSize}" StaysOpen="False" PopupAnimation="Fade" AllowsTransparency="True" Closed="popupSlider_Closed">
+                            <Slider x:Name="sliderSize" Width="200" />
+                        </Popup>
+                    </DockPanel>
+
+                </DockPanel>
+                <!-- BUTTONS ON RIGHT -->
+                <DockPanel LastChildFill="False" HorizontalAlignment="Right">
+
+                    <Grid Margin="0,5,0,0" x:Name="pnlPlaylistButtons" DockPanel.Dock="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="53" />
+                            <ColumnDefinition Width="53" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="53" />
+                            <ColumnDefinition Width="53" />
+                        </Grid.ColumnDefinitions>
+                        <ToggleButton Style="{StaticResource ShuffleButtonStyle}" x:Name="buttonShuffle" IsEnabled="False" Grid.Column="0" Margin="5,0,5,0" KeyboardNavigation.TabIndex="72" />
+                        <ToggleButton Style="{StaticResource RepeatButtonStyle}" x:Name="buttonRepeat" IsEnabled="False" Grid.Column="1" Margin="5,0,5,0"  KeyboardNavigation.TabIndex="73" />
+                        <Button Style="{StaticResource SaveButtonStyle}" x:Name="buttonSave" Grid.Column="3" Margin="5,0,5,0"  KeyboardNavigation.TabIndex="74"/>
+                        <Button Style="{StaticResource DeleteButtonStyle}" x:Name="buttonDelete" Grid.Column="4" Margin="5,0,5,0"  KeyboardNavigation.TabIndex="75"/>
+                    </Grid>
+                </DockPanel>
+
+            </Grid>
+            <!-- MAIN CENTRAL PANEL -->
+            <Grid x:Name="centrePanel" DockPanel.Dock="Bottom" MinHeight="0" Margin="6,0,5,0" Background="{DynamicResource BackgroundBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="42" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="{Binding SplitBarPositionLeft, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type kd:ViewKinsky}}, Mode=TwoWay}" MinWidth="{DynamicResource SplitterMinWidth}"/>
+                    <ColumnDefinition  Width="{Binding SplitBarPositionRight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type kd:ViewKinsky}}, Mode=TwoWay}" MinWidth="{DynamicResource SplitterMinWidth}"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Row="0" Grid.ColumnSpan="2" Stretch="Fill" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceTopBarFiller}}" Margin="0,0,3,0" />
+                <!-- BROWSER BREADCRUMB -->
+                <DockPanel Grid.Row="0" Grid.Column="0" x:Name="pnlBreadcrumbBrowser">
+                    <Button Style="{StaticResource BackButtonStyle}" x:Name="buttonUpBrowser" DockPanel.Dock="Left" Margin="3,5,5,5" KeyboardNavigation.TabIndex="40" />
+                    <ToggleButton DockPanel.Dock="Right" x:Name="buttonShowBookmarksList" Style="{StaticResource ShowBookmarksListButtonStyle}" Margin="3,5,5,5" KeyboardNavigation.TabIndex="43"  />
+                    <Grid SnapsToDevicePixels="True" HorizontalAlignment="Center" Margin="0,5,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="28" />
+                        </Grid.RowDefinitions>
+                        <Image x:Name="imgLeft" Grid.Column="0" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceBoxLeft}}" Stretch="Fill"  />
+                        <Image x:Name="imgFiller" Grid.Column="1" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceBoxFiller}}" Stretch="Fill" Margin="0,0,3,0" />
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="30" />
+                            </Grid.ColumnDefinitions>
+                            <kd:ViewWidgetBreadcrumb x:Name="breadcrumbBrowser" Margin="0,-3,0,0"  KeyboardNavigation.TabIndex="41" HorizontalAlignment="Left" />
+                            <ToggleButton x:Name="buttonShowAddBookmark" Grid.Column="1" HorizontalAlignment="Right"  KeyboardNavigation.TabIndex="42" ToolTip="Click to add bookmark">
+                                <TextBlock Text=" + " FontSize="{StaticResource SemiLargeFontSize}" VerticalAlignment="Center" />
+                            </ToggleButton>
+                        </Grid>
+                    </Grid>
+                </DockPanel>
+                <!--  ROOM/SOURCE DISPLAY -->
+                <Grid Grid.Row="0" Grid.Column="1" Margin="5,5,5,0" Width="{Binding ElementName=pnlPlaylist, Path=ActualWidth}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MinWidth="120" />
+                        <ColumnDefinition Width="*" MinWidth="120" />
+                    </Grid.ColumnDefinitions>
+                    <ToggleButton x:Name="buttonSelectRoom" ToolTip="Click to select room." Grid.Column="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" KeyboardNavigation.TabIndex="45" >
+                        <ContentControl x:Name="ctlSelectRoom" Margin="0,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" DataContext="{x:Null}" Focusable="False">
+                            <ContentControl.Content>
+                                <DockPanel>
+                                    <Image DockPanel.Dock="Left" Source="{Binding ImageSource}" Height="20" Margin="0,-5,5,0"/>
+                                    <TextBlock DockPanel.Dock="Right" Text="{Binding Name, FallbackValue={StaticResource SelectRoomText}}" Margin="10,-5,0,0" VerticalAlignment="Center" TextBlock.FontSize="{DynamicResource LargeFontSize}" />
+                                </DockPanel>
+                            </ContentControl.Content>
+                        </ContentControl>
+                    </ToggleButton>
+                    <ToggleButton x:Name="buttonSelectSource" Grid.Column="1" ToolTip="Click to select source." HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,0,10,0" KeyboardNavigation.TabIndex="46" >
+                        <ContentControl x:Name="ctlSelectSource" Margin="0,5,0,0" HorizontalAlignment="Right" VerticalAlignment="Center" DataContext="{x:Null}" Focusable="False">
+                            <ContentControl.Content>
+                                <DockPanel>
+                                    <Image DockPanel.Dock="Right" Source="{Binding ImageSource}" Height="20" Margin="10,-5,2,0"/>
+                                    <TextBlock DockPanel.Dock="Left" Text="{Binding Name, FallbackValue={StaticResource SelectSourceText}}" Margin="5,-5,5,0" VerticalAlignment="Center" TextBlock.FontSize="{DynamicResource LargeFontSize}" />
+                                </DockPanel>
+                            </ContentControl.Content>
+                        </ContentControl>
+                    </ToggleButton>
+                </Grid>
+                <!-- BROWSER -->
+                <Grid x:Name="pnlBrowser" Grid.Row="1"  Grid.Column="0" Background="{DynamicResource BackgroundBrush}" Margin="0,0,-1,0" KeyboardNavigation.TabIndex="57"  />
+                <!-- PLAYLIST -->
+                <Grid x:Name="pnlPlaylist" Grid.Row="1"  Grid.Column="1"  Background="{DynamicResource BackgroundBrush}" Margin="0" KeyboardNavigation.TabIndex="59" />
+
+                <GridSplitter HorizontalAlignment="Left" Width="8" Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" Margin="0,0,5,0" KeyboardNavigation.TabIndex="58" >
+                    <GridSplitter.Style>
+                        <Style  TargetType="{x:Type GridSplitter}">
+                            <Setter Property="FocusVisualStyle" Value="{StaticResource {x:Static SystemParameters.FocusVisualStyleKey}}" />
+                            <Setter Property="Control.Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Grid Background="Transparent" HorizontalAlignment="Stretch">
+                                            <Rectangle Width="2" HorizontalAlignment="Center" VerticalAlignment="Stretch" Stroke="#272727" Fill="#272727" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GridSplitter.Style>
+                </GridSplitter>
+
+            </Grid>
+
+        </DockPanel>
+        <Button x:Name="fullScreenArtworkButton" Style="{StaticResource HiddenContentButton}" HorizontalAlignment="Left" VerticalAlignment="Top" PreviewMouseLeftButtonDown="fullScreenArtworkButton_MouseLeftButtonDown">
+            <Grid x:Name="fullScreenArtwork" 
+                   Height="{Binding ElementName=mainView, Path=ActualHeight}" 
+                   Width="{Binding ElementName=mainView, Path=ActualWidth}" 
+                   Background="{DynamicResource BackgroundBrush}"
+                   Margin="5,5,5,5"
+                   Visibility="{Binding ShowFullScreenArtwork, Converter={StaticResource BooleanVisibilityValueConverter}}">
+                <Image x:Name="fullScreenArtworkImage" KeyDown="fullScreenArtworkImage_KeyDown" Focusable="True" Source="{Binding ElementName=viewWidgetTrackDisplay, Path=Artwork, TargetNullValue={x:Static kd:StaticImages.ImageSourceIconLoading}, FallbackValue={x:Static kd:StaticImages.ImageSourceNoAlbumArt}}" 
+                   VerticalAlignment="Center" Margin="20" />
+                <Border VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Background="#9000">
+                    <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="{Binding ElementName=artwork, Path=ActualWidth}">
+                        <TextBlock  Text="{Binding ElementName=viewWidgetTrackDisplay, Path=Display1}" HorizontalAlignment="Center" FontSize="{DynamicResource HugeFontSize}" DockPanel.Dock="Top" Foreground="#FFF" />
+                        <TextBlock FontSize="{DynamicResource LargeFontSize}" HorizontalAlignment="Center"  DockPanel.Dock="Bottom" Foreground="#FFF" Text="{Binding ElementName=viewWidgetTrackDisplay, Path=Display2}" 
+                                    />
+                        <TextBlock FontSize="{DynamicResource LargeFontSize}" HorizontalAlignment="Center"  DockPanel.Dock="Bottom" Foreground="#FFF" Text="{Binding ElementName=viewWidgetTrackDisplay, Path=Display3}" 
+                                    />
+
+                        <StackPanel Visibility="{Binding ElementName=viewWidgetTrackDisplay, Path=ShowExtendedInformation, Converter={StaticResource BooleanVisibilityValueConverter}}" Orientation="Horizontal" HorizontalAlignment="Center">
+
+                            <TextBlock  x:Name="txtCodec"
+                                            FontSize="{DynamicResource SmallFontSize}"
+                                            Text="{Binding ElementName=viewWidgetTrackDisplay, Path=Codec}"  Margin="0,0,10,0">
+                            </TextBlock>
+                            <TextBlock  x:Name="txtSampleRate" 
+                                            FontSize="{DynamicResource SmallFontSize}" Margin="0,0,10,0">
+                                    <TextBlock.Text>
+                                            <MultiBinding Converter="{StaticResource SampleRateAndBitDepthValueConverter}">
+                                              <Binding ElementName="viewWidgetTrackDisplay" Path="SampleRate"/>
+                                              <Binding ElementName="viewWidgetTrackDisplay" Path="BitDepth"/>
+                                              <Binding ElementName="viewWidgetTrackDisplay" Path="Lossless"/>
+                                            </MultiBinding>
+                                    </TextBlock.Text>
+                            </TextBlock>
+                            <TextBlock  x:Name="txtBitrate" 
+                                            FontSize="{DynamicResource SmallFontSize}"
+                                            Text="{Binding ElementName=viewWidgetTrackDisplay, Path=Bitrate, 
+                                                           Converter={StaticResource BitrateValueConverter}}" Margin="0">
+
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Button>
+
+    </Grid>
+</UserControl>

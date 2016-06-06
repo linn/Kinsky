@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="KinskyDesktopWpf.ViewWidgetTrackDisplay"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:kd="clr-namespace:KinskyDesktopWpf">
+    <DockPanel HorizontalAlignment="Stretch"  LastChildFill="True" Margin="5,2,5,5">
+        <Image Source="{Binding Path=Artwork}" Margin="0,5,0,0"
+                                       MaxHeight="95" 
+                                       MaxWidth="95"
+                                       DockPanel.Dock="Left" UIElement.MouseLeftButtonDown="Image_MouseLeftButtonDown"
+                                       VerticalAlignment="Top" ImageFailed="Image_ImageFailed" Focusable="True" KeyDown="Image_KeyDown" KeyboardNavigation.TabIndex="10" FocusVisualStyle="{StaticResource {x:Static SystemParameters.FocusVisualStyleKey}}"/>
+        <StackPanel Margin="10,0,15,0">
+            <Button x:Name="titleButton" Style="{StaticResource HiddenContentButton}" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" KeyboardNavigation.TabIndex="11"  IsEnabled="False">
+                <TextBlock x:Name="txtDisplay1" 
+                                               Text="{Binding Path=Display1}" 
+                                               FontSize="{DynamicResource LargeFontSize}"
+                                               FontWeight="Bold"
+                                               Foreground="{DynamicResource TextBrush}" HorizontalAlignment="Left">
+                    <TextBlock.Style>
+                        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <Trigger Property="FrameworkElement.IsEnabled" Value="False">
+                                    <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                                </Trigger>
+                            </Style.Triggers>                            
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Button>
+            <TextBlock  x:Name="txtDisplay2"  HorizontalAlignment="Left"
+                                            FontSize="{DynamicResource SemiLargeFontSize}" Text="{Binding Path=Display2}">
+            </TextBlock>
+            <TextBlock  x:Name="txtDisplay3"  HorizontalAlignment="Left"
+                                            FontSize="{DynamicResource SemiLargeFontSize}" Text="{Binding Path=Display3}">
+                                        
+            </TextBlock>
+            <StackPanel Visibility="{Binding ShowExtendedInformation, Converter={StaticResource BooleanVisibilityValueConverter}}" Orientation="Horizontal" HorizontalAlignment="Left">
+                
+                <TextBlock  x:Name="txtCodec"
+                                            FontSize="{DynamicResource SmallFontSize}"
+                                            Text="{Binding Codec}"  Margin="0,0,10,0">
+                </TextBlock>
+                <TextBlock  x:Name="txtSampleRate" 
+                                            FontSize="{DynamicResource SmallFontSize}" Margin="0,0,10,0">
+                                    <TextBlock.Text>
+                                            <MultiBinding Converter="{StaticResource SampleRateAndBitDepthValueConverter}">
+                                              <Binding Path="SampleRate"/>
+                                              <Binding Path="BitDepth"/>
+                                              <Binding Path="Lossless"/>
+                                            </MultiBinding>
+                                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock  x:Name="txtBitrate" 
+                                            FontSize="{DynamicResource SmallFontSize}"
+                                            Text="{Binding Path=Bitrate, 
+                                                           Converter={StaticResource BitrateValueConverter}}" Margin="0,0,10,0">
+
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+
+</UserControl>
