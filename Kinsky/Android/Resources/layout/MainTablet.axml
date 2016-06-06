@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kinskydroid.TabletBackground  xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+                android:id="@+id/rootview"
+      >
+
+  <RelativeLayout android:id="@+id/mainlayout"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:paddingTop="3dip"
+      android:paddingBottom="3dip"
+      android:paddingLeft="8dip"
+      android:paddingRight="8dip"
+                  >
+    <RelativeLayout android:id="@+id/topcontainer"
+             style="@style/topcontainerdimensions">
+
+      <RelativeLayout android:id="@+id/volumeandtransportcontrolscontainer"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                >
+        <!-- Volume/Transport Controls -->
+        <include layout="@layout/volumeandtransportcontrols"
+               android:id="@+id/volumeandtransportcontrols"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+               />
+      </RelativeLayout>
+      <!-- ViewWidgetTrack -->
+      <include layout="@layout/trackcontrols"
+             android:id="@+id/trackcontrols"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+             android:layout_toLeftOf="@id/volumeandtransportcontrolscontainer"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentTop="true"/>
+    </RelativeLayout>
+
+
+  <!-- Top toolbar -->
+  <LinearLayout android:id="@+id/topbar"
+               style="@style/toolbardimensions"
+              android:background="@drawable/topbarfiller"
+               android:layout_below="@id/topcontainer"
+                >
+    <include layout="@layout/browsercontrols"
+                 android:id="@+id/browsercontrols"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:paddingLeft="3dip"
+                 style="@style/splitterleft" />
+    <include layout="@layout/roomandsourcecontrols" />
+  </LinearLayout>
+
+  <!-- Decoration line -->
+  <View
+  android:layout_height="1dip"
+  android:layout_width="fill_parent"
+  style="@style/dividerbackground"
+  android:layout_below="@id/topbar" />
+
+  <!-- Bottom toolbar -->
+
+    <LinearLayout android:id="@+id/bottombar"
+             style="@style/toolbardimensions"
+             android:layout_alignParentBottom="true">
+
+      <include layout="@layout/browserbuttons"
+               style="@style/splitterleft"
+               android:layout_width="fill_parent"
+               android:layout_height="fill_parent" />
+
+      <include layout="@layout/playlistbuttons"
+               style="@style/splitterright"
+               android:layout_width="wrap_content"
+               android:layout_height="fill_parent"
+               android:layout_centerVertical="true"
+                android:gravity="right"
+                android:visibility="gone"/>
+
+    </LinearLayout>
+
+
+    <!-- Main central section with browser / playlist -->
+  <LinearLayout android:id="@+id/middlesection"
+                android:orientation="horizontal"
+               android:layout_width="fill_parent"
+               android:layout_height="fill_parent"
+               android:layout_below="@id/topbar"
+               android:layout_above="@id/bottombar"
+                >
+
+    <RelativeLayout android:id="@+id/browser"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 style="@style/splitterleft"
+                        >
+
+      <kinskydroid.Throbber android:id="@+id/browserthrobber"
+             android:layout_width="100dip"
+             android:layout_height="100dip"
+             android:layout_centerInParent="true"
+             android:enabled="false"
+             android:visibility="gone"
+           />
+    </RelativeLayout>
+
+    <View
+    android:layout_height="fill_parent"
+    android:layout_width="1dip"  
+    style="@style/dividerbackground"
+    />
+
+    <RelativeLayout android:id="@+id/playlist"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 style="@style/splitterright"
+                        />
+  </LinearLayout>
+
+  </RelativeLayout>
+
+  <include layout="@layout/trackcontrolsfullscreen"
+         android:id="@+id/trackcontrolsfullscreen" 
+      android:visibility="gone" />
+
+
+
+</kinskydroid.TabletBackground>
+

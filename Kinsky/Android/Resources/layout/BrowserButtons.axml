@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?> 
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:id="@+id/browserbuttons"
+             android:paddingLeft="5dip"
+             android:paddingRight="5dip"
+                        >
+    <ImageButton
+        android:id="@+id/settingsbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/settings"
+        android:background="@drawable/buttonbackground"
+        android:layout_centerVertical="true"
+    style="@style/textviewtext"
+        android:layout_marginRight="10dip"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/playnownextlaterbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonbackground"
+        android:layout_toRightOf="@id/settingsbutton"
+        android:layout_centerVertical="true"
+        android:text=""
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        style="@style/textviewtext" 
+             android:textStyle="bold"
+        android:layout_marginRight="10dip"
+        android:visibility="gone"/>
+
+    <ToggleButton  android:id="@+id/browsereditmodebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/editmodebutton"
+      android:textOff="Edit"
+      android:textOn="Done"
+        android:layout_toRightOf="@id/playnownextlaterbutton"
+        android:layout_centerVertical="true"
+      style="@style/textviewtext"
+             android:textStyle="bold"
+        android:layout_marginRight="10dip"
+        android:visibility="gone"
+                     />
+  </RelativeLayout>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dip">
+
+  <RelativeLayout android:id="@+id/playlistitemiconcontainer"
+               android:layout_height="?android:attr/listPreferredItemHeight"
+               android:layout_width="?android:attr/listPreferredItemHeight"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+                  android:layout_alignParentBottom="false"
+                  android:layout_centerVertical="false"
+        android:layout_marginRight="6dip"
+                  >
+    <osstoolkitdroid.LazyLoadingImageView
+        android:id="@+id/playlistitemicon"
+               android:layout_height="wrap_content"
+               android:layout_width="fill_parent"
+               android:src="@drawable/loading"
+      />
+  </RelativeLayout>
+    <RelativeLayout android:id="@+id/playlistitemplayingcontainer"
+                 android:layout_height="wrap_content"
+                 android:layout_width="?android:attr/listPreferredItemHeight"
+                 android:layout_alignParentLeft="true"
+                 android:layout_centerVertical="true"
+                 android:layout_marginRight="6dip"
+                  >
+    <ImageView android:id="@+id/playlistitemplaying"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/playing"
+               android:layout_centerInParent="true"
+               />
+  </RelativeLayout>
+
+
+  <TextView
+      android:id="@+id/playlistitemtechnicalinfo"
+      android:layout_width="50dip"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_alignParentTop="true"
+      android:gravity="right"
+      android:singleLine="true"
+      android:ellipsize="end"
+      style="@style/smalltextview" />
+  
+  <ImageButton
+      android:id="@+id/playlistitemjumptoroom"
+      android:layout_width="45dip"
+      android:layout_height="45dip"
+      android:layout_toLeftOf="@id/playlistitemtechnicalinfo"
+      android:layout_alignParentRight="true"
+      android:layout_alignParentTop="true"
+      android:scaleType="centerInside"
+      android:background="@android:color/transparent"
+      android:src="@drawable/room" />
+  
+  <TextView
+  android:id="@+id/playlistitemfirstline"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:layout_toRightOf="@id/playlistitemplayingcontainer"
+  android:layout_toLeftOf="@id/playlistitemjumptoroom"
+  android:layout_alignParentTop="true"
+  android:singleLine="true"
+  android:ellipsize="end"
+  style="@style/semilargetextview" />
+    
+  <TextView
+      android:id="@+id/playlistitemsecondline"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"        
+      android:layout_toRightOf="@id/playlistitemplayingcontainer"
+      android:layout_below="@id/playlistitemfirstline"        
+      android:singleLine="true"
+      android:ellipsize="end"
+      style="@style/mediumtextview" />
+
+  <TextView
+      android:id="@+id/playlistitemthirdline"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"        
+      android:layout_toRightOf="@id/playlistitemplayingcontainer"
+      android:layout_below="@id/playlistitemsecondline"        
+      android:singleLine="true"
+      android:ellipsize="end"
+      style="@style/mediumtextview" />
+  
+
+</RelativeLayout>

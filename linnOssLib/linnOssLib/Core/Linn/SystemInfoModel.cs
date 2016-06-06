@@ -16,6 +16,7 @@ namespace Linn
         MacOSX = 6,
         IOS = 7,
         Unknown = 8,
+        Android = 9
     }
 
     public class PlatformIdConverters

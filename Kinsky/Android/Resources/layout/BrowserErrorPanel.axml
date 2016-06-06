@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="6dip">
+
+    <ImageView
+        android:id="@+id/browsererroricon"
+               android:layout_height="120dip"
+               android:layout_width="120dip"
+             android:src="@drawable/error"
+             android:layout_alignParentTop="true"
+             android:layout_alignParentLeft="true"
+      />
+
+
+  <TextView
+      android:id="@+id/browsererrortext"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_toRightOf="@id/browsererroricon"
+      android:layout_alignParentTop="true"
+      android:text="A problem occurred retrieving content from the specified location."
+      android:layout_marginBottom="10dip"
+      style="@style/largetextview" />
+
+  <Button 
+      android:id="@+id/browsererrorretrybutton"
+      android:text="Retry"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/browsererrortext"
+      android:layout_toRightOf="@id/browsererroricon"
+      android:background="@drawable/buttonbackground"
+      android:layout_marginRight="10dip"
+      style="@style/largetextview" />
+
+  <Button android:text="Home"
+      android:id="@+id/browsererrorhomebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/browsererrortext"
+      android:layout_toRightOf="@id/browsererrorretrybutton"
+      android:background="@drawable/buttonbackground"
+      style="@style/largetextview"  />
+
+</RelativeLayout>

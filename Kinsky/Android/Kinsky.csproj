@@ -1,0 +1,716 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F0CD48C9-D732-4CC4-A132-57CD8BADC8EE}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KinskyDroid</RootNamespace>
+    <AssemblyName>Kinsky</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AndroidApplication>true</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <AndroidSupportedAbis>armeabi-v7a;armeabi</AndroidSupportedAbis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\Kinsky\Android\bin\Debug\</OutputPath>
+    <IntermediateOutputPath>..\..\build\Kinsky\Android\obj\Debug\</IntermediateOutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\Kinsky\Android\bin\Release\</OutputPath>
+    <IntermediateOutputPath>..\..\build\Kinsky\Android\obj\Release\</IntermediateOutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\packages\Linn.SharpZipLib.0.86.0.7\lib\MonoAndroid10\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Android" />
+    <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Android.Support.v4.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Insights, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Insights.1.10.4.112\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activities.cs" />
+    <Compile Include="..\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Stack.cs" />
+    <Compile Include="Views.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Linn\Kinsky\BookmarkManager.cs">
+      <Link>Linn\Kinsky\BookmarkManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Browser.cs">
+      <Link>Linn\Kinsky\Browser.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Container.cs">
+      <Link>Linn\Kinsky\Container.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ContentCollector.cs">
+      <Link>Linn\Kinsky\ContentCollector.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ContentDirectoryLocator.cs">
+      <Link>Linn\Kinsky\ContentDirectoryLocator.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Controllers.cs">
+      <Link>Linn\Kinsky\Controllers.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\FileItc2.cs">
+      <Link>Linn\Kinsky\FileItc2.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\HelperKinsky.cs">
+      <Link>Linn\Kinsky\HelperKinsky.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\HttpClient.cs">
+      <Link>Linn\Kinsky\HttpClient.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\HttpServer.cs">
+      <Link>Linn\Kinsky\HttpServer.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\IconResolver.cs">
+      <Link>Linn\Kinsky\IconResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ItemInfo.cs">
+      <Link>Linn\Kinsky\ItemInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Library.cs">
+      <Link>Linn\Kinsky\Library.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\LocalPlaylists.cs">
+      <Link>Linn\Kinsky\LocalPlaylists.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\MediaProvider.cs">
+      <Link>Linn\Kinsky\MediaProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\MediaRetriever.cs">
+      <Link>Linn\Kinsky\MediaRetriever.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Mediators.cs">
+      <Link>Linn\Kinsky\Mediators.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Models.cs">
+      <Link>Linn\Kinsky\Models.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\MultipusSourceList.cs">
+      <Link>Linn\Kinsky\MultipusSourceList.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\OptionStartupRoom.cs">
+      <Link>Linn\Kinsky\OptionStartupRoom.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Playlist.cs">
+      <Link>Linn\Kinsky\Playlist.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\PlaylistDisplayHelper.cs">
+      <Link>Linn\Kinsky\PlaylistDisplayHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\PlaylistSupport.cs">
+      <Link>Linn\Kinsky\PlaylistSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\PluginManager.cs">
+      <Link>Linn\Kinsky\PluginManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\RotaryControlTracker.cs">
+      <Link>Linn\Kinsky\RotaryControlTracker.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\SaveSupport.cs">
+      <Link>Linn\Kinsky\SaveSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\SharedPlaylists.cs">
+      <Link>Linn\Kinsky\SharedPlaylists.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Support.cs">
+      <Link>Linn\Kinsky\Support.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ViewMasters.cs">
+      <Link>Linn\Kinsky\ViewMasters.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Views.cs">
+      <Link>Linn\Kinsky\Views.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable-ldpi\Icon.png" />
+    <AndroidResource Include="Resources\Drawable-mdpi\Icon.png" />
+    <AndroidResource Include="Resources\Drawable-hdpi\Icon.png" />
+    <AndroidResource Include="Resources\Values\Strings.xml" />
+    <AndroidResource Include="..\Resources\ClockIcon.png">
+      <Link>Resources\Drawable\ClockIcon.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\ClockIconElapsed.png">
+      <Link>Resources\Drawable\ClockIconElapsed.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\ClockIconRemaining.png">
+      <Link>Resources\Drawable\ClockIconRemaining.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\MuteIcon.png">
+      <Link>Resources\Drawable\MuteIcon.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Mute.png">
+      <Link>Resources\Drawable\Mute.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\MuteActive.png">
+      <Link>Resources\Drawable\MuteActive.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\LeftFiller.png">
+      <Link>Resources\Drawable\LeftFiller.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\TopRightEdge.png">
+      <Link>Resources\Drawable\TopRightEdge.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\TopLeftEdge.png">
+      <Link>Resources\Drawable\TopLeftEdge.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\TopFiller.png">
+      <Link>Resources\Drawable\TopFiller.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\BottomLeftEdge.png">
+      <Link>Resources\Drawable\BottomLeftEdge.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\BottomRightEdge.png">
+      <Link>Resources\Drawable\BottomRightEdge.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\BottomFiller.png">
+      <Link>Resources\Drawable\BottomFiller.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\ButtonNormal.9.png">
+      <Link>Resources\Drawable\ButtonNormal.9.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\ButtonFocused.9.png">
+      <Link>Resources\Drawable\ButtonFocused.9.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\ButtonPressed.9.png">
+      <Link>Resources\Drawable\ButtonPressed.9.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\BackButtonNormal.9.png">
+      <Link>Resources\Drawable\BackButtonNormal.9.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\BackButtonFocused.9.png">
+      <Link>Resources\Drawable\BackButtonFocused.9.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\BackButtonPressed.9.png">
+      <Link>Resources\Drawable\BackButtonPressed.9.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\FfwdButton.png">
+      <Link>Resources\Drawable\FfwdButton.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\FrwdButton.png">
+      <Link>Resources\Drawable\FrwdButton.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\RightFiller.png">
+      <Link>Resources\Drawable\RightFiller.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\SkipBack.png">
+      <Link>Resources\Drawable\SkipBack.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\SkipBackDown.png">
+      <Link>Resources\Drawable\SkipBackDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\SkipForward.png">
+      <Link>Resources\Drawable\SkipForward.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\SkipForwardDown.png">
+      <Link>Resources\Drawable\SkipForwardDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Pause.png">
+      <Link>Resources\Drawable\Pause.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Play.png">
+      <Link>Resources\Drawable\Play.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Stop.png">
+      <Link>Resources\Drawable\Stop.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\ArrayCropped.png">
+      <Link>Resources\Drawable\Array.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\PauseOver.png">
+      <Link>Resources\Drawable\PauseOver.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\PlayOver.png">
+      <Link>Resources\Drawable\PlayOver.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\StopOver.png">
+      <Link>Resources\Drawable\StopOver.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Wheel.png">
+      <Link>Resources\Drawable\Wheel.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\WheelLarge.png">
+      <Link>Resources\Drawable\WheelLarge.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\WheelLargeOver.png">
+      <Link>Resources\Drawable\WheelLargeOver.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Screws.png">
+      <Link>Resources\Drawable\Screws.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\ScrewsLarge.png">
+      <Link>Resources\Drawable\ScrewsLarge.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\WheelOver.png">
+      <Link>Resources\Drawable\WheelOver.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Rocker.png">
+      <Link>Resources\Drawable\Rocker.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\RockerLeftDown.png">
+      <Link>Resources\Drawable\RockerLeftDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\RockerRightDown.png">
+      <Link>Resources\Drawable\RockerRightDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\WheelMute.png">
+      <Link>Resources\Drawable\WheelMute.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Shuffle.png">
+      <Link>Resources\Drawable\Shuffle.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\ShuffleDown.png">
+      <Link>Resources\Drawable\ShuffleDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\ShuffleOn.png">
+      <Link>Resources\Drawable\ShuffleOn.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\ShuffleOnDown.png">
+      <Link>Resources\Drawable\ShuffleOnDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\PauseDown.png">
+      <Link>Resources\Drawable\PauseDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\PlayDown.png">
+      <Link>Resources\Drawable\PlayDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\StopDown.png">
+      <Link>Resources\Drawable\StopDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\SkipBackOver.png">
+      <Link>Resources\Drawable\SkipBackOver.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\SkipForwardOver.png">
+      <Link>Resources\Drawable\SkipForwardOver.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Repeat.png">
+      <Link>Resources\Drawable\Repeat.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\RepeatDown.png">
+      <Link>Resources\Drawable\RepeatDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\RepeatOn.png">
+      <Link>Resources\Drawable\RepeatOn.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\RepeatOnDown.png">
+      <Link>Resources\Drawable\RepeatOnDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\RoomSource.png">
+      <Link>Resources\Drawable\RoomSource.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\LinnLogo.png">
+      <Link>Resources\Drawable\LinnLogo.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\TramLines.png">
+      <Link>Resources\Drawable\TramLines.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Home.png">
+      <Link>Resources\Drawable\Home.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\HomeDown.png">
+      <Link>Resources\Drawable\HomeDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\HourGlass.png">
+      <Link>Resources\Drawable\HourGlass.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\HourGlass2.png">
+      <Link>Resources\Drawable\HourGlass2.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\List.png">
+      <Link>Resources\Drawable\List.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\SettingsWhite.png">
+      <Link>Resources\Drawable\Settings.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Delete.png">
+      <Link>Resources\Drawable\Delete.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\DeleteDown.png">
+      <Link>Resources\Drawable\DeleteDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Save.png">
+      <Link>Resources\Drawable\Save.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\SaveDown.png">
+      <Link>Resources\Drawable\SaveDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Standby.png">
+      <Link>Resources\Drawable\Standby.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\StandbyDown.png">
+      <Link>Resources\Drawable\StandbyDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\StandbyOn.png">
+      <Link>Resources\Drawable\StandbyOn.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Multi.png">
+      <Link>Resources\Drawable\Multi.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\MultiDown.png">
+      <Link>Resources\Drawable\MultiDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\MultiOnDown.png">
+      <Link>Resources\Drawable\MultiOnDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\StandbyOnDown.png">
+      <Link>Resources\Drawable\StandbyOnDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\HomeOn.png">
+      <Link>Resources\Drawable\HomeOn.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\MultiOn.png">
+      <Link>Resources\Drawable\MultiOn.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Album.png">
+      <Link>Resources\Drawable\Album.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\AlbumArtError.png">
+      <Link>Resources\Drawable\AlbumArtError.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Artist.png">
+      <Link>Resources\Drawable\Artist.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Directory.png">
+      <Link>Resources\Drawable\Directory.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\DisclosureIndicator.png">
+      <Link>Resources\Drawable\DisclosureIndicator.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Error.png">
+      <Link>Resources\Drawable\Error.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Folder.png">
+      <Link>Resources\Drawable\Folder.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Library.png">
+      <Link>Resources\Drawable\Library.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Loading.png">
+      <Link>Resources\Drawable\Loading.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Playing.png">
+      <Link>Resources\Drawable\Playing.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Tick.png">
+      <Link>Resources\Drawable\Tick.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Playlist.png">
+      <Link>Resources\Drawable\Playlist.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\PlaylistItem.png">
+      <Link>Resources\Drawable\PlaylistItem.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\PlaylistSource.png">
+      <Link>Resources\Drawable\PlaylistSource.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\CD.png">
+      <Link>Resources\Drawable\CD.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Radio.png">
+      <Link>Resources\Drawable\Radio.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Room.png">
+      <Link>Resources\Drawable\Room.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Source.png">
+      <Link>Resources\Drawable\Source.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Sender.png">
+      <Link>Resources\Drawable\Sender.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\SenderNoSend.png">
+      <Link>Resources\Drawable\SenderNoSend.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Track.png">
+      <Link>Resources\Drawable\Track.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\UPNP.png">
+      <Link>Resources\Drawable\UPNP.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\Video.png">
+      <Link>Resources\Drawable\Video.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\RefreshButton.png">
+      <Link>Resources\Drawable\RefreshButton.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\IconBookmark.png">
+      <Link>Resources\Drawable\Bookmark.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\TopBarFiller.png">
+      <Link>Resources\Drawable\TopBarFiller.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\VolumeUp.png">
+      <Link>Resources\Drawable\VolumeUp.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\VolumeDown.png">
+      <Link>Resources\Drawable\VolumeDown.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Layout\BrowserItem.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\RoomListItem.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\RoomList.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\SourceList.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\SourceListItem.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\VolumeAndTransportControls.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\TrackControls.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\BrowserControls.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\RoomAndSourceControls.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\RequestDeleteButton.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\ConfirmDeleteButton.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\MoveUpButton.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\MoveDownButton.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\RotaryControl.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\PlaylistItem.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\BrowserErrorPanel.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\BackButton.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\HelpAbout.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\EditButton.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\ButtonControl.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\TrackControlsFullscreen.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\SaveButton.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\BrowserMenu.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\MainPhone.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\MainTablet.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\BrowserButtons.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\PlaylistButtons.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\RoomAndSourceControlsPhone.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\PlaylistScreenPhone.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\BrowserScreenPhone.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\TrackControlsPhone.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\PlaylistButtonsPhone.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\CancelButton.axml">
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\DummyPhone.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\DummyTablet.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <None Include="packages.config" />
+    <None Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\ButtonBackground.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\ShuffleButton.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\ShuffleButtonForeground.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\RepeatButton.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\RepeatButtonForeground.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\BackButton.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\StandbyButton.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\StandbyButtonForeground.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Values\Styles.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Values-Land\Styles.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\EditModeButton.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\RequestDeleteButton.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Resources\RequestDelete.png">
+      <Link>Resources\Drawable\RequestDelete.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\RequestDeleteConfirm.png">
+      <Link>Resources\Drawable\RequestDeleteConfirm.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Resources\MoveDown.png">
+      <Link>Resources\Drawable\MoveDown.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\MoveUp.png">
+      <Link>Resources\Drawable\MoveUp.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\MoveDownButton.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\MoveUpButton.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Resources\MoveDownDisabled.png">
+      <Link>Resources\Drawable\MoveDownDisabled.png</Link>
+    </AndroidResource>
+    <AndroidResource Include="..\Resources\MoveUpDisabled.png">
+      <Link>Resources\Drawable\MoveUpDisabled.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\SkipBackButton.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\SkipForwardButton.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\PauseButton.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\PlayButton.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\StopButton.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\WheelBackground.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\WheelGrip.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Resources\BrowserDown.png">
+      <Link>Resources\Drawable\BrowserDown.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\GradientBackground.xml">
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\linnOssLib\Android\linnOssLib.csproj">
+      <Project>{f817aec7-405a-41d3-8f82-d5b78f365f47}</Project>
+      <Name>linnOssLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+     Other similar extension points exist, see Microsoft.Common.targets.
+		<Target Name="BeforeBuild">
+		</Target>
+		<Target Name="AfterBuild">
+		</Target>
+ -->
+</Project>

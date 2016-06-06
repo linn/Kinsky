@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="splitterleft">
+    <item name="android:layout_weight">1</item>
+  </style>
+  <style name="splitterright">
+    <item name="android:layout_weight">1.61803399</item>
+  </style>
+</resources>

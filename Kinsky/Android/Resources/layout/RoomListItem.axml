@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"    
+    android:padding="6dip">
+
+
+    <ToggleButton android:id="@+id/standbybutton"
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:background="@drawable/standbybutton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:textOff=""
+        android:textOn=""
+        android:focusable="false"
+        android:layout_marginRight="6dip"
+        />
+
+
+  <ImageView android:id="@+id/currentroom"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_alignParentTop="true"
+      android:background="@drawable/tick"
+             android:layout_marginRight="6dip"
+              />
+  
+  <TextView
+      android:id="@+id/roomname"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"        
+      android:layout_toRightOf="@id/standbybutton"
+      android:singleLine="true"
+      android:ellipsize="marquee"
+          style="@style/semilargetextview" />
+
+
+</RelativeLayout>

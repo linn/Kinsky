@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:id="@+id/playlistbuttons"
+               android:paddingLeft="5dip"
+               android:paddingRight="5dip"
+                        >
+
+  <LinearLayout android:id="@+id/playlisteditbuttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+        android:layout_centerVertical="true">
+
+    <ToggleButton  android:id="@+id/playlisteditmodebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/editmodebutton"
+      android:textOff="Edit"
+      android:textOn="Done"
+             android:textStyle="bold"
+      style="@style/textviewtext"
+        android:layout_marginRight="10dip"
+      android:layout_marginLeft="30dip"/>
+
+    <Button  android:id="@+id/playlistsavebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/buttonbackground"
+      android:layout_gravity="center"
+      style="@style/textviewtext"
+      android:text="Save"
+             android:textStyle="bold"
+      android:enabled="false"/>
+
+    <ImageButton  android:id="@+id/playlistdeletebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/buttonbackground"
+      android:src="@drawable/delete"
+      android:layout_gravity="center"
+      android:visibility="gone"
+      android:enabled="false" />
+
+  </LinearLayout>
+
+
+  <ToggleButton
+      android:id="@+id/shufflebutton"
+      android:layout_width="40dip"
+      android:layout_height="wrap_content"
+      android:background="@drawable/shufflebutton"
+      android:textOff=""
+      android:textOn=""
+      android:layout_centerVertical="true"
+      style="@style/textviewtext"
+      android:layout_toLeftOf="@id/playlisteditbuttons"
+    android:visibility="gone" />
+
+  <ToggleButton
+      android:id="@+id/repeatbutton"
+      android:layout_width="40dip"
+      android:layout_height="wrap_content"
+      android:background="@drawable/repeatbutton"
+      android:textOff=""
+      android:textOn=""
+      android:layout_centerVertical="true"
+      style="@style/textviewtext"
+      android:layout_marginRight="10dip"
+      android:layout_toLeftOf="@id/shufflebutton"
+    android:visibility="gone" />
+
+</RelativeLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      >
+
+  <RelativeLayout android:id="@+id/browsercontrolscontainer"
+                  style="@style/toolbardimensions"
+            android:background="@drawable/topbarfiller"
+             android:layout_alignParentTop="true">
+
+    <include layout="@layout/browsercontrols"
+             android:id="@+id/browsercontrols"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent" />
+  </RelativeLayout>
+
+  <RelativeLayout android:id="@+id/browserbuttonscontainer" style="@style/toolbardimensions"
+          android:background="@drawable/topbarfiller"
+             android:layout_alignParentBottom="true">
+    <include layout="@layout/browserbuttons"
+             android:id="@+id/browserbuttons"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent"
+           />
+  </RelativeLayout>
+
+  <RelativeLayout android:id="@+id/browser"
+               android:layout_width="fill_parent"
+               android:layout_height="fill_parent"
+                  android:layout_above="@id/browserbuttonscontainer"
+                  android:layout_below="@id/browsercontrolscontainer"
+                        >
+
+    <kinskydroid.Throbber android:id="@+id/browserthrobber"
+           android:layout_width="80dip"
+           android:layout_height="80dip"
+           android:layout_centerInParent="true"
+           android:enabled="false"
+           android:visibility="gone"
+           />
+  </RelativeLayout>
+
+</RelativeLayout>

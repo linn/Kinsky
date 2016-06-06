@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent" 
+                android:padding="10dip"
+             android:background="#000">
+
+  <osstoolkitdroid.LazyLoadingImageView android:id="@+id/trackartworkfullscreen"
+           android:layout_width="fill_parent"
+           android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                                         />
+
+  <LinearLayout android:orientation="vertical"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+           android:layout_alignParentBottom="true"
+           android:background="#9000"
+                android:paddingBottom="10dip"
+                android:paddingTop="10dip"
+           >
+
+    <TextView android:id="@+id/trackdisplay1fullscreen"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+               android:ellipsize="end"
+               style="@style/hugetextview"
+             android:textStyle="bold"
+               android:singleLine="true" />
+
+    <TextView android:id="@+id/trackdisplay2fullscreen"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+               android:ellipsize="end"
+               android:singleLine="true"
+               style="@style/largetextview" />
+
+    <TextView android:id="@+id/trackdisplay3fullscreen"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+               android:ellipsize="end"
+               android:singleLine="true"
+               style="@style/largetextview" />
+
+    <TextView android:id="@+id/tracktechnicalinfofullscreen"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal"
+               android:ellipsize="end"
+               android:singleLine="true"
+               style="@style/mediumtextview" />
+  </LinearLayout>
+
+</RelativeLayout>

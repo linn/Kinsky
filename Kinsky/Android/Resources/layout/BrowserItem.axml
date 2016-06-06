@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dip">
+
+  <RelativeLayout android:id="@+id/browseritemiconcontainer"
+                 android:layout_height="?android:attr/listPreferredItemHeight"
+                 android:layout_width="?android:attr/listPreferredItemHeight"
+          android:layout_alignParentTop="true"
+          android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="false"
+                    android:layout_centerVertical="false"
+          android:layout_marginRight="6dip"
+                  >
+    <osstoolkitdroid.LazyLoadingImageView
+        android:id="@+id/browseritemicon"
+               android:layout_height="fill_parent"
+               android:layout_width="fill_parent"
+             android:src="@drawable/loading"
+      />
+  </RelativeLayout>
+
+  <ImageView android:id="@+id/browseritemnavigationicon"
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:layout_centerVertical="true"
+             android:src="@drawable/browserdown"
+             android:layout_alignParentRight="true" />
+  
+
+  <TextView
+      android:id="@+id/browseritemtechnicalinfo"
+      android:layout_width="50dip"
+      android:layout_height="wrap_content"
+      android:layout_toLeftOf="@id/browseritemnavigationicon"
+      android:layout_alignWithParentIfMissing="true"
+      android:layout_alignParentTop="true"
+      android:gravity="right"
+      android:singleLine="true"
+      android:ellipsize="end"
+      style="@style/smalltextview" />
+  
+  <TextView
+      android:id="@+id/browseritemfirstline"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_toRightOf="@id/browseritemiconcontainer"
+      android:layout_toLeftOf="@id/browseritemtechnicalinfo"
+      android:layout_alignWithParentIfMissing="true"
+      android:layout_alignParentTop="true"
+      android:singleLine="true"
+      android:ellipsize="end"
+      style="@style/semilargetextview" />
+  
+  <TextView
+      android:id="@+id/browseritemsecondline"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_toRightOf="@id/browseritemiconcontainer"
+      android:layout_below="@id/browseritemfirstline"
+      android:singleLine="true"
+      android:ellipsize="end"
+      style="@style/mediumtextview" />
+
+  <TextView
+      android:id="@+id/browseritemthirdline"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_toRightOf="@id/browseritemiconcontainer"
+      android:layout_below="@id/browseritemsecondline"
+      android:singleLine="true"
+      android:ellipsize="end"
+      style="@style/mediumtextview" />
+
+</RelativeLayout>

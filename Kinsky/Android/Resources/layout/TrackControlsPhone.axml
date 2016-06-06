@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+              style="@style/toolbardimensions"
+              android:background="@drawable/topbarfiller">
+
+  <RelativeLayout android:id="@+id/trackartworkcontainer"
+              style="@style/trackartworkcontainerdimensions"
+             android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+             android:paddingLeft="5dip"
+             android:paddingRight="5dip"
+             android:paddingTop="2dip"
+             android:paddingBottom="2dip">
+
+    <osstoolkitdroid.LazyLoadingImageView android:id="@+id/trackartwork"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+             />
+    <ImageButton android:id="@+id/trackshowplaylistbutton"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:background="@drawable/buttonbackground"
+                 android:src="@drawable/list"
+                 android:padding="5dip"
+             android:visibility="gone"    
+                android:layout_centerVertical="true"
+                 />
+
+  </RelativeLayout>
+  
+  <LinearLayout 
+                android:id="@+id/trackdisplaycontainer"
+                android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" 
+                android:orientation="vertical"             
+                android:layout_toLeftOf="@id/trackartworkcontainer"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="5dip"
+                android:paddingRight="5dip"
+                >
+    
+  <TextView android:id="@+id/trackdisplay1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:ellipsize="end"
+             style="@style/mediumtextview"
+             android:textStyle="bold"
+             android:singleLine="true" />
+
+  <TextView android:id="@+id/trackdisplay2"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:ellipsize="end"
+             android:singleLine="true"
+             style="@style/tinytextview" />
+
+  <TextView android:id="@+id/trackdisplay3"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:ellipsize="end"
+             android:singleLine="true"
+             style="@style/tinytextview" />
+
+  </LinearLayout>
+
+</RelativeLayout>

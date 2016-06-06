@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewSwitcher  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/roomandsourceviewswitcher"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  >
+    <LinearLayout android:id="@+id/roomlistcontainer"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+                  android:orientation="vertical">
+
+      <RelativeLayout android:id="@+id/roomlisttitlebar"
+        style="@style/toolbardimensions"
+              android:background="@drawable/topbarfiller">
+        
+        <ToggleButton android:id="@+id/standbybuttonall"
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:background="@drawable/standbybutton"
+        android:layout_alignParentLeft="true"
+                      android:layout_centerVertical="true"
+        android:textOff=""
+        android:textOn=""
+        android:focusable="false"
+        android:layout_marginRight="6dip"
+        android:layout_marginLeft="6dip"
+        />
+        
+        <TextView android:id="@+id/roomlisttitle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:text="Rooms"
+             android:textStyle="bold"
+            style="@style/largetextview"
+            />
+
+        <RelativeLayout android:id="@+id/roomsrefreshbuttoncontainer"
+          android:layout_centerVertical="true"
+          android:layout_alignParentRight="true"
+          android:layout_width="40dip"
+          android:layout_height="40dip"
+                    android:layout_marginRight="10dip">
+
+          <ImageButton android:id="@+id/roomsrefreshbutton"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/refreshbutton"
+            android:background="@android:color/transparent"
+               />
+
+          <kinskydroid.Throbber android:id="@+id/roomsrefreshthrobber"
+                              android:visibility="gone"
+                              android:layout_width="fill_parent"
+                              android:layout_height="fill_parent"
+               />
+
+        </RelativeLayout>
+        
+      </RelativeLayout>
+
+      <ListView android:id="@+id/roomlist"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:layout_below="@id/roomsrefreshbuttoncontainer"
+               android:dividerHeight="0px"
+                android:visibility="gone"
+    />
+    </LinearLayout>
+
+  <LinearLayout android:id="@+id/sourcelistcontainer"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+                  android:orientation="vertical">
+
+    <RelativeLayout android:id="@+id/sourcelisttitlebar" 
+                    style="@style/toolbardimensions"
+              android:background="@drawable/topbarfiller">
+      
+      <Button android:id="@+id/sourcelistbackbutton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/backbutton"
+          android:layout_centerVertical="true"
+          android:layout_alignParentLeft="true"
+          android:text="Rooms"
+             android:textStyle="bold"
+          style="@style/textviewtext"
+          />
+
+      <TextView android:id="@+id/sourcelisttitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:text="Sources"
+             android:textStyle="bold"
+          style="@style/largetextview"
+            />
+
+      <ToggleButton android:id="@+id/sourcesstandbybutton"
+                    android:layout_width="30dip"
+                    android:layout_height="30dip"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+      android:background="@drawable/standbybutton"
+        android:textOff=""
+        android:textOn=""
+                    android:layout_marginRight="10dip"
+        />
+      </RelativeLayout>
+
+      <ListView android:id="@+id/sourcelist"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:layout_below="@id/sourcesstandbybutton"
+               android:dividerHeight="0px"
+                android:visibility="gone"
+    />
+  </LinearLayout>
+</ViewSwitcher>

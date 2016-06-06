@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+                android:id="@+id/rootview"
+      >
+
+
+  <osstoolkitdroid.MultiViewPageIndicator
+     android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+     android:id="@+id/viewpageindicatorphone"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+     />
+
+  <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+                  android:background="@android:color/transparent"
+        android:layout_above="@id/viewpageindicatorphone"
+      >
+
+
+
+    <RelativeLayout android:id="@+id/volumeandtransportcontrolscontainer"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true"
+                  android:background="@drawable/topfiller"
+                >
+      <!-- Volume/Transport Controls -->
+      <include layout="@layout/volumeandtransportcontrols"
+             android:id="@+id/volumeandtransportcontrols"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+               android:layout_centerVertical="true"
+               android:layout_centerHorizontal="true"
+               />
+
+    </RelativeLayout>
+
+    <RelativeLayout android:id="@+id/playlisttopsectionphone"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+             android:layout_above="@id/volumeandtransportcontrolscontainer"
+             android:layout_alignParentTop="true">
+
+      <!-- ViewWidgetTrack -->
+      <include layout="@layout/trackcontrolsphone"
+             android:id="@+id/trackcontrols"
+             android:layout_alignParentTop="true"/>
+
+      <RelativeLayout android:id="@+id/playlistcontainerphone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                      android:layout_below="@id/trackcontrols">
+        >
+
+        <include layout="@layout/playlistbuttonsphone"
+              android:id="@+id/playlistbuttons"
+                 style="@style/toolbardimensions"
+             android:layout_alignParentBottom="true"
+             android:visibility="invisible"
+           />
+
+        <RelativeLayout android:id="@+id/playlist"
+                     android:layout_width="fill_parent"
+                     android:layout_height="fill_parent"
+                        android:layout_above="@id/playlistbuttons"
+                     android:layout_alignParentTop="true"
+                        />
+      </RelativeLayout>
+
+      <RelativeLayout android:id="@+id/fullscreenartworkcontainerphone"
+                      android:layout_width="fill_parent"
+                      android:layout_height="fill_parent"
+                      android:layout_below="@id/trackcontrols"
+                          android:visibility="gone">
+
+        <osstoolkitdroid.LazyLoadingImageView android:id="@+id/trackartworkfullscreen"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                  />
+
+      </RelativeLayout>
+    </RelativeLayout>
+
+  </RelativeLayout>
+
+</RelativeLayout>
+
+
+

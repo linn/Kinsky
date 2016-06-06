@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android">
+  <Button  android:id="@+id/backbutton"
+          android:layout_alignParentLeft="true"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/backbutton"
+          style="@style/textviewtext"
+          android:layout_centerVertical="true"
+          android:visibility="gone"
+          android:maxWidth="60dip"
+          android:singleLine="true"
+          android:ellipsize="end"
+             android:textStyle="bold"
+           android:text="Back"
+              />
+  <RelativeLayout
+           android:layout_width="fill_parent"
+           android:layout_height="fill_parent"
+           android:layout_toRightOf="@id/backbutton" >
+    <TextView  android:id="@+id/locationdisplay"
+           android:layout_centerInParent="true"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:singleLine="true"
+           android:ellipsize="end"
+           style="@style/textviewtext"
+             android:textStyle="bold"
+               />
+  </RelativeLayout>
+</RelativeLayout>

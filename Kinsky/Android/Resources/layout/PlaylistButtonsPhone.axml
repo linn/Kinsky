@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:id="@+id/playlistbuttons"
+               android:paddingLeft="5dip"
+               android:paddingRight="5dip"
+            android:background="@drawable/topbarfiller"
+                        >
+
+
+  <ToggleButton
+      android:id="@+id/repeatbutton"
+      android:layout_width="40dip"
+      android:layout_height="wrap_content"
+      android:background="@drawable/repeatbutton"
+      android:textOff=""
+      android:textOn=""
+      android:layout_centerVertical="true"
+      style="@style/textviewtext"
+      android:layout_marginRight="10dip"
+    android:visibility="gone" />
+
+  <ToggleButton
+      android:id="@+id/shufflebutton"
+      android:layout_width="40dip"
+      android:layout_height="wrap_content"
+      android:background="@drawable/shufflebutton"
+      android:textOff=""
+      android:textOn=""
+      android:layout_centerVertical="true"
+      style="@style/textviewtext"
+      android:layout_toRightOf="@id/repeatbutton"
+    android:visibility="gone" />
+
+
+  <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+        android:layout_centerVertical="true">
+
+    <ToggleButton  android:id="@+id/playlisteditmodebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/editmodebutton"
+      android:textOff="Edit"
+      android:textOn="Done"
+      style="@style/textviewtext"
+        android:layout_marginRight="10dip"
+             android:textStyle="bold"/>
+
+    <Button  android:id="@+id/playlistsavebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/buttonbackground"
+      android:layout_gravity="center"
+      style="@style/textviewtext"
+      android:text="Save"
+             android:textStyle="bold"
+      android:enabled="false"/>
+
+    <ImageButton  android:id="@+id/playlistdeletebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/buttonbackground"
+      android:src="@drawable/delete"
+      android:layout_gravity="center"
+      android:visibility="gone"
+      android:enabled="false" />
+
+    </LinearLayout>
+
+  </RelativeLayout>

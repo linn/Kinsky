@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+              android:orientation="vertical">
+  <TextView    
+        android:id="@+id/browsermenutitle"
+        android:gravity="center"
+        android:layout_width="300dip"
+        android:layout_height="wrap_content"
+        style="@style/largetextview"
+        android:textStyle="bold"
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip"
+        android:ellipsize="end"
+      android:singleLine="true"
+    />
+  <Button
+        android:id="@+id/browsermenuplaynow"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/buttonbackground"
+        android:text="Play Now"
+        style="@style/textviewtext"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip"
+          />
+  <Button
+        android:id="@+id/browsermenuplaynext"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/buttonbackground"
+        android:text="Play Next"
+        style="@style/textviewtext"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip"
+          />
+  <Button
+        android:id="@+id/browsermenuplaylater"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/buttonbackground"
+        android:text="Play Later"
+        style="@style/textviewtext"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip"
+          />
+</LinearLayout>
+

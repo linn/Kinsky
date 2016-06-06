@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="splitterleft">
+    <item name="android:layout_weight">0.5</item>
+  </style>
+  <style name="splitterright">
+    <item name="android:layout_weight">0.5</item>
+  </style>
+  <style name="textviewtext">
+    <item  name="android:textColor">#FFFFFF</item>
+  </style>
+  <style name="topcontainerdimensions">
+    <item  name="android:layout_height">117dip</item>
+    <item name="android:layout_width">fill_parent</item>
+  </style>
+  <style name="toolbardimensions">
+    <item  name="android:layout_height">41dip</item>
+    <item name="android:layout_width">fill_parent</item>
+  </style>
+  <style name="trackartworkcontainerdimensions">
+    <item  name="android:layout_height">45dip</item>
+    <item name="android:layout_width">45dip</item>
+  </style>
+  <style name="dividerbackground">
+    <item  name="android:background">#272727</item>
+  </style>
+  <style name="hugetextview" parent="@style/textviewtext">
+    <item name="android:textSize">26sp</item>
+  </style>
+  <style name="largetextview" parent="@style/textviewtext">
+    <item name="android:textSize">18sp</item>
+  </style>
+  <style name="semilargetextview" parent="@style/textviewtext">
+    <item name="android:textSize">15sp</item>
+  </style>
+  <style name="mediumtextview" parent="@style/textviewtext">
+    <item name="android:textSize">12sp</item>
+  </style>
+  <style name="smalltextview" parent="@style/textviewtext">
+    <item name="android:textSize">10sp</item>
+  </style>
+  <style name="tinytextview" parent="@style/textviewtext">
+    <item name="android:textSize">9sp</item>
+  </style>
+</resources>
