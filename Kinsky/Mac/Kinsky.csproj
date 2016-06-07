@@ -3,10 +3,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Windows Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{34D69E66-D626-40AE-8DD8-1F546E13D230}</ProjectGuid>
-    <ProjectTypeGuids>{948B3504-5B70-4649-8FE4-BDE1FB46EC69};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectTypeGuids>{42C0BBD9-55CE-4FC1-8D90-A7348ABAFB23};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
     <RootNamespace>KinskyDesktop</RootNamespace>
     <BaseDirectory>Monobjc</BaseDirectory>
@@ -26,6 +26,9 @@
     <CreatePackage>false</CreatePackage>
     <EnablePackageSigning>false</EnablePackageSigning>
     <IncludeMonoRuntime>false</IncludeMonoRuntime>
+    <UseSGen>false</UseSGen>
+    <UseRefCounting>false</UseRefCounting>
+    <Profiling>false</Profiling>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'MacOsX Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +45,9 @@
     <CreatePackage>false</CreatePackage>
     <EnablePackageSigning>false</EnablePackageSigning>
     <IncludeMonoRuntime>false</IncludeMonoRuntime>
+    <UseSGen>false</UseSGen>
+    <UseRefCounting>false</UseRefCounting>
+    <Profiling>false</Profiling>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'MacOsX Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -56,6 +62,9 @@
     <CreatePackage>false</CreatePackage>
     <EnablePackageSigning>false</EnablePackageSigning>
     <IncludeMonoRuntime>false</IncludeMonoRuntime>
+    <UseSGen>false</UseSGen>
+    <UseRefCounting>false</UseRefCounting>
+    <Profiling>false</Profiling>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Mono\MonoMac\v0.0\Mono.MonoMac.targets" />
@@ -101,6 +110,19 @@
     <Reference Include="Monobjc.ImageKit">
       <HintPath>..\..\External\Monobjc.ImageKit.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Insights">
+      <HintPath>..\..\packages\Xamarin.Insights.1.10.4.112\lib\portable-win+net45+wp80+windows8+wpa+MonoAndroid10+MonoTouch10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\packages\Linn.SharpZipLib.0.86.0.7\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="TagLib.Portable">
+      <HintPath>..\..\packages\TagLib.Portable.1.0.4\lib\portable-net45+win+wpa81+wp8+MonoAndroid10+xamarinios10+MonoTouch10\TagLib.Portable.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\linnOssLib\Mac\linnOssLib.csproj">
@@ -109,6 +131,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Linn\Kinsky\DropConverter.cs">
+      <Link>Linn\Kinsky\DropConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\UpnpObjectFactory.cs">
+      <Link>Linn\Kinsky\UpnpObjectFactory.cs</Link>
+    </Compile>
     <Compile Include="..\Linn\Kinsky\BookmarkManager.cs">
       <Link>Linn\Kinsky\BookmarkManager.cs</Link>
     </Compile>
@@ -199,21 +227,28 @@
     <Compile Include="..\Linn\Kinsky\Views.cs">
       <Link>Linn\Kinsky\Views.cs</Link>
     </Compile>
-  </ItemGroup>  
-  <ItemGroup>
-    <None Include="Info.plist" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="MainMenu.xib"/>
-    <InterfaceDefinition Include="MainWindow.xib"/>
-    <InterfaceDefinition Include="ViewBrowserContent.xib"/>
-    <InterfaceDefinition Include="ViewSelectionRoom.xib"/>
-    <InterfaceDefinition Include="ViewSelectionSource.xib"/>
-    <InterfaceDefinition Include="WindowPopover.xib"/>
-    <InterfaceDefinition Include="WindowAbout.xib"/>
-    <InterfaceDefinition Include="WindowSave.xib"/>
-    <InterfaceDefinition Include="WindowUpdate.xib"/>
-    <InterfaceDefinition Include="ViewSelectionBookmark.xib"/>
-    <InterfaceDefinition Include="ViewAddBookmark.xib"/>
+    <None Include="Info.plist" />
+    <None Include="Monobjc\packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="MainMenu.xib" />
+    <InterfaceDefinition Include="MainWindow.xib" />
+    <InterfaceDefinition Include="ViewBrowserContent.xib" />
+    <InterfaceDefinition Include="ViewSelectionRoom.xib" />
+    <InterfaceDefinition Include="ViewSelectionSource.xib" />
+    <InterfaceDefinition Include="WindowPopover.xib" />
+    <InterfaceDefinition Include="WindowAbout.xib" />
+    <InterfaceDefinition Include="WindowSave.xib" />
+    <InterfaceDefinition Include="WindowUpdate.xib" />
+    <InterfaceDefinition Include="ViewSelectionBookmark.xib" />
+    <InterfaceDefinition Include="ViewAddBookmark.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <NativeReference Include="..\..\External\libmonobjc.2.dylib">
+      <IsCxx>False</IsCxx>
+      <Kind>Dynamic</Kind>
+    </NativeReference>
   </ItemGroup>
 </Project>

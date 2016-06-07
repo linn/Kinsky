@@ -234,18 +234,18 @@ namespace KinskyDesktop
             // configure auto-updates
             iHelper.OptionPageUpdates.EventBetaVersionsChanged += OptionUpdatesChanged;
 
-            AutoUpdate.EUpdateType currentBuildType = AutoUpdate.EUpdateType.Stable;
+            EReleaseQuality currentBuildType = EReleaseQuality.Stable;
             if (iHelper.Product.Contains("(NightlyBuild)"))
             {
-                currentBuildType = AutoUpdate.EUpdateType.Nightly;
+                currentBuildType = EReleaseQuality.Nightly;
             }
             else if (iHelper.Product.Contains("(Beta)"))
             {
-                currentBuildType = AutoUpdate.EUpdateType.Beta;
+                currentBuildType = EReleaseQuality.Beta;
             }
             else if (iHelper.Product.Contains("(Development)"))
             {
-                currentBuildType = AutoUpdate.EUpdateType.Development;
+                currentBuildType = EReleaseQuality.Development;
             }
 
             iAutoUpdate = new AutoUpdate(iHelper,
@@ -317,22 +317,22 @@ namespace KinskyDesktop
             }
         }
 
-        private AutoUpdate.EUpdateType OptionUpdateType
+        private EReleaseQuality OptionUpdateType
         {
             get
             {
-                AutoUpdate.EUpdateType updateType = AutoUpdate.EUpdateType.Stable;
+                EReleaseQuality updateType = EReleaseQuality.Stable;
                 if (iHelper.OptionPageUpdates.BetaVersions)
                 {
-                    updateType |= AutoUpdate.EUpdateType.Beta;
+                    updateType |= EReleaseQuality.Beta;
                 }
                 if (iHelper.OptionPageUpdates.DevelopmentVersions)
                 {
-                    updateType |= AutoUpdate.EUpdateType.Development;
+                    updateType |= EReleaseQuality.Development;
                 }
                 if (iHelper.OptionPageUpdates.NightlyBuilds)
                 {
-                    updateType |= AutoUpdate.EUpdateType.Nightly;
+                    updateType |= EReleaseQuality.Nightly;
                 }
                 return updateType;
             }
@@ -340,7 +340,7 @@ namespace KinskyDesktop
 
         private void OptionUpdatesChanged(object sender, EventArgs e)
         {
-            iAutoUpdate.UpdateTypes = OptionUpdateType;
+            iAutoUpdate.DesiredQuality = OptionUpdateType;
         }
 
         private void AutoUpdateFound(object sender, Linn.AutoUpdate.EventArgsUpdateFound e)

@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Windows Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">MacOsX Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A3B345FA-E8C8-499B-8053-CED36AA353FF}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Linn.Toolkit.Cocoa</RootNamespace>
-    <AssemblyName>OssToolkitCocoa</AssemblyName>
+    <RootNamespace>linnOssLib</RootNamespace>
+    <AssemblyName>linnOssLib</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -28,8 +28,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <BaseDirectory>..\..\LibUpnpCil\Toolkit</BaseDirectory>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'MacOsX Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,8 +56,19 @@
     <Reference Include="Monobjc">
       <HintPath>..\..\External\Monobjc.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\packages\Linn.SharpZipLib.0.86.0.7\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Insights">
+      <HintPath>..\..\packages\Xamarin.Insights.1.10.4.112\lib\portable-win+net45+wp80+windows8+wpa+MonoAndroid10+MonoTouch10\Xamarin.Insights.dll</HintPath>
+    </Reference>
   </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
     <Compile Include="..\linnOssLib\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
@@ -351,7 +361,7 @@
       <Link>Topology\Linn\Topology\ModelSourceAuxiliary.cs</Link>
     </Compile>
     <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceDiscPlayer.cs">
-      <Link>Topology\Linn\Topology\ModelSourceDiscPlayer.cs/</Link>
+      <Link>Topology\Linn\Topology\ModelSourceDiscPlayer.cs</Link>
     </Compile>
     <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceDiscPlayerSdp.cs">
       <Link>Topology\Linn\Topology\ModelSourceDiscPlayerSdp.cs</Link>
@@ -412,9 +422,12 @@
     <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\Mac\UserLogDialogMonobjc.cs">
       <Link>Toolkit\Linn\Toolkit\Mac\UserLogDialogMonobjc.cs</Link>
     </Compile>
-    <InterfaceDefinition Include="..\linnOssLib\Toolkiet\Linn\Toolkit\Mac\MainMenu.xib">
-      <Link>MainMenu.xib</Link>
+    <InterfaceDefinition Include="..\linnOssLib\Toolkit\Linn\Toolkit\Mac\UserLog.xib">
+      <Link>UserLog.xib</Link>
     </InterfaceDefinition>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
 </Project>
