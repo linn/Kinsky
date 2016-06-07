@@ -64,6 +64,8 @@ namespace KinskyDesktop
 
     public class ControllerApp
     {
+        private static readonly string kApiKey = "129c76d1b4043e568d19a9fea8a1f5534cdae703";
+
         public ControllerApp(IViewApp aViewApp,
                              IInvoker aInvoker,
                              IAppRestartHandler aRestartHandler,
@@ -74,6 +76,11 @@ namespace KinskyDesktop
             try
             {
                 helper = new HelperKinskyDesktop(new string[] {}, aScreenRect, aInvoker);
+                #if DEBUG
+                Xamarin.Insights.Initialize(Xamarin.Insights.DebugModeKey, helper.Version, helper.Product);
+                #else
+                Xamarin.Insights.Initialize(kApiKey, helper.Version, helper.Product);
+                #endif
 
                 ICrashLogDumper dumper = aViewApp.CreateCrashLogDumper(helper);
                 helper.AddCrashLogDumper(dumper);

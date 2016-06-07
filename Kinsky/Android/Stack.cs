@@ -17,6 +17,7 @@ namespace KinskyDroid
 {
     public class Stack : ApplicationDroid, IStack
     {
+        private static readonly string kApiKey = "129c76d1b4043e568d19a9fea8a1f5534cdae703";
 
         public Stack(IntPtr aHandle, JniHandleOwnership aHandleOwnership)
             : base(aHandle, aHandleOwnership)
@@ -60,6 +61,11 @@ namespace KinskyDroid
 
         public override void OnCreate()
         {
+#if DEBUG
+            Xamarin.Insights.Initialize(Xamarin.Insights.DebugModeKey, this.Context);
+#else
+            Xamarin.Insights.Initialize(kApiKey, this.Context);
+#endif
             iScheduler = new Scheduler("StackScheduler", 1);
             iScheduler.SchedulerError += SchedulerErrorHandler;
             iStopTimer = new System.Threading.Timer(StopTimeout);

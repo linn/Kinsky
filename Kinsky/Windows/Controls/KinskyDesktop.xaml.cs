@@ -140,6 +140,7 @@ namespace KinskyDesktopWpf
         private bool iSessionConnected;
         private bool iStackStarted;
         private bool iSessionHookAdded;
+        private static readonly string kApiKey = "129c76d1b4043e568d19a9fea8a1f5534cdae703";
 
         public static KinskyDesktop Instance
         {
@@ -178,6 +179,12 @@ namespace KinskyDesktopWpf
             InitializeComponent();
             iUpdateOnExit = false;
             iHelper = new HelperKinsky(Environment.GetCommandLineArgs(), new Invoker(this.Dispatcher));
+#if DEBUG
+            Xamarin.Insights.Initialize(Xamarin.Insights.DebugModeKey, iHelper.Version, iHelper.Product);
+#else
+            Xamarin.Insights.Initialize(kApiKey, iHelper.Version, iHelper.Product);
+#endif
+
             ICrashLogDumper d = new CrashLogDumperForm(this,
                                                        iHelper.Title,
                                                        iHelper.Product,

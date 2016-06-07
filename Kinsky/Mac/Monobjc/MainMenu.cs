@@ -20,6 +20,7 @@ namespace KinskyDesktop
     [ObjectiveCClass]
     public class AppDelegate : NSObject, IViewApp, IInvoker, IAppRestartHandler
     {
+
         private System.Threading.Thread iThread;
 
         public AppDelegate() : base() { Init(); }

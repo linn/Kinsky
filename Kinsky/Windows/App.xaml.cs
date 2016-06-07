@@ -19,6 +19,7 @@ namespace KinskyDesktopWpf
     /// </summary>
     public partial class App : Application
     {
+        private static readonly string kApiKey = "129c76d1b4043e568d19a9fea8a1f5534cdae703";
 
         [STAThread()]
         static void Main()
@@ -29,6 +30,11 @@ namespace KinskyDesktopWpf
 
         public App()
         {
+#if DEBUG
+            Xamarin.Insights.Initialize(Xamarin.Insights.DebugModeKey);
+#else
+            Xamarin.Insights.Initialize(kApiKey);
+#endif
             InitializeComponent();
         }
 
