@@ -62,9 +62,9 @@ namespace KinskyDroid
         public override void OnCreate()
         {
 #if DEBUG
-            Xamarin.Insights.Initialize(Xamarin.Insights.DebugModeKey, this.Context);
+            Xamarin.Insights.Initialize(Xamarin.Insights.DebugModeKey, this);
 #else
-            Xamarin.Insights.Initialize(kApiKey, this.Context);
+            Xamarin.Insights.Initialize(kApiKey, this);
 #endif
             iScheduler = new Scheduler("StackScheduler", 1);
             iScheduler.SchedulerError += SchedulerErrorHandler;
