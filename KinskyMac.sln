@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "linnOssLib", "linnOssLib\Mac\linnOssLib.csproj", "{A3B345FA-E8C8-499B-8053-CED36AA353FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinsky", "Kinsky\Mac\Kinsky.csproj", "{34D69E66-D626-40AE-8DD8-1F546E13D230}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		MacOsX Debug|Any CPU = MacOsX Debug|Any CPU
+		MacOsX Release|Any CPU = MacOsX Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34D69E66-D626-40AE-8DD8-1F546E13D230}.MacOsX Debug|Any CPU.ActiveCfg = MacOsX Debug|Any CPU
+		{34D69E66-D626-40AE-8DD8-1F546E13D230}.MacOsX Debug|Any CPU.Build.0 = MacOsX Debug|Any CPU
+		{34D69E66-D626-40AE-8DD8-1F546E13D230}.MacOsX Release|Any CPU.ActiveCfg = MacOsX Release|Any CPU
+		{34D69E66-D626-40AE-8DD8-1F546E13D230}.MacOsX Release|Any CPU.Build.0 = MacOsX Release|Any CPU
+		{A3B345FA-E8C8-499B-8053-CED36AA353FF}.MacOsX Debug|Any CPU.ActiveCfg = MacOsX Debug|Any CPU
+		{A3B345FA-E8C8-499B-8053-CED36AA353FF}.MacOsX Debug|Any CPU.Build.0 = MacOsX Debug|Any CPU
+		{A3B345FA-E8C8-499B-8053-CED36AA353FF}.MacOsX Release|Any CPU.ActiveCfg = MacOsX Release|Any CPU
+		{A3B345FA-E8C8-499B-8053-CED36AA353FF}.MacOsX Release|Any CPU.Build.0 = MacOsX Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Kinsky\Mac\Kinsky.csproj
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = None
+		$1.ResourceNamePolicy = FileFormatDefault
+		$0.TextStylePolicy = $2
+		$2.inheritsSet = null
+		$2.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $3
+		$3.inheritsSet = Mono
+		$3.inheritsScope = text/x-csharp
+		$3.scope = text/x-csharp
+		$0.TextStylePolicy = $4
+		$4.FileWidth = 120
+		$4.RemoveTrailingWhitespace = True
+		$4.inheritsSet = VisualStudio
+		$4.inheritsScope = text/plain
+		$4.scope = text/plain
+		$0.TextStylePolicy = $5
+		$5.inheritsSet = null
+		$5.scope = application/xml
+		$0.XmlFormattingPolicy = $6
+		$6.inheritsSet = Mono
+		$6.inheritsScope = application/xml
+		$6.scope = application/xml
+		$0.TextStylePolicy = $7
+		$7.inheritsSet = null
+		$7.scope = text/microsoft-resx
+		$0.XmlFormattingPolicy = $8
+		$8.inheritsSet = null
+		$8.scope = text/microsoft-resx
+		$0.TextStylePolicy = $9
+		$9.inheritsSet = null
+		$9.scope = application/vnd.apple-interface-builder
+		$0.XmlFormattingPolicy = $10
+		$10.inheritsSet = null
+		$10.scope = application/vnd.apple-interface-builder
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

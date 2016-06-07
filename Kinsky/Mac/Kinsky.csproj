@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Windows Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{34D69E66-D626-40AE-8DD8-1F546E13D230}</ProjectGuid>
+    <ProjectTypeGuids>{948B3504-5B70-4649-8FE4-BDE1FB46EC69};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>KinskyDesktop</RootNamespace>
+    <BaseDirectory>Monobjc</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Windows Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\Mac\Debug\</IntermediateOutputPath>
+    <OutputPath>..\..\install\Windows\debug\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AssemblyName>KinskyMonobjc</AssemblyName>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <CreatePackage>false</CreatePackage>
+    <EnablePackageSigning>false</EnablePackageSigning>
+    <IncludeMonoRuntime>false</IncludeMonoRuntime>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'MacOsX Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\Mac\Debug</IntermediateOutputPath>
+    <OutputPath>..\..\build\Kinsky\bin\Mac\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AssemblyName>Kinsky</AssemblyName>
+    <ConsolePause>false</ConsolePause>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <CreatePackage>false</CreatePackage>
+    <EnablePackageSigning>false</EnablePackageSigning>
+    <IncludeMonoRuntime>false</IncludeMonoRuntime>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'MacOsX Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\Mac\Release</IntermediateOutputPath>
+    <OutputPath>..\..\build\Kinsky\bin\Mac\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AssemblyName>Kinsky</AssemblyName>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <CreatePackage>false</CreatePackage>
+    <EnablePackageSigning>false</EnablePackageSigning>
+    <IncludeMonoRuntime>false</IncludeMonoRuntime>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Mono\MonoMac\v0.0\Mono.MonoMac.targets" />
+  <ItemGroup>
+    <Compile Include="Monobjc\ArtworkCache.cs" />
+    <Compile Include="Monobjc\ButtonHoverPush.cs" />
+    <Compile Include="Monobjc\Controllers.cs" />
+    <Compile Include="Monobjc\DragData.cs" />
+    <Compile Include="Monobjc\DragDropManager.cs" />
+    <Compile Include="Monobjc\HelperKinskyDesktop.cs" />
+    <Compile Include="Monobjc\MainMenu.cs" />
+    <Compile Include="Monobjc\MainWindow.cs" />
+    <Compile Include="Monobjc\MediaProviderSupport.cs" />
+    <Compile Include="Monobjc\Models.cs" />
+    <Compile Include="Monobjc\OptionPageGeneral.cs" />
+    <Compile Include="Monobjc\Program.cs" />
+    <Compile Include="Monobjc\ResourcesManager.cs" />
+    <Compile Include="Monobjc\ViewBrowserContent.cs" />
+    <Compile Include="Monobjc\ViewHourglass.cs" />
+    <Compile Include="Monobjc\ViewRotary.cs" />
+    <Compile Include="Monobjc\ViewSelectionRoom.cs" />
+    <Compile Include="Monobjc\ViewSelectionSource.cs" />
+    <Compile Include="Monobjc\ViewUtils.cs" />
+    <Compile Include="Monobjc\WindowPopover.cs" />
+    <Compile Include="..\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Monobjc\FontManager.cs" />
+    <Compile Include="Monobjc\WindowUpdate.cs" />
+    <Compile Include="Monobjc\WindowSave.cs" />
+    <Compile Include="Monobjc\ViewSelectionBookmark.cs" />
+    <Compile Include="Monobjc\ViewAddBookmark.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="Monobjc.Cocoa">
+      <HintPath>..\..\External\Monobjc.Cocoa.dll</HintPath>
+    </Reference>
+    <Reference Include="Monobjc">
+      <HintPath>..\..\External\Monobjc.dll</HintPath>
+    </Reference>
+    <Reference Include="Monobjc.ImageKit">
+      <HintPath>..\..\External\Monobjc.ImageKit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\linnOssLib\Mac\linnOssLib.csproj">
+      <Project>{A3B345FA-E8C8-499B-8053-CED36AA353FF}</Project>
+      <Name>linnOssLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Linn\Kinsky\BookmarkManager.cs">
+      <Link>Linn\Kinsky\BookmarkManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Browser.cs">
+      <Link>Linn\Kinsky\Browser.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Container.cs">
+      <Link>Linn\Kinsky\Container.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ContentCollector.cs">
+      <Link>Linn\Kinsky\ContentCollector.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ContentDirectoryLocator.cs">
+      <Link>Linn\Kinsky\ContentDirectoryLocator.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Controllers.cs">
+      <Link>Linn\Kinsky\Controllers.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\FileItc2.cs">
+      <Link>Linn\Kinsky\FileItc2.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\HelperKinsky.cs">
+      <Link>Linn\Kinsky\HelperKinsky.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\HttpClient.cs">
+      <Link>Linn\Kinsky\HttpClient.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\HttpServer.cs">
+      <Link>Linn\Kinsky\HttpServer.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\IconResolver.cs">
+      <Link>Linn\Kinsky\IconResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ItemInfo.cs">
+      <Link>Linn\Kinsky\ItemInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Library.cs">
+      <Link>Linn\Kinsky\Library.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\LocalPlaylists.cs">
+      <Link>Linn\Kinsky\LocalPlaylists.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\MediaProvider.cs">
+      <Link>Linn\Kinsky\MediaProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\MediaRetriever.cs">
+      <Link>Linn\Kinsky\MediaRetriever.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Mediators.cs">
+      <Link>Linn\Kinsky\Mediators.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Models.cs">
+      <Link>Linn\Kinsky\Models.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\MultipusSourceList.cs">
+      <Link>Linn\Kinsky\MultipusSourceList.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\OptionStartupRoom.cs">
+      <Link>Linn\Kinsky\OptionStartupRoom.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Playlist.cs">
+      <Link>Linn\Kinsky\Playlist.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\PlaylistDisplayHelper.cs">
+      <Link>Linn\Kinsky\PlaylistDisplayHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\PlaylistSupport.cs">
+      <Link>Linn\Kinsky\PlaylistSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\PluginManager.cs">
+      <Link>Linn\Kinsky\PluginManager.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\RotaryControlTracker.cs">
+      <Link>Linn\Kinsky\RotaryControlTracker.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\SaveSupport.cs">
+      <Link>Linn\Kinsky\SaveSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\SharedPlaylists.cs">
+      <Link>Linn\Kinsky\SharedPlaylists.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Support.cs">
+      <Link>Linn\Kinsky\Support.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\ViewMasters.cs">
+      <Link>Linn\Kinsky\ViewMasters.cs</Link>
+    </Compile>
+    <Compile Include="..\Linn\Kinsky\Views.cs">
+      <Link>Linn\Kinsky\Views.cs</Link>
+    </Compile>
+  </ItemGroup>  
+  <ItemGroup>
+    <None Include="Info.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="MainMenu.xib"/>
+    <InterfaceDefinition Include="MainWindow.xib"/>
+    <InterfaceDefinition Include="ViewBrowserContent.xib"/>
+    <InterfaceDefinition Include="ViewSelectionRoom.xib"/>
+    <InterfaceDefinition Include="ViewSelectionSource.xib"/>
+    <InterfaceDefinition Include="WindowPopover.xib"/>
+    <InterfaceDefinition Include="WindowAbout.xib"/>
+    <InterfaceDefinition Include="WindowSave.xib"/>
+    <InterfaceDefinition Include="WindowUpdate.xib"/>
+    <InterfaceDefinition Include="ViewSelectionBookmark.xib"/>
+    <InterfaceDefinition Include="ViewAddBookmark.xib"/>
+  </ItemGroup>
+</Project>
