@@ -12,7 +12,7 @@
     <AssemblyName>Kinsky</AssemblyName>
     <UseMSBuildEngine>True</UseMSBuildEngine>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'MacOsX Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -30,7 +30,7 @@
     <UseRefCounting>false</UseRefCounting>
     <Profiling>false</Profiling>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'MacOsX Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <IntermediateOutputPath>..\..\build\Kinsky\obj\Mac\Release</IntermediateOutputPath>
     <OutputPath>..\..\build\Kinsky\bin\Mac\Release</OutputPath>
