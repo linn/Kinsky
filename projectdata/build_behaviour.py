@@ -10,11 +10,11 @@ class Builder(OpenHomeBuilder):
         platformsolutions = { 
             "Windows-x86" : "KinskyWindows.sln",
             "Mac-x64" : "KinskyMac.sln",
-            "Android-mono" : "KinskyAndroid.sln",
+            "Android-anycpu" : "KinskyAndroid.sln",
             "Ios-armv7" : "KinskyIos.sln"
         }
         self.solutionfile = platformsolutions[self.platform]
-        
+
         self.set_nuget_sln(self.solutionfile)
 
 
