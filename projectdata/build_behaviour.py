@@ -67,7 +67,7 @@ class Builder(OpenHomeBuilder):
         self.msbuild(self.solutionfile, target='Clean', configuration=self.configuration)
         if self.configuration == "Release" and self.platform == "Android-mono":
             # only build AppStore if release build
-            self.msbuild('KazooAndroid.sln', target='Clean', configuration="AppStore")
+            self.msbuild('KinskyAndroid.sln', target='Clean', configuration="AppStore")
 
     def build(self):
         self.msbuild(self.solutionfile, target='Build', configuration=self.configuration)
@@ -75,4 +75,4 @@ class Builder(OpenHomeBuilder):
             # only build AppStore if release build
             props = {'AndroidSigningStorePass': os.environ['ANDROID_SIGNING_STORE_PASS'],
                      'AndroidSigningKeyPass': os.environ['ANDROID_SIGNING_KEY_PASS']}
-            self.msbuild('KazooAndroid.sln', target='Build', configuration="AppStore", properties=props)
+            self.msbuild('KinskyAndroid.sln', target='Build', configuration="AppStore", properties=props)
