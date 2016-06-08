@@ -109,7 +109,6 @@
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <IpaPackageName>InstallerKinsky</IpaPackageName>
-    <IpaIncludeArtwork>false</IpaIncludeArtwork>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
@@ -121,12 +120,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="Xamarin.Insights">
-      <HintPath>..\..\packages\Xamarin.Insights.1.10.4.112\lib\Xamarin.iOS10\Xamarin.Insights.dll</HintPath>
-    </Reference>
-    <Reference Include="PLCrashReporterUnifiedBinding">
-      <HintPath>..\..\packages\Xamarin.Insights.1.10.4.112\lib\Xamarin.iOS10\PLCrashReporterUnifiedBinding.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\External\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -137,6 +130,12 @@
       <HintPath>..\..\External\taglib-sharp.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Services" />
+    <Reference Include="Xamarin.Insights">
+      <HintPath>..\..\packages\Xamarin.Insights.1.11.2\lib\Xamarin.iOS10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+    <Reference Include="PLCrashReporterUnifiedBinding">
+      <HintPath>..\..\packages\Xamarin.Insights.1.11.2\lib\Xamarin.iOS10\PLCrashReporterUnifiedBinding.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
@@ -281,6 +280,7 @@
     <Compile Include="Main.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Import Project="..\..\packages\Xamarin.Insights.1.11.2\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\..\packages\Xamarin.Insights.1.11.2\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
   <ItemGroup>
     <Folder Include="KinskyDesktop\" />
     <Folder Include="KinskyDesktop\Ios\" />
@@ -288,256 +288,256 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="..\Resources\Array.png">
-        <Link>Resources\Array.png</Link>
+      <Link>Resources\Array.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\BottomFiller.png">
-        <Link>Resources\BottomFiller.png</Link>
+      <Link>Resources\BottomFiller.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\BottomLeftEdge.png">
-        <Link>Resources\BottomLeftEdge.png</Link>
+      <Link>Resources\BottomLeftEdge.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\BottomRightEdge.png">
-        <Link>Resources\BottomRightEdge.png</Link>
+      <Link>Resources\BottomRightEdge.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Button.png">
-        <Link>Resources\Button.png</Link>
+      <Link>Resources\Button.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\ClockIcon.png">
-        <Link>Resources\ClockIcon.png</Link>
+      <Link>Resources\ClockIcon.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\ClockIconElapsed.png">
-        <Link>Resources\ClockIconElapsed.png</Link>
+      <Link>Resources\ClockIconElapsed.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\ClockIconRemaining.png">
-        <Link>Resources\ClockIconRemaining.png</Link>
+      <Link>Resources\ClockIconRemaining.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\FfwdButton.png">
-        <Link>Resources\FfwdButton.png</Link>
+      <Link>Resources\FfwdButton.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\FrwdButton.png">
-        <Link>Resources\FrwdButton.png</Link>
+      <Link>Resources\FrwdButton.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\LeftFiller.png">
-        <Link>Resources\LeftFiller.png</Link>
+      <Link>Resources\LeftFiller.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Mute.png">
-        <Link>Resources\Mute.png</Link>
+      <Link>Resources\Mute.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\MuteActive.png">
-        <Link>Resources\MuteActive.png</Link>
+      <Link>Resources\MuteActive.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\MuteIcon.png">
-        <Link>Resources\MuteIcon.png</Link>
+      <Link>Resources\MuteIcon.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Pause.png">
-        <Link>Resources\Pause.png</Link>
+      <Link>Resources\Pause.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\PauseOver.png">
-        <Link>Resources\PauseOver.png</Link>
+      <Link>Resources\PauseOver.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Play.png">
-        <Link>Resources\Play.png</Link>
+      <Link>Resources\Play.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\PlayOver.png">
-        <Link>Resources\PlayOver.png</Link>
+      <Link>Resources\PlayOver.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\RightFiller.png">
-        <Link>Resources\RightFiller.png</Link>
+      <Link>Resources\RightFiller.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Screws.png">
-        <Link>Resources\Screws.png</Link>
+      <Link>Resources\Screws.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\ScrewsLarge.png">
-        <Link>Resources\ScrewsLarge.png</Link>
+      <Link>Resources\ScrewsLarge.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\SkipBack.png">
-        <Link>Resources\SkipBack.png</Link>
+      <Link>Resources\SkipBack.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\SkipBackDown.png">
-        <Link>Resources\SkipBackDown.png</Link>
+      <Link>Resources\SkipBackDown.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\SkipForward.png">
-        <Link>Resources\SkipForward.png</Link>
+      <Link>Resources\SkipForward.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\SkipForwardDown.png">
-        <Link>Resources\SkipForwardDown.png</Link>
+      <Link>Resources\SkipForwardDown.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Stop.png">
-        <Link>Resources\Stop.png</Link>
+      <Link>Resources\Stop.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\StopOver.png">
-        <Link>Resources\StopOver.png</Link>
+      <Link>Resources\StopOver.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\TopFiller.png">
-        <Link>Resources\TopFiller.png</Link>
+      <Link>Resources\TopFiller.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\TopLeftEdge.png">
-        <Link>Resources\TopLeftEdge.png</Link>
+      <Link>Resources\TopLeftEdge.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\TopRightEdge.png">
-        <Link>Resources\TopRightEdge.png</Link>
+      <Link>Resources\TopRightEdge.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Wheel.png">
-        <Link>Resources\Wheel.png</Link>
+      <Link>Resources\Wheel.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\WheelLarge.png">
-        <Link>Resources\WheelLarge.png</Link>
+      <Link>Resources\WheelLarge.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\WheelLargeOver.png">
-        <Link>Resources\WheelLargeOver.png</Link>
+      <Link>Resources\WheelLargeOver.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\WheelOver.png">
-        <Link>Resources\WheelOver.png</Link>
+      <Link>Resources\WheelOver.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\LinnLogo.png">
-        <Link>Resources\LinnLogo.png</Link>
+      <Link>Resources\LinnLogo.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\PauseDown.png">
-        <Link>Resources\PauseDown.png</Link>
+      <Link>Resources\PauseDown.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\PlayDown.png">
-        <Link>Resources\PlayDown.png</Link>
+      <Link>Resources\PlayDown.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\RoomSource.png">
-        <Link>Resources\RoomSource.png</Link>
+      <Link>Resources\RoomSource.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\SkipBackOver.png">
-        <Link>Resources\SkipBackOver.png</Link>
+      <Link>Resources\SkipBackOver.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\SkipForwardOver.png">
-        <Link>Resources\SkipForwardOver.png</Link>
+      <Link>Resources\SkipForwardOver.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\StopDown.png">
-        <Link>Resources\StopDown.png</Link>
+      <Link>Resources\StopDown.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\TramLines.png">
-        <Link>Resources\TramLines.png</Link>
+      <Link>Resources\TramLines.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\WheelMute.png">
-        <Link>Resources\WheelMute.png</Link>
+      <Link>Resources\WheelMute.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Delete.png">
-        <Link>Resources\Delete.png</Link>
+      <Link>Resources\Delete.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\DeleteDown.png">
-        <Link>Resources\DeleteDown.png</Link>
+      <Link>Resources\DeleteDown.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\HourGlass.png">
-        <Link>Resources\HourGlass.png</Link>
+      <Link>Resources\HourGlass.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\HourGlass2.png">
-        <Link>Resources\HourGlass2.png</Link>
+      <Link>Resources\HourGlass2.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\List.png">
-        <Link>Resources\List.png</Link>
+      <Link>Resources\List.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Repeat.png">
-        <Link>Resources\Repeat.png</Link>
+      <Link>Resources\Repeat.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\RepeatDown.png">
-        <Link>Resources\RepeatDown.png</Link>
+      <Link>Resources\RepeatDown.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\RepeatOn.png">
-        <Link>Resources\RepeatOn.png</Link>
+      <Link>Resources\RepeatOn.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\RepeatOnDown.png">
-        <Link>Resources\RepeatOnDown.png</Link>
+      <Link>Resources\RepeatOnDown.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Settings.png">
-        <Link>Resources\Settings.png</Link>
+      <Link>Resources\Settings.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Shuffle.png">
-        <Link>Resources\Shuffle.png</Link>
+      <Link>Resources\Shuffle.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\ShuffleDown.png">
-        <Link>Resources\ShuffleDown.png</Link>
+      <Link>Resources\ShuffleDown.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\ShuffleOn.png">
-        <Link>Resources\ShuffleOn.png</Link>
+      <Link>Resources\ShuffleOn.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\ShuffleOnDown.png">
-        <Link>Resources\ShuffleOnDown.png</Link>
+      <Link>Resources\ShuffleOnDown.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Standby.png">
-        <Link>Resources\Standby.png</Link>
+      <Link>Resources\Standby.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\StandbyDown.png">
-        <Link>Resources\StandbyDown.png</Link>
+      <Link>Resources\StandbyDown.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\StandbyOn.png">
-        <Link>Resources\StandbyOn.png</Link>
+      <Link>Resources\StandbyOn.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\StandbyOnDown.png">
-        <Link>Resources\StandbyOnDown.png</Link>
+      <Link>Resources\StandbyOnDown.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Album.png">
-        <Link>Resources\Album.png</Link>
+      <Link>Resources\Album.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\AlbumArtError.png">
-        <Link>Resources\AlbumArtError.png</Link>
+      <Link>Resources\AlbumArtError.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Artist.png">
-        <Link>Resources\Artist.png</Link>
+      <Link>Resources\Artist.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\CD.png">
-        <Link>Resources\CD.png</Link>
+      <Link>Resources\CD.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Directory.png">
-        <Link>Resources\Directory.png</Link>
+      <Link>Resources\Directory.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\DisclosureIndicator.png">
-        <Link>Resources\DisclosureIndicator.png</Link>
+      <Link>Resources\DisclosureIndicator.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Error.png">
-        <Link>Resources\Error.png</Link>
+      <Link>Resources\Error.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Folder.png">
-        <Link>Resources\Folder.png</Link>
+      <Link>Resources\Folder.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Loading.png">
-        <Link>Resources\Loading.png</Link>
+      <Link>Resources\Loading.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Playing.png">
-        <Link>Resources\Playing.png</Link>
+      <Link>Resources\Playing.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Playlist.png">
-        <Link>Resources\Playlist.png</Link>
+      <Link>Resources\Playlist.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\PlaylistItem.png">
-        <Link>Resources\PlaylistItem.png</Link>
+      <Link>Resources\PlaylistItem.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\PlaylistSource.png">
-        <Link>Resources\PlaylistSource.png</Link>
+      <Link>Resources\PlaylistSource.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Radio.png">
-        <Link>Resources\Radio.png</Link>
+      <Link>Resources\Radio.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Room.png">
-        <Link>Resources\Room.png</Link>
+      <Link>Resources\Room.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Sender.png">
-        <Link>Resources\Sender.png</Link>
+      <Link>Resources\Sender.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\SenderNoSend.png">
-        <Link>Resources\SenderNoSend.png</Link>
+      <Link>Resources\SenderNoSend.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Source.png">
-        <Link>Resources\Source.png</Link>
+      <Link>Resources\Source.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Track.png">
-        <Link>Resources\Track.png</Link>
+      <Link>Resources\Track.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\UPNP.png">
-        <Link>Resources\UPNP.png</Link>
+      <Link>Resources\UPNP.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Video.png">
-        <Link>Resources\Video.png</Link>
+      <Link>Resources\Video.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\Library.png">
-        <Link>Resources\Library.png</Link>
+      <Link>Resources\Library.png</Link>
     </BundleResource>
     <BundleResource Include="..\Resources\KinskyLogoAbout.png">
-        <Link>Resources\KinskyLogoAbout.png</Link>
+      <Link>Resources\KinskyLogoAbout.png</Link>
     </BundleResource>
   </ItemGroup>
   <ItemGroup>

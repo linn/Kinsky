@@ -35,12 +35,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="Xamarin.Insights">
-      <HintPath>..\..\packages\Xamarin.Insights.1.10.4.112\lib\Xamarin.iOS10\Xamarin.Insights.dll</HintPath>
-    </Reference>
-    <Reference Include="PLCrashReporterUnifiedBinding">
-      <HintPath>..\..\packages\Xamarin.Insights.1.10.4.112\lib\Xamarin.iOS10\PLCrashReporterUnifiedBinding.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\External\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -51,6 +45,12 @@
       <HintPath>..\..\External\taglib-sharp.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Services" />
+    <Reference Include="Xamarin.Insights">
+      <HintPath>..\..\packages\Xamarin.Insights.1.11.2\lib\Xamarin.iOS10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+    <Reference Include="PLCrashReporterUnifiedBinding">
+      <HintPath>..\..\packages\Xamarin.Insights.1.11.2\lib\Xamarin.iOS10\PLCrashReporterUnifiedBinding.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="..\linnOssLib\Resources\" />
@@ -62,331 +62,331 @@
     <Compile Include="..\linnOssLib\Core\Linn\AssemblyInfoModel.cs">
       <Link>Core\Linn\AssemblyInfoModel.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\AutoUpdate.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\AutoUpdate.cs">
       <Link>Core\Linn\AutoUpdate.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\BitConverter.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\BitConverter.cs">
       <Link>Core\Linn\BitConverter.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Debug.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Debug.cs">
       <Link>Core\Linn\Debug.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\DebugReport.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\DebugReport.cs">
       <Link>Core\Linn\DebugReport.cs</Link>
     </Compile>
     <Compile Include="..\linnOssLib\Core\Linn\Framework\AssemblyInfo.cs">
       <Link>Core\Linn\Framework\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Framework\NetworkChangeWatcher.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Framework\NetworkChangeWatcher.cs">
       <Link>Core\Linn\Framework\NetworkChangeWatcher.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Framework\NetworkInfo.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Framework\NetworkInfo.cs">
       <Link>Core\Linn\Framework\NetworkInfo.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Framework\ServiceInfo.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Framework\ServiceInfo.cs">
       <Link>Core\Linn\Framework\ServiceInfo.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Framework\SystemEvents.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Framework\SystemEvents.cs">
       <Link>Core\Linn\Framework\SystemEvents.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Framework\Timer.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Framework\Timer.cs">
       <Link>Core\Linn\Framework\Timer.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Helper.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Helper.cs">
       <Link>Core\Linn\Helper.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\IImageCache.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\IImageCache.cs">
       <Link>Core\Linn\IImageCache.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\IInvoker.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\IInvoker.cs">
       <Link>Core\Linn\IInvoker.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Network\Network.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Network\Network.cs">
       <Link>Core\Linn\Network\Network.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Network\WebRequest.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Network\WebRequest.cs">
       <Link>Core\Linn\Network\WebRequest.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\NetworkInfoModel.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\NetworkInfoModel.cs">
       <Link>Core\Linn\NetworkInfoModel.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Option.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Option.cs">
       <Link>Core\Linn\Option.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\OptionManager.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\OptionManager.cs">
       <Link>Core\Linn\OptionManager.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\OptionPage.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\OptionPage.cs">
       <Link>Core\Linn\OptionPage.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\OptionPageCrashDumper.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\OptionPageCrashDumper.cs">
       <Link>Core\Linn\OptionPageCrashDumper.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\OptionPagePrivacy.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\OptionPagePrivacy.cs">
       <Link>Core\Linn\OptionPagePrivacy.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\OptionPageUpdates.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\OptionPageUpdates.cs">
       <Link>Core\Linn\OptionPageUpdates.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\OptionParser.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\OptionParser.cs">
       <Link>Core\Linn\OptionParser.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\ReleaseFeed.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\ReleaseFeed.cs">
       <Link>Core\Linn\ReleaseFeed.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Scheduler.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Scheduler.cs">
       <Link>Core\Linn\Scheduler.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Stack.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Stack.cs">
       <Link>Core\Linn\Stack.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Standard.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Standard.cs">
       <Link>Core\Linn\Standard.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Stream.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Stream.cs">
       <Link>Core\Linn\Stream.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\SystemInfoModel.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\SystemInfoModel.cs">
       <Link>Core\Linn\SystemInfoModel.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Ticker.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\Ticker.cs">
       <Link>Core\Linn\Ticker.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\UserLog.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\UserLog.cs">
       <Link>Core\Linn\UserLog.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\UserLogFile.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\UserLogFile.cs">
       <Link>Core\Linn\UserLogFile.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\VersionSupport.cs" >
+    <Compile Include="..\linnOssLib\Core\Linn\VersionSupport.cs">
       <Link>Core\Linn\VersionSupport.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Control\Linn\Control\Http\Http.cs" >
+    <Compile Include="..\linnOssLib\Control\Linn\Control\Http\Http.cs">
       <Link>Control\Linn\Control\Http\Http.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Control\Linn\Control\Nct\Client.cs" >
+    <Compile Include="..\linnOssLib\Control\Linn\Control\Nct\Client.cs">
       <Link>Control\Linn\Control\Nct\Client.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Control\Linn\Control\Service.cs" >
+    <Compile Include="..\linnOssLib\Control\Linn\Control\Service.cs">
       <Link>Control\Linn\Control\Service.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Control\Linn\Control\ServiceType.cs" >
+    <Compile Include="..\linnOssLib\Control\Linn\Control\ServiceType.cs">
       <Link>Control\Linn\Control\ServiceType.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Control\Linn\Control\Ssdp\Ssdp.cs" >
+    <Compile Include="..\linnOssLib\Control\Linn\Control\Ssdp\Ssdp.cs">
       <Link>Control\Linn\Control\Ssdp\Ssdp.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Control\Linn\ControlPoint\Discovery.cs" >
+    <Compile Include="..\linnOssLib\Control\Linn\ControlPoint\Discovery.cs">
       <Link>Control\Linn\ControlPoint\Discovery.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Control\Linn\ControlPoint\Service.cs" >
+    <Compile Include="..\linnOssLib\Control\Linn\ControlPoint\Service.cs">
       <Link>Control\Linn\ControlPoint\Service.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Control\Linn\ControlPoint\Upnp\Discovery.cs" >
+    <Compile Include="..\linnOssLib\Control\Linn\ControlPoint\Upnp\Discovery.cs">
       <Link>Control\Linn\ControlPoint\Upnp\Discovery.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Control\Linn\ControlPoint\Upnp\EventServer.cs" >
+    <Compile Include="..\linnOssLib\Control\Linn\ControlPoint\Upnp\EventServer.cs">
       <Link>Control\Linn\ControlPoint\Upnp\EventServer.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Control\Linn\ControlPoint\Upnp\Service.cs" >
+    <Compile Include="..\linnOssLib\Control\Linn\ControlPoint\Upnp\Service.cs">
       <Link>Control\Linn\ControlPoint\Upnp\Service.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\DidlLite\DidlLite.cs" >
+    <Compile Include="..\linnOssLib\DidlLite\DidlLite.cs">
       <Link>DidlLite\DidlLite.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\DidlLite\Upnp\DidlLiteAdapter.cs" >
+    <Compile Include="..\linnOssLib\DidlLite\Upnp\DidlLiteAdapter.cs">
       <Link>DidlLite\Upnp\DidlLiteAdapter.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointAVTransport.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointAVTransport.cs">
       <Link>Services\UpnpControlPointAVTransport.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointConfiguration.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointConfiguration.cs">
       <Link>Services\UpnpControlPointConfiguration.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointConnectionManager.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointConnectionManager.cs">
       <Link>Services\UpnpControlPointConnectionManager.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointContentDirectory.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointContentDirectory.cs">
       <Link>Services\UpnpControlPointContentDirectory.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointCredentials.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointCredentials.cs">
       <Link>Services\UpnpControlPointCredentials.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointDebug.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointDebug.cs">
       <Link>Services\UpnpControlPointDebug.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointDelay.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointDelay.cs">
       <Link>Services\UpnpControlPointDelay.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointDeviceProperties.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointDeviceProperties.cs">
       <Link>Services\UpnpControlPointDeviceProperties.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointDiagnostics.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointDiagnostics.cs">
       <Link>Services\UpnpControlPointDiagnostics.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointExakt.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointExakt.cs">
       <Link>Services\UpnpControlPointExakt.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointFlash.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointFlash.cs">
       <Link>Services\UpnpControlPointFlash.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointInfo.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointInfo.cs">
       <Link>Services\UpnpControlPointFlash.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointJukebox.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointJukebox.cs">
       <Link>Services\UpnpControlPointJukebox.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointNetworkMonitor.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointNetworkMonitor.cs">
       <Link>Services\UpnpControlPointNetworkMonitor.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointPlaylist.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointPlaylist.cs">
       <Link>Services\UpnpControlPointPlaylist.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointPlaylistManager.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointPlaylistManager.cs">
       <Link>Services\UpnpControlPointPlaylistManager.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointProduct.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointProduct.cs">
       <Link>Services\UpnpControlPointProduct.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointProductV1.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointProductV1.cs">
       <Link>Services\UpnpControlPointProductV1.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointProductV2.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointProductV2.cs">
       <Link>Services\UpnpControlPointProductV2.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointProductV3.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointProductV3.cs">
       <Link>Services\UpnpControlPointProductV3.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointProxy.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointProxy.cs">
       <Link>Services\UpnpControlPointProxy.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointRadio.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointRadio.cs">
       <Link>Services\UpnpControlPointRadio.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointReceiver.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointReceiver.cs">
       <Link>Services\UpnpControlPointReceiver.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointRenderingControl.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointRenderingControl.cs">
       <Link>Services\UpnpControlPointRenderingControl.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointSdp.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointSdp.cs">
       <Link>Services\UpnpControlPointSdp.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointSender.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointSender.cs">
       <Link>Services\UpnpControlPointSender.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointSoundcard.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointSoundcard.cs">
       <Link>Services\UpnpControlPointSoundcard.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointTime.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointTime.cs">
       <Link>Services\UpnpControlPointTime.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointVideo.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointVideo.cs">
       <Link>Services\UpnpControlPointVideo.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointVolkano.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointVolkano.cs">
       <Link>Services\UpnpControlPointVolkano.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Services\UpnpControlPointVolume.cs" >
+    <Compile Include="..\linnOssLib\Services\UpnpControlPointVolume.cs">
       <Link>Services\UpnpControlPointVolume.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\SysLib\Linn\Ascii\Ascii.cs" >
+    <Compile Include="..\linnOssLib\SysLib\Linn\Ascii\Ascii.cs">
       <Link>SysLib\Linn\Ascii\Ascii.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\SysLib\Linn\Ascii\Parser.cs" >
+    <Compile Include="..\linnOssLib\SysLib\Linn\Ascii\Parser.cs">
       <Link>SysLib\Linn\Ascii\Parser.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\AutoUpdateController.cs" >
+    <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\AutoUpdateController.cs">
       <Link>Toolkit\Linn\Toolkit\AutoUpdateController.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\FileDialog.cs" >
+    <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\FileDialog.cs">
       <Link>Toolkit\Linn\Toolkit\FileDialog.c</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\DeviceFinder.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\DeviceFinder.cs">
       <Link>Topology\Linn\Topology\DeviceFinder.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\House0.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\House0.cs">
       <Link>Topology\Linn\Topology\House0.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\House1.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\House1.cs">
       <Link>Topology\Linn\Topology\House1.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\House2.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\House2.cs">
       <Link>Topology\Linn\Topology\House2.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\Library.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\Library.cs">
       <Link>Topology\Linn\Topology\Library.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelFactory.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelFactory.cs">
       <Link>Topology\Linn\Topology\ModelFactory.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelIdArray.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelIdArray.cs">
       <Link>Topology\Linn\Topology\ModelIdArray.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelInfo.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelInfo.cs">
       <Link>Topology\Linn\Topology\ModelInfo.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelLibrary.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelLibrary.cs">
       <Link>Topology\Linn\Topology\ModelLibrary.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelMediaServer.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelMediaServer.cs">
       <Link>Topology\Linn\Topology\ModelMediaServer.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelMultipusSender.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelMultipusSender.cs">
       <Link>Topology\Linn\Topology\ModelMultipusSender.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelMultipusSenders.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelMultipusSenders.cs">
       <Link>Topology\Linn\Topology\ModelMultipusSenders.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelPlaylistManager.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelPlaylistManager.cs">
       <Link>Topology\Linn\Topology\ModelPlaylistManager.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSource.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSource.cs">
       <Link>Topology\Linn\Topology\ModelSource.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceAuxiliary.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceAuxiliary.cs">
       <Link>Topology\Linn\Topology\ModelSourceAuxiliary.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceDiscPlayer.cs" >
-      <Link>Topology\Linn\Topology\ModelSourceDiscPlayer.cs/</Link>
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceDiscPlayer.cs">
+      <Link>Topology\Linn\Topology\ModelSourceDiscPlayer.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceDiscPlayerSdp.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceDiscPlayerSdp.cs">
       <Link>Topology\Linn\Topology\ModelSourceDiscPlayerSdp.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceMediaRenderer.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceMediaRenderer.cs">
       <Link>Topology\Linn\Topology\ModelSourceMediaRenderer.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceMediaRendererDs.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceMediaRendererDs.cs">
       <Link>Topology\Linn\Topology\ModelSourceMediaRendererDs.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceMediaRendererUpnpAv.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceMediaRendererUpnpAv.cs">
       <Link>Topology\Linn\Topology\ModelSourceMediaRendererUpnpAv.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceMultipus.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceMultipus.cs">
       <Link>Topology\Linn\Topology\ModelSourceMultipus.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceRadio.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelSourceRadio.cs">
       <Link>Topology\Linn\Topology\ModelSourceRadio.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelTime.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelTime.cs">
       <Link>Topology\Linn\Topology\ModelTime.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelVolumeControl.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelVolumeControl.cs">
       <Link>Topology\Linn\Topology\ModelVolumeControl.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelVolumeControlPreamp.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelVolumeControlPreamp.cs">
       <Link>Topology\Linn\Topology\ModelVolumeControlPreamp.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelVolumeControlUpnpAv.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\ModelVolumeControlUpnpAv.cs">
       <Link>Topology\Linn\Topology\ModelVolumeControlUpnpAv.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\MultipusSenders.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\MultipusSenders.cs">
       <Link>Topology\Linn\Topology\MultipusSenders.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\PlaylistManager.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\PlaylistManager.cs">
       <Link>Topology\Linn\Topology\PlaylistManager.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Topology\Linn\Topology\SourceList.cs" >
+    <Compile Include="..\linnOssLib\Topology\Linn\Topology\SourceList.cs">
       <Link>Topology\Linn\Topology\SourceList.cs</Link>
     </Compile>
   </ItemGroup>
@@ -482,31 +482,29 @@
       <Link>Kinsky\Linn\Kinsky\Views.cs</Link>
     </Compile>
   </ItemGroup>
-  <ItemGroup>    
+  <ItemGroup>
     <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\Ios\CrashLogDumper.cs">
-        <Link>Toolkit\Linn\Toolkit\Ios\CrashLogDumper.cs</Link>
+      <Link>Toolkit\Linn\Toolkit\Ios\CrashLogDumper.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\Ios\FileDialog.cs" >
-        <Link>Toolkit\Linn\Toolkit\Ios\FileDialog.cs</Link>
+    <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\Ios\FileDialog.cs">
+      <Link>Toolkit\Linn\Toolkit\Ios\FileDialog.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\Ios\Invoker.cs" >
-        <Link>Toolkit\Linn\Toolkit\Ios\Invoker.cs</Link>
+    <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\Ios\Invoker.cs">
+      <Link>Toolkit\Linn\Toolkit\Ios\Invoker.cs</Link>
     </Compile>
     <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\Ios\Option.cs">
-        <Link>Toolkit\Linn\Toolkit\Ios\Option.cs</Link>
+      <Link>Toolkit\Linn\Toolkit\Ios\Option.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\Ios\OptionDialog.cs" >
-        <Link>Toolkit\Linn\Toolkit\Ios\OptionDialog.cs</Link>
+    <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\Ios\OptionDialog.cs">
+      <Link>Toolkit\Linn\Toolkit\Ios\OptionDialog.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\Ios\StackStatusHandler.cs" >
-        <Link>Toolkit\Linn\Toolkit\Ios\StackStatusHandler.cs</Link>
+    <Compile Include="..\linnOssLib\Toolkit\Linn\Toolkit\Ios\StackStatusHandler.cs">
+      <Link>Toolkit\Linn\Toolkit\Ios\StackStatusHandler.cs</Link>
     </Compile>
-    <Compile Include="..\linnOssLib\Core\Linn\Framework\SystemInfoIos.cs" >
-        <Link></Link>
-    </Compile>
-
+    <Compile Include="..\linnOssLib\Core\Linn\Framework\SystemInfoIos.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Import Project="..\..\packages\Xamarin.Insights.1.11.2\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\..\packages\Xamarin.Insights.1.11.2\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
