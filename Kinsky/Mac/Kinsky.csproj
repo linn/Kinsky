@@ -89,7 +89,7 @@
       <HintPath>..\..\External\Monobjc.ImageKit.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Insights">
-      <HintPath>..\..\packages\Xamarin.Insights.1.10.4.112\lib\Xamarin.Mac20\Xamarin.Insights.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Insights.1.11.2\lib\Xamarin.Mac20\Xamarin.Insights.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="ICSharpCode.SharpZipLib">
@@ -773,4 +773,5 @@
     <Message Importance="high" Text="Copying $(MonobjcDylib) to $(TargetDir)$(AssemblyName).app/Contents/MacOs" />
     <Copy SourceFiles="$(MonobjcDylib)" DestinationFolder="$(TargetDir)$(AssemblyName).app/Contents/MacOs" />
   </Target>
+  <Import Project="..\..\packages\Xamarin.Insights.1.11.2\build\Xamarin.Mac20\Xamarin.Insights.targets" Condition="Exists('..\..\packages\Xamarin.Insights.1.11.2\build\Xamarin.Mac20\Xamarin.Insights.targets')" />
 </Project>
