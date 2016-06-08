@@ -37,8 +37,8 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <IntermediateOutputPath>..\..\build\OssKinskyMppBbc\obj\Windows\Debug\</IntermediateOutputPath>
-    <OutputPath>..\..\build\OssKinskyMppBbc\bin\Windows\Debug\</OutputPath>
+    <IntermediateOutputPath>..\..\build\OssKinskyMppBbc\obj\Mac\Debug\</IntermediateOutputPath>
+    <OutputPath>..\..\build\OssKinskyMppBbc\bin\Mac\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -46,8 +46,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <IntermediateOutputPath>..\..\build\OssKinskyMppBbc\obj\Windows\Release\</IntermediateOutputPath>
-    <OutputPath>..\..\build\OssKinskyMppBbc\bin\Windows\Release\</OutputPath>
+    <IntermediateOutputPath>..\..\build\OssKinskyMppBbc\obj\Mac\Release\</IntermediateOutputPath>
+    <OutputPath>..\..\build\OssKinskyMppBbc\bin\Mac\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -66,8 +66,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\linnOssLib\Windows\linnOssLib.csproj">
-      <Project>{8475cd6a-a901-4d38-bcb4-ba2b160b6d04}</Project>
+    <ProjectReference Include="..\..\linnOssLib\Mac\linnOssLib.csproj">
+      <Project>{A3B345FA-E8C8-499B-8053-CED36AA353FF}</Project>
       <Name>linnOssLib</Name>
     </ProjectReference>
   </ItemGroup>

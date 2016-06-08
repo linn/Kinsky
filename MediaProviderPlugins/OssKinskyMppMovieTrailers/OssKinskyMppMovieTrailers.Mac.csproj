@@ -3,19 +3,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{72AB9915-1A27-43D0-B537-A4914726550D}</ProjectGuid>
+    <ProjectGuid>{B9800394-8A29-46F0-80BE-BC5328D6DFB0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OssKinskyMppBbc</RootNamespace>
-    <AssemblyName>OssKinskyMppBbc</AssemblyName>
+    <RootNamespace>OssKinskyMppMovieTrailers</RootNamespace>
+    <AssemblyName>OssKinskyMppMovieTrailers</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation />
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,8 +27,10 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BaseDirectory>..\..\MediaProviderPlugins\MovieTrailers</BaseDirectory>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
@@ -37,8 +38,8 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <IntermediateOutputPath>..\..\build\OssKinskyMppBbc\obj\Windows\Debug\</IntermediateOutputPath>
-    <OutputPath>..\..\build\OssKinskyMppBbc\bin\Windows\Debug\</OutputPath>
+    <IntermediateOutputPath>..\..\build\OssKinskyMppMovieTrailers\obj\Mac\Debug\</IntermediateOutputPath>
+    <OutputPath>..\..\build\OssKinskyMppMovieTrailers\bin\Mac\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -46,41 +47,33 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <IntermediateOutputPath>..\..\build\OssKinskyMppBbc\obj\Windows\Release\</IntermediateOutputPath>
-    <OutputPath>..\..\build\OssKinskyMppBbc\bin\Windows\Release\</OutputPath>
+    <IntermediateOutputPath>..\..\build\OssKinskyMppMovieTrailers\obj\Mac\Release\</IntermediateOutputPath>
+    <OutputPath>..\..\build\OssKinskyMppMovieTrailers\bin\Mac\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Bbc.cs" />
+    <Compile Include="MovieTrailers.cs" />
+    <Compile Include="Podcast.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebFetcher.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Bbc.png">
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MovieTrailers.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\linnOssLib\Windows\linnOssLib.csproj">
-      <Project>{8475cd6a-a901-4d38-bcb4-ba2b160b6d04}</Project>
+    <ProjectReference Include="..\..\linnOssLib\Mac\linnOssLib.csproj">
+      <Project>{A3B345FA-E8C8-499B-8053-CED36AA353FF}</Project>
       <Name>linnOssLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
 </Project>
