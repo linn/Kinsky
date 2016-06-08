@@ -91,152 +91,147 @@ namespace Linn.Kinsky
 
                 if (IsTagLibSupported(aInfo))
                 {
-                    using (var fileStream = new FileStream(aInfo.FullName, FileMode.Open))
+                    TagLib.File f = TagLib.File.Create(aInfo.FullName);
+
+                    if (f.Properties.MediaTypes == MediaTypes.Audio)
                     {
-                        var fileAbstraction = new StreamFileAbstraction(aInfo.FullName, fileStream, fileStream);
+                        musicTrack track = new musicTrack();
+                        resource resource = new resource();
+                        track.Res.Add(resource);
 
-                        TagLib.File f = TagLib.File.Create(fileAbstraction);
+                        track.Id = aInfo.FullName;
+                        track.WriteStatus = "PROTECTED";
+                        track.Restricted = true;
 
-                        if (f.Properties.MediaTypes == MediaTypes.Audio)
+                        if (!f.Tag.IsEmpty)
                         {
-                            musicTrack track = new musicTrack();
-                            resource resource = new resource();
-                            track.Res.Add(resource);
-
-                            track.Id = aInfo.FullName;
-                            track.WriteStatus = "PROTECTED";
-                            track.Restricted = true;
-
-                            if (!f.Tag.IsEmpty)
+                            if (f.Tag.Title != null)
                             {
-                                if (f.Tag.Title != null)
-                                {
-                                    track.Title = f.Tag.Title;
-                                }
-                                else
-                                {
-                                    track.Title = aInfo.Name;
-                                }
-                                if (f.Tag.Album != null)
-                                {
-                                    track.Album.Add(f.Tag.Album);
-                                }
-                                foreach (string g in f.Tag.Genres)
-                                {
-                                    track.Genre.Add(g);
-                                }
-                                track.OriginalTrackNumber = (int)f.Tag.Track;
-                                track.Date = f.Tag.Year.ToString();
-                                foreach (string p in f.Tag.Performers)
-                                {
-                                    artist performer = new artist();
-                                    performer.Artist = p;
-                                    performer.Role = "Performer";
-                                    track.Artist.Add(performer);
-                                }
-                                foreach (string a in f.Tag.AlbumArtists)
-                                {
-                                    artist artist = new artist();
-                                    artist.Artist = a;
-                                    artist.Role = "AlbumArtist";
-                                    track.Artist.Add(artist);
-                                }
-                                foreach (string c in f.Tag.Composers)
-                                {
-                                    artist composer = new artist();
-                                    composer.Artist = c;
-                                    composer.Role = "Composer";
-                                    track.Artist.Add(composer);
-                                }
-                                if (f.Tag.Conductor != null)
-                                {
-                                    artist conductor = new artist();
-                                    conductor.Artist = f.Tag.Conductor;
-                                    conductor.Role = "Conductor";
-                                    track.Artist.Add(conductor);
-                                }
+                                track.Title = f.Tag.Title;
                             }
                             else
                             {
                                 track.Title = aInfo.Name;
                             }
-
-                            resource.Bitrate = (int)((f.Properties.AudioBitrate * 1000.0f) / 8.0f);
-                            resource.Duration = new Time((int)f.Properties.Duration.TotalSeconds).ToString();
-                            resource.NrAudioChannels = f.Properties.AudioChannels;
-                            resource.SampleFrequency = f.Properties.AudioSampleRate;
-                            resource.Size = aInfo.Length;
-                            resource.Uri = aResourceUri;
-
-                            resource.ProtocolInfo = string.Format("http-get:*:{0}:*", f.MimeType.Replace("taglib", "audio"));
-                            resource.ProtocolInfo = resource.ProtocolInfo.Replace("flac", "x-flac");
-                            resource.ProtocolInfo = resource.ProtocolInfo.Replace("aif:", "aiff:");
-                            resource.ProtocolInfo = resource.ProtocolInfo.Replace("wma", "x-ms-wma");
-                            resource.ProtocolInfo = resource.ProtocolInfo.Replace("asf", "x-ms-asf");
-                            resource.ProtocolInfo = resource.ProtocolInfo.Replace("mp3", "mpeg");
-                            resource.ProtocolInfo = resource.ProtocolInfo.Replace("mpeg3", "mpeg");
-                            resource.ProtocolInfo = resource.ProtocolInfo.Replace("m4a", "x-m4a");
-
-                            if (!string.IsNullOrEmpty(aArtworkUri))
+                            if (f.Tag.Album != null)
                             {
-                                track.AlbumArtUri.Add(aArtworkUri);
+                                track.Album.Add(f.Tag.Album);
                             }
-
-                            return track;
-                        }
-                        else if (f.Properties.MediaTypes == TagLib.MediaTypes.Video)
-                        {
-                            videoItem video = new videoItem();
-                            resource resource = new resource();
-                            video.Res.Add(resource);
-
-                            video.Id = aInfo.FullName;
-                            video.WriteStatus = "PROTECTED";
-                            video.Restricted = true;
-
-                            if (!f.Tag.IsEmpty)
+                            foreach (string g in f.Tag.Genres)
                             {
-                                if (f.Tag.Title != null)
-                                {
-                                    video.Title = f.Tag.Title;
-                                }
-                                else
-                                {
-                                    video.Title = aInfo.Name;
-                                }
-                                foreach (string g in f.Tag.Genres)
-                                {
-                                    video.Genre.Add(g);
-                                }
-                                foreach (string p in f.Tag.Performers)
-                                {
-                                    actor performer = new actor();
-                                    performer.Actor = p;
-                                    performer.Role = "Actor";
-                                    video.Actor.Add(performer);
-                                }
+                                track.Genre.Add(g);
+                            }
+                            track.OriginalTrackNumber = (int)f.Tag.Track;
+                            track.Date = f.Tag.Year.ToString();
+                            foreach (string p in f.Tag.Performers)
+                            {
+                                artist performer = new artist();
+                                performer.Artist = p;
+                                performer.Role = "Performer";
+                                track.Artist.Add(performer);
+                            }
+                            foreach (string a in f.Tag.AlbumArtists)
+                            {
+                                artist artist = new artist();
+                                artist.Artist = a;
+                                artist.Role = "AlbumArtist";
+                                track.Artist.Add(artist);
+                            }
+                            foreach (string c in f.Tag.Composers)
+                            {
+                                artist composer = new artist();
+                                composer.Artist = c;
+                                composer.Role = "Composer";
+                                track.Artist.Add(composer);
+                            }
+                            if (f.Tag.Conductor != null)
+                            {
+                                artist conductor = new artist();
+                                conductor.Artist = f.Tag.Conductor;
+                                conductor.Role = "Conductor";
+                                track.Artist.Add(conductor);
+                            }
+                        }
+                        else
+                        {
+                            track.Title = aInfo.Name;
+                        }
+
+                        resource.Bitrate = (int)((f.Properties.AudioBitrate * 1000.0f) / 8.0f);
+                        resource.Duration = new Time((int)f.Properties.Duration.TotalSeconds).ToString();
+                        resource.NrAudioChannels = f.Properties.AudioChannels;
+                        resource.SampleFrequency = f.Properties.AudioSampleRate;
+                        resource.Size = aInfo.Length;
+                        resource.Uri = aResourceUri;
+
+                        resource.ProtocolInfo = string.Format("http-get:*:{0}:*", f.MimeType.Replace("taglib", "audio"));
+                        resource.ProtocolInfo = resource.ProtocolInfo.Replace("flac", "x-flac");
+                        resource.ProtocolInfo = resource.ProtocolInfo.Replace("aif:", "aiff:");
+                        resource.ProtocolInfo = resource.ProtocolInfo.Replace("wma", "x-ms-wma");
+                        resource.ProtocolInfo = resource.ProtocolInfo.Replace("asf", "x-ms-asf");
+                        resource.ProtocolInfo = resource.ProtocolInfo.Replace("mp3", "mpeg");
+                        resource.ProtocolInfo = resource.ProtocolInfo.Replace("mpeg3", "mpeg");
+                        resource.ProtocolInfo = resource.ProtocolInfo.Replace("m4a", "x-m4a");
+
+                        if (!string.IsNullOrEmpty(aArtworkUri))
+                        {
+                            track.AlbumArtUri.Add(aArtworkUri);
+                        }
+
+                        return track;
+                    }
+                    else if (f.Properties.MediaTypes == TagLib.MediaTypes.Video)
+                    {
+                        videoItem video = new videoItem();
+                        resource resource = new resource();
+                        video.Res.Add(resource);
+
+                        video.Id = aInfo.FullName;
+                        video.WriteStatus = "PROTECTED";
+                        video.Restricted = true;
+
+                        if (!f.Tag.IsEmpty)
+                        {
+                            if (f.Tag.Title != null)
+                            {
+                                video.Title = f.Tag.Title;
                             }
                             else
                             {
                                 video.Title = aInfo.Name;
                             }
-
-                            resource.Bitrate = (int)((f.Properties.AudioBitrate * 1000.0f) / 8.0f);
-                            resource.Duration = new Time((int)f.Properties.Duration.TotalSeconds).ToString();
-                            resource.NrAudioChannels = f.Properties.AudioChannels;
-                            resource.SampleFrequency = f.Properties.AudioSampleRate;
-                            resource.Size = aInfo.Length;
-                            resource.Uri = aResourceUri;
-
-                            resource.ProtocolInfo = string.Format("http-get:*:{0}:*", f.MimeType.Replace("taglib", "video"));
-
-                            if (!string.IsNullOrEmpty(aArtworkUri))
+                            foreach (string g in f.Tag.Genres)
                             {
-                                video.AlbumArtUri.Add(aArtworkUri);
+                                video.Genre.Add(g);
                             }
-
-                            return video;
+                            foreach (string p in f.Tag.Performers)
+                            {
+                                actor performer = new actor();
+                                performer.Actor = p;
+                                performer.Role = "Actor";
+                                video.Actor.Add(performer);
+                            }
                         }
+                        else
+                        {
+                            video.Title = aInfo.Name;
+                        }
+
+                        resource.Bitrate = (int)((f.Properties.AudioBitrate * 1000.0f) / 8.0f);
+                        resource.Duration = new Time((int)f.Properties.Duration.TotalSeconds).ToString();
+                        resource.NrAudioChannels = f.Properties.AudioChannels;
+                        resource.SampleFrequency = f.Properties.AudioSampleRate;
+                        resource.Size = aInfo.Length;
+                        resource.Uri = aResourceUri;
+
+                        resource.ProtocolInfo = string.Format("http-get:*:{0}:*", f.MimeType.Replace("taglib", "video"));
+
+                        if (!string.IsNullOrEmpty(aArtworkUri))
+                        {
+                            video.AlbumArtUri.Add(aArtworkUri);
+                        }
+
+                        return video;
                     }
                 }
             }

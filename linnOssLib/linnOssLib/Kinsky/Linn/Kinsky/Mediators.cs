@@ -1161,6 +1161,7 @@ namespace Linn.Kinsky
             if (iSource is IRadioSource)
             {
                 IRadioSource source = iSource as IRadioSource;
+                //source.
                 source.Current = e.Preset;
                 source.Play();
             }

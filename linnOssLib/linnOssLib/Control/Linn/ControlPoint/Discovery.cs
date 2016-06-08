@@ -60,7 +60,7 @@ namespace Linn.ControlPoint
             get
             {
                 string udn = Find(kKeyUdn);
-                return (udn.StartsWith(kUdnLinnPrefix));
+                return false;  //(udn.StartsWith(kUdnLinnPrefix));
             }
         }
 

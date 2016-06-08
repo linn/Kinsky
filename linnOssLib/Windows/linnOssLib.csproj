@@ -9,10 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>linnOssLib</RootNamespace>
     <AssemblyName>linnOssLib</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,13 +36,13 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\packages\Linn.SharpZipLib.0.86.0.7\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\External\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\External\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,6 +53,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="taglib-sharp">
+      <HintPath>..\..\External\taglib-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -442,8 +445,111 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\BookmarkManager.cs">
+      <Link>Kinsky\Linn\Kinsky\BookmarkManager.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\Browser.cs">
+      <Link>Kinsky\Linn\Kinsky\Browser.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\Container.cs">
+      <Link>Kinsky\Linn\Kinsky\Container.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\ContentCollector.cs">
+      <Link>Kinsky\Linn\Kinsky\ContentCollector.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\ContentDirectoryLocator.cs">
+      <Link>Kinsky\Linn\Kinsky\ContentDirectoryLocator.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\Controllers.cs">
+      <Link>Kinsky\Linn\Kinsky\Controllers.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\FileItc2.cs">
+      <Link>Kinsky\Linn\Kinsky\FileItc2.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\HelperKinsky.cs">
+      <Link>Kinsky\Linn\Kinsky\HelperKinsky.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\HttpClient.cs">
+      <Link>Kinsky\Linn\Kinsky\HttpClient.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\HttpServer.cs">
+      <Link>Kinsky\Linn\Kinsky\HttpServer.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\IconResolver.cs">
+      <Link>Kinsky\Linn\Kinsky\IconResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\ItemInfo.cs">
+      <Link>Kinsky\Linn\Kinsky\ItemInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\Library.cs">
+      <Link>Kinsky\Linn\Kinsky\Library.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\LocalPlaylists.cs">
+      <Link>Kinsky\Linn\Kinsky\LocalPlaylists.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\MediaProvider.cs">
+      <Link>Kinsky\Linn\Kinsky\MediaProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\MediaRetriever.cs">
+      <Link>Kinsky\Linn\Kinsky\MediaRetriever.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\Mediators.cs">
+      <Link>Kinsky\Linn\Kinsky\Mediators.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\Models.cs">
+      <Link>Kinsky\Linn\Kinsky\Models.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\MultipusSourceList.cs">
+      <Link>Kinsky\Linn\Kinsky\MultipusSourceList.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\OptionStartupRoom.cs">
+      <Link>Kinsky\Linn\Kinsky\OptionStartupRoom.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\Playlist.cs">
+      <Link>Kinsky\Linn\Kinsky\Playlist.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\PlaylistDisplayHelper.cs">
+      <Link>Kinsky\Linn\Kinsky\PlaylistDisplayHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\PlaylistSupport.cs">
+      <Link>Kinsky\Linn\Kinsky\PlaylistSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\PluginManager.cs">
+      <Link>Kinsky\Linn\Kinsky\PluginManager.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\RotaryControlTracker.cs">
+      <Link>Kinsky\Linn\Kinsky\RotaryControlTracker.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\SaveSupport.cs">
+      <Link>Kinsky\Linn\Kinsky\SaveSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\SharedPlaylists.cs">
+      <Link>Kinsky\Linn\Kinsky\SharedPlaylists.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\ViewMasters.cs">
+      <Link>Kinsky\Linn\Kinsky\ViewMasters.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\Views.cs">
+      <Link>Kinsky\Linn\Kinsky\Views.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\Support.cs">
+      <Link>Kinsky\Linn\Kinsky\Support.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\DropConverter.cs">
+      <Link>Kinsky\Linn\Kinsky\DropConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\UpnpObjectFactory.cs">
+      <Link>Kinsky\Linn\Kinsky\UpnpObjectFactory.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
