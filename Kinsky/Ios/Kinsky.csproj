@@ -544,7 +544,7 @@
     <ITunesArtwork Include="iTunesArtwork" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\linnOssLib\Ios\linnOssLib.csproj">
+    <ProjectReference Include="..\..\linnOssLib\Ios\linnOssLib.csproj">
       <Project>{9C7B8EF1-DDC4-4361-AF7E-72E3F70A3CAF}</Project>
       <Name>linnOssLib</Name>
     </ProjectReference>
