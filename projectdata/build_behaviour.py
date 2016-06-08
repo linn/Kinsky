@@ -64,15 +64,33 @@ class Builder(OpenHomeBuilder):
             f2.close()
 
     def clean(self):
-        self.msbuild(self.solutionfile, target='Clean', configuration=self.configuration)
-        if self.configuration == "Release" and self.platform == "Android-mono":
-            # only build AppStore if release build
-            self.msbuild('KinskyAndroid.sln', target='Clean', configuration="AppStore")
+        if self.platform == 'iOs-armv7' or self.platform == 'iOs-x86':
+            platformTarget = "iPhoneSimulator" if self.platform == 'iOs-x86' else "iPhone"
+            self.msbuild('KazooIos.sln', target='Clean', configuration=self.configuration, platform=platformTarget)
+            if self.configuration == "Release" and platformTarget == "iPhone":
+                # only build AdHoc/AppStore if release build on armv7
+                self.msbuild('KazooIos.sln', target='Clean', configuration="AdHoc", platform=platformTarget)
+                self.msbuild('KazooIos.sln', target='Clean', configuration="AppStore", platform=platformTarget)    
+        else:
+            self.msbuild(self.solutionfile, target='Clean', configuration=self.configuration)
+            if self.configuration == "Release" and self.platform == "Android-mono":
+                # only build AppStore if release build
+                self.msbuild(self.solutionfile, target='Clean', configuration="AppStore")
+            if self.configuration == "Release" and self.platform == "iOs-armv7":
+                self.msbuild(self.solutionfile, target='Build', configuration=self.configuration)
 
     def build(self):
-        self.msbuild(self.solutionfile, target='Build', configuration=self.configuration)
-        if self.configuration == "Release" and self.platform == "Android-mono":
-            # only build AppStore if release build
-            props = {'AndroidSigningStorePass': os.environ['ANDROID_SIGNING_STORE_PASS'],
-                     'AndroidSigningKeyPass': os.environ['ANDROID_SIGNING_KEY_PASS']}
-            self.msbuild('KinskyAndroid.sln', target='Build', configuration="AppStore", properties=props)
+        if self.platform == 'iOs-armv7' or self.platform == 'iOs-x86':
+            platformTarget = "iPhoneSimulator" if self.platform == 'iOs-x86' else "iPhone"
+            self.msbuild(self.solutionfile, target='Build', configuration=self.configuration, platform=platformTarget)
+            if self.configuration == "Release" and platformTarget == "iPhone":
+                # only build AdHoc/AppStore if release build on armv7
+                self.msbuild(self.solutionfile, target='Build', configuration="AdHoc", platform=platformTarget)
+                self.msbuild(self.solutionfile, target='Build', configuration="AppStore", platform=platformTarget)
+        else:
+            self.msbuild(self.solutionfile, target='Build', configuration=self.configuration)
+            if self.configuration == "Release" and self.platform == "Android-mono":
+                # only build AppStore if release build
+                props = {'AndroidSigningStorePass': os.environ['ANDROID_SIGNING_STORE_PASS'],
+                         'AndroidSigningKeyPass': os.environ['ANDROID_SIGNING_KEY_PASS']}
+                self.msbuild(self.solutionfile, target='Build', configuration="AppStore", properties=props)
