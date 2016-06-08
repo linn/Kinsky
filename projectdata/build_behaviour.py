@@ -7,6 +7,14 @@ import re
 class Builder(OpenHomeBuilder):
 
     def setup(self):
+        platformsolutions = { 
+            "Windows-x86" : "KinskyWindows.sln",
+            "Mac-x64" : "KinskyMac.sln",
+            "Android-mono" : "KinskyAndroid.sln",
+            "Ios-armv7" : "KinskyIos.sln"
+        }
+        self.solutionfile = platformsolutions[self.platform]
+        
         self.set_nuget_sln(self.solutionfile)
 
 
@@ -54,17 +62,6 @@ class Builder(OpenHomeBuilder):
             f2 = open('Kinsky/Mac/Info.plist', 'w')
             f2.write(c)
             f2.close()
-
-
-    def configure(self):
-        platformsolutions = { 
-            "Windows-x86" : "KinskyWindows.sln",
-            "Mac-x64" : "KinskyMac.sln",
-            "Android-mono" : "KinskyAndroid.sln",
-            "Ios-armv7" : "KinskyIos.sln"
-        }
-        self.solutionfile = platformsolutions[self.platform]
-
 
     def clean(self):
         self.msbuild(self.solutionfile, target='Clean', configuration=self.configuration)
