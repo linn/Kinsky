@@ -24,8 +24,8 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\build\Kinsky\Android\bin\Debug\</OutputPath>
-    <IntermediateOutputPath>..\..\build\Kinsky\Android\obj\Debug\</IntermediateOutputPath>
+    <OutputPath>..\..\build\Kinsky\bin\Android\Debug\</OutputPath>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\Android\Debug\</IntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -45,8 +45,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\build\Kinsky\Android\bin\Release\</OutputPath>
-    <IntermediateOutputPath>..\..\build\Kinsky\Android\obj\Release\</IntermediateOutputPath>
+    <OutputPath>..\..\build\Kinsky\bin\Android\Release\</OutputPath>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\Android\Release\</IntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -57,8 +57,8 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\build\Kinsky\Android\bin\AppStore\</OutputPath>
-    <IntermediateOutputPath>..\..\build\Kinsky\Android\obj\AppStore\</IntermediateOutputPath>
+    <OutputPath>..\..\build\Kinsky\bin\Android\AppStore\</OutputPath>
+    <IntermediateOutputPath>..\..\build\Kinsky\obj\Android\AppStore\</IntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
