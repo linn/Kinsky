@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">MacOsX Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
@@ -107,6 +107,26 @@
     <ProjectReference Include="..\..\linnOssLib\Mac\linnOssLib.csproj">
       <Project>{A3B345FA-E8C8-499B-8053-CED36AA353FF}</Project>
       <Name>linnOssLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MediaProviderPlugins\OssKinskyMppBbc\OssKinskyMppBbc.Mac.csproj">
+      <Project>{72AB9915-1A27-43D0-B537-A4914726550D}</Project>
+      <Name>OssKinskyMppBbc.Mac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MediaProviderPlugins\OssKinskyMppFolder\OssKinskyMppFolder.Mac.csproj">
+      <Project>{1DC2067E-4DE8-40A7-96E9-AFF6145CB53F}</Project>
+      <Name>OssKinskyMppFolder.Mac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MediaProviderPlugins\OssKinskyMppItunes\OssKinskyMppItunes.Mac.csproj">
+      <Project>{DB3AD111-798D-4B34-A160-402132610357}</Project>
+      <Name>OssKinskyMppItunes.Mac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MediaProviderPlugins\OssKinskyMppMovieTrailers\OssKinskyMppMovieTrailers.Mac.csproj">
+      <Project>{B9800394-8A29-46F0-80BE-BC5328D6DFB0}</Project>
+      <Name>OssKinskyMppMovieTrailers.Mac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MediaProviderPlugins\OssKinskyMppWfmu\OssKinskyMppWfmu.Mac.csproj">
+      <Project>{3EB1C1ED-95D4-46FF-AB1B-B93526341C7C}</Project>
+      <Name>OssKinskyMppWfmu.Mac</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -729,6 +749,21 @@
     </BundleResource>
     <BundleResource Include="..\Resources\WheelOver.png">
       <Link>Images\WheelOver.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\MediaProviderPlugins\OssKinskyMppBbc\Bbc.png">
+      <Link>PluginResources\Bbc.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\MediaProviderPlugins\OssKinskyMppFolder\Folder.png">
+      <Link>PluginResources\Folder.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\MediaProviderPlugins\OssKinskyMppItunes\Itunes.png">
+      <Link>PluginResources\Itunes.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\MediaProviderPlugins\OssKinskyMppMovieTrailers\MovieTrailers.png">
+      <Link>PluginResources\MovieTrailers.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\MediaProviderPlugins\OssKinskyMppWfmu\Wfmu.png">
+      <Link>PluginResources\Wfmu.png</Link>
     </BundleResource>
   </ItemGroup>
   <Target Name="CopyMonobjc" BeforeTargets="AfterBuild">

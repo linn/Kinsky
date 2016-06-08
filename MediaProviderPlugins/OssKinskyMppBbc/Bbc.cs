@@ -49,6 +49,7 @@ namespace OssKinskyMppBbc
             iOptionPage.Add(iOptionUk);
             
             string installPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName);
+
             iWebFetcher = new WebFetcher(aDataPath);
 
             string bbcLogo = aSupport.VirtualFileSystem.Uri(Path.Combine(installPath, "Bbc.png"));

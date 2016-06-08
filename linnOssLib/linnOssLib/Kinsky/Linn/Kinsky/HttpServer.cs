@@ -489,6 +489,11 @@ namespace Linn.Kinsky
                 throw new HttpServerException("Web server is not running");
             }
 
+            // hack for mac resources
+            if (aUnescapedFilename.Contains ("MonoBundle")) {
+                aUnescapedFilename = aUnescapedFilename.Replace ("MonoBundle", "Resources/PluginResources");
+            }
+
             string uri = new Uri(iBaseUri + kUriQuery + System.Uri.EscapeDataString(aUnescapedFilename)).AbsoluteUri;
 
             return uri;
