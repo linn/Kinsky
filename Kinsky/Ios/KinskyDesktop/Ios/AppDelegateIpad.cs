@@ -17,6 +17,7 @@ namespace KinskyTouch
         // This method is invoked when the application has loaded its UI and its ready to run
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+			
             Xamarin.Insights.Identify(Helper.OptionInstallId.Value, null);
             ObjCRuntime.Class.ThrowOnInitFailure = false;
 

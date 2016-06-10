@@ -10,7 +10,9 @@ using Linn.Kinsky;
 namespace KinskyTouch
 {
     public abstract class AppDelegate : UIApplicationDelegate, IStack
-    {
+    { 
+        private static readonly string kApiKey = "129c76d1b4043e568d19a9fea8a1f5534cdae703";
+
 		internal class QueryOptions
         {
             public QueryOptions()
@@ -66,6 +68,11 @@ namespace KinskyTouch
 
 		public AppDelegate() : base()
 		{
+#if DEBUG
+            Xamarin.Insights.Initialize(Xamarin.Insights.DebugModeKey);
+#else
+        Xamarin.Insights.Initialize(kApiKey);
+#endif
 			iScheduler = new Scheduler("StackScheduler", 1);
             iQueryOptions = new QueryOptions();
 		}

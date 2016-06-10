@@ -123,18 +123,15 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\External\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\External\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="taglib-sharp">
-      <HintPath>..\..\External\taglib-sharp.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Services" />
     <Reference Include="Xamarin.Insights">
       <HintPath>..\..\packages\Xamarin.Insights.1.11.2\lib\Xamarin.iOS10\Xamarin.Insights.dll</HintPath>
     </Reference>
     <Reference Include="PLCrashReporterUnifiedBinding">
       <HintPath>..\..\packages\Xamarin.Insights.1.11.2\lib\Xamarin.iOS10\PLCrashReporterUnifiedBinding.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
