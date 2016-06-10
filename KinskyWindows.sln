@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OssKinskyMppMovieTrailers.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OssKinskyMppWfmu.Windows", "MediaProviderPlugins\OssKinskyMppWfmu\OssKinskyMppWfmu.Windows.csproj", "{3EB1C1ED-95D4-46FF-AB1B-B93526341C7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdaterKinsky", "Kinsky\Windows\Installer\UpdaterKinsky.csproj", "{66920F8A-285E-4357-B691-9DB081EBD037}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{3EB1C1ED-95D4-46FF-AB1B-B93526341C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EB1C1ED-95D4-46FF-AB1B-B93526341C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EB1C1ED-95D4-46FF-AB1B-B93526341C7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66920F8A-285E-4357-B691-9DB081EBD037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66920F8A-285E-4357-B691-9DB081EBD037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66920F8A-285E-4357-B691-9DB081EBD037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66920F8A-285E-4357-B691-9DB081EBD037}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
