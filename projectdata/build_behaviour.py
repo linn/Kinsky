@@ -90,7 +90,7 @@ class Builder(OpenHomeBuilder):
                 self.msbuild(self.solutionfile, target='Build', configuration="AdHoc", platform=platformTarget)
                 self.msbuild(self.solutionfile, target='Build', configuration="AppStore", platform=platformTarget)
         else:
-            self.msbuild(self.solutionfile, target='Build', configuration=self.configuration, properties={'ReleaseVersion',releaseversion})
+            self.msbuild(self.solutionfile, target='Build', configuration=self.configuration, properties={'ReleaseVersion':releaseversion})
             if self.configuration == "Release" and self.platform == "Android-mono":
                 # only build AppStore if release build
                 props = {'AndroidSigningStorePass': os.environ['ANDROID_SIGNING_STORE_PASS'],
