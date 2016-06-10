@@ -11,7 +11,8 @@ class Builder(OpenHomeBuilder):
             "Windows-x86" : "KinskyWindows.sln",
             "Mac-x64" : "KinskyMac.sln",
             "Android-mono" : "KinskyAndroid.sln",
-            "iOs-armv7" : "KinskyIos.sln"
+            "iOs-armv7" : "KinskyIos.sln",
+            "iOs-x86" : "KinskyIos.sln"
         }
         self.solutionfile = platformsolutions[self.platform]
         
