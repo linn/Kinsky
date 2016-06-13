@@ -420,8 +420,8 @@
   <PropertyGroup>
     <InstallerScript>$(MSBuildThisFileDirectory)Installer\buildinstaller.py</InstallerScript>
     <InstallerFilesDir>$(TargetDir)</InstallerFilesDir>
-    <InstallerOutputDir>$(InstallerFilesDir)\..\Installer\$(ConfigurationName)</InstallerOutputDir>
-    <PostBuildEvent Condition=" '$(Configuration)' == 'Release' ">python "$(InstallerScript)" "$(InstallerFilesDir)" "$(InstallerOutputDir)" "$(ReleaseVersion)"</PostBuildEvent>
+    <InstallerOutputDir>$(InstallerFilesDir)..\Installer\$(ConfigurationName)</InstallerOutputDir>
+    <PostBuildEvent Condition=" '$(Configuration)' == 'Release' ">python '$(InstallerScript)' '$(InstallerFilesDir)' '$(InstallerOutputDir)' '$(ReleaseVersion)'</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
