@@ -765,6 +765,9 @@
     <BundleResource Include="..\..\MediaProviderPlugins\OssKinskyMppWfmu\Wfmu.png">
       <Link>PluginResources\Wfmu.png</Link>
     </BundleResource>
+    <BundleResource Include="Installer\Kinsky.icns">
+      <Link>Kinsky.icns</Link>
+    </BundleResource>
   </ItemGroup>
   <Target Name="CopyMonobjc" BeforeTargets="AfterBuild">
     <PropertyGroup>
