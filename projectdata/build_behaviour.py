@@ -81,6 +81,7 @@ class Builder(OpenHomeBuilder):
                 self.msbuild(self.solutionfile, target='Build', configuration=self.configuration)
 
     def build(self):
+        releaseversion = os.environ['RELEASE_VERSION'] if 'RELEASE_VERSION' in os.environ else '0.0.0'
         if self.platform == 'iOs-armv7' or self.platform == 'iOs-x86':
             platformTarget = "iPhoneSimulator" if self.platform == 'iOs-x86' else "iPhone"
             self.msbuild(self.solutionfile, target='Build', configuration=self.configuration, platform=platformTarget)
@@ -89,7 +90,7 @@ class Builder(OpenHomeBuilder):
                 self.msbuild(self.solutionfile, target='Build', configuration="AdHoc", platform=platformTarget)
                 self.msbuild(self.solutionfile, target='Build', configuration="AppStore", platform=platformTarget)
         else:
-            self.msbuild(self.solutionfile, target='Build', configuration=self.configuration)
+            self.msbuild(self.solutionfile, target='Build', configuration=self.configuration, properties={'ReleaseVersion':releaseversion})
             if self.configuration == "Release" and self.platform == "Android-mono":
                 # only build AppStore if release build
                 props = {'AndroidSigningStorePass': os.environ['ANDROID_SIGNING_STORE_PASS'],
