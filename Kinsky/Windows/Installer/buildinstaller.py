@@ -72,7 +72,7 @@ def GetArgs():
     
     if (len(args) != 3):
         parser.print_usage()
-        return
+        raise Exception("Incorrect args: " + ",".join(a for a in args))
 
     releasedir = os.path.abspath(args[0])
     installerdir = os.path.abspath(args[1])
