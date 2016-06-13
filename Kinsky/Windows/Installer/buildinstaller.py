@@ -67,16 +67,19 @@ def SignExe(exefile):
     subprocess.check_call(cmd, shell=True)
 
 def GetArgs():
-    parser = OptionParser(usage="buildinstaller <<releasedir>> <<installerdir>> <<version>>")
+    parser = OptionParser(usage="buildinstaller <<configuration>> <<version>>")
     options, args = parser.parse_args()
     
-    if (len(args) != 3):
+    if (len(args) != 2):
         parser.print_usage()
         raise Exception("Incorrect args: " + ",".join(a for a in args))
 
-    releasedir = os.path.abspath(args[0])
-    installerdir = os.path.abspath(args[1])
-    version = args[2]
+    configuration = args[0]
+    version = args[1]
+
+    builddir = os.path.abspath(os.path.join(kScriptDir,"../../../build"))
+    releasedir = os.path.abspath(os.path.join(builddir,"Kinsky/bin/Windows", configuration))
+    installerdir = os.path.abspath(os.path.join(builddir,"Kinsky/bin/Windows/Installer", configuration))
 
     if (not os.path.isdir(releasedir)):
         raise Exception("directory not found: " + releasedir)
