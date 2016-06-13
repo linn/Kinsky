@@ -418,7 +418,10 @@
     <Error Condition="!Exists('..\..\packages\Xamarin.Insights.1.11.2\build\portable-win+net40\Xamarin.Insights.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Insights.1.11.2\build\portable-win+net40\Xamarin.Insights.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent Condition=" '$(Configuration)' == 'Release' ">python &quot;$(MSBuildThisFileDirectory)Installer\buildinstaller.py&quot; &quot;$(TargetDir)&quot; &quot;$(TargetDir)..\Installer\$(ConfigurationName)&quot; &quot;$(ReleaseVersion)&quot;</PostBuildEvent>
+    <InstallerScript>$(MSBuildThisFileDirectory)Installer\buildinstaller.py</InstallerScript>
+    <InstallerFilesDir>$(TargetDir)</InstallerFilesDir>
+    <InstallerOutputDir>$(InstallerFilesDir)\..\Installer\$(ConfigurationName)</InstallerOutputDir>
+    <PostBuildEvent Condition=" '$(Configuration)' == 'Release' ">python "$(InstallerScript)" "$(InstallerFilesDir)" "$(InstallerOutputDir)" "$(ReleaseVersion)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
