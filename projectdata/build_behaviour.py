@@ -3,6 +3,7 @@
 import os
 import glob
 import re
+import subprocess
 
 class Builder(OpenHomeBuilder):
 
@@ -96,3 +97,8 @@ class Builder(OpenHomeBuilder):
                 props = {'AndroidSigningStorePass': os.environ['ANDROID_SIGNING_STORE_PASS'],
                          'AndroidSigningKeyPass': os.environ['ANDROID_SIGNING_KEY_PASS']}
                 self.msbuild(self.solutionfile, target='Build', configuration="AppStore", properties=props)
+
+            if self.configuration == "Release" and self.platform == "Mac-x64":
+                makeinstallercmd = "python buildinstaller.py %s %s" % (self.configuration, releaseversion)
+                print makeinstallercmd
+                subprocess.check_call(makeinstallercmd, shell=True, cwd="Kinsky/Mac/Installer/")

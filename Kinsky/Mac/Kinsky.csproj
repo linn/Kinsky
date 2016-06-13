@@ -11,6 +11,7 @@
     <RootNamespace>KinskyDesktop</RootNamespace>
     <AssemblyName>Kinsky</AssemblyName>
     <UseMSBuildEngine>True</UseMSBuildEngine>
+    <BuildVersion Condition=" '$(BuildVersion)' == ''">0.0.0</BuildVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,8 +41,8 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <EnableCodeSigning>true</EnableCodeSigning>
-    <CreatePackage>true</CreatePackage>
-    <EnablePackageSigning>true</EnablePackageSigning>
+    <CreatePackage>false</CreatePackage>
+    <EnablePackageSigning>false</EnablePackageSigning>
     <IncludeMonoRuntime>true</IncludeMonoRuntime>
     <UseSGen>true</UseSGen>
     <UseRefCounting>false</UseRefCounting>
@@ -137,9 +138,6 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="packages.config" />
-    <None Include="..\..\license.txt">
-      <Link>license.txt</Link>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />
@@ -776,7 +774,7 @@
     <BundleResource Include="Installer\Kinsky.icns">
       <Link>Kinsky.icns</Link>
     </BundleResource>
-  </ItemGroup>
+  </ItemGroup>  
   <ItemGroup>
     <NativeReference Include="..\..\External\libmonobjc.2.dylib">
       <Kind>Dynamic</Kind>
