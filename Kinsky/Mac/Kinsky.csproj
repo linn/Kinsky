@@ -46,8 +46,9 @@
     <UseSGen>true</UseSGen>
     <UseRefCounting>false</UseRefCounting>
     <Profiling>false</Profiling>
-    <CodeSigningKey>3rd Party Mac Developer Application</CodeSigningKey>
-    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+    <CodeSigningKey>Developer ID Application: Linn Products Ltd</CodeSigningKey>
+    <PackageSigningKey>Developer ID Installer: Linn Products Ltd</PackageSigningKey>
+    <CodeSignExtraArgs></CodeSignExtraArgs>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <ItemGroup>
@@ -136,6 +137,9 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="packages.config" />
+    <None Include="..\..\license.txt">
+      <Link>license.txt</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainMenu.xib" />
@@ -773,12 +777,11 @@
       <Link>Kinsky.icns</Link>
     </BundleResource>
   </ItemGroup>
-  <Target Name="CopyMonobjc" BeforeTargets="AfterBuild">
-    <PropertyGroup>
-      <MonobjcDylib>$(MSBuildThisFileDirectory)../../External/libmonobjc.2.dylib</MonobjcDylib>
-    </PropertyGroup>
-    <Message Importance="high" Text="Copying $(MonobjcDylib) to $(TargetDir)$(AssemblyName).app/Contents/MacOs" />
-    <Copy SourceFiles="$(MonobjcDylib)" DestinationFolder="$(TargetDir)$(AssemblyName).app/Contents/MacOs" />
-  </Target>
+  <ItemGroup>
+    <NativeReference Include="..\..\External\libmonobjc.2.dylib">
+      <Kind>Dynamic</Kind>
+      <SmartLink>False</SmartLink>
+    </NativeReference>
+  </ItemGroup>
   <Import Project="..\..\packages\Xamarin.Insights.1.11.2\build\Xamarin.Mac20\Xamarin.Insights.targets" Condition="Exists('..\..\packages\Xamarin.Insights.1.11.2\build\Xamarin.Mac20\Xamarin.Insights.targets')" />
 </Project>
