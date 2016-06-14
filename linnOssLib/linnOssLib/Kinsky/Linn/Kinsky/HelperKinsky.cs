@@ -33,6 +33,9 @@ namespace Linn.Kinsky
             //optionPage.Add(iOptionCloudServers);
             //AddOptionPage(optionPage);
 
+            iOptionInstallId = new OptionString("installid", "InstallId", "Unique installation identifer", Guid.NewGuid().ToString());
+            AddOption(iOptionInstallId);
+
             iOptionLastSelectedRoom = new OptionString("lastroom", "Last Selected Room", "The last room selected", string.Empty);
             AddOption(iOptionLastSelectedRoom);
 
@@ -42,6 +45,14 @@ namespace Linn.Kinsky
             iBookmarkManager = new BookmarkManager(Path.Combine(DataPath.FullName, "Bookmarks.xml"));
 
             Stack.SetStack(this);
+        }
+
+        public OptionString OptionInstallId
+        {
+            get
+            {
+                return iOptionInstallId;
+            }
         }
 
         public BookmarkManager BookmarkManager
@@ -193,6 +204,7 @@ namespace Linn.Kinsky
         private OptionString iOptionLastSelectedRoom;
         private OptionBreadcrumbTrail iOptionLastLocation;
         private OptionListUri iOptionCloudServers;
+        private OptionString iOptionInstallId;
 
         private BookmarkManager iBookmarkManager;
         private IInvoker iInvoker;

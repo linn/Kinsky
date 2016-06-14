@@ -35,9 +35,6 @@ namespace KinskyTouch
             iOptionInsertMode = new OptionInsertMode();
             iHelper.AddOption(iOptionInsertMode);
 
-            iOptionInstallId = new OptionString("installid", "InstallId", "Unique installation identifer", Guid.NewGuid().ToString ());
-            iHelper.AddOption(iOptionInstallId);
-
             iOptionPageGeneral.OptionAutoLock.EventValueChanged += EventOptionAutoLockValueChanged;
             iOptionPageGeneral.OptionAutoSendCrashLog.EventValueChanged += EventOptionAutoSendCrashLogValueChanged;
 
@@ -95,14 +92,6 @@ namespace KinskyTouch
             }
         }
 
-        public OptionString OptionInstallId
-        {
-            get
-            {
-                return iOptionInstallId;
-            }
-        }
-
         private void EventOptionAutoLockValueChanged(object sender, EventArgs e)
         {
             if(iOptionPageGeneral.OptionAutoLock.Value == "Always")
@@ -135,7 +124,6 @@ namespace KinskyTouch
         private CrashLogDumper iCrashLogDumper;
         private OptionPageGeneral iOptionPageGeneral;
         private OptionEnum iOptionInsertMode;
-        private OptionString iOptionInstallId;
     }
 }
 
