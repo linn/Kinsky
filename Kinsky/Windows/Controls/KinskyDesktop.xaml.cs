@@ -61,8 +61,6 @@ namespace KinskyDesktopWpf
         }
 
 
-
-        private const string kUpdateFeedUrl = "http://oss.linn.co.uk/Feeds/Updates/Application.xml";
         private const string kOnlineManualUrl = "http://oss.linn.co.uk/trac/wiki/KinskyWindowsDavaarManual";
         private HelperKinsky iHelper;
         private Mediator iMediator;
@@ -456,11 +454,12 @@ namespace KinskyDesktopWpf
                 currentBuildType = EReleaseQuality.Development;
             }
 
+            var appName = iHelper.Title;
             iAutoUpdate = new AutoUpdate(iHelper,
-                                         kUpdateFeedUrl,
+                                         AutoUpdate.DefaultFeedLocation(appName, "Windows"),
                                          1000 * 60 * 60,
                                          iAutoUpdateType,
-                                         iHelper.Title,
+                                         appName,
                                          kApplicationTarget,
                                          kUpdateVersion,
                                          currentBuildType);

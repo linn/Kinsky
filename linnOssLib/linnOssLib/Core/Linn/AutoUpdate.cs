@@ -41,9 +41,9 @@ namespace Linn
             public bool IsCompatibilityFamilyUpgrade { get; set; }
         }
 
-        public static string DefaultFeedLocation(string aAppName)
+        public static string DefaultFeedLocation(string aAppName, string aPlatform)
         {
-            return "https://cloud.linn.co.uk/applications/" + aAppName.ToLowerInvariant() + "/updates.json";
+            return "https://cloud.linn.co.uk/applications/" + aAppName.ToLowerInvariant() + "/" + aPlatform + "/updates.json";
         }
 
         public static readonly string kTargetWindows = "win32";
@@ -157,14 +157,15 @@ namespace Linn
             }
         }
 
-        public void SetUri(string aUpdateFeedUri)
-        {
-            Stop();
+        // don't think this is used - simplify code
+        //public void SetUri(string aUpdateFeedUri)
+        //{
+        //    Stop();
 
-            iUpdateFeedLocation = aUpdateFeedUri;
+        //    iUpdateFeedLocation = aUpdateFeedUri;
 
-            Start();
-        }
+        //    Start();
+        //}
 
         public int UpdateInterval
         {

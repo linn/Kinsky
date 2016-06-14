@@ -247,12 +247,13 @@ namespace KinskyDesktop
             {
                 currentBuildType = EReleaseQuality.Development;
             }
-
+            
+            var appName = iHelper.Title;
             iAutoUpdate = new AutoUpdate(iHelper,
-                                         "http://oss.linn.co.uk/Feeds/Updates/Application.xml",
+                                         AutoUpdate.DefaultFeedLocation(appName, "MacOsX"),
                                          0,                 // update interval of 0 means infinite i.e. only check on application startup
                                          OptionUpdateType,
-                                         iHelper.Title,
+                                         appName,
                                          "macosx",
                                          1,
                                          currentBuildType);
