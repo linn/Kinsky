@@ -93,6 +93,7 @@ namespace KinskyDroid
             iLayoutInflater = (LayoutInflater)GetSystemService(Context.LayoutInflaterService);
 
             iHelperKinsky = new HelperKinsky(new string[2] { "-t", kTraceLevel }, Invoker);
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Android.Runtime.AndroidEnvironment.UnhandledExceptionRaiser += UnhandledExceptionRaiser;
 
             // name the crash dumper section general and add other UI options
@@ -173,6 +174,11 @@ namespace KinskyDroid
             //EventLowMemory += EventLowMemoryHandler;
             iInitialised = true;
             StartStack();
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            UnhandledExceptionRaiser(sender, new RaiseThrowableEventArgs(e.ExceptionObject as Exception));
         }
 
         private void iOptionTabletLayout_EventValueChanged(object sender, EventArgs e)

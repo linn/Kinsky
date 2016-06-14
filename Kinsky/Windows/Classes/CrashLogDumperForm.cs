@@ -27,8 +27,8 @@ namespace KinskyDesktopWpf
             // show crash form
             CrashLogDialog form = new CrashLogDialog(iTitle, iReportText, iProduct, iVersion);
             form.EventDialogClosed += new EventHandler<EventArgs>(form_EventDialogClosed);
-            form.Show();
-            System.Windows.Threading.Dispatcher.Run();
+            form.ShowDialog();
+            //System.Windows.Threading.Dispatcher.Run();
         }
 
         void form_EventDialogClosed(object sender, EventArgs e)
@@ -40,7 +40,10 @@ namespace KinskyDesktopWpf
         {
             try
             {
-                iParent.Visibility = Visibility.Hidden;
+                iParent.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    iParent.Visibility = Visibility.Hidden;
+                }));
                 // include some system details in report
                 iReportText = aCrashLog.ToString();
                 iWaitHandle = new ManualResetEvent(false);

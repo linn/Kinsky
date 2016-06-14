@@ -471,7 +471,6 @@ namespace KinskyDroid
                                    iRootView.FindViewById<ViewGroup>(Resource.Id.sourcelisttitlebar),
                                    iRootView.FindViewById<ViewGroup>(Resource.Id.browsercontrolscontainer))
             .Layout(iStack.Resources.DisplayMetrics.HeightPixels);
-
         }
 
         private void TimerCallback(object aState)
