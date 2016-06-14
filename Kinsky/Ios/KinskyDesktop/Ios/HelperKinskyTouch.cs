@@ -53,7 +53,7 @@ namespace KinskyTouch
         }
 
 
-        public OptionBool OptionInstallId
+        public OptionString OptionInstallId
         {
             get
             {
