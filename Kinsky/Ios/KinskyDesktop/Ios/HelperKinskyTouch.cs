@@ -52,6 +52,15 @@ namespace KinskyTouch
             }
         }
 
+
+        public OptionBool OptionInstallId
+        {
+            get
+            {
+                return iHelper.OptionInstallId;
+            }
+        }
+
         public OptionBool OptionExtendedTrackInfo
         {
             get
