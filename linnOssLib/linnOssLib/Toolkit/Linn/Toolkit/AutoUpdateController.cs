@@ -61,7 +61,7 @@ namespace Linn.Toolkit
             iView = aView;
             iInvoker = aInvoker;
 
-            iModel = new AutoUpdateModel(aHelper.Title);
+            iModel = new AutoUpdateModel(aHelper.Product);
             
             iAutoUpdate.EventUpdateProgress += UpdateProgress;
             iAutoUpdate.EventUpdateFailed += UpdateFailed;

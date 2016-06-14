@@ -61,7 +61,7 @@ namespace Linn
             iErrorThrown = false;
 
             // create the data and exe paths
-            iDataPath = SystemInfo.DataPathForApp(Title);
+            iDataPath = SystemInfo.DataPathForApp(Product);
 
             if (!iDataPath.Exists)
             {
@@ -75,7 +75,7 @@ namespace Linn
                 }
             }
 
-            iExePath = SystemInfo.ExePathForApp(Title);
+            iExePath = SystemInfo.ExePathForApp(Product);
             
 
 
@@ -138,7 +138,7 @@ namespace Linn
 
             // create option parser
             iOptionParser = new OptionParser(aArgs);
-            iOptionParser.Usage = "usage: " + Title;
+            iOptionParser.Usage = "usage: " + Product;
             // add the trace level option
             iOptionTraceLevel = new OptionParser.OptionString("-t", "--tracelevel", "kNone",
                 "Set the trace level for the application. Multiple levels specified in quotes.", "LEVEL1 [LEVEL2 LEVEL3 ...]");

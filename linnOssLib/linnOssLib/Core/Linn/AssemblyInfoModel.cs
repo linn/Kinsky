@@ -122,7 +122,7 @@ namespace Linn
             {
                 buildType = EBuildType.Developer;
             }
-            else if (aProduct.ToLowerInvariant().Contains("(nightlybuild)"))
+            else if (aProduct.ToLowerInvariant().Contains("(nightly)"))
             {
                 buildType = EBuildType.Nightly;
             }

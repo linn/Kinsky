@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kinsky")]
+[assembly: AssemblyTitle("Linn Kinsky")]
 [assembly: AssemblyDescription("UPnP control point")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Linn")]
-[assembly: AssemblyProduct("Linn Kinsky")]
+[assembly: AssemblyProduct("Kinsky")]
 [assembly: AssemblyCopyright("Copyright © 2011-16")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

@@ -290,7 +290,7 @@ namespace KinskyDesktop
             IHelper helper = ModelMain.Instance.Helper;
 
             string version = "Version " + helper.Version;
-            if (helper.Product.Contains("NightlyBuild"))
+            if (helper.Title.ToLowerInvariant().Contains("nightly"))
             {
                 NSString buildVersion = NSBundle.MainBundle.InfoDictionary[NSString.StringWithUTF8String("CFBundleVersion")].CastAs<NSString>();
 

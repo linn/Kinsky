@@ -54,17 +54,21 @@ namespace Linn
         public AutoUpdate(IHelper aHelper, string aUpdateFeedLocation, int aUpdateInterval, EReleaseQuality aDesiredQuality, uint aUpdateVersion)
         {
             EReleaseQuality currentQuality = EReleaseQuality.Stable;
-            if (aHelper.Product.Contains("(NightlyBuild)"))
+            if (aHelper.Title.ToLowerInvariant().Contains("nightly"))
             {
                 currentQuality = EReleaseQuality.Nightly;
             }
-            else if (aHelper.Product.Contains("(Beta)"))
+            else if (aHelper.Title.ToLowerInvariant().Contains("beta"))
             {
                 currentQuality = EReleaseQuality.Beta;
             }
-            else if (aHelper.Product.Contains("(Development)"))
+            else if (aHelper.Title.ToLowerInvariant()..Contains("development"))
             {
                 currentQuality = EReleaseQuality.Development;
+            }
+            else if (aHelper.Title.ToLowerInvariant().Contains("developer"))
+            {
+                currentQuality = EReleaseQuality.Developer;
             }
 
             string applicationTarget = string.Empty;
@@ -89,7 +93,7 @@ namespace Linn
                     break;
             }
 
-            Initialise(aHelper, aUpdateFeedLocation, aUpdateInterval, aDesiredQuality, aHelper.Title, applicationTarget, aUpdateVersion, currentQuality);
+            Initialise(aHelper, aUpdateFeedLocation, aUpdateInterval, aDesiredQuality, aHelper.Product, applicationTarget, aUpdateVersion, currentQuality);
         }
 
         public AutoUpdate(IHelper aHelper, string aUpdateFeedLocation, int aUpdateInterval, EReleaseQuality aDesiredQuality, string aApplicationName, string aApplicationTarget, uint aUpdateVersion, EReleaseQuality aApplicationQuality)

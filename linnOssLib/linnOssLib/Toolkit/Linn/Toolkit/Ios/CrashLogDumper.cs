@@ -53,7 +53,7 @@ namespace Linn.Toolkit.Ios
 
             if(iAutoSend)
             {
-                report.Post(iTitle, reportText);
+                report.Post(iProduct, reportText);
             }
         }
 

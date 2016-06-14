@@ -442,20 +442,24 @@ namespace KinskyDesktopWpf
             });
 
             EReleaseQuality currentBuildType = EReleaseQuality.Stable;
-            if (iHelper.Product.Contains("(NightlyBuild)"))
+            if (iHelper.Title.ToLowerInvariant().Contains("nightly"))
             {
                 currentBuildType = EReleaseQuality.Nightly;
             }
-            else if (iHelper.Product.Contains("(Beta)"))
+            else if (iHelper.Title.ToLowerInvariant().Contains("beta"))
             {
                 currentBuildType = EReleaseQuality.Beta;
             }
-            else if (iHelper.Product.Contains("(Development)"))
+            else if (iHelper.Title.ToLowerInvariant().Contains("development"))
             {
                 currentBuildType = EReleaseQuality.Development;
             }
+            else if (iHelper.Title.ToLowerInvariant().Contains("developer"))
+            {
+                currentBuildType = EReleaseQuality.Developer;
+            }
 
-            var appName = iHelper.Title;
+            var appName = iHelper.Product;
             iAutoUpdate = new AutoUpdate(iHelper,
                                          AutoUpdate.DefaultFeedLocation(appName, "Windows"),
                                          1000 * 60 * 60,
