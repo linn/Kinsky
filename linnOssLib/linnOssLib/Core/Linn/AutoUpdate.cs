@@ -62,7 +62,7 @@ namespace Linn
             {
                 currentQuality = EReleaseQuality.Beta;
             }
-            else if (aHelper.Title.ToLowerInvariant()..Contains("development"))
+            else if (aHelper.Title.ToLowerInvariant().Contains("development"))
             {
                 currentQuality = EReleaseQuality.Development;
             }
