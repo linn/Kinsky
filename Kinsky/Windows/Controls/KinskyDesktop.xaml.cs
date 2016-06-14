@@ -191,6 +191,7 @@ namespace KinskyDesktopWpf
             System.Windows.Forms.Application.SetUnhandledExceptionMode(System.Windows.Forms.UnhandledExceptionMode.ThrowException);
             iUIOptions = new UiOptions(iHelper);
             InitialiseStack();
+            Xamarin.Insights.Identify(iHelper.OptionInstallId.Value, null);
             WindowChrome.SetIsMiniModeActive(mainWindowChrome, iUIOptions.MiniMode);
             SetWindowDimensions();
             iProcessedOptions = true;

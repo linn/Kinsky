@@ -144,6 +144,7 @@ namespace KinskyDroid
             iSaveSupport = new SaveSupport(iHelperKinsky, iSharedPlaylists, optionSharedPlaylists, iLocalPlaylists, optionLocalPlaylists);
             iPlaySupport = new PlaySupport();
             iHelperKinsky.ProcessOptionsFileAndCommandLine();
+            Xamarin.Insights.Identify(iHelperKinsky.OptionInstallId.Value, null);
 
             Linn.Kinsky.Model model = new Linn.Kinsky.Model(iViewMaster, iPlaySupport);
             iMediator = new Mediator(iHelperKinsky, model);

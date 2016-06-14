@@ -85,6 +85,7 @@ namespace KinskyDesktop
                 ICrashLogDumper dumper = aViewApp.CreateCrashLogDumper(helper);
                 helper.AddCrashLogDumper(dumper);
                 helper.ProcessOptionsFileAndCommandLine();
+                Xamarin.Insights.Identify(helper.OptionInstallId.Value, null);
             }
             catch (ArgumentException)
             {
