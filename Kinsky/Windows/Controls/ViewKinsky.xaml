@@ -377,7 +377,7 @@
                         <ContentControl x:Name="ctlSelectRoom" Margin="0,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" DataContext="{x:Null}" Focusable="False">
                             <ContentControl.Content>
                                 <DockPanel>
-                                    <Image DockPanel.Dock="Left" Source="{Binding ImageSource}" Height="20" Margin="0,-5,5,0"/>
+                                    <Image DockPanel.Dock="Left" Source="{Binding ImageSource}" Height="20" Margin="0,-5,5,0" RenderOptions.BitmapScalingMode="HighQuality"/>
                                     <TextBlock DockPanel.Dock="Right" Text="{Binding Name, FallbackValue={StaticResource SelectRoomText}}" Margin="10,-5,0,0" VerticalAlignment="Center" TextBlock.FontSize="{DynamicResource LargeFontSize}" />
                                 </DockPanel>
                             </ContentControl.Content>
@@ -387,7 +387,7 @@
                         <ContentControl x:Name="ctlSelectSource" Margin="0,5,0,0" HorizontalAlignment="Right" VerticalAlignment="Center" DataContext="{x:Null}" Focusable="False">
                             <ContentControl.Content>
                                 <DockPanel>
-                                    <Image DockPanel.Dock="Right" Source="{Binding ImageSource}" Height="20" Margin="10,-5,2,0"/>
+                                    <Image DockPanel.Dock="Right" Source="{Binding ImageSource}" Height="20" Margin="10,-5,2,0" RenderOptions.BitmapScalingMode="HighQuality"/>
                                     <TextBlock DockPanel.Dock="Left" Text="{Binding Name, FallbackValue={StaticResource SelectSourceText}}" Margin="5,-5,5,0" VerticalAlignment="Center" TextBlock.FontSize="{DynamicResource LargeFontSize}" />
                                 </DockPanel>
                             </ContentControl.Content>
