@@ -1144,14 +1144,12 @@ namespace Linn.Kinsky
             if (iSource is IRadioSource)
             {
                 IRadioSource source = iSource as IRadioSource;
-                source.SetChannel(e.Retriever.Media);
-                source.Play();
+                source.SetChannel(e.Retriever.Media, true);
             }
             else if (iSource is IReceiverSource)
             {
                 IReceiverSource source = iSource as IReceiverSource;
-                source.SetChannel(e.Retriever.Media);
-                source.Play();
+                source.SetChannel(e.Retriever.Media, true);
             }
         }
 
@@ -1161,9 +1159,7 @@ namespace Linn.Kinsky
             if (iSource is IRadioSource)
             {
                 IRadioSource source = iSource as IRadioSource;
-                //source.
-                source.Current = e.Preset;
-                source.Play();
+                source.Current = e.Preset; // setting current will also call play on radio source
             }
         }
 

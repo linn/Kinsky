@@ -577,7 +577,7 @@ namespace Linn.Kinsky
         /// </summary>
         /// <param name="aDidlLite">Provided in <see cref="DidlLite"/> format.</param>
         /// <exception cref="Linn.Kinsky.InvocationException">This code must only be called by client code on the application Invoke thread (see <see cref="Linn.Kinsky.IInvoker"/>).</exception>
-        void SetChannel(DidlLite aDidlLite);
+        void SetChannel(DidlLite aDidlLite, bool aPlay);
         /// <summary>
         /// Raised when the current channel has changed.
         /// </summary>
@@ -4380,7 +4380,7 @@ namespace Linn.Kinsky
             }
         }
 
-        #endregion
+        #endregion        
 
         #region IChannelSource Members
 
@@ -4397,12 +4397,18 @@ namespace Linn.Kinsky
             }
         }
 
-        public void SetChannel(DidlLite aDidlLite)
+        public void SetChannel(DidlLite aDidlLite, bool aPlay)
         {
             if (iInvoker.InvokeRequired) { throw new InvocationException(); }
             if (iModelSource != null)
             {
-                iModelSource.SetChannel(aDidlLite);
+                if (aPlay)
+                {
+                    iModelSource.PlayNow(aDidlLite);
+                }else
+                {
+                    iModelSource.SetChannel(aDidlLite);
+                }
             }
         }
 
@@ -4825,7 +4831,7 @@ namespace Linn.Kinsky
             {
                 if (iInvoker.InvokeRequired) { throw new InvocationException(); }
                 Assert.Check(value != null && value.Metadata != null);
-                SetChannel(value.Metadata);
+                SetChannel(value.Metadata, false);
             }
         }
 
@@ -4866,14 +4872,22 @@ namespace Linn.Kinsky
             }
         }
 
-        public void SetChannel(DidlLite aDidlLite)
+        public void SetChannel(DidlLite aDidlLite, bool aPlay)
         {
             if (iInvoker.InvokeRequired) { throw new InvocationException(); }
             if (iModelSource != null)
             {
-                iModelSource.SetChannel(aDidlLite);
+                if (aPlay)
+                {
+                    iModelSource.PlayNow(aDidlLite);
+                }
+                else
+                {
+                    iModelSource.SetChannel(aDidlLite);
+                }
             }
         }
+
 
         public event EventHandler<EventArgs> EventChannelChanged;
         private void OnEventChannelChanged()

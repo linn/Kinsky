@@ -441,6 +441,7 @@ namespace Linn.Topology
             {
                 EventSetId(this, EventArgs.Empty);
             }
+            Play();
         }
 
         private void EventIdArrayResponse(object sender, EventArgs e)
@@ -504,6 +505,11 @@ namespace Linn.Topology
         }
 
         public void EventSetChannelResponse(object sender, EventArgs e)
+        {
+            Play();
+        }
+
+        public void EventPlayNowSetIdResponse(object sender, EventArgs e)
         {
             Play();
         }
