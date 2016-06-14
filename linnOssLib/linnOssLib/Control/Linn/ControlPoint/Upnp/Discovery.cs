@@ -366,23 +366,24 @@ namespace Linn.ControlPoint.Upnp
         {
             try
             {
-                if (IsLinn)
-                {
-                    // this is a volkano device, so try to infer control and subscription uris
-                    Uri uri = new Uri(Find(kKeyUpnpLocation));
+                // remove hardcoded shortcut to linn devices for volkano 2 support
+                //if (IsLinn)
+                //{
+                //    // this is a volkano device, so try to infer control and subscription uris
+                //    Uri uri = new Uri(Find(kKeyUpnpLocation));
 
-                    if (uri.AbsolutePath != "/")
-                    {
-                        // this is a bute or post-bute volkano device from which the control and
-                        // subscription uris can be inferred
+                //    if (uri.AbsolutePath != "/")
+                //    {
+                //        // this is a bute or post-bute volkano device from which the control and
+                //        // subscription uris can be inferred
 
-                        Uri serviceuri = new Uri(uri, aType.Type + "/");
-                        Uri controluri = new Uri(serviceuri, kVolkanoRelativeControlUri);
-                        Uri subscriptionuri = new Uri(serviceuri, kVolkanoRelativeSubscriptionUri);
+                //        Uri serviceuri = new Uri(uri, aType.Type + "/");
+                //        Uri controluri = new Uri(serviceuri, kVolkanoRelativeControlUri);
+                //        Uri subscriptionuri = new Uri(serviceuri, kVolkanoRelativeSubscriptionUri);
 
-                        return (new ServiceLocationUpnp(controluri, subscriptionuri));
-                    }
-                }
+                //        return (new ServiceLocationUpnp(controluri, subscriptionuri));
+                //    }
+                //}
 
                 // this is not a volkano device or it is a pre-bute volkano device, so
                 // must inspect the device xml in order to find the control and subscription uris
