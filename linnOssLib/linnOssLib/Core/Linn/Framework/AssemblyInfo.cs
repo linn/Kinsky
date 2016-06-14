@@ -51,8 +51,8 @@ namespace Linn
                     title = ((AssemblyTitleAttribute)attributes[0]).Title;
                 }
             }
-        
-            version = entryAssembly.GetName().Version.ToString().Replace(".0", "");
+
+            version = entryAssembly.GetName ().Version.ToString ();//.Replace(".0", "");
 
             attributes = entryAssembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false);
             if (attributes.Length != 0)
