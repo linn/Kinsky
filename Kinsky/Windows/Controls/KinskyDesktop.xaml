@@ -19,7 +19,7 @@
     Drop="Window_Drop"
     AllowDrop="True"
     SnapsToDevicePixels="True"
-    SizeChanged="Window_SizeChanged">
+    SizeChanged="Window_SizeChanged" UseLayoutRounding="True">
     <Window.Resources>
         <Style x:Key="KompactMenuItem" TargetType="{x:Type MenuItem}">
             <Setter Property="Background" Value="Green" />
