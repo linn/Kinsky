@@ -402,7 +402,9 @@
     <Compile Include="..\linnOssLib\Topology\Linn\Topology\SourceList.cs">
       <Link>Topology\Linn\Topology\SourceList.cs</Link>
     </Compile>
-    <Compile Include="Kinsky\Linn\Kinsky\NotificationController.cs" />
+    <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\NotificationController.cs">
+      <Link>Kinsky\Linn\Kinsky\NotificationController.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\linnOssLib\Core\Linn\Framework\SystemInfo.cs">
