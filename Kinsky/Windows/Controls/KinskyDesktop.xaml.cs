@@ -28,7 +28,7 @@ namespace KinskyDesktopWpf
     /// <summary>
     /// Interaction logic for KinskyDesktop.xaml
     /// </summary>
-    public partial class KinskyDesktop : Window, IStack
+    public partial class KinskyDesktop : Window, IStack, INotificationView
     {
 
 
@@ -139,6 +139,8 @@ namespace KinskyDesktopWpf
         private bool iStackStarted;
         private bool iSessionHookAdded;
         private static readonly string kApiKey = "129c76d1b4043e568d19a9fea8a1f5534cdae703";
+        private readonly NotificationController iNotificationController;
+        private readonly INotificationView iNotificationView;
 
         public static KinskyDesktop Instance
         {
@@ -176,7 +178,8 @@ namespace KinskyDesktopWpf
             }
             InitializeComponent();
             iUpdateOnExit = false;
-            iHelper = new HelperKinsky(Environment.GetCommandLineArgs(), new Invoker(this.Dispatcher));
+            var invoker = new Invoker(this.Dispatcher);
+            iHelper = new HelperKinsky(Environment.GetCommandLineArgs(), invoker);
 #if DEBUG
             Xamarin.Insights.Initialize(Xamarin.Insights.DebugModeKey, iHelper.Version, iHelper.Product);
 #else
@@ -197,6 +200,7 @@ namespace KinskyDesktopWpf
             iProcessedOptions = true;
             AllowsTransparency = iTransparentOption.Native;
             this.Loaded += new RoutedEventHandler(KinskyDesktop_Loaded);
+            iNotificationController = new NotificationController(invoker, iHelper, new NotificationServerHttp(NotificationServerHttp.DefaultUri(iHelper.Product)), this);
         }
 
         private IntPtr HandleSessionEvents(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -1015,6 +1019,26 @@ namespace KinskyDesktopWpf
                 iUIOptions.WindowSize = new Size(Width, Height);
             }
             iUIOptions.WindowLocation = new Point(Left, Top);
+        }
+
+        public void Show(INotification aNotification)
+        {
+            //todo
+            //Window window = new Window()
+            //{
+            //    Title = "Kinsky is dead, man... Get with the times!",
+            //    ShowInTaskbar = false,               // don't show the dialog on the taskbar
+            //    Topmost = true,                      // ensure we're Always On Top
+            //    ResizeMode = ResizeMode.NoResize,    // remove excess caption bar buttons
+            //    Owner = Application.Current.MainWindow,
+            //};
+
+            //window.Show();
+        }
+
+        public void ShowBadge()
+        {
+            //todo
         }
     }
 }

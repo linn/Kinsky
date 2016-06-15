@@ -9,7 +9,7 @@ using Linn.Topology;
 
 namespace Linn.Kinsky
 {
-    public class HelperKinsky : Helper, IStack
+    public class HelperKinsky : Helper, IStack, INotificationPersistence
     {
         public HelperKinsky(string[] aArgs, IInvoker aInvoker)
             : base(aArgs)
@@ -35,6 +35,9 @@ namespace Linn.Kinsky
 
             iOptionInstallId = new OptionString("installid", "InstallId", "Unique installation identifer", Guid.NewGuid().ToString());
             AddOption(iOptionInstallId);
+
+            iOptionLastNotificationVersion = new OptionUint("lastnotificationversion", "LastNotificationVersion", "last version of notification feed viewed", 0);
+            AddOption(iOptionLastNotificationVersion);
 
             iOptionLastSelectedRoom = new OptionString("lastroom", "Last Selected Room", "The last room selected", string.Empty);
             AddOption(iOptionLastSelectedRoom);
@@ -143,6 +146,19 @@ namespace Linn.Kinsky
             }
         }
 
+        public uint LastNotificationVersion
+        {
+            get
+            {
+                return iOptionLastNotificationVersion.Native;
+            }
+
+            set
+            {
+                iOptionLastNotificationVersion.Native = value;
+            }
+        }
+
         public void SetStackExtender(IStack aStackExtender)
         {
             StackStatus status = Stack.Status;
@@ -205,6 +221,7 @@ namespace Linn.Kinsky
         private OptionBreadcrumbTrail iOptionLastLocation;
         private OptionListUri iOptionCloudServers;
         private OptionString iOptionInstallId;
+        private OptionUint iOptionLastNotificationVersion;
 
         private BookmarkManager iBookmarkManager;
         private IInvoker iInvoker;
