@@ -94,6 +94,11 @@ class Builder(OpenHomeBuilder):
             f2.write(c)
             f2.close()
 
+        # unlock ios and mac keychains on build slaves for non interactive code signing
+        if (self.platform == "Ios-armv7" or self.platform == "Mac-x64"):
+            cmdLine='~/unlock-keychain.py'
+            subprocess.check_call(cmdLine, shell=True)
+
     def clean(self):
         if self.platform == 'iOs-armv7' or self.platform == 'iOs-x86':
             platformTarget = "iPhoneSimulator" if self.platform == 'iOs-x86' else "iPhone"
