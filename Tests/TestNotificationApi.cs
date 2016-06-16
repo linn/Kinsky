@@ -14,7 +14,7 @@ namespace Tests
     [TestFixture]
     public class TestNotificationApi
     {
-        private static TimeSpan kTimeoutMilliseconds = TimeSpan.FromMilliseconds(50000);
+        private static TimeSpan kTimeoutMilliseconds = TimeSpan.FromMilliseconds(5000);
 
         private IInvoker iInvoker;
         private MockPersistence iPersistence;
@@ -60,7 +60,7 @@ namespace Tests
             iServer.SetDesiredResponse(iServerResponseV1);
             var waitHandle = new AutoResetEvent(false);
 
-            iView.ShowCallback = (notification) =>
+            iView.ShowCallback = (notification, shownow) =>
             {
                 if (!aShowAgainLater)
                 {
@@ -68,23 +68,21 @@ namespace Tests
                 }
                 waitHandle.Set();
             };
-            var controllerCanShow = false;
 
             // act
             using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView))
             {
                 Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
-                controllerCanShow = controller.CanShow;
             }
 
             // flush pending invocations
             AwaitInvoker();
 
             // assert
-            Assert.That(controllerCanShow);
-            Assert.That(iView.IsShowingBadge);
-            Assert.AreEqual(iPersistence.LastNotificationVersion, aExpectedPersistedId); 
             Assert.IsNotNull(iView.Current);
+            Assert.IsNotNull(iView.LastShown);
+            Assert.AreEqual(iView.Current, iView.LastShown);
+            Assert.AreEqual(iPersistence.LastNotificationVersion, aExpectedPersistedId); 
             Assert.AreEqual(iServerResponseV1.Uri, iView.Current.Uri);
             Assert.AreEqual(iServerResponseV1.Version, iView.Current.Version);
         }
@@ -104,27 +102,27 @@ namespace Tests
                     waitHandle.Set();
                 }));
             };
-            iView.ShowCallback = (notification) =>
+            iView.ShowCallback = (notification, shownow) =>
             {
-                Assert.Fail("View show should not be called");
+                if (shownow)
+                {
+                    Assert.Fail("View should not be shown.");
+                }
             };
-            var controllerCanShow = false;
 
             // act
             using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView))
             {
                 Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
-                controllerCanShow = controller.CanShow;
             }
 
             // flush pending invocations
             AwaitInvoker();
 
             // assert
-            Assert.That(controllerCanShow);
-            Assert.AreEqual(true, iView.IsShowingBadge);
+            Assert.IsNotNull(iView.Current);
+            Assert.IsNull(iView.LastShown);
             Assert.AreEqual(iPersistence.LastNotificationVersion, iServerResponseV1.Version);
-            Assert.IsNull(iView.Current);
         }
 
         [Test]
@@ -135,28 +133,26 @@ namespace Tests
             iServer.SetDesiredResponse(iServerResponseV2);
             var waitHandle = new AutoResetEvent(false);
 
-            iView.ShowCallback = (notification) =>
+            iView.ShowCallback = (notification, shownow) =>
             {
                 notification.DontShowAgain();
                 waitHandle.Set();
             };
-            var controllerCanShow = false;
 
             // act
             using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView))
             {
                 Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
-                controllerCanShow = controller.CanShow;
             }
 
             // flush pending invocations
             AwaitInvoker();
 
             // assert
-            Assert.That(controllerCanShow);
-            Assert.AreEqual(true, iView.IsShowingBadge);
-            Assert.AreEqual(iPersistence.LastNotificationVersion, iServerResponseV2.Version);
             Assert.IsNotNull(iView.Current);
+            Assert.IsNotNull(iView.LastShown);
+            Assert.AreEqual(iView.Current, iView.LastShown);
+            Assert.AreEqual(iPersistence.LastNotificationVersion, iServerResponseV2.Version);
             Assert.AreEqual(iServerResponseV2.Uri, iView.Current.Uri);
             Assert.AreEqual(iServerResponseV2.Version, iView.Current.Version);
         }
@@ -176,27 +172,24 @@ namespace Tests
                     waitHandle.Set();
                 }));
             };
-            iView.ShowCallback = (notification) =>
+            iView.ShowCallback = (notification, shownow) =>
             {
                 Assert.Fail("View show should not be called");
             };
-            var controllerCanShow = false;
 
             // act
             using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView))
             {
                 Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
-                controllerCanShow = controller.CanShow;
             }
 
             // flush pending invocations
             AwaitInvoker();
 
             // assert
-            Assert.IsFalse(controllerCanShow);
-            Assert.IsFalse(iView.IsShowingBadge);
-            Assert.AreEqual(iPersistence.LastNotificationVersion, 0);
             Assert.IsNull(iView.Current);
+            Assert.IsNull(iView.LastShown);
+            Assert.AreEqual(iPersistence.LastNotificationVersion, 0);
         }
 
 
@@ -214,27 +207,24 @@ namespace Tests
                     waitHandle.Set();
                 }));
             };
-            iView.ShowCallback = (notification) =>
+            iView.ShowCallback = (notification, shownow) =>
             {
                 Assert.Fail("View show should not be called");
             };
-            var controllerCanShow = false;
 
             // act
             using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView))
             {
                 Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
-                controllerCanShow = controller.CanShow;
             }
 
             // flush pending invocations
             AwaitInvoker();
 
             // assert
-            Assert.IsFalse(controllerCanShow);
-            Assert.IsFalse(iView.IsShowingBadge);
-            Assert.AreEqual(iPersistence.LastNotificationVersion, 0);
             Assert.IsNull(iView.Current);
+            Assert.IsNull(iView.LastShown);
+            Assert.AreEqual(iPersistence.LastNotificationVersion, 0);
         }
     }
 
@@ -282,28 +272,26 @@ namespace Tests
             iInvoker = aInvoker;
         }
 
-        public void Show(INotification aNotification)
+        public void Update(INotification aNotification, bool aShowNow)
         {
             Assert.IsFalse(iInvoker.InvokeRequired);
             Current = aNotification;
+            if (aShowNow)
+            {
+                LastShown = aNotification;
+            }
             var del = ShowCallback;
             if (del != null)
             {
-                del.Invoke(aNotification);
+                del.Invoke(aNotification, aShowNow);
             }
         }
 
-        public void ShowBadge()
-        {
-            Assert.IsFalse(iInvoker.InvokeRequired);
-            IsShowingBadge = true;
-        }
+        public INotification LastShown { get; set; }
 
         public INotification Current { get; set; }
 
-        public bool IsShowingBadge { get; set; }
-
-        public Action<INotification> ShowCallback { get; set; }
+        public Action<INotification, bool> ShowCallback { get; set; }
     }
 
     class MockPersistence : INotificationPersistence

@@ -13,8 +13,7 @@ namespace Linn.Kinsky
 
     public interface INotificationView
     {
-        void Show(INotification aNotification);
-        void ShowBadge(); // badge will always be shown while user is running kinsky
+        void Update(INotification aNotification, bool aShowNow);
     }
 
     public interface INotification
@@ -132,9 +131,9 @@ namespace Linn.Kinsky
 
         private Timer iTimer;
         private CancellationTokenSource iCancelTokenSource;
-        private Notification iCurrent;
         private bool iRunning;
         private bool iDisposed;
+        private uint iCurrentVersion;
 
         public NotificationController(IInvoker aInvoker, INotificationPersistence aNotificationPersistence, INotificationServer aNotificationServer, INotificationView aView)
         {
@@ -143,7 +142,8 @@ namespace Linn.Kinsky
             iInvoker = aInvoker;
             iView = aView;
 
-            iCurrent = null;
+            iCurrentVersion = iNotificationPersistence.LastNotificationVersion;
+
             Start();
         }
 
@@ -199,75 +199,37 @@ namespace Linn.Kinsky
                 iCancelTokenSource = new CancellationTokenSource();
 
                 var cancelToken = iCancelTokenSource.Token;
-                var currentVersion = iCurrent != null ? iCurrent.Version : iNotificationPersistence.LastNotificationVersion;
+                var currentVersion = iCurrentVersion;
                 iNotificationServer.Check(currentVersion, cancelToken).ContinueWith(t =>
                 {
-                    if (!cancelToken.IsCancellationRequested)
+                    iInvoker.BeginInvoke(new Action(() =>
                     {
-                        if (t.IsFaulted)
+                        if (!cancelToken.IsCancellationRequested)
                         {
+                            if (t.IsFaulted)
+                            {
                             t.Exception.Handle((ex =>
                             {
                                 return true;
                             }));
                             UserLog.WriteLine("Error checking Upgrade Feed: " + t.Exception.GetBaseException());
-                        }else
-                        {
-                            var response = t.Result;
-                            lock (iLock)
+                            }
+                            else
                             {
-                                iCurrent = new Notification(response.Version, response.Uri, () =>
+                                var response = t.Result;
+                                var notification = new Notification(response.Version, response.Uri, () =>
                                 {
                                     if (response.Version > iNotificationPersistence.LastNotificationVersion)
                                     {
                                         iNotificationPersistence.LastNotificationVersion = response.Version;
                                     }
                                 });
-                            }
-
-                            iInvoker.BeginInvoke(new Action(() =>
-                            {
-                                iView.ShowBadge(); // we always show badge after we get a response, badge is a bit odd in that it never goes away - we wish to encourage uptake of Kazoo
-                            }));
-
-                            if (response.Version > currentVersion)
-                            {
-                                Show(); // new version available - show notification to user
+                                iView.Update(notification, response.Version > currentVersion);
                             }
                         }
-                    }
+                     }));
                 });
             }
-        }
-
-        public bool CanShow
-        {
-            get
-            {
-                lock (iLock)
-                {
-                    return iCurrent != null;
-                }
-            }
-        }
-
-        public void Show()
-        {
-            iInvoker.BeginInvoke(new Action(() =>
-            {
-                INotification current = null;
-                lock(iLock)
-                {
-                    if (!iDisposed)
-                    {
-                        current = iCurrent;
-                    }
-                }
-                if (current != null)
-                {
-                    iView.Show(current);
-                }
-            }));
         }
         
 
