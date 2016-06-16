@@ -21,7 +21,7 @@ namespace Linn.Kinsky
     {
         uint Version { get; }
         string Uri { get; }
-        void Closed(bool aShowAgainLater);
+        void DontShowAgain();
     }
 
     public interface INotificationServer
@@ -36,23 +36,20 @@ namespace Linn.Kinsky
 
     internal class Notification : INotification
     {
-        private Action<bool> iClosedCallback;
-        private bool iClosed;
-        public Notification(uint aVersion, string aUri, Action<bool> aClosedCallback)
+        private Action iDontShowAgain;
+        public Notification(uint aVersion, string aUri, Action aDontShowAgain)
         {
             Version = aVersion;
             Uri = aUri;
-            iClosedCallback = aClosedCallback;
+            iDontShowAgain = aDontShowAgain;
         }
 
         public string Uri { get; private set; }
         public uint Version { get; private set; }
 
-        public void Closed(bool aShowAgainLater)
+        public void DontShowAgain()
         {
-            Assert.Check(!iClosed);
-            iClosed = true;
-            iClosedCallback(aShowAgainLater);
+            iDontShowAgain();
         }
     }
 
@@ -219,13 +216,13 @@ namespace Linn.Kinsky
                             var response = t.Result;
                             lock (iLock)
                             {
-                                iCurrent = new Notification(response.Version, response.Uri, (showagainlater) =>
+                                iCurrent = new Notification(response.Version, response.Uri, () =>
                                 {
-                                    if (!showagainlater)
+                                    if (response.Version > iNotificationPersistence.LastNotificationVersion)
                                     {
                                         iNotificationPersistence.LastNotificationVersion = response.Version;
                                     }
-                                }); ;
+                                });
                             }
 
                             iInvoker.BeginInvoke(new Action(() =>

@@ -62,7 +62,10 @@ namespace Tests
 
             iView.ShowCallback = (notification) =>
             {
-                notification.Closed(aShowAgainLater);
+                if (!aShowAgainLater)
+                {
+                    notification.DontShowAgain();
+                }
                 waitHandle.Set();
             };
             var controllerCanShow = false;
@@ -134,7 +137,7 @@ namespace Tests
 
             iView.ShowCallback = (notification) =>
             {
-                notification.Closed(false);
+                notification.DontShowAgain();
                 waitHandle.Set();
             };
             var controllerCanShow = false;
