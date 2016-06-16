@@ -3,3 +3,4 @@ build/
 packages/
 .DS_Store
 *.userprefs
+TestResult.xml

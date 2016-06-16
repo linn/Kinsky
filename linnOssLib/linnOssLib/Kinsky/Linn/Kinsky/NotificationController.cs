@@ -137,6 +137,7 @@ namespace Linn.Kinsky
         private CancellationTokenSource iCancelTokenSource;
         private Notification iCurrent;
         private bool iRunning;
+        private bool iDisposed;
 
         public NotificationController(IInvoker aInvoker, INotificationPersistence aNotificationPersistence, INotificationServer aNotificationServer, INotificationView aView)
         {
@@ -193,6 +194,7 @@ namespace Linn.Kinsky
         {
             lock (iLock)
             {
+                Assert.Check(!iDisposed);
                 if (iCancelTokenSource != null)
                 {
                     iCancelTokenSource.Cancel();
@@ -200,7 +202,7 @@ namespace Linn.Kinsky
                 iCancelTokenSource = new CancellationTokenSource();
 
                 var cancelToken = iCancelTokenSource.Token;
-                var currentVersion = iCurrent != null ? iCurrent.Version : 0;
+                var currentVersion = iCurrent != null ? iCurrent.Version : iNotificationPersistence.LastNotificationVersion;
                 iNotificationServer.Check(currentVersion, cancelToken).ContinueWith(t =>
                 {
                     if (!cancelToken.IsCancellationRequested)
@@ -241,16 +243,32 @@ namespace Linn.Kinsky
             }
         }
 
+        public bool CanShow
+        {
+            get
+            {
+                lock (iLock)
+                {
+                    return iCurrent != null;
+                }
+            }
+        }
+
         public void Show()
         {
             iInvoker.BeginInvoke(new Action(() =>
             {
+                INotification current = null;
                 lock(iLock)
                 {
-                    if (iCurrent != null)
+                    if (!iDisposed)
                     {
-                        iView.Show(iCurrent);
+                        current = iCurrent;
                     }
+                }
+                if (current != null)
+                {
+                    iView.Show(current);
                 }
             }));
         }
@@ -258,6 +276,11 @@ namespace Linn.Kinsky
 
         public void Dispose()
         {
+            lock (iLock)
+            {
+                Assert.Check(!iDisposed);
+                iDisposed = true;
+            }
             Stop();
         }
     }

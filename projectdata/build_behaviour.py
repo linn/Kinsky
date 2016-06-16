@@ -7,8 +7,6 @@ import subprocess
 
 class Builder(OpenHomeBuilder):
 
-
-
     def findoption(self, aKey):
         kAdditionalOptions = {
             "RELEASE_VERSION" : "0.0.0",
@@ -99,6 +97,7 @@ class Builder(OpenHomeBuilder):
             cmdLine='~/unlock-keychain.py'
             subprocess.check_call(cmdLine, shell=True)
 
+
     def clean(self):
         if self.platform == 'iOs-armv7' or self.platform == 'iOs-x86':
             platformTarget = "iPhoneSimulator" if self.platform == 'iOs-x86' else "iPhone"
@@ -133,3 +132,15 @@ class Builder(OpenHomeBuilder):
                 makeinstallercmd = "python buildinstaller.py %s %s" % (self.configuration, self.releaseversion)
                 print makeinstallercmd
                 subprocess.check_call(makeinstallercmd, shell=True, cwd="Kinsky/Mac/Installer/")
+
+
+    def should_test(self):
+        # only run tests on windows slave
+        return self.platform == 'Windows-x86'
+
+    def test(self):
+        if self.should_test():
+            self.set_reportgen_location(glob.glob('packages/ReportGenerator*/tools/ReportGenerator.exe')[0])
+            self.set_nunit_location(glob.glob('packages/NUnit.ConsoleRunner*/tools/nunit3-console.exe')[0])
+
+            self._builder.cli([self.nunitexe, self._expand_template(self.test_location, assembly='Tests')])
