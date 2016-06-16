@@ -121,7 +121,7 @@ namespace Linn.Kinsky
 
     public class NotificationController : IDisposable
     {
-        private const double kTimerInterval = 24 * 60 * 60; // daily
+        private const double kTimerInterval = 24 * 60 * 60 * 1000; // daily
 
         private readonly IInvoker iInvoker;
         private readonly INotificationView iView;

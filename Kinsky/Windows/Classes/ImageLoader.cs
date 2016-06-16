@@ -369,6 +369,7 @@ namespace KinskyDesktopWpf
 
         public static readonly BitmapImage ImageSourceKinskyIcon = KinskyIcon.ToBitmapImage();
 
+        public static readonly BitmapImage ImageSourceSettings = Settings.ToBitmapImage();
         public static readonly BitmapImage ImageSourceNoAlbumArt = NoAlbumArt.ToBitmapImage();
         public static readonly BitmapImage ImageSourceIconAlbum = IconAlbum.ToBitmapImage();
         public static readonly BitmapImage ImageSourceIconAlbumError = IconAlbumError.ToBitmapImage();

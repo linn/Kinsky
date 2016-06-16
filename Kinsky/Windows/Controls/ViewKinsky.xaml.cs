@@ -513,6 +513,19 @@ namespace KinskyDesktopWpf
         private NavigationController iNavigationController;
         private System.Threading.Timer iRefreshTimer;
         private const int kRefreshTimeout = 5000;
+
+        public Action ShowOptionsDialog { get; set; }
+
+        private void OptionsCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+            e.Handled = true;
+        }
+
+        private void OptionsExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            ShowOptionsDialog();
+        }
     }
 
 }

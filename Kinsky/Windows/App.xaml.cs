@@ -24,6 +24,7 @@ namespace KinskyDesktopWpf
         static void Main()
         {
             App app = new App();
+            CefSharp.Cef.Initialize(new CefSharp.CefSettings());
             app.Run();
         }
 

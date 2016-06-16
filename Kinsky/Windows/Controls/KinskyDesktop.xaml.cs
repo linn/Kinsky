@@ -22,6 +22,7 @@ using System.Windows.Threading;
 using System.Windows.Interop;
 using System.Windows.Markup;
 using System.Runtime.InteropServices;
+using KinskyDesktopWpf.Controls;
 
 namespace KinskyDesktopWpf
 {
@@ -140,7 +141,7 @@ namespace KinskyDesktopWpf
         private bool iSessionHookAdded;
         private static readonly string kApiKey = "129c76d1b4043e568d19a9fea8a1f5534cdae703";
         private readonly NotificationController iNotificationController;
-        private readonly INotificationView iNotificationView;
+        private NotificationView iNotificationView;
 
         public static KinskyDesktop Instance
         {
@@ -151,7 +152,7 @@ namespace KinskyDesktopWpf
         }
 
         public KinskyDesktop()
-        {            
+        {
             iInstance = this;
             HttpWebRequest.DefaultWebProxy = WebRequest.GetSystemWebProxy();
             HttpWebRequest.DefaultWebProxy.Credentials = CredentialCache.DefaultCredentials;
@@ -201,6 +202,10 @@ namespace KinskyDesktopWpf
             AllowsTransparency = iTransparentOption.Native;
             this.Loaded += new RoutedEventHandler(KinskyDesktop_Loaded);
             iNotificationController = new NotificationController(invoker, iHelper, new NotificationServerHttp(NotificationServerHttp.DefaultUri(iHelper.Product)), this);
+            viewKinsky.ShowOptionsDialog = () =>
+            {
+                ShowOptionsDialog(false);
+            };
         }
 
         private IntPtr HandleSessionEvents(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -811,7 +816,7 @@ namespace KinskyDesktopWpf
                 }
                 catch { }
             }
-            Environment.Exit(0);
+            App.Current.Shutdown();
         }
 
         #region Command Bindings
@@ -824,7 +829,7 @@ namespace KinskyDesktopWpf
 
         private void CloseExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            Exit();
+            Close();
         }
 
         private void KompactCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -934,7 +939,7 @@ namespace KinskyDesktopWpf
                 if (result.HasValue && result.Value)
                 {
                     iUpdateOnExit = true;
-                    Exit();
+                    Close();
                 }
             }));
         }
@@ -1021,24 +1026,27 @@ namespace KinskyDesktopWpf
             iUIOptions.WindowLocation = new Point(Left, Top);
         }
 
-        public void Show(INotification aNotification)
+        public void Update(INotification aNotification, bool aShowNow)
         {
-            //todo
-            //Window window = new Window()
-            //{
-            //    Title = "Kinsky is dead, man... Get with the times!",
-            //    ShowInTaskbar = false,               // don't show the dialog on the taskbar
-            //    Topmost = true,                      // ensure we're Always On Top
-            //    ResizeMode = ResizeMode.NoResize,    // remove excess caption bar buttons
-            //    Owner = Application.Current.MainWindow,
-            //};
+            if (aShowNow)
+            {
+                Show(aNotification);
+            }
+        }        
 
-            //window.Show();
-        }
-
-        public void ShowBadge()
+        private void Show(INotification aNotification)
         {
-            //todo
+            if (iNotificationView != null)
+            {
+                iNotificationView.Close();
+            }
+            var notificationView = new NotificationView();
+            notificationView.Closed += (s, e) =>
+            {
+                iNotificationView = null;
+            };
+            notificationView.Launch(aNotification, this);
+            iNotificationView = notificationView;
         }
     }
 }

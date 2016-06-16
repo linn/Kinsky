@@ -303,6 +303,14 @@
                         <Button Style="{StaticResource PlayLaterButtonStyle}" x:Name="buttonPlayLater" DockPanel.Dock="Left" AllowDrop="True" Margin="5,0,5,0" />
                     </DockPanel>
                     <DockPanel LastChildFill="False" HorizontalAlignment="Left" x:Name="pnlBrowserButtons" Grid.Column="0" Visibility="{Binding IsDragging, Converter={StaticResource InverseBooleanVisibilityValueConverter}}">
+                        <Button Command="kd:Commands.OptionsCommand" Margin="5,0,3,0" >
+                            <Button.CommandBindings>
+                                <CommandBinding Command="kd:Commands.OptionsCommand"
+                                CanExecute="OptionsCanExecute"
+                                Executed="OptionsExecuted" />
+                            </Button.CommandBindings>
+                            <Image RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0,5,0" x:Name="SettingsButton" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceSettings}}" Height="20" />
+                        </Button>
                         <ToggleButton x:Name="buttonToggleListView" DockPanel.Dock="Left" Style="{StaticResource ToggleListViewButtonStyle}" Margin="5,0,3,0" KeyboardNavigation.TabIndex="70"  />
                         <ToggleButton x:Name="buttonChangeSize" DockPanel.Dock="Left" Click="buttonChangeSize_Click" Style="{StaticResource SizeButtonStyle}" Margin="5,0,5,0" KeyboardNavigation.TabIndex="71" />
                         <Popup x:Name="popupSlider" Placement="Right" PlacementTarget="{Binding ElementName=buttonChangeSize}" StaysOpen="False" PopupAnimation="Fade" AllowsTransparency="True" Closed="popupSlider_Closed">
