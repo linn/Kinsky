@@ -11,9 +11,9 @@ namespace Linn
     {
         ImageType Image { get; }
         int SizeBytes { get; }
-        int ReferenceCount { get; }
-        void IncrementReferenceCount();
-        void DecrementReferenceCount();
+        //int ReferenceCount { get; }
+        //void IncrementReferenceCount();
+        //void DecrementReferenceCount();
     }
 
     public interface IImageLoader<ImageType>
@@ -237,10 +237,10 @@ namespace Linn
         {
             lock (iLockObject)
             {
-                foreach (IImage<ImageType> image in iImageCache.Values)
-                {
-                    image.DecrementReferenceCount();
-                }
+                //foreach (IImage<ImageType> image in iImageCache.Values)
+                //{
+                //    image.DecrementReferenceCount();
+                //}
                 if (aClearPending)
                 {
                     iPendingRequests.Clear();
@@ -261,7 +261,7 @@ namespace Linn
                     int imageSize = aImage.SizeBytes;
                     iCurrentCacheSize += imageSize;
                     iImageCache.Add(aUri, aImage);
-                    aImage.IncrementReferenceCount();
+                    //aImage.IncrementReferenceCount();
                     iImageCacheUsage.Add(aUri);
                     RemoveStaleCacheItems();
                 }
@@ -278,7 +278,7 @@ namespace Linn
                     iImageCache.Remove(aUri);
                     iImageCacheUsage.Remove(aUri);
                     iCurrentCacheSize -= image.SizeBytes;
-                    image.DecrementReferenceCount();
+                    //image.DecrementReferenceCount();
                 }
                 else if (iImageCacheFailures.Contains(aUri))
                 {
@@ -317,14 +317,14 @@ namespace Linn
                     try
                     {
                         IImage<ImageType> img = loader.LoadImage(new Uri(request.Uri), iDownscaleImageSize);
-                        img.IncrementReferenceCount();
+                        //img.IncrementReferenceCount();
                         lock (iLockObject)
                         {
                             Add(request.Uri, img);
                             iExecutingRequests.Remove(request);
                         }
                         OnEventImageAdded(request, img);
-                        img.DecrementReferenceCount();
+                        //img.DecrementReferenceCount();
                     }
                     catch (Exception ex)
                     {

@@ -131,48 +131,48 @@ namespace OssToolkitDroid
             }
         }
 
-        public int ReferenceCount
-        {
-            get
-            {
-                Assert.Check(iImage != null);
-                lock (iImage)
-                {
-                    return iReferenceCount;
-                }
-            }
-        }
+        //public int ReferenceCount
+        //{
+        //    get
+        //    {
+        //        Assert.Check(iImage != null);
+        //        lock (iImage)
+        //        {
+        //            return iReferenceCount;
+        //        }
+        //    }
+        //}
 
-        public void IncrementReferenceCount()
-        {
-            Assert.Check(iImage != null, "iImage != null");
-            Assert.Check(!iImage.IsRecycled, "!iImage.IsRecycled");
-            lock (iImage)
-            {
-                iReferenceCount++;
-            }
-        }
+        //public void IncrementReferenceCount()
+        //{
+        //    Assert.Check(iImage != null, "iImage != null");
+        //    Assert.Check(!iImage.IsRecycled, "!iImage.IsRecycled");
+        //    lock (iImage)
+        //    {
+        //        iReferenceCount++;
+        //    }
+        //}
 
-        public void DecrementReferenceCount()
-        {
-                Assert.Check(iImage != null);
-            lock (iImage)
-            {
-                iReferenceCount--;
-                if (iReferenceCount == 0)
-                {
-                    iImage.Recycle();
-                    iImage.Dispose();
-                    iImage = null;
-                }
-            }
-        }
+        //public void DecrementReferenceCount()
+        //{
+        //        Assert.Check(iImage != null);
+        //    lock (iImage)
+        //    {
+        //        iReferenceCount--;
+        //        if (iReferenceCount == 0)
+        //        {
+        //            iImage.Recycle();
+        //            iImage.Dispose();
+        //            iImage = null;
+        //        }
+        //    }
+        //}
 
         #endregion
 
         private int iSizeBytes;
         private Bitmap iImage;
-        private int iReferenceCount;
+        //private int iReferenceCount;
     }
 
     public class LazyLoadingImageView : ImageView
@@ -232,7 +232,7 @@ namespace OssToolkitDroid
 
         private void SetImage(IImage<Bitmap> aImage)
         {
-            aImage.IncrementReferenceCount();
+            //aImage.IncrementReferenceCount();
             RemoveCacheHandler();
             if (aImage != iImageBitmap)
             {
@@ -328,7 +328,7 @@ namespace OssToolkitDroid
             {
                 if (iImageBitmap != null)
                 {
-                    iImageBitmap.DecrementReferenceCount();
+                    //iImageBitmap.DecrementReferenceCount();
                     iImageBitmap = null;
                 }
             }
@@ -341,7 +341,7 @@ namespace OssToolkitDroid
             {
                 if (iImageCache != null && e.Uri == iUri)
                 {
-                    e.Image.IncrementReferenceCount();
+                    //e.Image.IncrementReferenceCount();
                     iImageCache.Invoker.BeginInvoke((Action)(() =>
                     {
                         lock (iLockObject)
@@ -350,7 +350,7 @@ namespace OssToolkitDroid
                             {
                                 SetImage(e.Image);
                             }
-                            e.Image.DecrementReferenceCount();
+                            //e.Image.DecrementReferenceCount();
                         }
                     }));
                 }
