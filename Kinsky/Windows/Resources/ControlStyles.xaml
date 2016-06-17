@@ -165,7 +165,7 @@
                         <Image x:Name="imgLeftOver" Grid.Column="0" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceBoxNotificationOverLeft}}" Stretch="Fill" Opacity="0" />
                         <Image x:Name="imgFiller" Grid.Column="1" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceBoxNotificationFiller}}" Stretch="Fill" Width="{Binding ElementName=content, Path=ActualWidth}" Opacity="{TemplateBinding kd:FrameworkElementExtensions.BackgroundOpacity}"  />
                         <Image x:Name="imgFillerOver" Grid.Column="1" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceBoxNotificationOverFiller}}" Stretch="Fill" Opacity="0" Width="{Binding ElementName=content, Path=ActualWidth}" />
-                        <ContentPresenter Grid.Column="1" x:Name="content" HorizontalAlignment="Center" Panel.ZIndex="2" />
+                        <ContentPresenter Grid.Column="1" x:Name="content" Panel.ZIndex="2" />
                         <Image x:Name="imgRight" Grid.Column="2" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceBoxNotificationRight}}" Stretch="Fill" Opacity="{TemplateBinding kd:FrameworkElementExtensions.BackgroundOpacity}" />
                         <Image x:Name="imgRightOver" Grid.Column="2" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceBoxNotificationOverRight}}" Stretch="Fill" Opacity="0" />
                     </Grid>

@@ -295,10 +295,8 @@
                     </Grid>
                 </DockPanel>
             </Border>
-            <Button x:Name="ShowNotificationButton" Visibility="Hidden" Click="ShowNotificationButton_Click" Grid.Row="1" HorizontalAlignment="Left" Style="{StaticResource NotificationButton}" VerticalAlignment="Bottom" Margin="5">
-                <Label Margin="1" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-                    <TextBlock Margin="10,0,10,0" Text="Find out about Linn Kazoo" />
-                </Label>
+            <Button x:Name="ShowNotificationButton" Visibility="Hidden" Click="ShowNotificationButton_Click" Grid.Row="1" HorizontalAlignment="Left" MaxWidth="180" Style="{StaticResource NotificationButton}" VerticalAlignment="Bottom" Margin="5">
+                <TextBlock VerticalAlignment="Center" Padding="10" HorizontalAlignment="Stretch" TextAlignment="Center" Text="Try Linn's latest control app" />
             </Button>
             <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                 <Button Command="kd:Commands.OptionsPageResetCommand" HorizontalContentAlignment="Stretch" HorizontalAlignment="Right" Margin="5,0,5,5">
