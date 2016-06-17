@@ -30,6 +30,8 @@ namespace KinskyDesktopWpf
         IList<OptionPageViewModel> iOptionPages;
         private HelperKinsky iHelperKinsky;
         private UiOptions iUiOptions;
+        private Action iShowNotificationAction;
+
         public OptionsDialog(HelperKinsky aHelperKinsky, UiOptions aUiOptions)
         {
             InitializeComponent();
@@ -75,6 +77,15 @@ namespace KinskyDesktopWpf
                 {
                     page.IsSelected = true;
                 }
+            }
+        }
+
+        public Action ShowNotificationAction
+        {
+            set
+            {
+                iShowNotificationAction = value;
+                ShowNotificationButton.Visibility = Visibility.Visible;
             }
         }
 
@@ -197,6 +208,13 @@ namespace KinskyDesktopWpf
                 opt.ResetToDefault();
             }
         }
+
         #endregion
+
+        private void ShowNotificationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (iShowNotificationAction != null)
+                iShowNotificationAction();
+        }
     }
 }

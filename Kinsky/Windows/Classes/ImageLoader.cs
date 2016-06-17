@@ -551,6 +551,16 @@ namespace KinskyDesktopWpf
         public static readonly BitmapImage ImageSourceBoxOverRight = BoxOverRight.ToBitmapImage();
         public static readonly BitmapImage ImageSourceBoxDownRight = BoxDownRight.ToBitmapImage();
 
+        public static readonly BitmapImage ImageSourceBoxNotificationLeft = BoxNotificationLeft.ToBitmapImage();
+        public static readonly BitmapImage ImageSourceBoxNotificationOverLeft = BoxNotificationOverLeft.ToBitmapImage();
+        public static readonly BitmapImage ImageSourceBoxNotificationDownLeft = BoxNotificationDownLeft.ToBitmapImage();
+        public static readonly BitmapImage ImageSourceBoxNotificationFiller = BoxNotificationFiller.ToBitmapImage();
+        public static readonly BitmapImage ImageSourceBoxNotificationOverFiller = BoxNotificationOverFiller.ToBitmapImage();
+        public static readonly BitmapImage ImageSourceBoxNotificationDownFiller = BoxNotificationDownFiller.ToBitmapImage();
+        public static readonly BitmapImage ImageSourceBoxNotificationRight = BoxNotificationRight.ToBitmapImage();
+        public static readonly BitmapImage ImageSourceBoxNotificationOverRight = BoxNotificationOverRight.ToBitmapImage();
+        public static readonly BitmapImage ImageSourceBoxNotificationDownRight = BoxNotificationDownRight.ToBitmapImage();
+
 
         public static readonly BitmapImage ImageSourceAddTab = AddTab.ToBitmapImage();
         public static readonly BitmapImage ImageSourceAddTabDown = AddTabDown.ToBitmapImage();

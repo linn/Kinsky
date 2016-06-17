@@ -21,16 +21,17 @@ namespace KinskyDesktopWpf.Controls
     public partial class NotificationView : Window
     {
         private INotification iNotification;
-        private static string kAppstoreUri = "https://www.microsoft.com/en-us/store/apps/linn-kazoo-beta/9nblggh4np11";
+        private INotificationPersistence iPersistence;
 
         public NotificationView()
         {
             InitializeComponent();
         }
 
-        public void Launch(INotification aNotification, Window aOwner)
+        public void Launch(INotificationPersistence aPersistence, INotification aNotification, Window aOwner)
         {
             iNotification = aNotification;
+            iPersistence = aPersistence;
             this.Owner = aOwner;
             var rendered = false;
             this.ContentRendered += (s, e) =>
@@ -41,30 +42,31 @@ namespace KinskyDesktopWpf.Controls
                     Browser.Load(iNotification.Uri);
                 }
             };
-            
+            chkDontShowAgain.IsChecked = aPersistence.LastNotificationVersion == aNotification.Version;
             this.ShowDialog();
         }
-        
-        private void Now_Click(object sender, RoutedEventArgs e)
+
+        protected override void OnClosed(EventArgs e)
         {
-            Close();
-            OpenStorePage();
+            if (chkDontShowAgain.IsChecked.Value)
+            {
+                iNotification.DontShowAgain();
+            }
+            else if (iPersistence.LastNotificationVersion == iNotification.Version)
+            {
+                iPersistence.LastNotificationVersion = 0;
+            }
+            base.OnClosed(e);
         }
 
-        private void Later_Click(object sender, RoutedEventArgs e)
+        private void Now_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            KinskyDesktop.GetKazoo();
         }
 
         private void Dismiss_Click(object sender, RoutedEventArgs e)
         {
-            iNotification.DontShowAgain();
             Close();
-        }
-        
-        public static void OpenStorePage()
-        {
-            System.Diagnostics.Process.Start(kAppstoreUri);
         }
     }
 }

@@ -219,19 +219,22 @@ namespace Linn.Kinsky
                                 var response = t.Result;
                                 var notification = new Notification(response.Version, response.Uri, () =>
                                 {
-                                    if (response.Version > iNotificationPersistence.LastNotificationVersion)
+                                    if (response.Version != iNotificationPersistence.LastNotificationVersion)
                                     {
                                         iNotificationPersistence.LastNotificationVersion = response.Version;
                                     }
                                 });
-                                iView.Update(notification, response.Version > currentVersion);
+                                iView.Update(notification, response.Version != currentVersion);
+                                lock (iLock)
+                                {
+                                    iCurrentVersion = response.Version;
+                                }
                             }
                         }
                      }));
                 });
             }
-        }
-        
+        }        
 
         public void Dispose()
         {

@@ -223,6 +223,96 @@ namespace KinskyDesktopWpf.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap BoxNotificationDownFiller {
+            get {
+                object obj = ResourceManager.GetObject("BoxNotificationDownFiller", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BoxNotificationDownLeft {
+            get {
+                object obj = ResourceManager.GetObject("BoxNotificationDownLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BoxNotificationDownRight {
+            get {
+                object obj = ResourceManager.GetObject("BoxNotificationDownRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BoxNotificationFiller {
+            get {
+                object obj = ResourceManager.GetObject("BoxNotificationFiller", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BoxNotificationLeft {
+            get {
+                object obj = ResourceManager.GetObject("BoxNotificationLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BoxNotificationOverFiller {
+            get {
+                object obj = ResourceManager.GetObject("BoxNotificationOverFiller", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BoxNotificationOverLeft {
+            get {
+                object obj = ResourceManager.GetObject("BoxNotificationOverLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BoxNotificationOverRight {
+            get {
+                object obj = ResourceManager.GetObject("BoxNotificationOverRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BoxNotificationRight {
+            get {
+                object obj = ResourceManager.GetObject("BoxNotificationRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap BoxOverFiller {
             get {
                 object obj = ResourceManager.GetObject("BoxOverFiller", resourceCulture);

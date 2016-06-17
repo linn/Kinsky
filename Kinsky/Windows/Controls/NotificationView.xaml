@@ -6,27 +6,31 @@
              xmlns:local="clr-namespace:KinskyDesktopWpf.Controls"
              xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
              xmlns:kd="clr-namespace:KinskyDesktopWpf"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Width="800" Height="600" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" Title="Have you tried Linn Kazoo?" WindowStyle="None">
-    <Grid Background="Black">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Border BorderBrush="#111" Grid.Row="0" BorderThickness="1" Margin="10">
-            <cef:ChromiumWebBrowser x:Name="Browser" />
-        </Border>
-        <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Center" Name="ButtonsPanel">
-            <Button Name="Now" Margin="10" Click="Now_Click" >
-                <TextBlock Text="Show me now" VerticalAlignment="Center" Padding="10" />
-            </Button>
-            <Button Name="Later" Margin="10" Click="Later_Click" >
-                <TextBlock Text="Show me later" VerticalAlignment="Center" Padding="10" />
-            </Button>
-            <Button Name="Dismiss" Margin="10" Click="Dismiss_Click" >
-                <TextBlock Text="Stay with Kinsky for now" VerticalAlignment="Center" Padding="10" />
-            </Button>
-        </StackPanel>
-        <kd:IndeterminateProgressBar x:Name="progressBar" Width="40" Height="40" Grid.RowSpan="2" Visibility="{Binding IsLoading, ElementName=Browser,Converter={StaticResource BooleanVisibilityValueConverter}}" IsAnimating="True" HorizontalAlignment="Center" VerticalAlignment="Center" />
-    </Grid>
+             mc:Ignorable="d" Width="828" Height="660"
+              WindowStartupLocation="CenterOwner" ShowInTaskbar="False" Title="Have you tried Linn Kazoo?" WindowStyle="None" ResizeMode="NoResize" Background="Transparent">
+    <Border BorderBrush="#333" BorderThickness="2" CornerRadius="3">
+        <Grid Background="Black">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border BorderBrush="#111" Grid.Row="0" BorderThickness="1" Margin="10,10,10,0">
+                <cef:ChromiumWebBrowser x:Name="Browser"  Width="800" Height="600" />
+            </Border>
+            <Grid Grid.Row="1" Margin="10,0,10,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="Dismiss" Margin="0,10,0,10" Click="Dismiss_Click" HorizontalContentAlignment="Center" Width="100">
+                        <TextBlock Text="OK" VerticalAlignment="Center" Padding="10"  HorizontalAlignment="Stretch" TextAlignment="Center" />
+                    </Button>
+                    <Button Name="Now" Margin="10,10,0,10" Click="Now_Click" HorizontalContentAlignment="Center" Width="100">
+                        <TextBlock Text="Get Kazoo" VerticalAlignment="Center" Padding="10" HorizontalAlignment="Stretch" TextAlignment="Center" />
+                    </Button>
+                </StackPanel>
+                <CheckBox x:Name="chkDontShowAgain" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left">
+                    <TextBlock Text="Don't show this again" FontSize="10" Foreground="White" />
+                </CheckBox>
+            </Grid>
+            <kd:IndeterminateProgressBar x:Name="progressBar" Width="40" Height="40" Grid.RowSpan="2" Visibility="{Binding IsLoading, ElementName=Browser,Converter={StaticResource BooleanVisibilityValueConverter}}" IsAnimating="True" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+    </Border>
 </Window>

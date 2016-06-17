@@ -303,14 +303,29 @@
                         <Button Style="{StaticResource PlayLaterButtonStyle}" x:Name="buttonPlayLater" DockPanel.Dock="Left" AllowDrop="True" Margin="5,0,5,0" />
                     </DockPanel>
                     <DockPanel LastChildFill="False" HorizontalAlignment="Left" x:Name="pnlBrowserButtons" Grid.Column="0" Visibility="{Binding IsDragging, Converter={StaticResource InverseBooleanVisibilityValueConverter}}">
-                        <Button Command="kd:Commands.OptionsCommand" Margin="5,0,3,0" >
+                        <Button Command="kd:Commands.OptionsCommand" Margin="5,0,3,0">
                             <Button.CommandBindings>
                                 <CommandBinding Command="kd:Commands.OptionsCommand"
                                 CanExecute="OptionsCanExecute"
                                 Executed="OptionsExecuted" />
                             </Button.CommandBindings>
-                            <Image RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0,5,0" x:Name="SettingsButton" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceSettings}}" Height="20" />
-                        </Button>
+                            <Grid>
+                                <Image RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0,5,0" x:Name="SettingsButton" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceSettings}}" Height="20" />
+                                <Border x:Name="NotificationsBadge" 
+                                x:FieldModifier="public" 
+                                Visibility="Hidden" 
+                                BorderBrush="#FFF" 
+                                BorderThickness="1" 
+                                CornerRadius="5" 
+                                Padding="5,0,3,0" 
+                                Background="#0F97B3" Panel.ZIndex="2" Height="16" Width="16">
+                                    <FrameworkElement.RenderTransform>
+                                        <TranslateTransform X="13" Y="-11" />
+                                    </FrameworkElement.RenderTransform>
+                                    <TextBlock Text="1" Foreground="#FFF" FontSize="10" />
+                                </Border>
+                            </Grid>
+                        </Button> 
                         <ToggleButton x:Name="buttonToggleListView" DockPanel.Dock="Left" Style="{StaticResource ToggleListViewButtonStyle}" Margin="5,0,3,0" KeyboardNavigation.TabIndex="70"  />
                         <ToggleButton x:Name="buttonChangeSize" DockPanel.Dock="Left" Click="buttonChangeSize_Click" Style="{StaticResource SizeButtonStyle}" Margin="5,0,5,0" KeyboardNavigation.TabIndex="71" />
                         <Popup x:Name="popupSlider" Placement="Right" PlacementTarget="{Binding ElementName=buttonChangeSize}" StaysOpen="False" PopupAnimation="Fade" AllowsTransparency="True" Closed="popupSlider_Closed">
@@ -351,7 +366,7 @@
                 <Image Grid.Row="0" Grid.ColumnSpan="2" Stretch="Fill" Source="{Binding Source={x:Static kd:StaticImages.ImageSourceTopBarFiller}}" Margin="0,0,3,0" />
                 <!-- BROWSER BREADCRUMB -->
                 <DockPanel Grid.Row="0" Grid.Column="0" x:Name="pnlBreadcrumbBrowser">
-                    <Button Style="{StaticResource BackButtonStyle}" x:Name="buttonUpBrowser" DockPanel.Dock="Left" Margin="3,5,5,5" KeyboardNavigation.TabIndex="40" />
+                    <Button Style="{StaticResource BackButtonStyle}" x:Name="buttonUpBrowser" DockPanel.Dock="Left" Margin="3,5,5,5" KeyboardNavigation.TabIndex="40" Width="40" />
                     <ToggleButton DockPanel.Dock="Right" x:Name="buttonShowBookmarksList" Style="{StaticResource ShowBookmarksListButtonStyle}" Margin="3,5,5,5" KeyboardNavigation.TabIndex="43"  />
                     <Grid SnapsToDevicePixels="True" HorizontalAlignment="Center" Margin="0,5,0,0">
                         <Grid.ColumnDefinitions>

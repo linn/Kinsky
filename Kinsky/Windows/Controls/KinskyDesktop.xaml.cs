@@ -142,7 +142,13 @@ namespace KinskyDesktopWpf
         private static readonly string kApiKey = "129c76d1b4043e568d19a9fea8a1f5534cdae703";
         private readonly NotificationController iNotificationController;
         private NotificationView iNotificationView;
+        private INotification iNotification;
+        private OptionsDialog iOptionsDialog;
 
+        private static string kAppstoreUri = "https://www.microsoft.com/store/apps/9nblggh4np11";
+        private static string kLinnDownloadPageUri = "https://www.linn.co.uk/software#kazoo";
+        //private static string kLatestKazooInstallerLink = "https://oss.linn.co.uk/Releases/Kazoo/Davaar/kazoo_latest_win.exe";
+        
         public static KinskyDesktop Instance
         {
             get
@@ -756,15 +762,23 @@ namespace KinskyDesktopWpf
             // add a new stack status change handler while the options page  is visible
             // leave the default one so the balloon tips still appear
             iHelper.Stack.EventStatusChanged += iHelper.Stack.StatusHandler.StackStatusOptionsChanged;
-            OptionsDialog dialog = new OptionsDialog(iHelper, iUIOptions);
+            iOptionsDialog = new OptionsDialog(iHelper, iUIOptions);
+            iOptionsDialog.Closed += (s, e) =>
+            {
+                iHelper.Stack.EventStatusChanged -= iHelper.Stack.StatusHandler.StackStatusOptionsChanged;
+                iOptionsDialog = null;
+            };
             if (aStartOnNetwork)
             {
-                dialog.SetPageByName("Network");
+                iOptionsDialog.SetPageByName("Network");
             }
-            dialog.Owner = Window.GetWindow(this);
-            dialog.AllowsTransparency = dialog.Owner.AllowsTransparency;
-            dialog.ShowDialog();
-            iHelper.Stack.EventStatusChanged -= iHelper.Stack.StatusHandler.StackStatusOptionsChanged;
+            if (iNotification != null)
+            {
+                iOptionsDialog.ShowNotificationAction = () => Show(iNotification);
+            }
+            iOptionsDialog.Owner = Window.GetWindow(this);
+            iOptionsDialog.AllowsTransparency = this.AllowsTransparency;
+            iOptionsDialog.ShowDialog();
         }
 
         private void Exit()
@@ -782,6 +796,8 @@ namespace KinskyDesktopWpf
                 iSystrayForm.Invoke((Action)delegate()
                 {
                     iSystrayForm.Close();
+                    iSystrayForm.Dispose();
+                    iSystrayForm = null;
                 });
             }
             StopStack();
@@ -816,7 +832,7 @@ namespace KinskyDesktopWpf
                 }
                 catch { }
             }
-            App.Current.Shutdown();
+            CefSharp.Cef.Shutdown();
         }
 
         #region Command Bindings
@@ -1028,11 +1044,17 @@ namespace KinskyDesktopWpf
 
         public void Update(INotification aNotification, bool aShowNow)
         {
+            iNotification = aNotification;
+            if (iOptionsDialog != null)
+            {
+                iOptionsDialog.ShowNotificationAction = () => Show(aNotification); 
+            }
             if (aShowNow)
             {
                 Show(aNotification);
             }
-        }        
+            viewKinsky.NotificationsBadge.Visibility = Visibility.Visible;
+        }
 
         private void Show(INotification aNotification)
         {
@@ -1040,13 +1062,35 @@ namespace KinskyDesktopWpf
             {
                 iNotificationView.Close();
             }
+            if (iOptionsDialog != null)
+            {
+                iOptionsDialog.Close();
+            }
             var notificationView = new NotificationView();
             notificationView.Closed += (s, e) =>
             {
                 iNotificationView = null;
             };
-            notificationView.Launch(aNotification, this);
+            notificationView.Launch(iHelper, aNotification, this);
             iNotificationView = notificationView;
+        }
+
+        public static void GetKazoo()
+        {
+            if (IsWindowsStoreCapable())
+            {
+                System.Diagnostics.Process.Start(kAppstoreUri);
+            }else
+            {
+                System.Diagnostics.Process.Start(kLinnDownloadPageUri);
+            }
+        }
+
+        // https://msdn.microsoft.com/library/windows/desktop/ms724832.aspx
+        // return osversion >= 6.2 - can't differentiate between windows 8 and 8.1 as both are 6.2, so assume 8.1
+        private static bool IsWindowsStoreCapable()
+        {
+            return Environment.OSVersion.Version.Major > 6 || (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor >= 2);
         }
     }
 }
