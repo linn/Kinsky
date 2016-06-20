@@ -145,6 +145,9 @@ namespace KinskyDroid
             iSaveSupport = new SaveSupport(iHelperKinsky, iSharedPlaylists, optionSharedPlaylists, iLocalPlaylists, optionLocalPlaylists);
             iPlaySupport = new PlaySupport();
             iHelperKinsky.ProcessOptionsFileAndCommandLine();
+            iNotificationView = new NotificationView(this);
+            iNotificationController = new NotificationController(iInvoker, iHelperKinsky, new NotificationServerHttp(NotificationServerHttp.DefaultUri(iHelperKinsky.Product)), iNotificationView);
+
             Xamarin.Insights.Identify(iHelperKinsky.OptionInstallId.Value, null);
 
             Linn.Kinsky.Model model = new Linn.Kinsky.Model(iViewMaster, iPlaySupport);
@@ -238,6 +241,14 @@ namespace KinskyDroid
         {
             UserLog.WriteLine("Stack start/stop failed to complete in a timely manner, terminating current process...");
             System.Diagnostics.Process.GetCurrentProcess().Kill();
+        }
+
+        public NotificationView NotificationView
+        {
+            get
+            {
+                return iNotificationView;
+            }
         }
 
         public OptionBool OptionExtendedTrackInfo
@@ -612,6 +623,8 @@ namespace KinskyDroid
         private System.Threading.Timer iStopTimer;
         private AutoResetEvent iEventCreated;
         private const string kTraceLevel = "kGui";
+        private NotificationController iNotificationController;
+        private NotificationView iNotificationView;
     }
 
     internal class AppRestartHandler : IAppRestartHandler

@@ -18,6 +18,7 @@ using Android.App;
 using Android.Graphics.Drawables;
 using Android.Content.PM;
 using Android.Support.V4.View;
+using Android.Webkit;
 
 namespace KinskyDroid
 {
@@ -1048,8 +1049,8 @@ namespace KinskyDroid
         private ListView iPlaylistRadio;
         private ListView iPlaylistReceiver;
         private View iRootView;
-
     }
+
     public abstract class ViewKinsky
     {
         public ViewKinsky(Stack aStack, Activity aActivity, AndroidViewMaster aViewMaster, AndroidResourceManager aResourceManager, IconResolver aIconResolver)
@@ -8153,4 +8154,162 @@ namespace KinskyDroid
 
     #endregion
 
+    #region Notification
+
+    public class NotificationView : INotificationView
+    {
+        private readonly Stack iStack;
+        private Activity iActivity;
+        private INotification iNotification;
+        private bool iShowOnActivityStart;
+        private IPopup iPopup;
+
+        public NotificationView(Stack aStack)
+        {
+            iStack = aStack;
+        }
+
+        public Activity Activity
+        {
+            set
+            {
+                if (iActivity != null)
+                {
+                    if (iPopup != null)
+                    {
+                        iPopup.EventDismissed -= PopupDismissed;
+                        iPopup.Dismiss();
+                        iPopup = null;
+                    }
+                }
+                iActivity = value;
+                if (value != null)
+                {
+                    if (iShowOnActivityStart)
+                    {
+                        ShowPopup(value, iNotification);
+                    }
+                }
+            }
+        }
+
+        public void Update(INotification aNotification, bool aShowNow)
+        {
+            iNotification = aNotification;
+            if (aShowNow)
+            {
+                if (iActivity != null)
+                {
+                    ShowPopup(iActivity, aNotification);
+                }
+                else
+                {
+                    iShowOnActivityStart = true;
+                }
+            }
+        }
+
+        private void ShowPopup(Activity aActivity, INotification aNotification)
+        {
+            LayoutInflater inflater = (LayoutInflater)aActivity.GetSystemService(Context.LayoutInflaterService);
+            var popupFactory = new OverlayPopupFactory(aActivity, new Color(0, 0, 0, 200));
+
+            // create the view
+            View popupView = inflater.Inflate(Resource.Layout.Notification, null, false);
+            var dimensions = GetDimensions(aActivity);
+
+            // create the popup
+            iPopup = popupFactory.CreatePopup(popupView, aActivity.FindViewById(Resource.Id.rootview));
+            iPopup.EventDismissed += PopupDismissed;
+            iPopup.Show();
+
+            // set the width and height
+            //var layoutParams = new RelativeLayout.LayoutParams(dimensions.X, dimensions.Y);
+            popupView.LayoutParameters.Width = dimensions.X;
+            popupView.LayoutParameters.Height = dimensions.Y;
+            //= layoutParams;
+
+            // load the webview
+            var browser = popupView.FindViewById<WebView>(Resource.Id.notificationwebview);
+            browser.LoadUrl(aNotification.Uri);
+
+            var closeButton = popupView.FindViewById<Button>(Resource.Id.notificationclose);
+            var dontShowCheckbox = popupView.FindViewById<CheckBox>(Resource.Id.notificationcheckbox);
+            var getKazooButton = popupView.FindViewById<Button>(Resource.Id.notificationgetkazoo);
+
+            closeButton.Click += (s, e) => ClosePopup(dontShowCheckbox.Checked);
+            getKazooButton.Click += (s, e) => GetKazoo();
+        }
+
+        private void GetKazoo()
+        {
+            var packageId = "uk.co.linn.kazoo";
+
+            string url;
+            try
+            {
+                //Check whether Google Play store is installed or not:
+                iActivity.PackageManager.GetPackageInfo("com.android.vending", 0);
+                url = string.Format("market://details?id={0}", packageId);
+            }
+            catch
+            {
+                url = string.Format("https://play.google.com/store/apps/details?id={0}", packageId);
+            }
+
+            // todo: amazon store uri?
+
+            var intent = new Intent(Intent.ActionView.ToString(), Android.Net.Uri.Parse(url));
+            iActivity.StartActivity(intent);
+        }
+
+        private void ClosePopup(bool aDontShowAgain)
+        {
+            if (aDontShowAgain)
+            {
+                iNotification.DontShowAgain();
+            }
+            iPopup.Dismiss();
+        }
+
+        private Point GetDimensions(Activity aActivity)
+        {
+            //DisplayMetrics dm = this.ApplicationContext.Resources.DisplayMetrics;
+            //UserLog.WriteLine("Display Metrics: WidthPixels=" + dm.WidthPixels + ", Xdpi=" + dm.Xdpi + ", HeightPixels=" + dm.HeightPixels + ", Ydpi=" + dm.Ydpi);
+            //float screenWidth = dm.WidthPixels / dm.Xdpi;
+            //float screenHeight = dm.HeightPixels / dm.Ydpi;
+            //IWindowManager windowManager = aActivity.GetSystemService(Context.WindowService).JavaCast<IWindowManager>();
+            //Point displaySize = new Point();
+            //windowManager.DefaultDisplay.GetSize(displaySize);
+
+            // use the dimensions of the root view
+            var rootView = aActivity.FindViewById(Resource.Id.rootview);
+            var width = rootView.Width;
+            var height = rootView.Height;
+
+            // don't fill the whole screen
+            var margin = 50;
+            width -= (margin * 2);
+            height -= (margin * 2);
+
+            //if (iStack.TabletView)
+            //{
+            //    // inject some margins into the popup if showing in tablet view
+            //    width -= width / 5;
+            //    height -= height / 5;
+            //}
+
+            return new Point(width, height);
+        }
+
+        private void PopupDismissed(object sender, EventArgs args)
+        {
+            iPopup.EventDismissed -= PopupDismissed;
+            iPopup = null;
+            iShowOnActivityStart = false;
+        }
+
+    }
+
+    #endregion
 }

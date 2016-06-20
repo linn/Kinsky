@@ -102,6 +102,7 @@ namespace KinskyDroid
                     iViewKinsky = CreateViewKinsky();
                 }
                 iViewKinsky.Open();
+                iStack.NotificationView.Activity = this;
                 iStackStarted = true;
             }));
         }
@@ -114,6 +115,7 @@ namespace KinskyDroid
                 {
                     iViewKinsky.Close();
                 }
+                iStack.NotificationView.Activity = null;
                 iStackStarted = false;
             }));
         }
@@ -137,6 +139,7 @@ namespace KinskyDroid
             Assert.Check(!iStack.Invoker.InvokeRequired);
             UserLog.WriteLine("OnConfigurationChanged()");
             base.OnConfigurationChanged(newConfig);
+            iStack.NotificationView.Activity = this;
             RestartUI();
         }
 
