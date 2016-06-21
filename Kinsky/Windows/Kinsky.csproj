@@ -428,9 +428,9 @@
     <Error Condition="!Exists('..\..\packages\CefSharp.Common.49.0.1\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.49.0.1\build\CefSharp.Common.targets'))" />
     <Error Condition="!Exists('..\..\packages\CefSharp.Wpf.49.0.1\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Wpf.49.0.1\build\CefSharp.Wpf.props'))" />
   </Target>
-  <PropertyGroup>
-    <PostBuildEvent Condition=" '$(Configuration)' == 'Release'">python "$(MSBuildThisFileDirectory)Installer\buildinstaller.py" $(Configuration) $(BuildVersion)</PostBuildEvent>
-  </PropertyGroup>
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
+    <Exec Command="python &quot;$(MSBuildThisFileDirectory)Installer\buildinstaller.py&quot; $(Configuration) $(BuildVersion)" />
+  </Target>
   <Import Project="..\..\packages\cef.redist.x64.3.2623.1401\build\cef.redist.x64.targets" Condition="Exists('..\..\packages\cef.redist.x64.3.2623.1401\build\cef.redist.x64.targets')" />
   <Import Project="..\..\packages\cef.redist.x86.3.2623.1401\build\cef.redist.x86.targets" Condition="Exists('..\..\packages\cef.redist.x86.3.2623.1401\build\cef.redist.x86.targets')" />
   <Import Project="..\..\packages\CefSharp.Common.49.0.1\build\CefSharp.Common.targets" Condition="Exists('..\..\packages\CefSharp.Common.49.0.1\build\CefSharp.Common.targets')" />
