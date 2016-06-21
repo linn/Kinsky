@@ -70,6 +70,7 @@ namespace KinskyDroid
             iScheduler.SchedulerError += SchedulerErrorHandler;
             iStopTimer = new System.Threading.Timer(StopTimeout);
             iStopTimer.Change(Timeout.Infinite, Timeout.Infinite);
+            iNotificationView = new NotificationView(this);
 
             iScheduler.Schedule(() =>
             {
@@ -145,7 +146,6 @@ namespace KinskyDroid
             iSaveSupport = new SaveSupport(iHelperKinsky, iSharedPlaylists, optionSharedPlaylists, iLocalPlaylists, optionLocalPlaylists);
             iPlaySupport = new PlaySupport();
             iHelperKinsky.ProcessOptionsFileAndCommandLine();
-            iNotificationView = new NotificationView(this);
             iNotificationController = new NotificationController(iInvoker, iHelperKinsky, new NotificationServerHttp(NotificationServerHttp.DefaultUri(iHelperKinsky.Product)), iNotificationView);
 
             Xamarin.Insights.Identify(iHelperKinsky.OptionInstallId.Value, null);

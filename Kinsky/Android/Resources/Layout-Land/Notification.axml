@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/notificationbackground"
+    android:padding="10dip">
     <RelativeLayout
         android:id="@+id/notificationcontrols"
         android:layout_width="match_parent"
@@ -33,7 +35,8 @@
                 style="@style/textviewtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dip" />
+                android:layout_marginRight="10dip"
+                android:minWidth="100dip" />
             <Button
                 android:id="@+id/notificationgetkazoo"
                 android:text="Get Kazoo"
@@ -41,7 +44,8 @@
                 android:background="@drawable/notificationbuttonbackground"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip" />
+                android:layout_marginLeft="10dip"
+                android:minWidth="100dip" />
         </LinearLayout>
     </RelativeLayout>
     <WebView

@@ -325,6 +325,7 @@ namespace KinskyDroid
             iStack.EventAutoLockChanged += EventAutoLockChangedHandler;
 
             iOptionsMediator.SettingsButton = iRootView.FindViewById(Resource.Id.settingsbutton);
+            iOptionsMediator.SettingsButtonBadge = iRootView.FindViewById(Resource.Id.settingsbuttonbadge);
 
             iStack.OptionEnableRocker.EventValueChanged += OptionEnableRockerEventValueChangedHandler;
 
@@ -759,11 +760,13 @@ namespace KinskyDroid
         {
             iOptionsMediator = new OptionsMediator(iPopupFactory, iStack, iViewMaster.ImageCache, iIconResolver, false);
             iOptionsMediator.PopupAnchor = iRootView.FindViewById(Resource.Id.settingsbutton);
+
             iRootView.KeepScreenOn = iStack.AutoLock;
 
             iStack.EventAutoLockChanged += EventAutoLockChangedHandler;
 
             iOptionsMediator.SettingsButton = iRootView.FindViewById(Resource.Id.settingsbutton);
+            iOptionsMediator.SettingsButtonBadge = iRootView.FindViewById(Resource.Id.settingsbuttonbadge);
 
             iStack.OptionEnableRocker.EventValueChanged += OptionEnableRockerEventValueChangedHandler;
 
@@ -1690,11 +1693,39 @@ namespace KinskyDroid
             iOptionsView.CancelButtonText = "Back";
             iOptionsView.ShowCancelButton = aShowCancelButton;
             iOptionsView.EventCancelButtonClicked += EventCancelButtonClickedHandler;
+            iGetKazooButtonContainer = iStack.LayoutInflater.Inflate(Resource.Layout.GetKazoo, null) as ViewGroup;
+            var layoutParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WrapContent, RelativeLayout.LayoutParams.WrapContent);
+            layoutParameters.AddRule(LayoutRules.Below, iOptionsView.MasterTitleView.Id);
+            layoutParameters.AddRule(LayoutRules.CenterHorizontal);
+            iOptionsView.MasterContainer.AddView(iGetKazooButtonContainer, layoutParameters);
+            iGetKazooButton = iGetKazooButtonContainer.FindViewById<Button>(Resource.Id.settingsgetkazoobutton);
+            iGetKazooButton.Click += GetKazooButtonClickHandler;
+            iStack.NotificationView.EventNotificationUpdated += NotificationUpdated;
+            NotificationUpdated(this, EventArgs.Empty);
+
             iStack.HelperKinsky.EventOptionPagesChanged += EventOptionPagesChangedHandler;
             aStack.Invoker.BeginInvoke((Action)(() =>
             {
                 UpdateOptionPages();
             }));
+        }
+
+        private void NotificationUpdated(object sender, EventArgs args)
+        {
+            iGetKazooButtonContainer.Visibility = iStack.NotificationView.HasNotification ? ViewStates.Visible : ViewStates.Gone;
+            if (iSettingsButtonBadge != null)
+            {
+                iSettingsButtonBadge.Visibility = iStack.NotificationView.HasNotification ? ViewStates.Visible : ViewStates.Gone;
+            }
+        }
+
+        private void GetKazooButtonClickHandler(object sender, EventArgs args)
+        {
+            if (iStack.NotificationView.HasNotification)
+            {
+                iStack.NotificationView.ShowNow();
+                iPopup.Dismiss();
+            }
         }
 
         private void EventCancelButtonClickedHandler(object sender, EventArgs e)
@@ -1721,6 +1752,15 @@ namespace KinskyDroid
                 {
                     iPopup.Dismiss();
                 }
+            }
+        }
+
+        public View SettingsButtonBadge
+        {
+            set
+            {
+                iSettingsButtonBadge = value;
+                NotificationUpdated(this, EventArgs.Empty); // update badge visibility
             }
         }
 
@@ -1842,6 +1882,8 @@ namespace KinskyDroid
 
         public void Dispose()
         {
+            iStack.NotificationView.EventNotificationUpdated -= NotificationUpdated;
+            iGetKazooButton.Click -= GetKazooButtonClickHandler;
             iStack.HelperKinsky.EventOptionPagesChanged -= EventOptionPagesChangedHandler;
             if (iPopup != null)
             {
@@ -1856,6 +1898,8 @@ namespace KinskyDroid
             iOptionsView = null;
         }
 
+        private Button iGetKazooButton;
+        private ViewGroup iGetKazooButtonContainer;
         private IPopupFactory iPopupFactory;
         private View iSettingsButton;
         private Stack iStack;
@@ -1867,6 +1911,7 @@ namespace KinskyDroid
         private static string kManualLinkTablet = "http://oss.linn.co.uk/trac/wiki/KinskyAndroidTabletDavaarManual";
         private static string kManualLinkPhone = "http://oss.linn.co.uk/trac/wiki/KinskyAndroidPhoneDavaarManual";
         private View iAboutView;
+        private View iSettingsButtonBadge;
     }
 
     #endregion
@@ -8164,6 +8209,8 @@ namespace KinskyDroid
         private bool iShowOnActivityStart;
         private IPopup iPopup;
 
+        public event EventHandler<EventArgs> EventNotificationUpdated;
+
         public NotificationView(Stack aStack)
         {
             iStack = aStack;
@@ -8190,12 +8237,14 @@ namespace KinskyDroid
                         ShowPopup(value, iNotification);
                     }
                 }
+                OnNotificationUpdated();
             }
         }
 
         public void Update(INotification aNotification, bool aShowNow)
         {
             iNotification = aNotification;
+            OnNotificationUpdated();
             if (aShowNow)
             {
                 if (iActivity != null)
@@ -8207,6 +8256,29 @@ namespace KinskyDroid
                     iShowOnActivityStart = true;
                 }
             }
+        }
+
+        private void OnNotificationUpdated()
+        {
+            var del = EventNotificationUpdated;
+            if (del != null)
+            {
+                del(this, EventArgs.Empty);
+            }
+        }
+
+        public bool HasNotification
+        {
+            get
+            {
+                return iNotification != null && iActivity != null;
+            }
+        }
+
+        public void ShowNow()
+        {
+            Assert.Check(HasNotification);
+            ShowPopup(iActivity, iNotification);
         }
 
         private void ShowPopup(Activity aActivity, INotification aNotification)
@@ -8237,6 +8309,8 @@ namespace KinskyDroid
             var dontShowCheckbox = popupView.FindViewById<CheckBox>(Resource.Id.notificationcheckbox);
             var getKazooButton = popupView.FindViewById<Button>(Resource.Id.notificationgetkazoo);
 
+            dontShowCheckbox.Checked = iStack.HelperKinsky.LastNotificationVersion == aNotification.Version;
+
             closeButton.Click += (s, e) => ClosePopup(dontShowCheckbox.Checked);
             getKazooButton.Click += (s, e) => GetKazoo();
         }
@@ -8244,23 +8318,69 @@ namespace KinskyDroid
         private void GetKazoo()
         {
             var packageId = "uk.co.linn.kazoo";
+            var intent = new Intent(Intent.ActionView.ToString(), Android.Net.Uri.Parse(GetMarketplaceUri(iActivity, packageId)));
+            iActivity.StartActivity(intent);
+        }
 
-            string url;
+        private string GetMarketplaceUri(Activity aActivity, string aPackageId)
+        {
+            string storeWebUrl = string.Format("https://play.google.com/store/apps/details?id={0}", aPackageId);
+            string marketUrl = string.Format("market://details?id={0}", aPackageId);
+            string amazonUrl = string.Format("https://www.amazon.com/gp/mas/dl/android?p={0}", aPackageId);
+
+            var pm = aActivity.PackageManager;
+
+            var url = storeWebUrl;
+            var model = Android.OS.Build.Model;
+            if (!string.IsNullOrEmpty(model))
+            {
+                model = model.ToLowerInvariant();
+            }
             try
             {
-                //Check whether Google Play store is installed or not:
-                iActivity.PackageManager.GetPackageInfo("com.android.vending", 0);
-                url = string.Format("market://details?id={0}", packageId);
+                var installer = pm.GetInstallerPackageName(aActivity.PackageName);
+                if (!string.IsNullOrEmpty(installer) && installer == "com.android.vending")
+                {
+                    url = marketUrl;
+                }
+                else if (!string.IsNullOrEmpty(installer) && installer == "com.amazon.venezia")
+                {
+                    url = amazonUrl;
+                }
+                else if (!string.IsNullOrEmpty(model)
+                         && (model.Contains("amazon")
+                         || model.Contains("kindle")))
+                {
+                    url = amazonUrl;
+                }
+                else
+                {
+                    try
+                    {
+                        if (pm.GetPackageInfo("com.android.vending", 0) != null)
+                        {
+                            url = marketUrl;
+                        }
+                    }
+                    catch (PackageManager.NameNotFoundException)
+                    {
+                    }
+                    try
+                    {
+                        if (pm.GetPackageInfo("com.amazon.venezia", 0) != null)
+                        {
+                            url = amazonUrl;
+                        }
+                    }
+                    catch (PackageManager.NameNotFoundException)
+                    {
+                    }
+                }
             }
             catch
             {
-                url = string.Format("https://play.google.com/store/apps/details?id={0}", packageId);
             }
-
-            // todo: amazon store uri?
-
-            var intent = new Intent(Intent.ActionView.ToString(), Android.Net.Uri.Parse(url));
-            iActivity.StartActivity(intent);
+            return url;
         }
 
         private void ClosePopup(bool aDontShowAgain)

@@ -29,6 +29,14 @@ namespace OssToolkitDroid
         public event EventHandler<EventArgs> EventSaveButtonClicked;
         public event EventHandler<EventArgs> EventCancelButtonClicked;
 
+        public ViewGroup MasterContainer
+        {
+            get
+            {
+                return iMasterContainer;
+            }
+        }
+
         public View MasterView
         {
             get
@@ -120,6 +128,14 @@ namespace OssToolkitDroid
             set
             {
                 iMasterContainer.FindViewById<TextView>(kMasterTitleId).Text = value;
+            }
+        }
+
+        public View MasterTitleView
+        {
+            get
+            {
+                return iMasterContainer.FindViewById<TextView>(kMasterTitleId);
             }
         }
 
