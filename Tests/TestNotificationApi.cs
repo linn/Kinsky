@@ -94,20 +94,14 @@ namespace Tests
             iPersistence.LastNotificationVersion = 1;
             iServer.SetDesiredResponse(iServerResponseV1);
             var waitHandle = new AutoResetEvent(false);
-
-            iServer.CheckCallback = (response) =>
-            {
-                iInvoker.BeginInvoke(new Action(() =>
-                {
-                    waitHandle.Set();
-                }));
-            };
+           
             iView.ShowCallback = (notification, shownow) =>
             {
                 if (shownow)
                 {
                     Assert.Fail("View should not be shown.");
                 }
+                waitHandle.Set();
             };
 
             // act
