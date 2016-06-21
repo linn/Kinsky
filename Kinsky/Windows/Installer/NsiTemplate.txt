@@ -10,7 +10,7 @@
 
   !insertmacro VersionCompare
 
-  !define DOTNETURI "http://download.microsoft.com/download/0/6/1/061F001C-8752-4600-A198-53214C69B51F/dotnetfx35setup.exe"
+  !define DOTNETURI "http://download.microsoft.com/download/1/B/E/1BE39E79-7E39-46A3-96FF-047F95396215/dotNetFx40_Full_setup.exe"
   !define PRODUCT "%(product)s"
   !define VERSION "%(version)s"
   !define LAUNCHFILE "%(launch)s"
@@ -112,7 +112,7 @@ Function IsDotNETInstalled
   Push $0
   Push $1
   
-  ReadRegDWORD $1 HKLM 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v3.5' Install
+  ReadRegDWORD $1 HKLM 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full' Install
   
   ${If} $1 == ''
     StrCpy $0 "not installed"
@@ -428,16 +428,16 @@ Section "Linn" SecLinn
   
   ${If} $InstallDotNet == "Yes"
      SetDetailsView hide
-     inetc::get /caption "Downloading .NET Framework 3.5" /canceltext "Cancel" ${DOTNETURI} "$TEMP\dotnetfx35setup.exe" /end
+     inetc::get /caption "Downloading .NET Framework 4.0" /canceltext "Cancel" ${DOTNETURI} "$TEMP\dotNetFx40_Full_setup.exe" /end
      Pop $1
  
      ${If} $1 != "OK"
-        Delete "$TEMP\dotnetfx35setup.exe"
+        Delete "$TEMP\dotNetFx40_Full_setup.exe"
         Abort "Installation cancelled."
      ${EndIf}
  
-     ExecWait "$TEMP\dotnetfx35setup.exe"
-     Delete "$TEMP\dotnetfx35setup.exe"
+     ExecWait "$TEMP\dotNetFx40_Full_setup.exe"
+     Delete "$TEMP\dotNetFx40_Full_setup.exe"
  
      SetDetailsView show
   ${EndIf}
