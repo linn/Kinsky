@@ -51,6 +51,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
@@ -63,9 +64,11 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <MonoDroidExtraArgs>
     </MonoDroidExtraArgs>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <AndroidKeyStore>True</AndroidKeyStore>
     <AndroidSigningKeyStore>/Users/dev/.android_keystores/linnapps.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>default</AndroidSigningStorePass>
