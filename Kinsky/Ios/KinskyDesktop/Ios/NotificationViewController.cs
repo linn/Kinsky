@@ -25,7 +25,13 @@ namespace KinskyTouch
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-
+			// give the dialog a border on iPad
+			if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+			{
+				this.View.Layer.BorderColor = UIColor.LightGray.CGColor;
+				this.View.Layer.BorderWidth = 1;
+				this.View.Layer.CornerRadius = 8;
+			}
 			iGetKazooButton = new UIBarButtonItem();
 			iGetKazooButton.Title = "Get Kazoo";
 
