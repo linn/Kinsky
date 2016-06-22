@@ -18,18 +18,18 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't show me this again" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DfE-Sd-8lC">
-                    <rect key="frame" x="67" y="571" width="192" height="21"/>
+                    <rect key="frame" x="67" y="564" width="192" height="21"/>
                     <edgeInsets key="layoutMargins" top="8" left="37" bottom="8" right="8"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QgT-2E-dzS">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="554"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="547"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </webView>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4wR-xA-KzM">
-                    <rect key="frame" x="8" y="566" width="51" height="31"/>
+                    <rect key="frame" x="8" y="559" width="51" height="31"/>
                 </switch>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -40,7 +40,7 @@
                 <constraint firstItem="DfE-Sd-8lC" firstAttribute="leading" secondItem="4wR-xA-KzM" secondAttribute="trailing" constant="10" id="Rbf-eG-3mc"/>
                 <constraint firstItem="QgT-2E-dzS" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="SkL-kj-KCC"/>
                 <constraint firstItem="4wR-xA-KzM" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="8" id="jas-9E-E3h"/>
-                <constraint firstAttribute="bottom" secondItem="4wR-xA-KzM" secondAttribute="bottom" constant="3" id="nuG-Yx-r4W"/>
+                <constraint firstAttribute="bottom" secondItem="4wR-xA-KzM" secondAttribute="bottom" constant="10" id="nuG-Yx-r4W"/>
                 <constraint firstItem="QgT-2E-dzS" firstAttribute="top" secondItem="2" secondAttribute="top" id="u3i-Vs-gIP"/>
             </constraints>
             <point key="canvasLocation" x="529" y="436"/>
