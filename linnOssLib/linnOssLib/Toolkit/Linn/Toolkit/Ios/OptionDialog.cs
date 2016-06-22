@@ -15,6 +15,15 @@ namespace Linn.Toolkit.Ios
             iPopOverController = new UIPopoverController(iNavigationController);
         }
 
+
+		public UINavigationController NavigationController
+		{
+			get
+			{
+				return iNavigationController;
+			}
+		}
+
         public void Open(UIButton aButton)
         {
             if(!iPopOverController.PopoverVisible)

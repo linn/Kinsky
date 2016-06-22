@@ -21,7 +21,15 @@ namespace KinskyTouch
                 iOptionDialog = new OptionDialogIpad(iHelper, kManualUri, KinskyTouch.Properties.ResourceManager.Icon);
             }
 
+			var getKazooButton = new UIBarButtonItem("Try Linn's latest control point", UIBarButtonItemStyle.Bordered, new EventHandler((s, e) =>
+			{
+				iOptionDialog.NavigationController.DismissViewController(true, null);
+				NotificationView.Instance.ShowCurrent();
+			}));
+
             iOptionDialog.Open(aBarButtonItem);
+			iOptionDialog.NavigationController.ToolbarHidden = false;
+			iOptionDialog.NavigationController.TopViewController.SetToolbarItems(new UIBarButtonItem[] { getKazooButton }, false);
         }
 
         public static string kManualUri = "http://oss.linn.co.uk/trac/wiki/KinskyIpadDavaarManual";
