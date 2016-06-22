@@ -5,6 +5,8 @@ using Foundation;
 
 using Linn;
 using Linn.Toolkit.Ios;
+using CoreGraphics;
+using ObjCRuntime;
 
 namespace KinskyTouch
 {
@@ -105,9 +107,23 @@ namespace KinskyTouch
 
             iButtonConfig = new UIBarButtonItem(new UIImage("Settings.png"), UIBarButtonItemStyle.Bordered, null);
             iButtonConfig.TintColor = UIColor.White;
-            //iButtonConfig.SetBackgroundImage(new UIImage("Button.png"), UIControlState.Normal, UIBarMetrics.Default);
+			//iButtonConfig.SetBackgroundImage(new UIImage("Button.png"), UIControlState.Normal, UIBarMetrics.Default);
             iButtonConfig.Width = 40.0f;
-            iButtonPlay = new UIBarButtonItemPlay(aOptionInsertMode, UIBarButtonItemStyle.Bordered, null);
+
+			iBadgeView = new BadgeView(new CGRect(40, 0, 14, 14));
+			iBadgeView.Value = 1;
+			iBadgeView.Font = iBadgeView.Font.WithSize(10);
+			iBadgeView.BackgroundColor = UIColor.FromRGBA(0, 0, 0, 0); // transparent
+			iBadgeView.FillColor = UIColor.FromRGB(15, 151, 179); // #0F9783
+			iBadgeView.StrokeColor = UIColor.White;
+			iBadgeView.TextColor = UIColor.White;
+			iBadgeView.Hidden = NotificationView.Instance.Current == null;
+			NotificationView.Instance.EventCurrentChanged += (s, e) => 
+			{
+				iBadgeView.Hidden = NotificationView.Instance.Current == null;
+			};
+
+			iButtonPlay = new UIBarButtonItemPlay(aOptionInsertMode, UIBarButtonItemStyle.Bordered, null);
             iButtonPlay.TintColor = UIColor.White;
             //iButtonPlay.SetBackgroundImage(new UIImage("Button.png"), UIControlState.Normal, UIBarMetrics.Default);
             iButtonSpacer1 = new UIBarButtonItem(UIBarButtonSystemItem.FixedSpace);
@@ -124,8 +140,10 @@ namespace KinskyTouch
             iButtonConfig.Clicked += ConfigClicked;
             iButtonEdit.Clicked += EditClicked;
             iButtonDone.Clicked += DoneClicked;
+			iBadgeView.TouchUpInside += ConfigClicked;
 
             iTableViewController.SetToolbarItems(new UIBarButtonItem[] { iButtonConfig, iButtonPlay, iButtonSpacer1, iButtonSpacer2 }, false);
+			iTableViewController.NavigationController.Toolbar.AddSubview(iBadgeView);
         }
 
         public bool AllowEditing
@@ -219,6 +237,7 @@ namespace KinskyTouch
         private UIBarButtonItem iButtonEdit;
         private UIBarButtonItem iButtonDone;
         private UIBarButtonItem iButtonSpacer2;
+		private BadgeView iBadgeView;
     }
 }
 

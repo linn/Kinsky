@@ -104,6 +104,7 @@ namespace KinskyTouch
         public override void OnActivated(UIApplication application)
         {
             Trace.WriteLine(Trace.kKinskyTouch, "AppDelegate.OnActivated");
+			iNotificationView = new NotificationView(Helper.Helper, Helper.Helper.Product, Helper.Helper.Invoker, ViewController);
 
             iScheduler.Schedule(()=>
 			{
@@ -303,5 +304,6 @@ namespace KinskyTouch
 
         private SaveViewController.Saver iSaver;
 		private Scheduler iScheduler;
+		protected NotificationView iNotificationView;
     }
 }

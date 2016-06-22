@@ -74,6 +74,14 @@ namespace Linn.Toolkit.Ios
             //iNavigationController.TopViewController.NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIBarButtonSystemItem.Done, delegate { iViewController.DismissViewController(true, () => {}); });
         }
 
+		public UINavigationController NavigationController
+		{
+			get
+			{
+				return iNavigationController;
+			}
+		}
+
         public void Open()
         {
 			iViewController.PresentModalViewController(iNavigationController, true);

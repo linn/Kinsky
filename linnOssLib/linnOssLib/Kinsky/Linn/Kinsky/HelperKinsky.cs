@@ -82,7 +82,7 @@ namespace Linn.Kinsky
             }
         }
 
-        internal IInvoker Invoker
+        public IInvoker Invoker
         {
             get
             {

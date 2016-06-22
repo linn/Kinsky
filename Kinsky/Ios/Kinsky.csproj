@@ -175,6 +175,7 @@
     <InterfaceDefinition Include="KinskyDesktop\Ios\TimeRotary.xib" />
     <InterfaceDefinition Include="KinskyDesktop\Ios\VolumeButtons.xib" />
     <InterfaceDefinition Include="KinskyDesktop\Ios\VolumeRotary.xib" />
+    <InterfaceDefinition Include="KinskyDesktop\Ios\NotificationViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -275,6 +276,12 @@
     </Compile>
     <Compile Include="..\Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="KinskyDesktop\Ios\NotificationView.cs" />
+    <Compile Include="KinskyDesktop\Ios\NotificationViewController.cs" />
+    <Compile Include="KinskyDesktop\Ios\NotificationViewController.designer.cs">
+      <DependentUpon>NotificationViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KinskyDesktop\Ios\BadgeView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Insights.1.11.2\build\Xamarin.iOS10\Xamarin.Insights.targets" Condition="Exists('..\..\packages\Xamarin.Insights.1.11.2\build\Xamarin.iOS10\Xamarin.Insights.targets')" />
