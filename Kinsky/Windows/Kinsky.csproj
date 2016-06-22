@@ -41,6 +41,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Installer\icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib, Version=2.84.0.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -414,7 +417,11 @@
       <Name>OssKinskyMppWfmu.Windows</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Installer\icon.ico">
+      <Link>icon.ico</Link>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Insights.1.11.2\build\portable-win+net40\Xamarin.Insights.targets" Condition="Exists('..\..\packages\Xamarin.Insights.1.11.2\build\portable-win+net40\Xamarin.Insights.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -428,9 +435,9 @@
     <Error Condition="!Exists('..\..\packages\CefSharp.Common.49.0.1\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.49.0.1\build\CefSharp.Common.targets'))" />
     <Error Condition="!Exists('..\..\packages\CefSharp.Wpf.49.0.1\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Wpf.49.0.1\build\CefSharp.Wpf.props'))" />
   </Target>
-  <PropertyGroup>
-    <PostBuildEvent Condition=" '$(Configuration)' == 'Release'">python "$(MSBuildThisFileDirectory)Installer\buildinstaller.py" $(Configuration) $(BuildVersion)</PostBuildEvent>
-  </PropertyGroup>
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
+    <Exec Command="python &quot;$(MSBuildThisFileDirectory)Installer\buildinstaller.py&quot; $(Configuration) $(BuildVersion)" />
+  </Target>
   <Import Project="..\..\packages\cef.redist.x64.3.2623.1401\build\cef.redist.x64.targets" Condition="Exists('..\..\packages\cef.redist.x64.3.2623.1401\build\cef.redist.x64.targets')" />
   <Import Project="..\..\packages\cef.redist.x86.3.2623.1401\build\cef.redist.x86.targets" Condition="Exists('..\..\packages\cef.redist.x86.3.2623.1401\build\cef.redist.x86.targets')" />
   <Import Project="..\..\packages\CefSharp.Common.49.0.1\build\CefSharp.Common.targets" Condition="Exists('..\..\packages\CefSharp.Common.49.0.1\build\CefSharp.Common.targets')" />

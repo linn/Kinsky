@@ -1,4 +1,5 @@
-﻿using Linn.Kinsky;
+﻿using Linn;
+using Linn.Kinsky;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,27 +23,24 @@ namespace KinskyDesktopWpf.Controls
     {
         private INotification iNotification;
         private INotificationPersistence iPersistence;
-
+        
         public NotificationView()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         public void Launch(INotificationPersistence aPersistence, INotification aNotification, Window aOwner)
         {
             iNotification = aNotification;
+            UserLog.WriteLine("Launch: " + iNotification.Uri);
             iPersistence = aPersistence;
             this.Owner = aOwner;
-            var rendered = false;
+            chkDontShowAgain.IsChecked = aPersistence.LastNotificationVersion == aNotification.Version;
             this.ContentRendered += (s, e) =>
             {
-                if (!rendered)
-                {
-                    rendered = true;
-                    Browser.Load(iNotification.Uri);
-                }
+                UserLog.WriteLine("Loading: " + iNotification.Uri);
+                Browser.Address = iNotification.Uri;
             };
-            chkDontShowAgain.IsChecked = aPersistence.LastNotificationVersion == aNotification.Version;
             this.ShowDialog();
         }
 
@@ -68,5 +66,6 @@ namespace KinskyDesktopWpf.Controls
         {
             Close();
         }
+        
     }
 }
