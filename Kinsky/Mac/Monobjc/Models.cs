@@ -29,11 +29,11 @@ namespace KinskyDesktop
     {
         private static ModelMain iInstance = null;
 
-        public static void Create(HelperKinskyDesktop aHelper, IInvoker aInvoker,
+        public static void Create (HelperKinskyDesktop aHelper, IInvoker aInvoker,
                                   IAppRestartHandler aRestartHandler)
         {
-            Assert.Check(iInstance == null);
-            iInstance = new ModelMain(aHelper, aInvoker, aRestartHandler);
+            Assert.Check (iInstance == null);
+            iInstance = new ModelMain (aHelper, aInvoker, aRestartHandler);
         }
 
         public static ModelMain Instance
