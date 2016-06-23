@@ -21,7 +21,8 @@ namespace KinskyDesktop
             KinskyDesktop.Properties.Resources.SetBasePath(resFolder);
 
 			ObjectiveCRuntime.LoadFramework("Cocoa");
-            ObjectiveCRuntime.LoadFramework("Quartz");
+            ObjectiveCRuntime.LoadFramework ("Quartz");
+            ObjectiveCRuntime.LoadFramework ("WebKit");
 			ObjectiveCRuntime.Initialize();
 
 			NSApplication.Bootstrap();

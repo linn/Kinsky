@@ -81,6 +81,8 @@
     <Compile Include="Monobjc\WindowSave.cs" />
     <Compile Include="Monobjc\ViewSelectionBookmark.cs" />
     <Compile Include="Monobjc\ViewAddBookmark.cs" />
+    <Compile Include="Monobjc\WindowNotification.cs" />
+    <Compile Include="Monobjc\NotificationView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -154,6 +156,7 @@
     <InterfaceDefinition Include="..\..\linnOssLib\linnOssLib\Toolkit\Linn\Toolkit\Mac\UserLog.xib">
       <Link>UserLog.xib</Link>
     </InterfaceDefinition>
+    <InterfaceDefinition Include="WindowNotification.xib" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="..\Resources\About.png">

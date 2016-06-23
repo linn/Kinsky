@@ -127,6 +127,8 @@ namespace KinskyDesktop
 
             // show the main window
             aViewMainWindow.Show(true);
+
+            iNotificationView = new NotificationView (iModel.Helper);
         }
 
         public void Start(IViewMainWindow aView)
@@ -163,6 +165,7 @@ namespace KinskyDesktop
         }
 
         private ModelMain iModel;
+        private NotificationView iNotificationView;
     }
 
 
