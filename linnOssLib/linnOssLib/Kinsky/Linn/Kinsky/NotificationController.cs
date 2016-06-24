@@ -79,6 +79,7 @@ namespace Linn.Kinsky
 
             TaskCompletionSource<NotificationServerResponse> tcs = new TaskCompletionSource<NotificationServerResponse>();
             var client = new WebClient();
+            client.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
             client.DownloadStringCompleted += (s, e) =>
             {
                 try
@@ -108,7 +109,7 @@ namespace Linn.Kinsky
                     client.Dispose();
                 }
             };
-            client.DownloadStringAsync(new Uri(string.Format("{0}?version={1}&cachebuster={2}", iUri, aCurrentVersion, Guid.NewGuid())));
+            client.DownloadStringAsync(new Uri(string.Format("{0}?version={1}", iUri, aCurrentVersion)));
 
             aCancelToken.Register(() =>
             {
