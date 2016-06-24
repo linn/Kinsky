@@ -21,7 +21,7 @@ namespace KinskyTouch
                 iOptionDialog = new OptionDialogIpad(iHelper, kManualUri, KinskyTouch.Properties.ResourceManager.Icon);
             }
 
-			var getKazooButton = new UIBarButtonItem("Try Linn's latest control point", UIBarButtonItemStyle.Bordered, new EventHandler((s, e) =>
+			var getKazooButton = new UIBarButtonItem("Try Linn's latest control app", UIBarButtonItemStyle.Bordered, new EventHandler((s, e) =>
 			{
 				iOptionDialog.NavigationController.DismissViewController(true, null);
 				NotificationView.Instance.ShowCurrent();
@@ -52,7 +52,7 @@ namespace KinskyTouch
                 iOptionDialog = new OptionDialogIphone(iViewController, iHelper, kManualUri, KinskyTouch.Properties.ResourceManager.Icon);
             }
 
-			var getKazooButton = new UIBarButtonItem("Try Linn's latest control point", UIBarButtonItemStyle.Bordered, new EventHandler((s, e) =>
+			var getKazooButton = new UIBarButtonItem("Try Linn's latest control app", UIBarButtonItemStyle.Bordered, new EventHandler((s, e) =>
 			{
 				iOptionDialog.NavigationController.DismissViewController(true, null);
 				NotificationView.Instance.ShowCurrent();
