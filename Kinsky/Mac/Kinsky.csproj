@@ -777,6 +777,9 @@
     <BundleResource Include="Installer\Kinsky.icns">
       <Link>Kinsky.icns</Link>
     </BundleResource>
+    <BundleResource Include="..\Resources\Badge.png">
+      <Link>Images\Badge.png</Link>
+    </BundleResource>
   </ItemGroup>  
   <ItemGroup>
     <NativeReference Include="..\..\External\libmonobjc.2.dylib">

@@ -203,8 +203,7 @@ namespace KinskyDesktop
         [ObjectiveCMessage("preferences:")]
         public void Preferences(Id aSender)
         {
-            OptionDialogMonobjc window = new OptionDialogMonobjc(ModelMain.Instance.Helper.OptionPages);
-            window.Open();
+            iController.OpenSettings ();
         }
 
         [ObjectiveCMessage("rescanNetwork:")]

@@ -12,6 +12,7 @@ using Monobjc;
 using Monobjc.Cocoa;
 
 using System.Linq;
+using Linn.Toolkit.Cocoa;
 
 
 // View classes that correspond to the MainWindow.xib file
@@ -184,6 +185,11 @@ namespace KinskyDesktop
             {
                 Window.OrderOut(this);
             }
+        }
+
+        public void SetNotificationView (NotificationView aView)
+        {
+            Window.SetNotificationView (aView);
         }
 
         void IViewMainWindow.ShowAlertPanel(string aTitle, string aMessage)
@@ -361,7 +367,13 @@ namespace KinskyDesktop
             }
 
             iController.MouseUp(new Point(NSEvent.MouseLocation));
-        }        
+        }
+
+        public void OpenSettings ()
+        {
+            OptionDialogMonobjc window = new OptionDialogMonobjc (ModelMain.Instance.Helper.OptionPages);
+            window.Open ();
+        }
 
         [ObjectiveCField]
         public WindowMain Window;
@@ -444,6 +456,12 @@ namespace KinskyDesktop
             iController = aController;
         }
 
+        public void SetNotificationView (NotificationView aView)
+        {
+            aView.EventNotificationUpdated += (s, e) => {
+                iBadge.IsHidden = !aView.CanShow;
+            };
+        }
 
         [ObjectiveCMessage("initWithContentRect:styleMask:backing:defer:")]
         public override Id InitWithContentRectStyleMaskBackingDefer(NSRect aContentRect, NSWindowStyleMasks aWindowStyle, NSBackingStoreType aBufferingType, bool aDeferCreation)
@@ -514,6 +532,10 @@ namespace KinskyDesktop
         [ObjectiveCMessage("awakeFromNib")]
         public void AwakeFromNib()
         {
+            iBadge = CreateBadge ();
+            this.ContentView.AddSubview (iBadge);
+            iBadge.IsHidden = true;
+
             // make the window transparent
             this.IsOpaque = false;
             // this line needs to be added when the views are CoreAnimation layer-backed i.e. so stuff can animate
@@ -556,6 +578,7 @@ namespace KinskyDesktop
                                      Properties.Resources.IconOsXMiniMouse,
                                      Properties.Resources.IconOsXMiniTouch,
                                      PanelWindowButtons);
+            ButtonSettings.Initialise (Properties.Resources.IconSettings);
 
 
             // setup handlers for widgets
@@ -563,6 +586,16 @@ namespace KinskyDesktop
             ButtonMaximise.EventClicked += ButtonMaximiseClicked;
             ButtonMinimise.EventClicked += ButtonMinimiseClicked;
             ButtonKompact.EventClicked += ButtonKompactClicked;
+            ButtonSettings.EventClicked += ButtonSettingsClicked;
+        }
+
+        private NSView CreateBadge ()
+        {
+            var badge = new ImageViewClickable ();
+            badge.EventClick += ButtonSettingsClicked;
+            badge.Frame = new NSRect (30, 20, 25, 25);
+            badge.Image = Properties.Resources.Badge;
+            return badge;
         }
 
         [ObjectiveCMessage("dealloc", SynchronizeFields = false)]
@@ -572,6 +605,7 @@ namespace KinskyDesktop
             ButtonMaximise.EventClicked -= ButtonMaximiseClicked;
             ButtonMinimise.EventClicked -= ButtonMinimiseClicked;
             ButtonKompact.EventClicked -= ButtonKompactClicked;
+            ButtonSettings.EventClicked -= ButtonSettingsClicked;
 
             this.SendMessageSuper(ThisClass, "dealloc");
         }
@@ -607,6 +641,11 @@ namespace KinskyDesktop
         private void ButtonCloseClicked(Id aSender)
         {
             this.Close();
+        }
+
+        private void ButtonSettingsClicked (Id aSender)
+        {
+            iController.OpenSettings ();
         }
 
         [ObjectiveCField]
@@ -666,7 +705,11 @@ namespace KinskyDesktop
         [ObjectiveCField]
         public ViewHoverTracker PanelWindowButtons;
 
+        [ObjectiveCField]
+        public ButtonHoverPush ButtonSettings;
+
         private ControllerMainWindow iController;
+        private NSView iBadge;
     }
 
 

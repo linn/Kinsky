@@ -66,6 +66,8 @@ namespace KinskyDesktop
     {
         private static readonly string kApiKey = "129c76d1b4043e568d19a9fea8a1f5534cdae703";
 
+        private IViewMainWindow iViewMainWindow;
+
         public ControllerApp(IViewApp aViewApp,
                              IInvoker aInvoker,
                              IAppRestartHandler aRestartHandler,
@@ -104,6 +106,7 @@ namespace KinskyDesktop
 
         public void InitialiseMainWindow(IViewMainWindow aViewMainWindow)
         {
+            iViewMainWindow = aViewMainWindow;
             // create a main window helper for initialisation
             MainWindowHelper mainWindowHelper = new MainWindowHelper(iModel, aViewMainWindow);
 
@@ -128,7 +131,15 @@ namespace KinskyDesktop
             // show the main window
             aViewMainWindow.Show(true);
 
-            iNotificationView = new NotificationView (iModel.Helper);
+            aViewMainWindow.SetNotificationView (new NotificationView (iModel.Helper));
+
+        }
+
+        public void OpenSettings ()
+        {
+            if (iViewMainWindow != null) {
+                iViewMainWindow.OpenSettings ();
+            }
         }
 
         public void Start(IViewMainWindow aView)
@@ -165,7 +176,6 @@ namespace KinskyDesktop
         }
 
         private ModelMain iModel;
-        private NotificationView iNotificationView;
     }
 
 
@@ -231,18 +241,20 @@ namespace KinskyDesktop
     // view interface and controller for the main application window
     public interface IViewMainWindow
     {
-        void Show(bool aShow);
-        void ShowAlertPanel(string aTitle, string aMessage);
-        bool PointInDragRect(Point aPt);
-        bool PointInResizeRect(Point aPt);
+        void Show (bool aShow);
+        void ShowAlertPanel (string aTitle, string aMessage);
+        bool PointInDragRect (Point aPt);
+        bool PointInResizeRect (Point aPt);
         Rect Rect { get; set; }
         bool IsFullscreen { get; set; }
         float KompactModeHeight { get; }
-        void KompactModeEnter(Rect aRect);
-        void KompactModeExit(Rect aRect);
+        void KompactModeEnter (Rect aRect);
+        void KompactModeExit (Rect aRect);
         float SplitterFraction { set; }
-        void NowPlayingModeEnter();
-        void NowPlayingModeExit();
+        void NowPlayingModeEnter ();
+        void NowPlayingModeExit ();
+        void OpenSettings ();
+        void SetNotificationView (NotificationView aNotificationView);    
     }
 
     public class ControllerMainWindow
@@ -478,6 +490,11 @@ namespace KinskyDesktop
                 iModel.Helper.WindowY.Native = normalRect.Origin.Y;
                 iModel.Helper.WindowWidth.Native = normalRect.Width;
             }
+        }
+
+        public void OpenSettings ()
+        {
+            iView.OpenSettings ();
         }
 
         private const float iMinWidth = 640;
