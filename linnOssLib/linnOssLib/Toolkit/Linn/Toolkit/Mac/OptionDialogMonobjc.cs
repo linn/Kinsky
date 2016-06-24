@@ -42,6 +42,9 @@ namespace Linn.Toolkit.Cocoa
             NSView view = new NSView();
             iWindow.ContentView = view;
 
+            iOptionsContainer = new NSView ();
+            iOptionsContainer.Frame = new NSRect (view.Frame.origin.x, view.Frame.origin.y, view.Frame.Width, view.Frame.Height);
+
             NSScrollView scrollView = new NSScrollView();
          
             scrollView.HasVerticalScroller = true;
@@ -71,9 +74,9 @@ namespace Linn.Toolkit.Cocoa
             tableColumn.Width = iTableView.Bounds.Width - 3;
          
             scrollView.DocumentView = iTableView;
-         
 
-            view.AddSubview(scrollView);
+            view.AddSubview (iOptionsContainer);
+            iOptionsContainer.AddSubview(scrollView);
 
             iTableView.ReloadData();
 
@@ -83,6 +86,24 @@ namespace Linn.Toolkit.Cocoa
             scrollView.Release();
         }
 
+        public Action Closed {
+            set {
+                iClosed = value;
+            }
+        }
+
+        public NSView RootView {
+            get {
+                return iWindow.ContentView;
+            }
+        }
+
+        public NSView OptionsContainer {
+            get {
+                return iOptionsContainer;
+            }
+        }
+
         void EventSelectedPageHandler (object sender, EventArgsOptionPage e)
         {
             if (iCurrentView != null && iCurrentView != e.Page.View)
@@ -90,7 +111,7 @@ namespace Linn.Toolkit.Cocoa
                 iCurrentView.RemoveFromSuperview();
             }
             iCurrentView = e.Page.View;
-            iWindow.ContentView.AddSubview(iCurrentView);
+            iOptionsContainer.AddSubview(iCurrentView);
         }
 
 
@@ -115,19 +136,25 @@ namespace Linn.Toolkit.Cocoa
             {
                 page.Dispose();
             }
+            iOptionsContainer.Release ();
             iWindow.Release();
             iWindow = null;
+            if (iClosed != null) {
+                iClosed ();
+            }
 		}
 		
 		private NSWindow iWindow;
         private List<OptionPageMonobjc> iPages;
         private NSView iCurrentView;
+        private NSView iOptionsContainer;
         private const float kWidth= 600;
         private const float kHeight = 320;
         private const float kPadding = 10;
         private OptionDialogMonobjcDelegate iTableDelegate;
         private OptionDialogMonobjcDataSource iTableDataSource;
         private NSTableView iTableView;
+        private Action iClosed;
     }
 
     [ObjectiveCClass]

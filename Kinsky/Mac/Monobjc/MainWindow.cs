@@ -189,6 +189,7 @@ namespace KinskyDesktop
 
         public void SetNotificationView (NotificationView aView)
         {
+            iNotificationView = aView;
             Window.SetNotificationView (aView);
         }
 
@@ -372,7 +373,71 @@ namespace KinskyDesktop
         public void OpenSettings ()
         {
             OptionDialogMonobjc window = new OptionDialogMonobjc (ModelMain.Instance.Helper.OptionPages);
+            AddGetKazooButtonToOptionsWindow (window);
             window.Open ();
+        }
+
+        private void AddGetKazooButtonToOptionsWindow (OptionDialogMonobjc aWindow)
+        {
+            if (iNotificationView != null) {
+                NSPoint origin = new NSPoint (10, 10);
+                NSSize marginsTopRight = new NSSize (10, 10);
+                var buttonHeight = 20;
+                var buttonWidth = 250;
+
+
+                ActionEventHandler clickHandler = (n) => {
+                    aWindow.RootView.Window.Close ();
+                    iNotificationView.Show ();
+                };
+
+                var getKazooButton = new NSButton ();
+                getKazooButton.InitWithFrame (new NSRect (origin.x, origin.y, buttonWidth, buttonHeight));
+
+                // todo: should set this button be the default (blue) button, why is it not working?!?
+                getKazooButton.SetButtonType (NSButtonType.NSMomentaryPushInButton);
+                getKazooButton.KeyEquivalent = @"\r"; //set as default, tshould turn the button blue
+                getKazooButton.IsBordered = true; // try this?
+                getKazooButton.BezelStyle = NSBezelStyle.NSRoundedBezelStyle; // and this???
+                getKazooButton.Cell.IsBezeled = true; // and this??????
+                // I give up - thanks, Apple...!
+
+                getKazooButton.Title = "Try Linn's latest control app";
+
+                //var getKazooButton = new ButtonHoverPush ();
+                //var buttonCell = getKazooButton.Initialise ();
+                //buttonCell.Text = NSString.StringWithUTF8String ("Try Linn's latest control app");
+
+                EventHandler<EventArgs> notificationUpdated = (s, e) => {
+                    getKazooButton.IsHidden = !iNotificationView.CanShow;
+                    getKazooButton.NeedsDisplay = true;
+                };
+
+                getKazooButton.ActionEvent += clickHandler;
+                //getKazooButton.EventClicked += clickHandler;
+
+                // set button frame and add to view
+                aWindow.RootView.AddSubview (getKazooButton);
+                getKazooButton.NeedsDisplay = true;
+
+                // update button visibility
+                iNotificationView.EventNotificationUpdated += notificationUpdated;
+                notificationUpdated (this, EventArgs.Empty);
+
+                // resize existing views to make room for button inserted at the bottom
+                var dialogWindow = aWindow.RootView.Window;
+                var buttonHeightOffset = getKazooButton.Frame.Height + origin.x + marginsTopRight.height;
+                dialogWindow.SetFrameDisplay (new NSRect (dialogWindow.Frame.origin.x, dialogWindow.Frame.origin.y, dialogWindow.Frame.Width, dialogWindow.Frame.Height + buttonHeightOffset),true);
+                aWindow.OptionsContainer.Frame = new NSRect (aWindow.OptionsContainer.Frame.origin.x, aWindow.OptionsContainer.Frame.origin.y + buttonHeightOffset, aWindow.OptionsContainer.Frame.Width, aWindow.OptionsContainer.Frame.Height);
+
+                // add close handler to window
+                aWindow.Closed = () => {
+                    if (iNotificationView != null) {
+                        iNotificationView.EventNotificationUpdated -= notificationUpdated;
+                        getKazooButton.ActionEvent -= clickHandler;
+                    }
+                };
+            }
         }
 
         [ObjectiveCField]
@@ -439,6 +504,7 @@ namespace KinskyDesktop
         private ControllerMainWindow iController;
         private NSViewAnimation iAnimKompactMode;
         private bool iWindowNowPlayingDragged;
+        private NotificationView iNotificationView;
     }
 
 
@@ -587,12 +653,12 @@ namespace KinskyDesktop
             ButtonMinimise.EventClicked += ButtonMinimiseClicked;
             ButtonKompact.EventClicked += ButtonKompactClicked;
             ButtonSettings.EventClicked += ButtonSettingsClicked;
+            iBadge.EventClick += ButtonSettingsClicked;
         }
 
-        private NSView CreateBadge ()
+        private ImageViewClickable CreateBadge ()
         {
             var badge = new ImageViewClickable ();
-            badge.EventClick += ButtonSettingsClicked;
             badge.Frame = new NSRect (30, 20, 25, 25);
             badge.Image = Properties.Resources.Badge;
             return badge;
@@ -606,6 +672,7 @@ namespace KinskyDesktop
             ButtonMinimise.EventClicked -= ButtonMinimiseClicked;
             ButtonKompact.EventClicked -= ButtonKompactClicked;
             ButtonSettings.EventClicked -= ButtonSettingsClicked;
+            iBadge.EventClick -= ButtonSettingsClicked;
 
             this.SendMessageSuper(ThisClass, "dealloc");
         }
@@ -709,7 +776,7 @@ namespace KinskyDesktop
         public ButtonHoverPush ButtonSettings;
 
         private ControllerMainWindow iController;
-        private NSView iBadge;
+        private ImageViewClickable iBadge;
     }
 
 
