@@ -212,6 +212,9 @@ namespace KinskyDesktopWpf
             {
                 ShowOptionsDialog(false);
             };
+            Uri iconUri = new Uri("pack://application:,,,/icon.ico", UriKind.RelativeOrAbsolute); //make sure your path is correct, and the icon set as Resource
+            this.Icon = BitmapFrame.Create(iconUri, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+
         }
 
         private IntPtr HandleSessionEvents(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)

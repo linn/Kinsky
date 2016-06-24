@@ -10,6 +10,7 @@ using Linn.Kinsky;
 using System.Windows;
 using System.Reflection;
 using Linn;
+using System.Windows.Media.Imaging;
 
 namespace KinskyDesktopWpf
 {
@@ -154,10 +155,13 @@ namespace KinskyDesktopWpf
                 ExitToolStripMenuItem
             });
             NotifyIcon.MouseDoubleClick += new MouseEventHandler(NotifyIcon_MouseDoubleClick);
-            Bitmap bmp = KinskyDesktopWpf.StaticImages.KinskyIcon;
             try
             {
-                NotifyIcon.Icon = System.Drawing.Icon.FromHandle((bmp).GetHicon());
+                Uri iconUri = new Uri("pack://application:,,,/icon.ico", UriKind.RelativeOrAbsolute); //make sure your path is correct, and the icon set as Resource
+                using (var iconStream = System.Windows.Application.GetResourceStream(iconUri).Stream)
+                {
+                    NotifyIcon.Icon = new System.Drawing.Icon(iconStream);
+                }
             }
             catch (System.Runtime.InteropServices.ExternalException ex)
             {
