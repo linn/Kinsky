@@ -68,31 +68,43 @@ namespace Linn.ControlPoint
         {
             string value;
 
-            Lock();
-
-            iDictionary.TryGetValue(aKey, out value);
-
-            Unlock();
+            try
+            {
+                Lock();
+                iDictionary.TryGetValue(aKey, out value);
+            }
+            finally
+            {
+                Unlock();
+            }
 
             return (value);
         }
 
         public void Add(string aKey, string aValue)
         {
-            Lock();
-
-            iDictionary.Add(aKey, aValue);
-
-            Unlock();
+            try
+            {
+                Lock();
+                iDictionary.Add(aKey, aValue);
+            }
+            finally
+            {
+                Unlock();
+            }
         }
 
         public void Remove(string aKey)
         {
-            Lock();
-
-            iDictionary.Remove(aKey);
-
-            Unlock();
+            try
+            {
+                Lock();
+                iDictionary.Remove(aKey);
+            }
+            finally
+            {
+                Unlock();
+            }
         }
 
         public string Udn
@@ -157,29 +169,34 @@ namespace Linn.ControlPoint
         {
             string result = "Device{Udn{" + Find(kKeyUdn) + "}";
 
-            Lock();
-
-            foreach (string key in iDictionary.Keys)
+            try
             {
-                result += key;
-                result += "{";
-                result += iDictionary[key];
-                result += "}";
-            }
+                Lock();
 
-            Unlock();
+                foreach (string key in iDictionary.Keys)
+                {
+                    result += key;
+                    result += "{";
+                    result += iDictionary[key];
+                    result += "}";
+                }
+            }
+            finally
+            {
+                Unlock();
+            }
 
             result += "}";
 
             return (result);
         }
 
-        protected void Lock()
+        private void Lock()
         {
             iMutex.WaitOne();
         }
 
-        protected void Unlock()
+        private void Unlock()
         {
             iMutex.ReleaseMutex();
         }
