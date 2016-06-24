@@ -63,7 +63,7 @@ namespace Linn.Kinsky
 
         public static string DefaultUri(string aProduct)
         {
-            return string.Format("http://pc820.linn.co.uk/applications/{0}/Notifications/feed.json", aProduct);
+            return string.Format("http://eng.linn.co.uk/~iainm/Notifications/feed.json", aProduct); // TODO: live link!
         }
 
         private readonly string iUri;
