@@ -20,7 +20,9 @@ namespace Linn.Kinsky
     {
         uint Version { get; }
         string Uri { get; }
-        void DontShowAgain();
+        void Closed(bool aDontShowAgain);
+
+        bool DontShowAgain { get; }
     }
 
     public interface INotificationServer
@@ -35,24 +37,38 @@ namespace Linn.Kinsky
 
     internal class Notification : INotification
     {
-        private Action iDontShowAgain;
-        public Notification(uint aVersion, string aUri, Action aDontShowAgain)
+        private Action<bool> iClosed;
+        private Func<bool> iDontShowAgain;
+        public Notification(uint aVersion, string aUri, Func<bool> aDontShowAgain, Action<bool> aClosed)
         {
+            iDontShowAgain = aDontShowAgain;
             Version = aVersion;
             Uri = aUri;
-            iDontShowAgain = aDontShowAgain;
+            iClosed = aClosed;
         }
 
         public string Uri { get; private set; }
         public uint Version { get; private set; }
 
-        public void DontShowAgain()
+        public void Closed(bool aDontShowAgain)
         {
-            iDontShowAgain();
+            iClosed(aDontShowAgain);
+        }
+
+        public bool DontShowAgain {
+            get
+            {
+                return iDontShowAgain();
+            }
         }
     }
 
     public sealed class NotificationServerResponse
+    {
+        public NotificationVersion[] Notifications;
+    }
+
+    public sealed class NotificationVersion
     {
         public uint Version { get; set; }
         public string Uri { get; set; }
@@ -200,8 +216,8 @@ namespace Linn.Kinsky
                 iCancelTokenSource = new CancellationTokenSource();
 
                 var cancelToken = iCancelTokenSource.Token;
-                var currentVersion = iCurrentVersion;
-                iNotificationServer.Check(currentVersion, cancelToken).ContinueWith(t =>
+                var previousVersion = iCurrentVersion;
+                iNotificationServer.Check(previousVersion, cancelToken).ContinueWith(t =>
                 {
                     iInvoker.BeginInvoke(new Action(() =>
                     {
@@ -217,25 +233,48 @@ namespace Linn.Kinsky
                             }
                             else
                             {
-                                var response = t.Result;
-                                var notification = new Notification(response.Version, response.Uri, () =>
+                                var current = GetNextNotification(previousVersion, t.Result);
+                                if (current != null)
                                 {
-                                    if (response.Version != iNotificationPersistence.LastNotificationVersion)
+                                    var notification = new Notification(current.Version, current.Uri, ()=>current.Version <= iNotificationPersistence.LastNotificationVersion, (dontshowagain) =>
                                     {
-                                        iNotificationPersistence.LastNotificationVersion = response.Version;
+                                        if (dontshowagain && iNotificationPersistence.LastNotificationVersion < current.Version)
+                                        {
+                                            iNotificationPersistence.LastNotificationVersion = current.Version;
+                                        }
+                                        else if(!dontshowagain)
+                                        {
+                                            iNotificationPersistence.LastNotificationVersion = current.Version - 1;
+                                        }
+                                    });
+                                    iView.Update(notification, current.Version > previousVersion);
+                                    lock (iLock)
+                                    {
+                                        iCurrentVersion = current.Version;
                                     }
-                                });
-                                iView.Update(notification, response.Version != currentVersion);
-                                lock (iLock)
-                                {
-                                    iCurrentVersion = response.Version;
-                                }
+                               }                                
                             }
                         }
                      }));
                 });
             }
-        }        
+        }
+
+        private NotificationVersion GetNextNotification(uint aCurrentVersion, NotificationServerResponse aResponse)
+        {
+            if (aResponse.Notifications != null && aResponse.Notifications.Any())
+            {
+                // if there are unseen notifications, return the first of these
+                var result = aResponse.Notifications.Where(n=>n.Version > aCurrentVersion).OrderBy(n => n.Version).FirstOrDefault();
+                if (result == null)
+                {
+                    // else return the most up to date notification
+                    result = aResponse.Notifications.OrderBy(n => n.Version).Last();
+                }
+                return result;
+            }
+            return null;
+        }
 
         public void Dispose()
         {

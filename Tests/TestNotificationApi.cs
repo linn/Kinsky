@@ -19,6 +19,8 @@ namespace Tests
         private IInvoker iInvoker;
         private MockPersistence iPersistence;
         private MockNotificationServer iServer;
+        private NotificationVersion iNotificationVersion1;
+        private NotificationVersion iNotificationVersion2;
         private NotificationServerResponse iServerResponseV1;
         private NotificationServerResponse iServerResponseV2;
         private AutoResetEvent iWaitHandleInvoker;
@@ -31,8 +33,10 @@ namespace Tests
             iWaitHandleInvoker = new AutoResetEvent(false);
             iPersistence = new MockPersistence { LastNotificationVersion = 0 };
             iServer = new MockNotificationServer();
-            iServerResponseV1 = new NotificationServerResponse() { Uri = "http://notifications/1", Version = 1 };
-            iServerResponseV2 = new NotificationServerResponse() { Uri = "http://notifications/2", Version = 2 };
+            iNotificationVersion1 = new NotificationVersion() { Uri = "http://notifications/1", Version = 1 };
+            iNotificationVersion2 = new NotificationVersion() { Uri = "http://notifications/2", Version = 2 };
+            iServerResponseV1 = new NotificationServerResponse() { Notifications = new NotificationVersion[] { iNotificationVersion1 } };
+            iServerResponseV2 = new NotificationServerResponse() { Notifications = new NotificationVersion[] {  iNotificationVersion1, iNotificationVersion2}  };
             iView = new MockNotificationView(iInvoker);
         }
 
@@ -62,10 +66,7 @@ namespace Tests
 
             iView.ShowCallback = (notification, shownow) =>
             {
-                if (!aShowAgainLater)
-                {
-                    notification.DontShowAgain();
-                }
+                notification.Closed(!aShowAgainLater);
                 waitHandle.Set();
             };
 
@@ -83,8 +84,8 @@ namespace Tests
             Assert.IsNotNull(iView.LastShown);
             Assert.AreEqual(iView.Current, iView.LastShown);
             Assert.AreEqual(iPersistence.LastNotificationVersion, aExpectedPersistedId); 
-            Assert.AreEqual(iServerResponseV1.Uri, iView.Current.Uri);
-            Assert.AreEqual(iServerResponseV1.Version, iView.Current.Version);
+            Assert.AreEqual(iNotificationVersion1.Uri, iView.Current.Uri);
+            Assert.AreEqual(iNotificationVersion1.Version, iView.Current.Version);
         }
 
         [Test]
@@ -116,7 +117,7 @@ namespace Tests
             // assert
             Assert.IsNotNull(iView.Current);
             Assert.IsNull(iView.LastShown);
-            Assert.AreEqual(iPersistence.LastNotificationVersion, iServerResponseV1.Version);
+            Assert.AreEqual(iPersistence.LastNotificationVersion, iNotificationVersion1.Version);
         }
 
         [Test]
@@ -129,7 +130,7 @@ namespace Tests
 
             iView.ShowCallback = (notification, shownow) =>
             {
-                notification.DontShowAgain();
+                notification.Closed(true);
                 waitHandle.Set();
             };
 
@@ -146,9 +147,9 @@ namespace Tests
             Assert.IsNotNull(iView.Current);
             Assert.IsNotNull(iView.LastShown);
             Assert.AreEqual(iView.Current, iView.LastShown);
-            Assert.AreEqual(iPersistence.LastNotificationVersion, iServerResponseV2.Version);
-            Assert.AreEqual(iServerResponseV2.Uri, iView.Current.Uri);
-            Assert.AreEqual(iServerResponseV2.Version, iView.Current.Version);
+            Assert.AreEqual(iPersistence.LastNotificationVersion, iNotificationVersion2.Version);
+            Assert.AreEqual(iNotificationVersion2.Uri, iView.Current.Uri);
+            Assert.AreEqual(iNotificationVersion2.Version, iView.Current.Version);
         }
 
 
