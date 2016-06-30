@@ -1074,7 +1074,7 @@ namespace KinskyDesktopWpf
             {
                 iNotificationView = null;
             };
-            notificationView.Launch(iHelper, aNotification, this);
+            notificationView.Launch(aNotification, this, aNotification.DontShowAgain);
             iNotificationView = notificationView;
         }
 

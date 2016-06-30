@@ -8309,7 +8309,7 @@ namespace KinskyDroid
             var dontShowCheckbox = popupView.FindViewById<CheckBox>(Resource.Id.notificationcheckbox);
             var getKazooButton = popupView.FindViewById<Button>(Resource.Id.notificationgetkazoo);
 
-            dontShowCheckbox.Checked = iStack.HelperKinsky.LastNotificationVersion == aNotification.Version;
+            dontShowCheckbox.Checked = aNotification.DontShowAgain;
 
             closeButton.Click += (s, e) => ClosePopup(dontShowCheckbox.Checked);
             getKazooButton.Click += (s, e) =>
@@ -8389,14 +8389,7 @@ namespace KinskyDroid
 
         private void ClosePopup(bool aDontShowAgain)
         {
-            if (aDontShowAgain)
-            {
-                iNotification.DontShowAgain();
-            }
-            else if (iNotification.Version == iStack.HelperKinsky.LastNotificationVersion)
-            {
-                iStack.HelperKinsky.LastNotificationVersion = 0;
-            }
+            iNotification.Closed(aDontShowAgain);
             iPopup.Dismiss();
         }
 

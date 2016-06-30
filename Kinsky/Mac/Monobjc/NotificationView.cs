@@ -7,7 +7,6 @@ namespace KinskyDesktop
     public class NotificationView : INotificationView
     {
         private readonly NotificationController iNotificationController;
-        private readonly INotificationPersistence iNotificationPersistence;
         private INotification iNotification;
         private WindowNotification iCurrentWindow;
 
@@ -15,8 +14,7 @@ namespace KinskyDesktop
 
         public NotificationView (HelperKinsky aHelper)
         {
-            iNotificationPersistence = aHelper;
-            iNotificationController = new NotificationController (aHelper.Invoker, iNotificationPersistence, new NotificationServerHttp (NotificationServerHttp.DefaultUri (aHelper.Product)), this);
+            iNotificationController = new NotificationController (aHelper.Invoker, aHelper, new NotificationServerHttp (NotificationServerHttp.DefaultUri (aHelper.Product)), this);
         }
 
         public void Update (INotification aNotification, bool aShowNow)
@@ -42,9 +40,9 @@ namespace KinskyDesktop
         {
             Assert.Check (iNotification != null);
             if (iCurrentWindow != null) {
-                iCurrentWindow.Dismiss (false);
+                iCurrentWindow.Dismiss ();
             }
-            iCurrentWindow = new WindowNotification (iNotificationPersistence, iNotification);
+            iCurrentWindow = new WindowNotification (iNotification);
             iCurrentWindow.Show (() => {
                 iCurrentWindow.Release ();
                 iCurrentWindow = null;

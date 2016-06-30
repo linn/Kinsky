@@ -22,20 +22,18 @@ namespace KinskyDesktopWpf.Controls
     public partial class NotificationView : Window
     {
         private INotification iNotification;
-        private INotificationPersistence iPersistence;
         
         public NotificationView()
         {
             InitializeComponent();            
         }
 
-        public void Launch(INotificationPersistence aPersistence, INotification aNotification, Window aOwner)
+        public void Launch(INotification aNotification, Window aOwner, bool aChecked)
         {
             iNotification = aNotification;
             UserLog.WriteLine("Launch: " + iNotification.Uri);
-            iPersistence = aPersistence;
             this.Owner = aOwner;
-            chkDontShowAgain.IsChecked = aPersistence.LastNotificationVersion == aNotification.Version;
+            chkDontShowAgain.IsChecked = aChecked;
             this.ContentRendered += (s, e) =>
             {
                 UserLog.WriteLine("Loading: " + iNotification.Uri);
@@ -46,19 +44,13 @@ namespace KinskyDesktopWpf.Controls
 
         protected override void OnClosed(EventArgs e)
         {
-            if (chkDontShowAgain.IsChecked.Value)
-            {
-                iNotification.DontShowAgain();
-            }
-            else if (iPersistence.LastNotificationVersion == iNotification.Version)
-            {
-                iPersistence.LastNotificationVersion = 0;
-            }
+            iNotification.Closed(chkDontShowAgain.IsChecked.Value);
             base.OnClosed(e);
         }
 
         private void Now_Click(object sender, RoutedEventArgs e)
         {
+            Close();
             KinskyDesktop.GetKazoo();
         }
 

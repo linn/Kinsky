@@ -16,14 +16,12 @@ namespace KinskyDesktop
     public class WindowNotification : NSWindowController
     {
         private INotification iNotification;
-        private INotificationPersistence iNotificationPersistence;
         public WindowNotification () : base() {}
         public WindowNotification (IntPtr aInstance) : base(aInstance) {}
 
-        public WindowNotification (INotificationPersistence aNotificationPersistence, INotification aNotification)
+        public WindowNotification (INotification aNotification)
             : base()
         {
-            iNotificationPersistence = aNotificationPersistence;
             iNotification = aNotification;
             NSBundle.LoadNibNamedOwner("WindowNotification.nib", this);
         }
@@ -44,7 +42,7 @@ namespace KinskyDesktop
         {
             LoadUri (iNotification.Uri);
 
-            ButtonDontShowAgain.State = (iNotification.Version == iNotificationPersistence.LastNotificationVersion) ? NSCellStateValue.NSOnState : NSCellStateValue.NSOffState;
+            ButtonDontShowAgain.State = (iNotification.DontShowAgain) ? NSCellStateValue.NSOnState : NSCellStateValue.NSOffState;
             ButtonClose.ActionEvent += ButtonCloseClicked;
             ButtonGetKazoo.ActionEvent += GetKazooClicked;
 
@@ -58,22 +56,18 @@ namespace KinskyDesktop
 
         private void ButtonCloseClicked (Id aSender)
         {
-            this.Dismiss (true);
+            this.Dismiss ();
         }
 
-        public void Dismiss (bool aSave)
+        public void Dismiss ()
         {
-            if (ButtonDontShowAgain.State == NSCellStateValue.NSOnState) {
-                iNotification.DontShowAgain ();
-            } else if (iNotification.Version == iNotificationPersistence.LastNotificationVersion) {
-                iNotificationPersistence.LastNotificationVersion = 0;
-            }
+            iNotification.Closed (ButtonDontShowAgain.State == NSCellStateValue.NSOnState);
             this.Close ();
         }
 
         private void GetKazooClicked (Id aSender)
         {
-            this.Dismiss (true);
+            this.Dismiss ();
             GetKazoo();
         }
 

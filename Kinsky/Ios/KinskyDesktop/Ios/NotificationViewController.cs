@@ -7,19 +7,15 @@ namespace KinskyTouch
 {
 	public partial class NotificationViewController : UIViewController
 	{
-		private readonly INotificationPersistence iPersistence;
 		private readonly INotification iNotification;
-		private readonly bool iInitialChecked;
 
 		private UIBarButtonItem iGetKazooButton;
 		private UIBarButtonItem iCloseButton;
 
-		public NotificationViewController(INotificationPersistence aPersistence, INotification aNotification, bool aInitialChecked) 
+		public NotificationViewController(INotification aNotification) 
 			: base("NotificationViewController", null)
 		{
-			iPersistence = aPersistence;
 			iNotification = aNotification;
-			iInitialChecked = aInitialChecked;
 		}
 
 		public override void ViewDidLoad()
@@ -45,7 +41,7 @@ namespace KinskyTouch
 
 			NavigationItem.LeftBarButtonItem = iCloseButton;
 			NavigationItem.RightBarButtonItem = iGetKazooButton;
-			swDontShowAgain.SetState(iInitialChecked, false);
+			swDontShowAgain.SetState(iNotification.DontShowAgain, false);
 			webView.LoadRequest(new Foundation.NSUrlRequest(new NSUrl(iNotification.Uri)));
 		}
 
@@ -65,14 +61,7 @@ namespace KinskyTouch
 
 		private void Dismiss(bool aAnimated, Action aCallback)
 		{
-			if (swDontShowAgain.On)
-			{
-				iNotification.DontShowAgain();
-			}
-			else if (iPersistence.LastNotificationVersion == iNotification.Version)
-			{
-				iPersistence.LastNotificationVersion = 0; // reset the saved version to allow showing the ad again if the user has unchecked this
-			}
+			iNotification.Closed(swDontShowAgain.On);
 			DismissViewController(aAnimated, aCallback);
 		}
 

@@ -12,7 +12,6 @@ namespace KinskyTouch
 
 		private readonly NotificationController iNotificationController;
 		private readonly UIViewController iParent;
-		private readonly INotificationPersistence iPersistence;
 
 		public event EventHandler<EventArgs> EventCurrentChanged;
 
@@ -21,7 +20,6 @@ namespace KinskyTouch
 		public NotificationView(INotificationPersistence aPersistence, string aProduct, IInvoker aInvoker, UIViewController aParent)
 		{
 			iParent = aParent;
-			iPersistence = aPersistence;
 			iNotificationController = new NotificationController(aInvoker, aPersistence, new NotificationServerHttp(NotificationServerHttp.DefaultUri(aProduct)), this);
 			NotificationView.Instance = this;
 		}
@@ -78,7 +76,7 @@ namespace KinskyTouch
 
 		private void ShowNotification(INotification aNotification)
 		{
-			UINavigationController controller = new UINavigationController(new NotificationViewController(iPersistence, aNotification, iPersistence.LastNotificationVersion == aNotification.Version));
+			UINavigationController controller = new UINavigationController(new NotificationViewController(aNotification));
 			controller.ModalPresentationStyle = UIModalPresentationStyle.FormSheet;
 
 			iParent.PresentViewController(controller, true, null);
