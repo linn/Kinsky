@@ -60,7 +60,11 @@ namespace Linn.Kinsky
 
         public void TrackUsageEventDismissed(bool aVisitedStorePage, bool aDontShowAgain)
         {
-            Insights.Track(string.Format("NotificationDismissedV{0}", Version), new Dictionary<string, string>() { { "VisitedStore", aVisitedStorePage.ToString() } });
+            if (Insights.IsInitialized)
+            {
+                Insights.Track(string.Format("NotificationDismissedV{0}", Version), new Dictionary<string, string>() { { "VisitedStore", aVisitedStorePage.ToString() } });
+                Insights.PurgeAllPendingData();
+            }
         }
 
         public bool DontShowAgain {
