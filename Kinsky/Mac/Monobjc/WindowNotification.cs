@@ -16,6 +16,8 @@ namespace KinskyDesktop
     public class WindowNotification : NSWindowController
     {
         private INotification iNotification;
+        private bool iDismissed = false;
+
         public WindowNotification () : base() {}
         public WindowNotification (IntPtr aInstance) : base(aInstance) {}
 
@@ -30,7 +32,10 @@ namespace KinskyDesktop
         {
             Window.SetDelegate(d =>
             {
-                d.WindowWillClose += (n) => aClosed();
+                d.WindowWillClose += (n) => {
+                    OnDismissed (false); // in case window is closed from title bar
+                    aClosed ();
+                };
             });
             Window.Center();
             Window.MakeKeyAndOrderFront(this);
@@ -57,19 +62,23 @@ namespace KinskyDesktop
         private void ButtonCloseClicked (Id aSender)
         {
             iNotification.TrackUsageEventDismissed(false, ButtonDontShowAgain.State == NSCellStateValue.NSOnState);
-            this.Dismiss ();
+            this.OnDismissed (false);
+            this.Close ();
         }
 
-        public void Dismiss ()
+        private void OnDismissed (bool aGetKazooClicked)
         {
-            iNotification.Closed (ButtonDontShowAgain.State == NSCellStateValue.NSOnState);
-            this.Close ();
+            if (!iDismissed) {
+                iDismissed = true;
+                iNotification.TrackUsageEventDismissed (aGetKazooClicked, ButtonDontShowAgain.State == NSCellStateValue.NSOnState);
+                iNotification.Closed (ButtonDontShowAgain.State == NSCellStateValue.NSOnState);
+            }
         }
 
         private void GetKazooClicked (Id aSender)
         {
-            iNotification.TrackUsageEventDismissed(true, ButtonDontShowAgain.State == NSCellStateValue.NSOnState);
-            this.Dismiss ();
+            this.OnDismissed (true);
+            this.Close ();
             GetKazoo();
         }
 

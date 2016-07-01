@@ -40,7 +40,7 @@ namespace KinskyDesktop
         {
             Assert.Check (iNotification != null);
             if (iCurrentWindow != null) {
-                iCurrentWindow.Dismiss ();
+                iCurrentWindow.Close ();
             }
             iCurrentWindow = new WindowNotification (iNotification);
             iCurrentWindow.Show (() => {
