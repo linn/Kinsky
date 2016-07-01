@@ -63,7 +63,6 @@ namespace Linn.Kinsky
             if (Insights.IsInitialized)
             {
                 Insights.Track(string.Format("NotificationDismissedV{0}", Version), new Dictionary<string, string>() { { "VisitedStore", aVisitedStorePage.ToString() } });
-                Insights.PurgeAllPendingData();
             }
         }
 

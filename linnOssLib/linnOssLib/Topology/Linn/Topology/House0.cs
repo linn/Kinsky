@@ -467,7 +467,6 @@ namespace Linn.Topology.Layer0
                 {
                     Insights.Track("House", new Dictionary<string, string>() { { "IsAllLinn", allLinn.ToString() } });
                 }
-                Insights.PurgeAllPendingData();
             }
         }
 
