@@ -8313,13 +8313,13 @@ namespace KinskyDroid
 
             closeButton.Click += (s, e) => 
             {
-                iNotification.TrackUsageEventDismissed(false, chkDontShowAgain.IsChecked.Value);
+                iNotification.TrackUsageEventDismissed(false, dontShowCheckbox.Checked);
                 ClosePopup(dontShowCheckbox.Checked);
             };
             getKazooButton.Click += (s, e) =>
             {
 
-                iNotification.TrackUsageEventDismissed(true, chkDontShowAgain.IsChecked.Value);
+                iNotification.TrackUsageEventDismissed(true, dontShowCheckbox.Checked);
                 ClosePopup(dontShowCheckbox.Checked);
                 GetKazoo();
             };
