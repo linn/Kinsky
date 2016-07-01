@@ -405,6 +405,9 @@
     <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\NotificationController.cs">
       <Link>Kinsky\Linn\Kinsky\NotificationController.cs</Link>
     </Compile>
+    <Compile Include="..\linnOssLib\Core\Linn\SafeTimer.cs">
+      <Link>Core\Linn\SafeTimer.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\linnOssLib\Core\Linn\Framework\SystemInfo.cs">

@@ -37,6 +37,7 @@ namespace Linn.ControlPoint.Upnp
         private static readonly string kKeyUpnpFriendlyName = "UpnpFriendName";
         private static readonly string kKeyUpnpModel = "UpnpModel";
         private static readonly string kKeyUpnpPresentationUri = "UpnpPresentationUri";
+        private static readonly string kKeyUpnpManufacturer = "UpnpManufacturer";
 
         private static readonly string kVolkanoRelativeControlUri = "control";
         private static readonly string kVolkanoRelativeSubscriptionUri = "event";
@@ -302,6 +303,39 @@ namespace Linn.ControlPoint.Upnp
                 }
 
                 return (model);
+            }
+        }
+
+        public override string Manufacturer
+        {
+            get
+            {
+                // See if we have the model cached already
+
+                string manufacturer = Find(kKeyUpnpManufacturer);
+
+                if (manufacturer == null)
+                {
+                    // ... no, better get and cache the model
+
+                    XmlNode device = DeviceXmlExplicit();
+
+                    if (device != null)
+                    {
+                        XmlNamespaceManager nsmanager = new XmlNamespaceManager(device.OwnerDocument.NameTable);
+                        nsmanager.AddNamespace("u", "urn:schemas-upnp-org:device-1-0");
+
+                        XmlNode node = device.SelectSingleNode("u:manufacturer", nsmanager);
+
+                        if (node != null && node.FirstChild != null)
+                        {
+                            manufacturer = node.FirstChild.Value;
+                            Add(kKeyUpnpManufacturer, manufacturer);
+                        }
+                    }
+                }
+
+                return (manufacturer);
             }
         }
 

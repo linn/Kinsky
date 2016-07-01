@@ -60,7 +60,7 @@ namespace Linn.ControlPoint
             get
             {
                 string udn = Find(kKeyUdn);
-                return false;  //(udn.StartsWith(kUdnLinnPrefix));
+                return (udn.StartsWith(kUdnLinnPrefix));
             }
         }
 
@@ -141,6 +141,11 @@ namespace Linn.ControlPoint
         }
 
         public abstract string Model
+        {
+            get;
+        }
+
+        public abstract string Manufacturer
         {
             get;
         }

@@ -389,6 +389,9 @@
     <Compile Include="..\linnOssLib\Topology\Linn\Topology\SourceList.cs">
       <Link>Topology\Linn\Topology\SourceList.cs</Link>
     </Compile>
+    <Compile Include="..\linnOssLib\Core\Linn\SafeTimer.cs">
+      <Link>Core\Linn\SafeTimer.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\BookmarkManager.cs">

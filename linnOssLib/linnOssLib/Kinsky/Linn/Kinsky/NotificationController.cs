@@ -25,7 +25,7 @@ namespace Linn.Kinsky
 
         bool DontShowAgain { get; }
 
-        void TrackUsageEventDismissed(bool aVisitedStorePage, bool aDontShowAgain)
+        void TrackUsageEventDismissed(bool aVisitedStorePage, bool aDontShowAgain);
     }
 
     public interface INotificationServer
@@ -60,7 +60,7 @@ namespace Linn.Kinsky
 
         public void TrackUsageEventDismissed(bool aVisitedStorePage, bool aDontShowAgain)
         {
-            Insights.Track("NotificationDismissed", new Dictionary<string, string>() { { "VisitedStore", aVisitedStorePage.ToString() }, { "Version", Version.ToString() }, { "DontShowAgain", aDontShowAgain.ToString() } });
+            Insights.Track(string.Format("NotificationDismissedV{0}", Version), new Dictionary<string, string>() { { "VisitedStore", aVisitedStorePage.ToString() } });
         }
 
         public bool DontShowAgain {

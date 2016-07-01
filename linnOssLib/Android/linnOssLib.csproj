@@ -553,6 +553,9 @@
     <Compile Include="..\linnOssLib\Kinsky\Linn\Kinsky\Views.cs">
       <Link>Kinsky\Linn\Kinsky\Views.cs</Link>
     </Compile>
+    <Compile Include="..\linnOssLib\Core\Linn\SafeTimer.cs">
+      <Link>Core\Linn\SafeTimer.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

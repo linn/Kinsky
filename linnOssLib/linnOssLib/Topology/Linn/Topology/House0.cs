@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using Linn.Control.Ssdp;
 using Linn.ControlPoint;
 using Linn.ControlPoint.Upnp;
+using Xamarin;
 
 namespace Linn.Topology.Layer0
 {
@@ -144,6 +145,8 @@ namespace Linn.Topology.Layer0
             iDeviceListUpnp.EventDeviceAdded += UpnpAdded;
             iDeviceListUpnp.EventDeviceRemoved += UpnpRemoved;
 
+            iDeviceAnalytics = new DeviceAnalytics(this);
+
             iMutex = new Mutex();
             iJobList = new List<IJob>();
             iJobReady = new ManualResetEvent(false);
@@ -164,6 +167,7 @@ namespace Linn.Topology.Layer0
             iDeviceListUpnp.Start(aInterface);
 
             Trace.WriteLine(Trace.kTopology, "Layer0.Stack.Start() successful");
+            iDeviceAnalytics.Start();
         }
 
         public void Stop()
@@ -178,6 +182,7 @@ namespace Linn.Topology.Layer0
                 iThread.Join();
                 iThread = null;
 
+                iDeviceAnalytics.Stop();
                 Trace.WriteLine(Trace.kTopology, "Layer0.Stack.Stop() successful");
             }
             else
@@ -334,5 +339,164 @@ namespace Linn.Topology.Layer0
 
         private DeviceListUpnp iDeviceListProduct;
         private DeviceListUpnp iDeviceListUpnp;
+        private DeviceAnalytics iDeviceAnalytics;
+    }
+
+    class DeviceAnalytics
+    {
+        private readonly IStack iStack;
+        private readonly Dictionary<string, DeviceWatcher> iDeviceWatchers;
+        private readonly Dictionary<string, Device> iOpenDevices;
+        private SafeTimer iTimer;
+        private const uint kTimeout = 1 * 60 * 1000; // 1 minute
+        private bool iRunning;
+        private readonly object iLock = new object();
+
+        public DeviceAnalytics(IStack aStack)
+        {
+            iStack = aStack;
+            iDeviceWatchers = new Dictionary<string, DeviceWatcher>();
+            iOpenDevices = new Dictionary<string, Device>();
+        }
+
+        public void Start()
+        {
+            iStack.EventProductAdded += ProductAdded;
+            iStack.EventUpnpAdded += UpnpAdded;
+
+            lock(iLock)
+            {
+                iRunning = true;
+                iTimer = new SafeTimer(SendAnalyticsEvents);
+                iTimer.FireIn(kTimeout);
+            }
+        }
+
+        public void Stop()
+        {
+            iStack.EventProductAdded -= ProductAdded;
+            iStack.EventUpnpAdded -= UpnpAdded;
+
+            SafeTimer timer = null;
+            lock(iLock)
+            {
+                iRunning = false;
+                foreach (var device in iDeviceWatchers.Values)
+                {
+                    device.Dispose();
+                }
+                iDeviceWatchers.Clear();
+                iOpenDevices.Clear();
+                timer = iTimer;
+                iTimer = null;
+            }
+            if (timer != null)
+            {
+                timer.Dispose();
+            }
+        }
+
+        private void ProductAdded(object sender, EventArgsDevice e)
+        {
+            Watch(e.Device, true);
+        }
+
+        private void UpnpAdded(object sender, EventArgsDevice e)
+        {
+            Watch(e.Device, false);
+        }
+
+        private void Watch(Device aDevice, bool aRequiresOpened)
+        {
+            lock (iLock)
+            {
+                if (!iRunning)
+                {
+                    return;
+                }
+                if (!iDeviceWatchers.ContainsKey(aDevice.Udn))
+                {
+                    iDeviceWatchers.Add(aDevice.Udn, new DeviceWatcher(aDevice, aRequiresOpened, () =>
+                    {
+                        lock (iLock)
+                        {
+                            if (!iRunning)
+                            {
+                                return;
+                            }
+                            if (!iOpenDevices.ContainsKey(aDevice.Udn))
+                            {
+                                iOpenDevices.Add(aDevice.Udn, aDevice);
+                            }
+                        }
+                    }));
+                }
+            }
+        }
+
+        private void SendAnalyticsEvents()
+        {
+            var deviceEvents = new List<Dictionary<string, string>>();
+            var allLinn = true;
+            var devicesCount = 0;
+
+            lock (iLock)
+            {
+                if (!iRunning)
+                {
+                    return;
+                }
+                foreach (var device in iOpenDevices.Values)
+                {
+                    var eventData = new Dictionary<string, string>();
+                    allLinn &= device.IsLinn;
+                    eventData.Add("Manufacturer", device.Manufacturer);
+                    eventData.Add("Model", device.Model);
+                    deviceEvents.Add(eventData);
+                }
+                devicesCount = iOpenDevices.Count;
+            }
+
+            if (Insights.IsInitialized)
+            {
+                foreach (var eventData in deviceEvents)
+                {
+                    Insights.Track("Device", eventData);
+                }
+                if (devicesCount > 0)
+                {
+                    Insights.Track("House", new Dictionary<string, string>() { { "IsAllLinn", allLinn.ToString() } });
+                }
+                Insights.PurgeAllPendingData();
+            }
+        }
+
+        class DeviceWatcher : IDisposable
+        {
+            public Device Device { get; private set; }
+            private System.Action iOpened;
+
+            public DeviceWatcher(Device aDevice, bool aRequiresOpen, System.Action aOpened)
+            {
+                Device = aDevice;
+                iOpened = aOpened;
+
+                Device.EventOpened += DeviceOpened;
+                if (aRequiresOpen)
+                {
+                    Device.Open();
+                }
+            }
+
+            private void DeviceOpened(object sender, EventArgs args)
+            {
+                iOpened();
+            }
+
+            public void Dispose()
+            {
+                Device.EventOpened -= DeviceOpened;
+            }
+        }
     }
 }
