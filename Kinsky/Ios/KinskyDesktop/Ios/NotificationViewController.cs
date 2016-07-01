@@ -48,6 +48,7 @@ namespace KinskyTouch
 
 		private void GetKazoo(object sender, EventArgs args)
 		{
+            iNotification.TrackUsageEventDismissed(true, swDontShowAgain.On);
 			Dismiss(true, () =>
 			{
 				NotificationView.Instance.GetKazoo();
@@ -56,6 +57,7 @@ namespace KinskyTouch
 
 		private void Close(object sender, EventArgs args)
 		{
+            iNotification.TrackUsageEventDismissed(false, swDontShowAgain.On);
 			Dismiss(true, null);
 		}
 

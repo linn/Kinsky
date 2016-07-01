@@ -56,6 +56,7 @@ namespace KinskyDesktop
 
         private void ButtonCloseClicked (Id aSender)
         {
+            iNotification.TrackUsageEventDismissed(false, ButtonDontShowAgain.State == NSCellStateValue.NSOnState);
             this.Dismiss ();
         }
 
@@ -67,6 +68,7 @@ namespace KinskyDesktop
 
         private void GetKazooClicked (Id aSender)
         {
+            iNotification.TrackUsageEventDismissed(true, ButtonDontShowAgain.State == NSCellStateValue.NSOnState);
             this.Dismiss ();
             GetKazoo();
         }

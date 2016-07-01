@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin;
 
 namespace Linn.Kinsky
 {
@@ -23,6 +24,8 @@ namespace Linn.Kinsky
         void Closed(bool aDontShowAgain);
 
         bool DontShowAgain { get; }
+
+        void TrackUsageEventDismissed(bool aVisitedStorePage, bool aDontShowAgain)
     }
 
     public interface INotificationServer
@@ -53,6 +56,11 @@ namespace Linn.Kinsky
         public void Closed(bool aDontShowAgain)
         {
             iClosed(aDontShowAgain);
+        }
+
+        public void TrackUsageEventDismissed(bool aVisitedStorePage, bool aDontShowAgain)
+        {
+            Insights.Track("NotificationDismissed", new Dictionary<string, string>() { { "VisitedStore", aVisitedStorePage.ToString() }, { "Version", Version.ToString() }, { "DontShowAgain", aDontShowAgain.ToString() } });
         }
 
         public bool DontShowAgain {

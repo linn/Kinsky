@@ -8311,9 +8311,15 @@ namespace KinskyDroid
 
             dontShowCheckbox.Checked = aNotification.DontShowAgain;
 
-            closeButton.Click += (s, e) => ClosePopup(dontShowCheckbox.Checked);
+            closeButton.Click += (s, e) => 
+            {
+                iNotification.TrackUsageEventDismissed(false, chkDontShowAgain.IsChecked.Value);
+                ClosePopup(dontShowCheckbox.Checked);
+            };
             getKazooButton.Click += (s, e) =>
             {
+
+                iNotification.TrackUsageEventDismissed(true, chkDontShowAgain.IsChecked.Value);
                 ClosePopup(dontShowCheckbox.Checked);
                 GetKazoo();
             };

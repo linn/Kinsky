@@ -50,12 +50,14 @@ namespace KinskyDesktopWpf.Controls
 
         private void Now_Click(object sender, RoutedEventArgs e)
         {
+            iNotification.TrackUsageEventDismissed(true, chkDontShowAgain.IsChecked.Value);
             Close();
             KinskyDesktop.GetKazoo();
         }
 
         private void Dismiss_Click(object sender, RoutedEventArgs e)
         {
+            iNotification.TrackUsageEventDismissed(false, chkDontShowAgain.IsChecked.Value);
             Close();
         }
         
