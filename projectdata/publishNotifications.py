@@ -24,7 +24,7 @@ def main():
         parser.print_usage()
         return False
 
-    if not os.path.exists(kNotificationsDir): os.makedirs(kNotificationsDir)
+    if not os.path.exists(kNotificationsDirEng): os.makedirs(kNotificationsDirEng)
     rsync('../Notifications', kNotificationsDirEng, options.debug) # sync with eng
     rsync(kNotificationsDirEng, kNotificationsDirKiboko, options.debug, '--rsh="ssh -i /home/products/.ssh/volkano_products_rsa"') # sync eng with kiboko
 
