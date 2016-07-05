@@ -8,7 +8,7 @@ from optparse import OptionParser
 import subprocess
 
 script_path, script_name = os.path.split(__file__)
-kArtifactsDir = os.path.join(script_path, '../build/artifacts/%s')
+kArtifactsDir = os.path.join(script_path, '../build/artifacts/slave=%s/%s')
 
 kFilenameFormat = 'Kinsky_{0}_{1}.{2}'
 kDirFormat = '/local/share/oss/Releases/Kinsky/Davaar/'
@@ -39,7 +39,7 @@ kArtifacts = [
         "slave":"Mac-x64", 
         "prefix" : "osx", 
         "suffix" : "dll", 
-        "path": "Kinsky/build/Kinsky/bin/Windows/Installer/Release/UpdaterKinsky.dll", 
+        "path": "Kinsky/build/Kinsky/bin/Mac/Installer/Release/UpdaterKinsky.dll", 
         "zip" : False, 
         "curl" : False
     },        
@@ -57,7 +57,7 @@ kArtifacts = [
         "slave":"Windows-x86", 
         "prefix" : "win", 
         "suffix" : "dll", 
-        "path": "Kinsky/build/Kinsky/bin/Mac/Installer/Release/UpdaterKinsky.dll", 
+        "path": "Kinsky/build/Kinsky/bin/Windows/Installer/Release/UpdaterKinsky.dll", 
         "zip" : False, 
         "curl" : False
     },        
@@ -131,15 +131,15 @@ def main():
     destDir = kDirFormatDebug if options.debug else kDirFormat
     if not os.path.exists(destDir): os.makedirs(destDir)
 
-    if options.debug or buildtype in ['Beta', 'Release']
+    if options.debug or buildtype in ['Beta', 'Release']:
         for artifact in kArtifacts:
-            src = kArtifactsDir % artifact.path
-            dest = os.path.join(destDir, kFilenameFormat.format(version, artifact.prefix, artifact.suffix))
-            if artifact.zip:
+            src = kArtifactsDir % (artifact['slave'],artifact['path'])
+            dest = os.path.join(destDir, kFilenameFormat.format(version, artifact['prefix'], artifact['suffix']))
+            if artifact['zip']:
                 zip(dest, src)
             else:
                 shutil.copy2(src, dest)
-            if artifact.curl:
+            if artifact['curl']:
                 # upload dSYM to insights
                 lcurlcmd = 'curl -F "dsym=@%s;type=application/zip" https://xaapi.xamarin.com/api/dsym?apikey=129c76d1b4043e568d19a9fea8a1f5534cdae703' % dest
                 subprocess.check_call(lcurlcmd, shell=True)
