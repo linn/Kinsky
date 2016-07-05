@@ -2,7 +2,7 @@
   "Notifications":[
     {
       "Version": 1,
-      "Uri": "http://eng.linn.co.uk/~iainm/Notifications/v1/index.html"
+      "Uri": "https://cloud.linn.co.uk/applications/kinsky/notifications/v1/index.html"
     }
   ]
 }
