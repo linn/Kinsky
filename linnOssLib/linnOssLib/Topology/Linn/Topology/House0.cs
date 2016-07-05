@@ -453,6 +453,8 @@ namespace Linn.Topology.Layer0
                     eventData.Add("Manufacturer", device.Manufacturer);
                     eventData.Add("Model", device.Model);
                     deviceEvents.Add(eventData);
+                    eventData.Add("Model." + (device.IsLinn ? "Linn" : "Non_Linn"), device.Model);
+                    eventData.Add("Model." + device.Manufacturer.Replace(" ","_"), device.Model);
                 }
                 devicesCount = iOpenDevices.Count;
             }
