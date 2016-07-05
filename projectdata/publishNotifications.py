@@ -6,10 +6,11 @@ import shutil
 from optparse import OptionParser
 import subprocess
 
-kNotificationsDir = '/local/share/oss/applications/kinsky/notifications/'
+kNotificationsDirEng = '/local/share/oss/applications/kinsky/notifications/'
+kNotificationsDirKiboko = 'kiboko.linn.co.uk:/var/www.oss/applications/notifications'
 
-def rsync(aSrc, aDest, aDryRun):
-    rsync = "rsync %s --itemize-changes --recursive --delete --delete-excluded --compress --checksum --links --perms %s %s" % ('--dry-run' if aDryRun else '', aSrc, aDest)
+def rsync(aSrc, aDest, aDryRun, additionalArgs=''):
+    rsync = "rsync %s %s --itemize-changes --recursive --delete --delete-excluded --compress --checksum --links --perms %s %s" % ('--dry-run' if aDryRun else '', additionalArgs, aSrc, aDest)
     subprocess.check_call(rsync, shell=True)
 
 def main():
@@ -24,7 +25,8 @@ def main():
         return False
 
     if not os.path.exists(kNotificationsDir): os.makedirs(kNotificationsDir)
-    rsync('../Notifications', kNotificationsDir, options.debug)
+    rsync('../Notifications', kNotificationsDirEng, options.debug) # sync with eng
+    rsync(kNotificationsDirEng, kNotificationsDirKiboko, options.debug, '--rsh="ssh -i /home/products/.ssh/volkano_products_rsa"') # sync eng with kiboko
 
 if __name__ == '__main__':
     main()
