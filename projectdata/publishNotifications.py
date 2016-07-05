@@ -6,6 +6,8 @@ import shutil
 from optparse import OptionParser
 import subprocess
 
+script_path, script_name = os.path.split(__file__)
+
 kNotificationsDirEng = '/local/share/oss/applications/kinsky/notifications/'
 kNotificationsDirKiboko = 'kiboko.linn.co.uk:/var/www.oss/applications/notifications'
 
@@ -25,7 +27,7 @@ def main():
         return False
 
     if not os.path.exists(kNotificationsDirEng): os.makedirs(kNotificationsDirEng)
-    rsync('../Notifications', kNotificationsDirEng, options.debug) # sync with eng
+    rsync(os.path.join(script_path, '../Notifications'), kNotificationsDirEng, options.debug) # sync with eng
     rsync(kNotificationsDirEng, kNotificationsDirKiboko, options.debug, '--rsh="ssh -i /home/products/.ssh/volkano_products_rsa"') # sync eng with kiboko
 
 if __name__ == '__main__':
