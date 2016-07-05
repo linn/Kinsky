@@ -6,7 +6,7 @@ import shutil
 from optparse import OptionParser
 import subprocess
 
-kNotificationsDir = '/local/share/oss/applications/kazoo/notifications/'
+kNotificationsDir = '/local/share/oss/applications/kinsky/notifications/'
 
 def rsync(aSrc, aDest, aDryRun):
     rsync = "rsync %s --itemize-changes --recursive --delete --delete-excluded --compress --checksum --links --perms %s %s" % ('--dry-run' if aDryRun else '', aSrc, aDest)
