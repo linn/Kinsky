@@ -90,7 +90,7 @@ namespace Linn.Kinsky
 
         public static string DefaultUri(string aProduct)
         {
-            return string.Format("http://eng.linn.co.uk/~iainm/Notifications/feed.json", aProduct); // TODO: live link!
+            return string.Format("https://cloud.linn.co.uk/applications/{0}/notifications/feed.json", aProduct.ToLowerInvariant());
         }
 
         private readonly string iUri;
