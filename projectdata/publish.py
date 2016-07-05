@@ -12,7 +12,7 @@ kArtifactsDir = os.path.join(script_path, '../build/artifacts/slave=%s/%s')
 
 kFilenameFormat = 'Kinsky_{0}_{1}.{2}'
 kDirFormat = '/local/share/oss/Releases/Kinsky/Davaar/'
-kDirFormatDebug = '~/testpublishkinsky/' 
+kDirFormatDebug = '/home/products/testpublishkinsky/' 
 
 
 kArtifacts = [
