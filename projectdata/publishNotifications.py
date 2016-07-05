@@ -9,7 +9,7 @@ import subprocess
 script_path, script_name = os.path.split(__file__)
 
 kNotificationsDirEng = '/local/share/oss/applications/kinsky/notifications/'
-kNotificationsDirKiboko = 'kiboko.linn.co.uk:/var/www.oss/applications/notifications'
+kNotificationsDirKiboko = 'kiboko.linn.co.uk:/var/www.oss/applications/kinsky/notifications'
 
 def rsync(aSrc, aDest, aDryRun, additionalArgs=''):
     rsync = "rsync %s %s --itemize-changes --recursive --delete --delete-excluded --compress --checksum --links --perms %s %s" % ('--dry-run' if aDryRun else '', additionalArgs, aSrc, aDest)
