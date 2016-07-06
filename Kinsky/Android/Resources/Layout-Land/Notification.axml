@@ -39,7 +39,7 @@
                 android:minWidth="100dip" />
             <Button
                 android:id="@+id/notificationgetkazoo"
-                android:text="Get Kazoo"
+                android:text="Download Kazoo"
                 style="@style/textviewtext"
                 android:background="@drawable/notificationbuttonbackground"
                 android:layout_width="wrap_content"

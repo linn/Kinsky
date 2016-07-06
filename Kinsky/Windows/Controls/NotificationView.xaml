@@ -23,7 +23,7 @@
                         <TextBlock Text="Not now" VerticalAlignment="Center" Padding="10"  HorizontalAlignment="Stretch" TextAlignment="Center" />
                     </Button>
                     <Button Name="Now" Margin="10,10,0,10" Click="Now_Click" HorizontalContentAlignment="Center" Width="100" Style="{StaticResource NotificationButton}">
-                        <TextBlock Text="Get Kazoo" VerticalAlignment="Center" Padding="10" HorizontalAlignment="Stretch" TextAlignment="Center" />
+                        <TextBlock Text="Download Kazoo" VerticalAlignment="Center" Padding="10" HorizontalAlignment="Stretch" TextAlignment="Center" />
                     </Button>
                 </StackPanel>
                 <CheckBox x:Name="chkDontShowAgain" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left">

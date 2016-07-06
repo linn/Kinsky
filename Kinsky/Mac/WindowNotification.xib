@@ -36,7 +36,7 @@
                     <button id="xNM-k5-h4k">
                         <rect key="frame" x="18" y="24" width="318" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="check" title="Don't show me this again" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="NGT-gC-DoA">
+                        <buttonCell key="cell" type="check" title="Don't show this again" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="NGT-gC-DoA">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -52,7 +52,7 @@
                     <button verticalHuggingPriority="750" id="Iq8-e8-6Tm">
                         <rect key="frame" x="631" y="16" width="103" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Get Kazoo" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Y1p-Ii-1Lr">
+                        <buttonCell key="cell" type="push" title="Download Kazoo" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Y1p-Ii-1Lr">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
