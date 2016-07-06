@@ -380,9 +380,9 @@ namespace KinskyDesktop
         private void AddGetKazooButtonToOptionsWindow (OptionDialogMonobjc aWindow)
         {
             if (iNotificationView != null) {
-                NSPoint origin = new NSPoint (10, 10);
+                NSPoint origin = new NSPoint (5, 10);
                 NSSize marginsTopRight = new NSSize (10, 10);
-                var buttonHeight = 20;
+                var buttonHeight = 30;
                 var buttonWidth = 250;
 
 
@@ -390,31 +390,30 @@ namespace KinskyDesktop
                     aWindow.RootView.Window.Close ();
                     iNotificationView.Show ();
                 };
-
-                var getKazooButton = new NSButton ();
-                getKazooButton.InitWithFrame (new NSRect (origin.x, origin.y, buttonWidth, buttonHeight));
-
-                // todo: should set this button be the default (blue) button, why is it not working?!?
-                getKazooButton.SetButtonType (NSButtonType.NSMomentaryPushInButton);
-                getKazooButton.KeyEquivalent = @"\r"; //set as default, tshould turn the button blue
-                getKazooButton.IsBordered = true; // try this?
-                getKazooButton.BezelStyle = NSBezelStyle.NSRoundedBezelStyle; // and this???
-                getKazooButton.Cell.IsBezeled = true; // and this??????
-                // I give up - thanks, Apple...!
-
-                getKazooButton.Title = "Try Linn's latest control app";
-
-                //var getKazooButton = new ButtonHoverPush ();
-                //var buttonCell = getKazooButton.Initialise ();
-                //buttonCell.Text = NSString.StringWithUTF8String ("Try Linn's latest control app");
+                var getKazooButton = new ButtonHoverPush ();
+                getKazooButton.Frame = new NSRect (origin.x, origin.y, buttonWidth, buttonHeight);
+                var buttonCell = getKazooButton.Initialise (
+                    new ButtonType2Drawer(
+                        Properties.Resources.ImageBoxNotificationLeft,
+                        Properties.Resources.ImageBoxNotificationRight,
+                        Properties.Resources.ImageBoxNotificationFiller,
+                        Properties.Resources.ImageBoxNotificationOverLeft,
+                        Properties.Resources.ImageBoxNotificationOverRight,
+                        Properties.Resources.ImageBoxNotificationOverFiller,
+                        Properties.Resources.ImageBoxNotificationDownLeft,
+                        Properties.Resources.ImageBoxNotificationDownRight,
+                        Properties.Resources.ImageBoxNotificationDownFiller
+                    ));
+                buttonCell.Text = NSString.StringWithUTF8String ("Try Linn's latest control app");
+                getKazooButton.IsHidden = true;
 
                 EventHandler<EventArgs> notificationUpdated = (s, e) => {
                     getKazooButton.IsHidden = !iNotificationView.CanShow;
                     getKazooButton.NeedsDisplay = true;
                 };
 
-                getKazooButton.ActionEvent += clickHandler;
-                //getKazooButton.EventClicked += clickHandler;
+                getKazooButton.EventClicked += clickHandler;
+
 
                 // set button frame and add to view
                 aWindow.RootView.AddSubview (getKazooButton);
@@ -434,7 +433,7 @@ namespace KinskyDesktop
                 aWindow.Closed = () => {
                     if (iNotificationView != null) {
                         iNotificationView.EventNotificationUpdated -= notificationUpdated;
-                        getKazooButton.ActionEvent -= clickHandler;
+                        getKazooButton.EventClicked -= clickHandler;
                     }
                 };
             }
@@ -4137,13 +4136,13 @@ namespace KinskyDesktop
         [ObjectiveCMessage("awakeFromNib")]
         public void AwakeFromNib()
         {
-            iButtonRoom = ButtonRoom.Initialise(null);
+            iButtonRoom = ButtonRoom.Initialise(null as NSImage);
             iButtonRoom.Text = NSString.StringWithUTF8String("Select room");
             iButtonRoom.TextOnLeft = false;
             iButtonRoom.ImageWidth = 25.0f;
             ButtonRoom.EventClicked += ButtonRoomClicked;
 
-            iButtonSource = ButtonSource.Initialise(null);
+            iButtonSource = ButtonSource.Initialise(null as NSImage);
             iButtonSource.Text = NSString.StringWithUTF8String("Select source");
             iButtonSource.TextOnLeft = true;
             iButtonSource.ImageWidth = 25.0f;
