@@ -59,7 +59,16 @@ namespace KinskyDesktop.Properties
         public static ResourceImage ImageBoxDownLeft = new ResourceImage("Images/BoxDownLeft");
         public static ResourceImage ImageBoxDownRight = new ResourceImage("Images/BoxDownRight");
         public static ResourceImage ImageBoxFiller = new ResourceImage("Images/BoxFiller");
-        public static ResourceImage ImageBoxLeft = new ResourceImage("Images/BoxLeft");
+        public static ResourceImage ImageBoxLeft = new ResourceImage ("Images/BoxLeft");
+        public static ResourceImage ImageBoxNotificationLeft = new ResourceImage ("Images/BoxNotificationLeft");
+        public static ResourceImage ImageBoxNotificationRight = new ResourceImage ("Images/BoxNotificationRight");
+        public static ResourceImage ImageBoxNotificationFiller = new ResourceImage ("Images/BoxNotificationFiller");
+        public static ResourceImage ImageBoxNotificationDownLeft = new ResourceImage ("Images/BoxNotificationDownLeft");
+        public static ResourceImage ImageBoxNotificationDownRight = new ResourceImage ("Images/BoxNotificationDownRight");
+        public static ResourceImage ImageBoxNotificationDownFiller = new ResourceImage ("Images/BoxNotificationDownFiller");
+        public static ResourceImage ImageBoxNotificationOverLeft = new ResourceImage ("Images/BoxNotificationOverLeft");
+        public static ResourceImage ImageBoxNotificationOverRight = new ResourceImage ("Images/BoxNotificationOverRight");
+        public static ResourceImage ImageBoxNotificationOverFiller = new ResourceImage ("Images/BoxNotificationOverFiller");
         public static ResourceImage ImageBoxOverFiller = new ResourceImage("Images/BoxOverFiller");
         public static ResourceImage ImageBoxOverLeft = new ResourceImage("Images/BoxOverLeft");
         public static ResourceImage ImageBoxOverRight = new ResourceImage("Images/BoxOverRight");
