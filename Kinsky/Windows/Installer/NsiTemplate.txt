@@ -118,16 +118,16 @@ Function SongcastOutOfDatePage
         Abort
     ${EndIf}
 
-    ${NSD_CreateLabel} 0 0 100% 25u "Songcast is out of date"
+    ${NSD_CreateLabel} 0 0 100%% 25u "Songcast is out of date"
     Pop $SongcastTitle
 
     CreateFont $0 "$(^Font)" "$(^FontSize)" "700"
     SendMessage $SongcastTitle ${WM_SETFONT} $0 0
 
-    ${NSD_CreateLabel} 0 20u 100% 25u "We have detected that you are running an old version of Songcast and recommend that you update your installation. Please visit the Linn website to get the latest version."
+    ${NSD_CreateLabel} 0 20u 100%% 25u "We have detected that you are running an old version of Songcast and recommend that you update your installation. Please visit the Linn website to get the latest version."
     Pop $SongcastText
 
-    ${NSD_CreateLink} 0 60u 100% 25u "http://www.linn.co.uk/software#songcast"
+    ${NSD_CreateLink} 0 60u 100%% 25u "http://www.linn.co.uk/software#songcast"
     Pop $SongcastLink
     ${NSD_OnClick} $SongcastLink SongcastLinkClicked
 
