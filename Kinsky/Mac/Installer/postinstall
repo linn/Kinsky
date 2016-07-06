@@ -1,0 +1,15 @@
+#!/bin/sh
+
+osascript <<EOD
+  try
+    if (version of application "Songcast") starts with "4.4." then
+      set result to display dialog "We have detected that you are running an old version of Songcast and recommend that you update your installation. Please visit the Linn website to get the latest version." with title "Songcast is out of date" buttons {"Skip", "Visit Linn Website"} cancel button "Skip" default button "Visit Linn Website"
+
+      if button returned of result is "Visit Linn Website" then
+        do shell script "open http://www.linn.co.uk/software#songcast"
+      end if
+    end if
+  on error
+  end try
+EOD
+
