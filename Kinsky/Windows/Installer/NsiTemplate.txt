@@ -39,6 +39,10 @@
 ;Variables
 
   Var InstallDotNET
+  Var SongcastDialog
+  Var SongcastTitle
+  Var SongcastText
+  Var SongcastLink
 
 ;--------------------------------
 ;Default installation folder
@@ -68,6 +72,8 @@
   !insertmacro MUI_PAGE_DIRECTORY
   !insertmacro MUI_PAGE_INSTFILES  
 
+  Page custom SongcastOutOfDatePage
+
   ;FINISH page settings
   !define MUI_FINISHPAGE_TITLE "Completing the Setup Wizard for ${PRODUCT}"
   !define MUI_FINISHPAGE_TEXT "${PRODUCT} has been installed on your computer.\n\nClick Finish to close this wizard."
@@ -95,6 +101,43 @@
   !define MUI_FINISHPAGE_NOREBOOTSUPPORT
   
   !insertmacro MUI_UNPAGE_FINISH
+
+Function SongcastOutOfDatePage
+    ; abort creation if the broken songcast version is not installed
+    ReadRegStr $0 HKLM "Software\Linn\Songcast" "InstalledVersions"
+    StrCpy $1 $0 4
+    StrCmp $1 "4.4." +2 0
+    Abort
+
+    !insertmacro MUI_HEADER_TEXT "Checking For Songcast Updates" "Please wait while we check for available Songcast updates"
+
+    nsDialogs::Create 1018
+    Pop $SongcastDialog
+
+    ${If} $SongcastDialog == error
+        Abort
+    ${EndIf}
+
+    ${NSD_CreateLabel} 0 0 100%% 25u "Songcast is out of date"
+    Pop $SongcastTitle
+
+    CreateFont $0 "$(^Font)" "$(^FontSize)" "700"
+    SendMessage $SongcastTitle ${WM_SETFONT} $0 0
+
+    ${NSD_CreateLabel} 0 20u 100%% 25u "We have detected that you are running an old version of Songcast and recommend that you update your installation. Please visit the Linn website to get the latest version."
+    Pop $SongcastText
+
+    ${NSD_CreateLink} 0 60u 100%% 25u "http://www.linn.co.uk/software#songcast"
+    Pop $SongcastLink
+    ${NSD_OnClick} $SongcastLink SongcastLinkClicked
+
+    nsDialogs::Show
+
+FunctionEnd
+
+Function SongcastLinkClicked
+    ExecShell "open" "http://www.linn.co.uk/software#songcast"
+FunctionEnd
 
 Function LaunchLink
     ExecShell "open" "$INSTDIR\${LAUNCHFILE}"

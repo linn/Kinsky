@@ -228,6 +228,37 @@
     <BundleResource Include="..\Resources\BoxRight.png">
       <Link>Images\BoxRight.png</Link>
     </BundleResource>
+
+    <BundleResource Include="..\Resources\BoxLeft.png">
+      <Link>Images\BoxLeft.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\BoxNotificationLeft.png">
+      <Link>Images\BoxNotificationLeft.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\BoxNotificationRight.png">
+      <Link>Images\BoxNotificationRight.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\BoxNotificationFiller.png">
+      <Link>Images\BoxNotificationFiller.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\BoxNotificationDownLeft.png">
+      <Link>Images\BoxNotificationDownLeft.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\BoxNotificationDownRight.png">
+      <Link>Images\BoxNotificationDownRight.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\BoxNotificationDownFiller.png">
+      <Link>Images\BoxNotificationDownFiller.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\BoxNotificationOverLeft.png">
+      <Link>Images\BoxNotificationOverLeft.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\BoxNotificationOverRight.png">
+      <Link>Images\BoxNotificationOverRight.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\Resources\BoxNotificationOverFiller.png">
+      <Link>Images\BoxNotificationOverFiller.png</Link>
+    </BundleResource>
     <BundleResource Include="..\Resources\BrowserDown.png">
       <Link>Images\BrowserDown.png</Link>
     </BundleResource>
@@ -780,7 +811,7 @@
     <BundleResource Include="..\Resources\Badge.png">
       <Link>Images\Badge.png</Link>
     </BundleResource>
-  </ItemGroup>  
+  </ItemGroup>
   <ItemGroup>
     <NativeReference Include="..\..\External\libmonobjc.2.dylib">
       <Kind>Dynamic</Kind>

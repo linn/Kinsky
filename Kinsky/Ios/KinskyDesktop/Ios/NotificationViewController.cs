@@ -29,7 +29,7 @@ namespace KinskyTouch
 				this.View.Layer.CornerRadius = 18;
 			}
 			iGetKazooButton = new UIBarButtonItem();
-			iGetKazooButton.Title = "Get Kazoo";
+			iGetKazooButton.Title = "Download Kazoo";
 
 			iCloseButton = new UIBarButtonItem();
 			iCloseButton.Title = "Not Now";

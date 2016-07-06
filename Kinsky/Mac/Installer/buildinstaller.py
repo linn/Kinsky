@@ -130,6 +130,10 @@ def main():
     os.makedirs(resourcesdir)
     shutil.copyfile(os.path.join(kScriptDir, "../../../license.txt"), os.path.join(resourcesdir, "License.txt"))
 
+    scriptsDir = os.path.join(installerTmpDir, "Scripts/")
+    os.makedirs(scriptsDir)
+    shutil.copy2(os.path.join(kScriptDir, "postinstall"), scriptsDir)
+
     
     bundleSrc = os.path.join(releasedir, "Kinsky.app")
     bundle = os.path.join(pkgDir, "Kinsky.app")
@@ -146,7 +150,7 @@ def main():
     }]
     plistlib.writePlist(plistparts, componentplist)
 
-    pkg = PackageBuild(installerdir, pkgDir, "Kinsky", "uk.co.linn", sourceOptionName="--root", componentPlist=componentplist)
+    pkg = PackageBuild(installerdir, pkgDir, "Kinsky", "uk.co.linn", sourceOptionName="--root", componentPlist=componentplist, scriptsDir=scriptsDir)
 
     distFile = ProductBuildSynthesizeDistFile(installerdir, pkg)
     UpdateDistributionFile(distFile, version, title="%s" % appName, license='License.txt')

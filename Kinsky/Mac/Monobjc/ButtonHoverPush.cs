@@ -60,6 +60,18 @@ namespace KinskyDesktop
             return cell;
         }
 
+        public IButtonHoverType2 Initialise (ButtonType2Drawer aDrawer)
+        {
+            // button initialised as a type 2 non-toggle button with internal mouse tracking
+            iTrackingArea = TrackerHelper.Create (this, this.Bounds, false);
+
+            // create and initialise the cell
+            ButtonHoverCellType2 cell = new ButtonHoverCellType2 (aDrawer);
+            Initialise (cell);
+
+            return cell;
+        }
+
         public IButtonHoverType2 Initialise(NSImage aImage)
         {
             // button initialised as a type 2 non-toggle button with internal mouse tracking
@@ -441,8 +453,32 @@ namespace KinskyDesktop
     // - a foreground image or text
     public class ButtonType2Drawer
     {
-        public ButtonType2Drawer()
+
+        public ButtonType2Drawer() : this(
+            Properties.Resources.ImageBoxLeft,
+            Properties.Resources.ImageBoxRight,
+            Properties.Resources.ImageBoxFiller,
+            Properties.Resources.ImageBoxOverLeft,
+            Properties.Resources.ImageBoxOverRight,
+            Properties.Resources.ImageBoxOverFiller,
+            Properties.Resources.ImageBoxDownLeft,
+            Properties.Resources.ImageBoxDownRight,
+            Properties.Resources.ImageBoxDownFiller
+        )
         {
+        }
+
+        public ButtonType2Drawer (NSImage aLeft, NSImage aRight, NSImage aFiller, NSImage aLeftOver, NSImage aRightOver, NSImage aFillerOver, NSImage aLeftDown, NSImage aRightDown, NSImage aFillerDown)
+        {
+            iLeft = aLeft;
+            iRight = aRight;
+            iFiller = aFiller;
+            iLeftOver = aLeftOver;
+            iRightOver = aRightOver;
+            iFillerOver = aFillerOver;
+            iLeftDown = aLeftDown;
+            iRightDown = aRightDown;
+            iFillerDown = aFillerDown;
         }
 
         public void Release()
@@ -517,30 +553,30 @@ namespace KinskyDesktop
 
         public void DrawNoHover(NSRect aRect)
         {
-            Draw(aRect, Properties.Resources.ImageBoxLeft,
-                 Properties.Resources.ImageBoxRight,
-                 Properties.Resources.ImageBoxFiller);
+            Draw(aRect, iLeft,
+                 iRight,
+                 iFiller);
         }
 
         public void DrawHover(NSRect aRect)
         {
-            Draw(aRect, Properties.Resources.ImageBoxOverLeft,
-                 Properties.Resources.ImageBoxOverRight,
-                 Properties.Resources.ImageBoxOverFiller);
+            Draw(aRect, iLeftOver,
+                 iRightOver,
+                 iFillerOver);
         }
 
         public void DrawDown(NSRect aRect)
         {
-            Draw(aRect, Properties.Resources.ImageBoxDownLeft,
-                 Properties.Resources.ImageBoxDownRight,
-                 Properties.Resources.ImageBoxDownFiller);
+            Draw(aRect, iLeftDown,
+                 iRightDown,
+                 iFillerDown);
         }
 
         public NSSize CalculateSize()
         {
             // assume images for the background are the same for the no-hover, hover and down states
-            NSImage left = Properties.Resources.ImageBoxLeft;
-            NSImage right = Properties.Resources.ImageBoxRight;
+            NSImage left = iLeft;
+            NSImage right = iRight;
 
             return new NSSize(TextSize.width + ImageSize.width + left.Size.width + right.Size.width + 2.0f*iTextPadding, left.Size.height);
         }
@@ -551,8 +587,8 @@ namespace KinskyDesktop
                 return;
 
             // assume images for the background are the same for the no-hover, hover and down states
-            NSImage left = Properties.Resources.ImageBoxLeft;
-            NSImage right = Properties.Resources.ImageBoxRight;
+            NSImage left = iLeft;
+            NSImage right = iRight;
             NSRect fillerRect = new NSRect(aRect.MinX + left.Size.width, aRect.MinY, aRect.Width - left.Size.width - right.Size.width, aRect.Height);
 
             // calculate the text rect
@@ -667,6 +703,8 @@ namespace KinskyDesktop
         private bool iTextLeft;
         private float iTextPadding = 5.0f;
         private NSFont iFont = FontManager.FontLarge;
+
+        private NSImage iLeft, iRight, iFiller, iLeftOver, iRightOver, iFillerOver, iLeftDown, iRightDown, iFillerDown;
     }
 
 
@@ -749,10 +787,19 @@ namespace KinskyDesktop
     // - there are 6 states: no-hover, hover and push for on and off states
     public class ButtonHoverCellType2 : IButtonHoverCell, IButtonHoverType2
     {
-        public ButtonHoverCellType2()
+        public ButtonHoverCellType2() : this(new ButtonType2Drawer (), new ButtonType2Drawer ())
         {
-            iDrawerOff = new ButtonType2Drawer();
-            iDrawerOn = new ButtonType2Drawer();
+        }
+
+        public ButtonHoverCellType2 (ButtonType2Drawer aDrawer) 
+            : this (aDrawer, aDrawer)
+        {
+        }
+
+        public ButtonHoverCellType2 (ButtonType2Drawer aDrawerOn, ButtonType2Drawer aDrawerOff)
+        {
+            iDrawerOn = aDrawerOn;
+            iDrawerOff = aDrawerOff;
         }
 
         public void Initialise(NSView aParent)
@@ -794,7 +841,9 @@ namespace KinskyDesktop
             iBkgd.Release();
 
             iDrawerOff.Release();
-            iDrawerOn.Release();
+            if (iDrawerOff != iDrawerOn) {
+                iDrawerOn.Release ();
+            }
         }
 
         public void SetEnabled(bool aEnabled)
