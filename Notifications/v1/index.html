@@ -1,131 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <style>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
 
-        @font-face
-        {
-            font-family:'MyEffraRegular';
-            src:url("font/effra/effra-webfont.eot");
-            src:url("font/effra/effra-webfont.eot?#iefix") format("embedded-opentype"),url("font/effra/effra-webfont.woff") format("woff"),url("font/effra/effra-webfont.ttf") format("truetype"),url("font/effra/effra-webfont.svg#EffraRegular") format("svg");
-        }
+<body>
+    <div class="container-fluid">
 
-        body {
-            font-family: MyEffraRegular,"Helvetica Neue",Helvetica,Arial,sans-serif;
-            margin:0;
-            padding:0;
-            height:100%;
-            background-color:#181E29;
-        }
+        <div class="section header">
+            <div class="row">
+                <div class="col-sm-5 text-sm-right text-xs-center">
+                    <img class="devices" src="img/devices.png" />
+                </div>
+                <div class="col-sm-7 ">
+                    <h1 class="text-xs-center text-sm-left">Try our new control app, Linn Kazoo</h1>
+                    <p class="text-xs-center text-sm-left">Fast, fun and easy to use on mobile, tablet or desktop, it’s packed with great new features:</p>
+                    <ol class="text-sm-left">
+                        <li>Free Tidal streaming for 90 days</li>
+                        <li>All your music under one roof</li>
+                        <li>Take control of every room</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+                 <div class="col-sm-12 text-sm-right text-xs-center">
+                <img class="platforms" src="img/platforms.png" />
+                </div>
+            </div>
+        </div>
 
-        ::-webkit-scrollbar
-        {
-        width: 12px;  /* for vertical scrollbars */
-        height: 12px; /* for horizontal scrollbars */
-        }
-
-        ::-webkit-scrollbar-track
-        {
-            background: #181E29;
-        }
-
-        ::-webkit-scrollbar-thumb
-        {
-            background:  rgba(140, 140, 140, 0.4);
-            border-radius: 10px;
-        }
-
-        .section {
-            text-align:center;
-            color:#FFF;
-        }
-
-        .header {
-            background-color:#181E29;
-        }
-
-        .section > h1 {
-            margin:0;
-            font-size:26px;
-            padding:30px 20px 30px 20px;
-        }
-
-
-        .section > p {
-            padding:0px 30px 40px 30px;
-            font-size:18px;
-            margin:0px;
-        }
-
-        .feature1 {
-            background:url('img/feature1.jpg');
-        }
-
-        .feature2 {
-            background:url('img/feature2.jpg');
-        }
-
-        .feature3 {
-            background:url('img/feature3.jpg');
-        }
-
-
-        .feature:nth-child(even)
-        {
-            background-color:#EEE;
-        }
-
-        .footer {
-            padding:20px;
-        }
-
-        @media only screen and (max-width : 1200px) {
-
-        }
-
-        /* Medium Devices, Desktops */
-        @media only screen and (max-width : 992px) {
-
-        }
-
-        /* Small Devices, Tablets */
-        @media only screen and (max-width : 768px) {
-
-        }
-
-        /* Extra Small Devices, Phones */ 
-        @media only screen and (max-width : 480px) {
-
-        }
-
-        /* Custom, iPhone Retina */ 
-        @media only screen and (max-width : 320px) {
+        <div class="section feature feature1">
+            <div class="row">
+                <div class="col-sm-5 text-sm-right text-xs-center">
+                    <img src="img/tidal.png" />
+                </div>
+                <div class="col-sm-7">
+                    <h1>1. Free Tidal streaming for 90 days</h1>
+                    <p>Stream high quality music straight to your Linn DS player. Kazoo gives you direct access to Tidal’s huge music
+                library, plus it’s free to try for every registered Linn owner.*</p> 
+                </div>
+            </div>
             
-        }
+        </div>
 
-    </style>
 
-  </head>
-  <body>
-      <div class="section header">
-            <h1>Try our new control app, Linn Kazoo</h1>
-      </div>
-      <div class="section feature feature1">
-          <h1>Free Tidal streaming for 90 days</h1>
-            <p>Stream high quality music straight to your Linn DS player. Kazoo gives you direct access to Tidal’s huge music library, plus it’s free to try for every registered Linn owner.*</p>
-      </div>
-      <div class="section feature feature2">
-          <h1>All your music under one roof</h1>
-            <p>With customisable views and faster search, it’s never been easier to find that perfect track. Kazoo brings all your music together, however it’s stored or streamed. </p>
-      </div>
-      <div class="section feature feature3">
-          <h1>Take control of every room</h1>
-            <p>Own more than one Linn DS player? Kazoo’s specially designed multi-room feature lets you link rooms together or control them separately, all from one simple app.</p>
-      </div>
-      <div class="section footer">
+        <div class="section feature feature2">
+            <div class="row">
+                <div class="col-sm-5 text-sm-right text-xs-center">
+                    <img src="img/albums.png" />
+                </div>
+                <div class="col-sm-7">
+                    <h1>2. All your music under one roof</h1>
+                    <p>With customisable views and faster search, it’s never been easier to find that perfect track. Kazoo brings all
+                your music together, however it’s stored or streamed. </p> 
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="section feature feature3">
+            <div class="row">
+                <div class="col-sm-5 text-sm-right text-xs-center">
+                    <img src="img/multiroom.png" />
+                </div>
+                <div class="col-sm-7">
+                    <h1>3. Take control of every room</h1>
+                    <p>Own more than one Linn DS player? Kazoo’s specially designed multi-room feature lets you link rooms together
+                or control them separately, all from one simple app. </p> 
+                </div>
+            </div>
+            
+        </div>
+        <div class="section footer">
             <small>* subject to Tidal availability in your country</small>
-      </div>
-  </body>
+        </div>
+    </div>
+</body>
+
 </html>
