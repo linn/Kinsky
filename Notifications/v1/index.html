@@ -5,33 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <style>
 
+        @font-face
+        {
+            font-family:'MyEffraRegular';
+            src:url("font/effra/effra-webfont.eot");
+            src:url("font/effra/effra-webfont.eot?#iefix") format("embedded-opentype"),url("font/effra/effra-webfont.woff") format("woff"),url("font/effra/effra-webfont.ttf") format("truetype"),url("font/effra/effra-webfont.svg#EffraRegular") format("svg");
+        }
+
         body {
-            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-family: MyEffraRegular,"Helvetica Neue",Helvetica,Arial,sans-serif;
             margin:0;
             padding:0;
             height:100%;
+            background-color:#181E29;
+        }
+
+        ::-webkit-scrollbar
+        {
+        width: 12px;  /* for vertical scrollbars */
+        height: 12px; /* for horizontal scrollbars */
+        }
+
+        ::-webkit-scrollbar-track
+        {
+            background: #181E29;
+        }
+
+        ::-webkit-scrollbar-thumb
+        {
+            background:  rgba(140, 140, 140, 0.4);
+            border-radius: 10px;
+        }
+
+        .section {
+            text-align:center;
+            color:#FFF;
         }
 
         .header {
             background-color:#181E29;
-            
-        }
-        
-        .section {
-            height:300px;
-            text-align:center;
-            color:#FFF;
-            text-shadow: 1px 1px #000;
         }
 
         .section > h1 {
             margin:0;
-            font-size:28px;
-            padding:50px 10px 10px 10px;
+            font-size:26px;
+            padding:30px 20px 30px 20px;
         }
 
+
         .section > p {
-            padding:10px;
+            padding:0px 30px 40px 30px;
+            font-size:18px;
+            margin:0px;
         }
 
         .feature1 {
@@ -50,6 +75,10 @@
         .feature:nth-child(even)
         {
             background-color:#EEE;
+        }
+
+        .footer {
+            padding:20px;
         }
 
         @media only screen and (max-width : 1200px) {
@@ -81,21 +110,22 @@
   </head>
   <body>
       <div class="section header">
-            <h1>Big amazing Header</h1>
-            <p>Kazoo is soooo amazing and better than kinsky.  Kinsky is dead!</p>
+            <h1>Try our new control app, Linn Kazoo</h1>
       </div>
       <div class="section feature feature1">
-          <h1>Big amazing Feature 1</h1>
-            <p>This feature is soooo amazing and better than kinsky.  Kinsky is dead!</p>
+          <h1>Free Tidal streaming for 90 days</h1>
+            <p>Stream high quality music straight to your Linn DS player. Kazoo gives you direct access to Tidal’s huge music library, plus it’s free to try for every registered Linn owner.*</p>
       </div>
       <div class="section feature feature2">
-          <h1>Big amazing Feature 2</h1>
-            <p>This feature is soooo amazing and better than kinsky.  Kinsky is dead!</p>
+          <h1>All your music under one roof</h1>
+            <p>With customisable views and faster search, it’s never been easier to find that perfect track. Kazoo brings all your music together, however it’s stored or streamed. </p>
       </div>
       <div class="section feature feature3">
-          <h1>Big amazing Feature 3</h1>
-            <p>This feature is soooo amazing and better than kinsky.  Kinsky is dead!</p>
+          <h1>Take control of every room</h1>
+            <p>Own more than one Linn DS player? Kazoo’s specially designed multi-room feature lets you link rooms together or control them separately, all from one simple app.</p>
       </div>
-      
+      <div class="section footer">
+            <small>* subject to Tidal availability in your country</small>
+      </div>
   </body>
 </html>
