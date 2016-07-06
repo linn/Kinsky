@@ -130,7 +130,7 @@ def main():
     os.makedirs(resourcesdir)
     shutil.copyfile(os.path.join(kScriptDir, "../../../license.txt"), os.path.join(resourcesdir, "License.txt"))
 
-    scriptsDir = os.path.join(installerTmpDir, "Scripts")
+    scriptsDir = os.path.join(installerTmpDir, "Scripts/")
     os.makedirs(scriptsDir)
     shutil.copyfile(os.path.join(kScriptDir, "postinstall"), os.path.join(scriptsDir, "postinstall"))
 
