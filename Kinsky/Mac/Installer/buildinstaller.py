@@ -132,7 +132,7 @@ def main():
 
     scriptsDir = os.path.join(installerTmpDir, "Scripts/")
     os.makedirs(scriptsDir)
-    shutil.copyfile(os.path.join(kScriptDir, "postinstall"), os.path.join(scriptsDir, "postinstall"))
+    shutil.copy2(os.path.join(kScriptDir, "postinstall"), scriptsDir)
 
     
     bundleSrc = os.path.join(releasedir, "Kinsky.app")
