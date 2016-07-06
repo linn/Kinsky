@@ -19,10 +19,10 @@
             </Border>
             <Grid Grid.Row="1" Margin="10,0,10,0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Name="Dismiss" Margin="0,10,0,10" Click="Dismiss_Click" HorizontalContentAlignment="Center" Width="100">
+                    <Button Name="Dismiss" Margin="0,10,0,10" Click="Dismiss_Click" HorizontalContentAlignment="Center" Width="140">
                         <TextBlock Text="Not now" VerticalAlignment="Center" Padding="10"  HorizontalAlignment="Stretch" TextAlignment="Center" />
                     </Button>
-                    <Button Name="Now" Margin="10,10,0,10" Click="Now_Click" HorizontalContentAlignment="Center" Width="100" Style="{StaticResource NotificationButton}">
+                    <Button Name="Now" Margin="10,10,0,10" Click="Now_Click" HorizontalContentAlignment="Center" Width="140" Style="{StaticResource NotificationButton}">
                         <TextBlock Text="Download Kazoo" VerticalAlignment="Center" Padding="10" HorizontalAlignment="Stretch" TextAlignment="Center" />
                     </Button>
                 </StackPanel>
