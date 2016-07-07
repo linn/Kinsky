@@ -8415,9 +8415,9 @@ namespace KinskyDroid
             var height = rootView.Height;
 
             // don't fill the whole screen
-            var margin = 50;
-            width -= (margin * 2);
-            height -= (margin * 2);
+            //var margin = 50;
+            //width -= (margin * 2);
+            //height -= (margin * 2);
 
             //if (iStack.TabletView)
             //{

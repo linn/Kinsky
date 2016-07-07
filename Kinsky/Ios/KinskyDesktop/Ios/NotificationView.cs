@@ -77,7 +77,7 @@ namespace KinskyTouch
 		private void ShowNotification(INotification aNotification)
 		{
 			UINavigationController controller = new UINavigationController(new NotificationViewController(aNotification));
-			controller.ModalPresentationStyle = UIModalPresentationStyle.FormSheet;
+			controller.ModalPresentationStyle = UIModalPresentationStyle.FullScreen;
 
 			iParent.PresentViewController(controller, true, null);
 		}
