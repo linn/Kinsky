@@ -102,7 +102,8 @@ height: 12px; /* for horizontal scrollbars */
 }
 
 .feature1 img {
-    padding:30px;
+    padding:10px;
+    width:200px;
 }
 
 .feature2 {
@@ -110,7 +111,8 @@ height: 12px; /* for horizontal scrollbars */
 }
 
 .feature2 img {
-    padding:20px ;
+    padding:20px;
+    width:200px;
 }
 
 .feature3 {
@@ -120,6 +122,7 @@ height: 12px; /* for horizontal scrollbars */
 
 .feature3 img {
     padding:40px 0 20px 0px;
+    width:200px;
 }
 
 .feature:nth-child(even)
@@ -156,14 +159,17 @@ height: 12px; /* for horizontal scrollbars */
 
     .feature1 img {
         padding:80px 20px 80px 40px;
+         width:auto;
     }
 
     .feature2 img {
         padding:40px ;
+        width:auto;
     }
 
     .feature3 img {
         padding:80px 0 80px 40px;
+        width:auto;
     }
 
     .feature h1 {
