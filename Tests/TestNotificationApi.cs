@@ -56,9 +56,7 @@ namespace Tests
         }
 
         [Test]
-        [TestCase(true, (uint)0)] // show again later should not persist notification id
-        [TestCase(false, (uint)1)] // dismiss should persist notification id
-        public void TestNotificationIdPersistence(bool aShowAgainLater, uint aExpectedPersistedId)
+        public void TestNotificationIdPersistence()
         {
             // arrange
             iServer.SetDesiredResponse(iServerResponseV1);
@@ -66,12 +64,12 @@ namespace Tests
 
             iView.ShowCallback = (notification, shownow) =>
             {
-                notification.Closed(!aShowAgainLater);
+                notification.Closed();
                 waitHandle.Set();
             };
 
             // act
-            using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView))
+            using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView, NotificationController.DefaultTimespan))
             {
                 Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
             }
@@ -83,7 +81,7 @@ namespace Tests
             Assert.IsNotNull(iView.Current);
             Assert.IsNotNull(iView.LastShown);
             Assert.AreEqual(iView.Current, iView.LastShown);
-            Assert.AreEqual(iPersistence.LastNotificationVersion, aExpectedPersistedId); 
+            Assert.AreEqual(iPersistence.LastNotificationVersion, 1); 
             Assert.AreEqual(iNotificationVersion1.Uri, iView.Current.Uri);
             Assert.AreEqual(iNotificationVersion1.Version, iView.Current.Version);
         }
@@ -93,6 +91,7 @@ namespace Tests
         {
             // arrange
             iPersistence.LastNotificationVersion = 1;
+            iPersistence.LastShownNotification = DateTime.Now;
             iServer.SetDesiredResponse(iServerResponseV1);
             var waitHandle = new AutoResetEvent(false);
            
@@ -106,7 +105,7 @@ namespace Tests
             };
 
             // act
-            using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView))
+            using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView, NotificationController.DefaultTimespan))
             {
                 Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
             }
@@ -120,6 +119,50 @@ namespace Tests
             Assert.AreEqual(iPersistence.LastNotificationVersion, iNotificationVersion1.Version);
         }
 
+
+        [Test]
+        [TestCase(-2, true)]
+        [TestCase(-1, true)]
+        [TestCase(0, false)]
+        [TestCase(1, false)]
+        public void TestNotificationReshowTimespan(int aDaysElapsed, bool aShouldShow)
+        {
+            // arrange
+            iPersistence.LastNotificationVersion = 1;
+            iPersistence.LastShownNotification = DateTime.Now.Add(TimeSpan.FromDays(aDaysElapsed)).AddMinutes(-5); // take 5 mins off to ensure days comparison works properly
+            iServer.SetDesiredResponse(iServerResponseV1);
+            var waitHandle = new AutoResetEvent(false);
+
+            iView.ShowCallback = (notification, shownow) =>
+            {
+                if (shownow && !aShouldShow)
+                {
+                    Assert.Fail("View should not be shown.");
+                }
+                waitHandle.Set();
+            };
+
+            // act
+            using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView, TimeSpan.FromDays(1)))
+            {
+                Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
+            }
+
+            // flush pending invocations
+            AwaitInvoker();
+
+            // assert
+            Assert.IsNotNull(iView.Current);
+            if (aShouldShow)
+            {
+                Assert.IsNotNull(iView.LastShown);
+            }else
+            {
+                Assert.IsNull(iView.LastShown);
+            }
+            Assert.AreEqual(iPersistence.LastNotificationVersion, iNotificationVersion1.Version);
+        }
+
         [Test]
         public void TestNotificationIsShownIfNewNotificationAvailable()
         {
@@ -130,12 +173,12 @@ namespace Tests
 
             iView.ShowCallback = (notification, shownow) =>
             {
-                notification.Closed(true);
+                notification.Closed();
                 waitHandle.Set();
             };
 
             // act
-            using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView))
+            using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView, NotificationController.DefaultTimespan))
             {
                 Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
             }
@@ -173,7 +216,7 @@ namespace Tests
             };
 
             // act
-            using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView))
+            using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView, NotificationController.DefaultTimespan))
             {
                 Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
             }
@@ -208,7 +251,7 @@ namespace Tests
             };
 
             // act
-            using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView))
+            using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView, NotificationController.DefaultTimespan))
             {
                 Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
             }
@@ -292,6 +335,7 @@ namespace Tests
     class MockPersistence : INotificationPersistence
     {
         public uint LastNotificationVersion { get; set; }
+        public DateTime LastShownNotification { get; set; }
     }
 
 

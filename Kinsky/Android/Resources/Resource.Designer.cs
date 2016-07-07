@@ -555,11 +555,11 @@ namespace KinskyDroid
 			// aapt resource value: 0x7f05001e
 			public const int confirmdeletebutton = 2131034142;
 			
-			// aapt resource value: 0x7f050065
-			public const int currentroom = 2131034213;
+			// aapt resource value: 0x7f050064
+			public const int currentroom = 2131034212;
 			
-			// aapt resource value: 0x7f05006e
-			public const int currentsource = 2131034222;
+			// aapt resource value: 0x7f05006d
+			public const int currentsource = 2131034221;
 			
 			// aapt resource value: 0x7f050028
 			public const int fullscreenartworkcontainerphone = 2131034152;
@@ -600,23 +600,20 @@ namespace KinskyDroid
 			// aapt resource value: 0x7f05003a
 			public const int moveupbutton = 2131034170;
 			
-			// aapt resource value: 0x7f05003d
-			public const int notificationbuttoncontrols = 2131034173;
-			
 			// aapt resource value: 0x7f05003c
-			public const int notificationcheckbox = 2131034172;
+			public const int notificationbuttoncontrols = 2131034172;
 			
-			// aapt resource value: 0x7f05003e
-			public const int notificationclose = 2131034174;
+			// aapt resource value: 0x7f05003d
+			public const int notificationclose = 2131034173;
 			
 			// aapt resource value: 0x7f05003b
 			public const int notificationcontrols = 2131034171;
 			
-			// aapt resource value: 0x7f05003f
-			public const int notificationgetkazoo = 2131034175;
+			// aapt resource value: 0x7f05003e
+			public const int notificationgetkazoo = 2131034174;
 			
-			// aapt resource value: 0x7f050040
-			public const int notificationwebview = 2131034176;
+			// aapt resource value: 0x7f05003f
+			public const int notificationwebview = 2131034175;
 			
 			// aapt resource value: 0x7f050027
 			public const int playlist = 2131034151;
@@ -627,44 +624,44 @@ namespace KinskyDroid
 			// aapt resource value: 0x7f050025
 			public const int playlistcontainerphone = 2131034149;
 			
-			// aapt resource value: 0x7f050044
-			public const int playlistdeletebutton = 2131034180;
+			// aapt resource value: 0x7f050043
+			public const int playlistdeletebutton = 2131034179;
+			
+			// aapt resource value: 0x7f050040
+			public const int playlisteditbuttons = 2131034176;
 			
 			// aapt resource value: 0x7f050041
-			public const int playlisteditbuttons = 2131034177;
-			
-			// aapt resource value: 0x7f050042
-			public const int playlisteditmodebutton = 2131034178;
-			
-			// aapt resource value: 0x7f05004d
-			public const int playlistitemfirstline = 2131034189;
-			
-			// aapt resource value: 0x7f050048
-			public const int playlistitemicon = 2131034184;
-			
-			// aapt resource value: 0x7f050047
-			public const int playlistitemiconcontainer = 2131034183;
+			public const int playlisteditmodebutton = 2131034177;
 			
 			// aapt resource value: 0x7f05004c
-			public const int playlistitemjumptoroom = 2131034188;
+			public const int playlistitemfirstline = 2131034188;
 			
-			// aapt resource value: 0x7f05004a
-			public const int playlistitemplaying = 2131034186;
+			// aapt resource value: 0x7f050047
+			public const int playlistitemicon = 2131034183;
 			
-			// aapt resource value: 0x7f050049
-			public const int playlistitemplayingcontainer = 2131034185;
-			
-			// aapt resource value: 0x7f05004e
-			public const int playlistitemsecondline = 2131034190;
+			// aapt resource value: 0x7f050046
+			public const int playlistitemiconcontainer = 2131034182;
 			
 			// aapt resource value: 0x7f05004b
-			public const int playlistitemtechnicalinfo = 2131034187;
+			public const int playlistitemjumptoroom = 2131034187;
 			
-			// aapt resource value: 0x7f05004f
-			public const int playlistitemthirdline = 2131034191;
+			// aapt resource value: 0x7f050049
+			public const int playlistitemplaying = 2131034185;
 			
-			// aapt resource value: 0x7f050043
-			public const int playlistsavebutton = 2131034179;
+			// aapt resource value: 0x7f050048
+			public const int playlistitemplayingcontainer = 2131034184;
+			
+			// aapt resource value: 0x7f05004d
+			public const int playlistitemsecondline = 2131034189;
+			
+			// aapt resource value: 0x7f05004a
+			public const int playlistitemtechnicalinfo = 2131034186;
+			
+			// aapt resource value: 0x7f05004e
+			public const int playlistitemthirdline = 2131034190;
+			
+			// aapt resource value: 0x7f050042
+			public const int playlistsavebutton = 2131034178;
 			
 			// aapt resource value: 0x7f050023
 			public const int playlisttopsectionphone = 2131034147;
@@ -672,59 +669,59 @@ namespace KinskyDroid
 			// aapt resource value: 0x7f050003
 			public const int playnownextlaterbutton = 2131034115;
 			
-			// aapt resource value: 0x7f050046
-			public const int repeatbutton = 2131034182;
+			// aapt resource value: 0x7f050045
+			public const int repeatbutton = 2131034181;
 			
-			// aapt resource value: 0x7f050050
-			public const int requestdeletebutton = 2131034192;
+			// aapt resource value: 0x7f05004f
+			public const int requestdeletebutton = 2131034191;
 			
-			// aapt resource value: 0x7f050054
-			public const int roomandsourceviewswitcher = 2131034196;
-			
-			// aapt resource value: 0x7f05005c
-			public const int roomlist = 2131034204;
-			
-			// aapt resource value: 0x7f050055
-			public const int roomlistcontainer = 2131034197;
-			
-			// aapt resource value: 0x7f050063
-			public const int roomlistheader = 2131034211;
-			
-			// aapt resource value: 0x7f050058
-			public const int roomlisttitle = 2131034200;
-			
-			// aapt resource value: 0x7f050056
-			public const int roomlisttitlebar = 2131034198;
-			
-			// aapt resource value: 0x7f050066
-			public const int roomname = 2131034214;
-			
-			// aapt resource value: 0x7f05005a
-			public const int roomsrefreshbutton = 2131034202;
-			
-			// aapt resource value: 0x7f050059
-			public const int roomsrefreshbuttoncontainer = 2131034201;
+			// aapt resource value: 0x7f050053
+			public const int roomandsourceviewswitcher = 2131034195;
 			
 			// aapt resource value: 0x7f05005b
-			public const int roomsrefreshthrobber = 2131034203;
+			public const int roomlist = 2131034203;
+			
+			// aapt resource value: 0x7f050054
+			public const int roomlistcontainer = 2131034196;
+			
+			// aapt resource value: 0x7f050062
+			public const int roomlistheader = 2131034210;
+			
+			// aapt resource value: 0x7f050057
+			public const int roomlisttitle = 2131034199;
+			
+			// aapt resource value: 0x7f050055
+			public const int roomlisttitlebar = 2131034197;
+			
+			// aapt resource value: 0x7f050065
+			public const int roomname = 2131034213;
+			
+			// aapt resource value: 0x7f050059
+			public const int roomsrefreshbutton = 2131034201;
+			
+			// aapt resource value: 0x7f050058
+			public const int roomsrefreshbuttoncontainer = 2131034200;
+			
+			// aapt resource value: 0x7f05005a
+			public const int roomsrefreshthrobber = 2131034202;
 			
 			// aapt resource value: 0x7f05001f
 			public const int rootview = 2131034143;
 			
-			// aapt resource value: 0x7f050067
-			public const int rotarybackground = 2131034215;
-			
-			// aapt resource value: 0x7f050069
-			public const int rotarycentrebutton = 2131034217;
+			// aapt resource value: 0x7f050066
+			public const int rotarybackground = 2131034214;
 			
 			// aapt resource value: 0x7f050068
-			public const int rotarygrip = 2131034216;
+			public const int rotarycentrebutton = 2131034216;
+			
+			// aapt resource value: 0x7f050067
+			public const int rotarygrip = 2131034215;
+			
+			// aapt resource value: 0x7f050051
+			public const int selectroombutton = 2131034193;
 			
 			// aapt resource value: 0x7f050052
-			public const int selectroombutton = 2131034194;
-			
-			// aapt resource value: 0x7f050053
-			public const int selectsourcebutton = 2131034195;
+			public const int selectsourcebutton = 2131034194;
 			
 			// aapt resource value: 0x7f050001
 			public const int settingsbutton = 2131034113;
@@ -735,50 +732,50 @@ namespace KinskyDroid
 			// aapt resource value: 0x7f050030
 			public const int settingsgetkazoobutton = 2131034160;
 			
-			// aapt resource value: 0x7f050045
-			public const int shufflebutton = 2131034181;
-			
-			// aapt resource value: 0x7f05006d
-			public const int sourceicon = 2131034221;
-			
-			// aapt resource value: 0x7f050062
-			public const int sourcelist = 2131034210;
-			
-			// aapt resource value: 0x7f05005f
-			public const int sourcelistbackbutton = 2131034207;
-			
-			// aapt resource value: 0x7f05005d
-			public const int sourcelistcontainer = 2131034205;
-			
-			// aapt resource value: 0x7f050060
-			public const int sourcelisttitle = 2131034208;
-			
-			// aapt resource value: 0x7f05005e
-			public const int sourcelisttitlebar = 2131034206;
-			
-			// aapt resource value: 0x7f05006f
-			public const int sourcename = 2131034223;
-			
-			// aapt resource value: 0x7f05006b
-			public const int sourcesrefreshbutton = 2131034219;
-			
-			// aapt resource value: 0x7f05006a
-			public const int sourcesrefreshbuttoncontainer = 2131034218;
+			// aapt resource value: 0x7f050044
+			public const int shufflebutton = 2131034180;
 			
 			// aapt resource value: 0x7f05006c
-			public const int sourcesrefreshthrobber = 2131034220;
+			public const int sourceicon = 2131034220;
 			
 			// aapt resource value: 0x7f050061
-			public const int sourcesstandbybutton = 2131034209;
+			public const int sourcelist = 2131034209;
 			
-			// aapt resource value: 0x7f050064
-			public const int standbybutton = 2131034212;
+			// aapt resource value: 0x7f05005e
+			public const int sourcelistbackbutton = 2131034206;
 			
-			// aapt resource value: 0x7f050057
-			public const int standbybuttonall = 2131034199;
+			// aapt resource value: 0x7f05005c
+			public const int sourcelistcontainer = 2131034204;
 			
-			// aapt resource value: 0x7f05007d
-			public const int timedisplay = 2131034237;
+			// aapt resource value: 0x7f05005f
+			public const int sourcelisttitle = 2131034207;
+			
+			// aapt resource value: 0x7f05005d
+			public const int sourcelisttitlebar = 2131034205;
+			
+			// aapt resource value: 0x7f05006e
+			public const int sourcename = 2131034222;
+			
+			// aapt resource value: 0x7f05006a
+			public const int sourcesrefreshbutton = 2131034218;
+			
+			// aapt resource value: 0x7f050069
+			public const int sourcesrefreshbuttoncontainer = 2131034217;
+			
+			// aapt resource value: 0x7f05006b
+			public const int sourcesrefreshthrobber = 2131034219;
+			
+			// aapt resource value: 0x7f050060
+			public const int sourcesstandbybutton = 2131034208;
+			
+			// aapt resource value: 0x7f050063
+			public const int standbybutton = 2131034211;
+			
+			// aapt resource value: 0x7f050056
+			public const int standbybuttonall = 2131034198;
+			
+			// aapt resource value: 0x7f05007c
+			public const int timedisplay = 2131034236;
 			
 			// aapt resource value: 0x7f05002c
 			public const int topbar = 2131034156;
@@ -786,11 +783,11 @@ namespace KinskyDroid
 			// aapt resource value: 0x7f05002b
 			public const int topcontainer = 2131034155;
 			
-			// aapt resource value: 0x7f050070
-			public const int trackartwork = 2131034224;
+			// aapt resource value: 0x7f05006f
+			public const int trackartwork = 2131034223;
 			
-			// aapt resource value: 0x7f05007a
-			public const int trackartworkcontainer = 2131034234;
+			// aapt resource value: 0x7f050079
+			public const int trackartworkcontainer = 2131034233;
 			
 			// aapt resource value: 0x7f050029
 			public const int trackartworkfullscreen = 2131034153;
@@ -801,38 +798,38 @@ namespace KinskyDroid
 			// aapt resource value: 0x7f05002f
 			public const int trackcontrolsfullscreen = 2131034159;
 			
-			// aapt resource value: 0x7f050072
-			public const int trackdisplay1 = 2131034226;
-			
-			// aapt resource value: 0x7f050076
-			public const int trackdisplay1fullscreen = 2131034230;
-			
-			// aapt resource value: 0x7f050073
-			public const int trackdisplay2 = 2131034227;
-			
-			// aapt resource value: 0x7f050077
-			public const int trackdisplay2fullscreen = 2131034231;
-			
-			// aapt resource value: 0x7f050074
-			public const int trackdisplay3 = 2131034228;
-			
-			// aapt resource value: 0x7f050078
-			public const int trackdisplay3fullscreen = 2131034232;
-			
 			// aapt resource value: 0x7f050071
-			public const int trackdisplaycontainer = 2131034225;
-			
-			// aapt resource value: 0x7f05007b
-			public const int trackshowplaylistbutton = 2131034235;
+			public const int trackdisplay1 = 2131034225;
 			
 			// aapt resource value: 0x7f050075
-			public const int tracktechnicalinfo = 2131034229;
+			public const int trackdisplay1fullscreen = 2131034229;
 			
-			// aapt resource value: 0x7f050079
-			public const int tracktechnicalinfofullscreen = 2131034233;
+			// aapt resource value: 0x7f050072
+			public const int trackdisplay2 = 2131034226;
 			
-			// aapt resource value: 0x7f05007c
-			public const int transportcontrols = 2131034236;
+			// aapt resource value: 0x7f050076
+			public const int trackdisplay2fullscreen = 2131034230;
+			
+			// aapt resource value: 0x7f050073
+			public const int trackdisplay3 = 2131034227;
+			
+			// aapt resource value: 0x7f050077
+			public const int trackdisplay3fullscreen = 2131034231;
+			
+			// aapt resource value: 0x7f050070
+			public const int trackdisplaycontainer = 2131034224;
+			
+			// aapt resource value: 0x7f05007a
+			public const int trackshowplaylistbutton = 2131034234;
+			
+			// aapt resource value: 0x7f050074
+			public const int tracktechnicalinfo = 2131034228;
+			
+			// aapt resource value: 0x7f050078
+			public const int tracktechnicalinfofullscreen = 2131034232;
+			
+			// aapt resource value: 0x7f05007b
+			public const int transportcontrols = 2131034235;
 			
 			// aapt resource value: 0x7f050020
 			public const int viewpageindicatorphone = 2131034144;
@@ -840,8 +837,8 @@ namespace KinskyDroid
 			// aapt resource value: 0x7f050037
 			public const int viewpagerphone = 2131034167;
 			
-			// aapt resource value: 0x7f050051
-			public const int viewsourceselection = 2131034193;
+			// aapt resource value: 0x7f050050
+			public const int viewsourceselection = 2131034192;
 			
 			// aapt resource value: 0x7f050022
 			public const int volumeandtransportcontrols = 2131034146;
@@ -849,8 +846,8 @@ namespace KinskyDroid
 			// aapt resource value: 0x7f050021
 			public const int volumeandtransportcontrolscontainer = 2131034145;
 			
-			// aapt resource value: 0x7f05007e
-			public const int volumedisplay = 2131034238;
+			// aapt resource value: 0x7f05007d
+			public const int volumedisplay = 2131034237;
 			
 			static Id()
 			{

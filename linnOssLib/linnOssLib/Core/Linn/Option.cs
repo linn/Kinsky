@@ -108,14 +108,14 @@ namespace Linn
 
         public override void ResetToDefault()
         {
-            Set(iDefault.ToString());
+            Set(Serialize(iDefault));
         }
 
         public override string Value
         {
             get
             {
-                return (iValue.ToString());
+                return (Serialize(iValue));
             }
         }
 
@@ -134,7 +134,7 @@ namespace Linn
 
         protected void Update(T aValue)
         {
-            if (iValue.ToString() != aValue.ToString())
+            if (Serialize(iValue) != Serialize(aValue))
             {
                 iValue = aValue;
 
@@ -157,6 +157,11 @@ namespace Linn
             }
         }
 
+        protected virtual string Serialize(T aValue)
+        {
+            return aValue.ToString();
+        }
+
         private T iDefault;
         private T iValue;
     }
@@ -173,6 +178,27 @@ namespace Linn
         {
             Update(aValue);
             return (true);
+        }
+    }
+
+    public class OptionDateTime : OptionSimple<DateTime>
+    {
+        public OptionDateTime(string aId, string aName, string aDescription, DateTime aDefault)
+            : base(aId, aName, aDescription, aDefault)
+        {
+        }
+
+        protected override string Serialize(DateTime aValue)
+        {
+            return aValue.ToString("s");
+        }
+
+        public override bool Set(string aValue)
+        {
+            DateTime result;
+            var success = DateTime.TryParse(aValue, out result);
+            Update(result);
+            return (success);
         }
     }
 

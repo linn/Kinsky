@@ -29,7 +29,7 @@ namespace KinskyTouch
 				this.View.Layer.CornerRadius = 18;
 			}
 			iGetKazooButton = new UIBarButtonItem();
-			iGetKazooButton.Title = "Download Kazoo";
+			iGetKazooButton.Title = "Try it now";
 
 			iCloseButton = new UIBarButtonItem();
 			iCloseButton.Title = "Not Now";
@@ -41,14 +41,14 @@ namespace KinskyTouch
 
 			NavigationItem.LeftBarButtonItem = iCloseButton;
 			NavigationItem.RightBarButtonItem = iGetKazooButton;
-			swDontShowAgain.SetState(iNotification.DontShowAgain, false);
 			webView.LoadRequest(new Foundation.NSUrlRequest(new NSUrl(iNotification.Uri)));
+			iNotification.Shown();
 		}
 
 
 		private void GetKazoo(object sender, EventArgs args)
 		{
-            iNotification.TrackUsageEventDismissed(true, swDontShowAgain.On);
+            iNotification.TrackUsageEventDismissed(true);
 			Dismiss(true, () =>
 			{
 				NotificationView.Instance.GetKazoo();
@@ -57,13 +57,13 @@ namespace KinskyTouch
 
 		private void Close(object sender, EventArgs args)
 		{
-            iNotification.TrackUsageEventDismissed(false, swDontShowAgain.On);
+            iNotification.TrackUsageEventDismissed(false);
 			Dismiss(true, null);
 		}
 
 		private void Dismiss(bool aAnimated, Action aCallback)
 		{
-			iNotification.Closed(swDontShowAgain.On);
+			iNotification.Closed();
 			DismissViewController(aAnimated, aCallback);
 		}
 

@@ -8306,23 +8306,20 @@ namespace KinskyDroid
             browser.LoadUrl(aNotification.Uri);
 
             var closeButton = popupView.FindViewById<Button>(Resource.Id.notificationclose);
-            var dontShowCheckbox = popupView.FindViewById<CheckBox>(Resource.Id.notificationcheckbox);
             var getKazooButton = popupView.FindViewById<Button>(Resource.Id.notificationgetkazoo);
-
-            dontShowCheckbox.Checked = aNotification.DontShowAgain;
 
             closeButton.Click += (s, e) => 
             {
-                iNotification.TrackUsageEventDismissed(false, dontShowCheckbox.Checked);
-                ClosePopup(dontShowCheckbox.Checked);
+                iNotification.TrackUsageEventDismissed(false);
+                ClosePopup();
             };
             getKazooButton.Click += (s, e) =>
             {
-
-                iNotification.TrackUsageEventDismissed(true, dontShowCheckbox.Checked);
-                ClosePopup(dontShowCheckbox.Checked);
+                iNotification.TrackUsageEventDismissed(true);
+                ClosePopup();
                 GetKazoo();
             };
+            aNotification.Shown();
         }
 
         private void GetKazoo()
@@ -8393,9 +8390,9 @@ namespace KinskyDroid
             return url;
         }
 
-        private void ClosePopup(bool aDontShowAgain)
+        private void ClosePopup()
         {
-            iNotification.Closed(aDontShowAgain);
+            iNotification.Closed();
             iPopup.Dismiss();
         }
 

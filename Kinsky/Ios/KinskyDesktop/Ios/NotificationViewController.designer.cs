@@ -12,8 +12,6 @@ namespace KinskyTouch
 	[Register ("NotificationViewController")]
 	partial class NotificationViewController
 	{
-		[Outlet]
-		UIKit.UISwitch swDontShowAgain { get; set; }
 
 		[Outlet]
 		UIKit.UIWebView webView { get; set; }
@@ -23,11 +21,6 @@ namespace KinskyTouch
 			if (webView != null) {
 				webView.Dispose ();
 				webView = null;
-			}
-
-			if (swDontShowAgain != null) {
-				swDontShowAgain.Dispose ();
-				swDontShowAgain = null;
 			}
 		}
 	}

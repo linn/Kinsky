@@ -21,11 +21,9 @@ namespace Linn.Kinsky
     {
         uint Version { get; }
         string Uri { get; }
-        void Closed(bool aDontShowAgain);
-
-        bool DontShowAgain { get; }
-
-        void TrackUsageEventDismissed(bool aVisitedStorePage, bool aDontShowAgain);
+        void Shown();
+        void Closed();
+        void TrackUsageEventDismissed(bool aVisitedStorePage);
     }
 
     public interface INotificationServer
@@ -36,40 +34,39 @@ namespace Linn.Kinsky
     public interface INotificationPersistence
     {
         uint LastNotificationVersion { get; set; }
+        DateTime LastShownNotification { get; set; }
     }
 
     internal class Notification : INotification
     {
-        private Action<bool> iClosed;
-        private Func<bool> iDontShowAgain;
-        public Notification(uint aVersion, string aUri, Func<bool> aDontShowAgain, Action<bool> aClosed)
+        private Action iClosed;
+        private Action iShown;
+        public Notification(uint aVersion, string aUri, Action aShown, Action aClosed)
         {
-            iDontShowAgain = aDontShowAgain;
             Version = aVersion;
             Uri = aUri;
             iClosed = aClosed;
+            iShown = aShown;
         }
 
         public string Uri { get; private set; }
         public uint Version { get; private set; }
 
-        public void Closed(bool aDontShowAgain)
+        public void Shown()
         {
-            iClosed(aDontShowAgain);
+            iShown();
         }
 
-        public void TrackUsageEventDismissed(bool aVisitedStorePage, bool aDontShowAgain)
+        public void Closed()
+        {
+            iClosed();
+        }
+
+        public void TrackUsageEventDismissed(bool aVisitedStorePage)
         {
             if (Insights.IsInitialized)
             {
                 Insights.Track(string.Format("NotificationDismissedV{0}", Version), new Dictionary<string, string>() { { "VisitedStore", aVisitedStorePage.ToString() } });
-            }
-        }
-
-        public bool DontShowAgain {
-            get
-            {
-                return iDontShowAgain();
             }
         }
     }
@@ -151,6 +148,7 @@ namespace Linn.Kinsky
     {
         private const double kTimerInterval = 24 * 60 * 60 * 1000; // daily
 
+        private readonly TimeSpan iShowAgainTimespan;
         private readonly IInvoker iInvoker;
         private readonly INotificationView iView;
         private readonly object iLock = new object();
@@ -163,8 +161,17 @@ namespace Linn.Kinsky
         private bool iDisposed;
         private uint iCurrentVersion;
 
-        public NotificationController(IInvoker aInvoker, INotificationPersistence aNotificationPersistence, INotificationServer aNotificationServer, INotificationView aView)
+        public static TimeSpan DefaultTimespan
         {
+            get
+            {
+                return TimeSpan.FromDays(28); // default timespan shows ad again in a month's time
+            }
+        }
+
+        public NotificationController(IInvoker aInvoker, INotificationPersistence aNotificationPersistence, INotificationServer aNotificationServer, INotificationView aView, TimeSpan aShowAgainTimespan)
+        {
+            iShowAgainTimespan = aShowAgainTimespan;
             iNotificationPersistence = aNotificationPersistence;
             iNotificationServer = aNotificationServer;
             iInvoker = aInvoker;
@@ -247,18 +254,21 @@ namespace Linn.Kinsky
                                 var current = GetNextNotification(previousVersion, t.Result);
                                 if (current != null)
                                 {
-                                    var notification = new Notification(current.Version, current.Uri, ()=>current.Version <= iNotificationPersistence.LastNotificationVersion, (dontshowagain) =>
+                                    var notification = new Notification(current.Version, current.Uri, ()=> 
                                     {
-                                        if (dontshowagain && iNotificationPersistence.LastNotificationVersion < current.Version)
+                                        lock (iLock)
+                                        {
+                                            iNotificationPersistence.LastShownNotification = DateTime.Now;
+                                        }
+                                    },
+                                    () =>
+                                    {
+                                        if (iNotificationPersistence.LastNotificationVersion < current.Version)
                                         {
                                             iNotificationPersistence.LastNotificationVersion = current.Version;
                                         }
-                                        else if(!dontshowagain)
-                                        {
-                                            iNotificationPersistence.LastNotificationVersion = current.Version - 1;
-                                        }
                                     });
-                                    iView.Update(notification, current.Version > previousVersion);
+                                    iView.Update(notification, current.Version > previousVersion || TimespanElapsed());
                                     lock (iLock)
                                     {
                                         iCurrentVersion = current.Version;
@@ -268,6 +278,14 @@ namespace Linn.Kinsky
                         }
                      }));
                 });
+            }
+        }
+
+        private bool TimespanElapsed()
+        {
+            lock (iLock)
+            {
+                return iNotificationPersistence.LastShownNotification.Add(iShowAgainTimespan).CompareTo(DateTime.Now) < 0;
             }
         }
 

@@ -8,7 +8,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotificationViewController">
             <connections>
-                <outlet property="swDontShowAgain" destination="4wR-xA-KzM" id="KxY-8L-VTA"/>
                 <outlet property="view" destination="2" id="RRd-Eg-VrN"/>
                 <outlet property="webView" destination="QgT-2E-dzS" id="lkn-Jr-1VZ"/>
             </connections>
@@ -17,30 +16,16 @@
         <view contentMode="scaleToFill" id="2">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Don't show this again" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DfE-Sd-8lC">
-                    <rect key="frame" x="67" y="564" width="192" height="21"/>
-                    <edgeInsets key="layoutMargins" top="8" left="37" bottom="8" right="8"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QgT-2E-dzS">
                     <rect key="frame" x="0.0" y="40" width="600" height="507"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </webView>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4wR-xA-KzM">
-                    <rect key="frame" x="8" y="559" width="51" height="31"/>
-                </switch>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="QgT-2E-dzS" firstAttribute="bottom" secondItem="4wR-xA-KzM" secondAttribute="top" constant="-12" id="88A-lx-hhf"/>
-                <constraint firstItem="DfE-Sd-8lC" firstAttribute="centerY" secondItem="4wR-xA-KzM" secondAttribute="centerY" id="8Dz-hc-JEd"/>
+                <constraint firstItem="QgT-2E-dzS" firstAttribute="bottom" secondItem="2" secondAttribute="bottom" id="88A-lx-hhf"/>
                 <constraint firstAttribute="trailing" secondItem="QgT-2E-dzS" secondAttribute="trailing" id="FdA-nh-7ZI"/>
-                <constraint firstItem="DfE-Sd-8lC" firstAttribute="leading" secondItem="4wR-xA-KzM" secondAttribute="trailing" constant="10" id="Rbf-eG-3mc"/>
                 <constraint firstItem="QgT-2E-dzS" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="SkL-kj-KCC"/>
-                <constraint firstItem="4wR-xA-KzM" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="8" id="jas-9E-E3h"/>
-                <constraint firstAttribute="bottom" secondItem="4wR-xA-KzM" secondAttribute="bottom" constant="10" id="nuG-Yx-r4W"/>
                 <constraint firstItem="QgT-2E-dzS" firstAttribute="top" secondItem="2" secondAttribute="top" constant="40" id="u3i-Vs-gIP"/>
             </constraints>
             <point key="canvasLocation" x="529" y="436"/>

@@ -46,8 +46,8 @@ namespace KinskyDesktop
         public void AwakeFromNib()
         {
             LoadUri (iNotification.Uri);
+            iNotification.Shown();
 
-            ButtonDontShowAgain.State = (iNotification.DontShowAgain) ? NSCellStateValue.NSOnState : NSCellStateValue.NSOffState;
             ButtonClose.ActionEvent += ButtonCloseClicked;
             ButtonGetKazoo.ActionEvent += GetKazooClicked;
 
@@ -61,7 +61,7 @@ namespace KinskyDesktop
 
         private void ButtonCloseClicked (Id aSender)
         {
-            iNotification.TrackUsageEventDismissed(false, ButtonDontShowAgain.State == NSCellStateValue.NSOnState);
+            iNotification.TrackUsageEventDismissed(false);
             this.OnDismissed (false);
             this.Close ();
         }
@@ -70,8 +70,8 @@ namespace KinskyDesktop
         {
             if (!iDismissed) {
                 iDismissed = true;
-                iNotification.TrackUsageEventDismissed (aGetKazooClicked, ButtonDontShowAgain.State == NSCellStateValue.NSOnState);
-                iNotification.Closed (ButtonDontShowAgain.State == NSCellStateValue.NSOnState);
+                iNotification.TrackUsageEventDismissed (aGetKazooClicked);
+                iNotification.Closed ();
             }
         }
 
@@ -118,9 +118,6 @@ namespace KinskyDesktop
 
         [ObjectiveCField]
         public NSButton ButtonGetKazoo;
-
-        [ObjectiveCField]
-        public NSButton ButtonDontShowAgain;
 
         [ObjectiveCField]
         public NSView WebView;

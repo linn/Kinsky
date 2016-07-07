@@ -23,12 +23,9 @@
                         <TextBlock Text="Not now" VerticalAlignment="Center" Padding="10"  HorizontalAlignment="Stretch" TextAlignment="Center" />
                     </Button>
                     <Button Name="Now" Margin="10,10,0,10" Click="Now_Click" HorizontalContentAlignment="Center" Width="140" Style="{StaticResource NotificationButton}">
-                        <TextBlock Text="Download Kazoo" VerticalAlignment="Center" Padding="10" HorizontalAlignment="Stretch" TextAlignment="Center" />
+                        <TextBlock Text="Try it now" VerticalAlignment="Center" Padding="10" HorizontalAlignment="Stretch" TextAlignment="Center" />
                     </Button>
                 </StackPanel>
-                <CheckBox x:Name="chkDontShowAgain" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left">
-                    <TextBlock Text="Don't show this again" FontSize="10" Foreground="White" />
-                </CheckBox>
             </Grid>
             <kd:IndeterminateProgressBar x:Name="progressBar" Width="40" Height="40" Grid.RowSpan="2" Visibility="{Binding IsLoading, ElementName=Browser,Converter={StaticResource BooleanVisibilityValueConverter}}" IsAnimating="True" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>

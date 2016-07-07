@@ -10,7 +10,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="WindowNotification">
             <connections>
                 <outlet property="ButtonClose" destination="ku5-Rr-gTM" id="6Cv-Ym-0he"/>
-                <outlet property="ButtonDontShowAgain" destination="xNM-k5-h4k" id="Qzk-Sc-SwI"/>
                 <outlet property="ButtonGetKazoo" destination="Iq8-e8-6Tm" id="dEe-o4-alQ"/>
                 <outlet property="WebView" destination="8Xf-bi-20p" id="AlP-Z7-nUu"/>
                 <outlet property="WindowOutlet" destination="9Xd-ad-34d" id="Als-WW-nFf"/>
@@ -33,14 +32,6 @@
                             <nil key="identifier"/>
                         </webPreferences>
                     </webView>
-                    <button id="xNM-k5-h4k">
-                        <rect key="frame" x="18" y="24" width="318" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="check" title="Don't show this again" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="NGT-gC-DoA">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                    </button>
                     <button verticalHuggingPriority="750" id="ku5-Rr-gTM">
                         <rect key="frame" x="469" y="16" width="130" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -52,7 +43,7 @@
                     <button verticalHuggingPriority="750" id="Iq8-e8-6Tm">
                         <rect key="frame" x="604" y="16" width="130" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Download Kazoo" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Y1p-Ii-1Lr">
+                        <buttonCell key="cell" type="push" title="Try it now" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Y1p-Ii-1Lr">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">

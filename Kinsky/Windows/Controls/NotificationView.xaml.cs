@@ -28,12 +28,12 @@ namespace KinskyDesktopWpf.Controls
             InitializeComponent();            
         }
 
-        public void Launch(INotification aNotification, Window aOwner, bool aChecked)
+        public void Launch(INotification aNotification, Window aOwner)
         {
             iNotification = aNotification;
+            iNotification.Shown();
             UserLog.WriteLine("Launch: " + iNotification.Uri);
             this.Owner = aOwner;
-            chkDontShowAgain.IsChecked = aChecked;
             this.ContentRendered += (s, e) =>
             {
                 UserLog.WriteLine("Loading: " + iNotification.Uri);
@@ -44,20 +44,20 @@ namespace KinskyDesktopWpf.Controls
 
         protected override void OnClosed(EventArgs e)
         {
-            iNotification.Closed(chkDontShowAgain.IsChecked.Value);
+            iNotification.Closed();
             base.OnClosed(e);
         }
 
         private void Now_Click(object sender, RoutedEventArgs e)
         {
-            iNotification.TrackUsageEventDismissed(true, chkDontShowAgain.IsChecked.Value);
+            iNotification.TrackUsageEventDismissed(true);
             Close();
             KinskyDesktop.GetKazoo();
         }
 
         private void Dismiss_Click(object sender, RoutedEventArgs e)
         {
-            iNotification.TrackUsageEventDismissed(false, chkDontShowAgain.IsChecked.Value);
+            iNotification.TrackUsageEventDismissed(false);
             Close();
         }
         

@@ -207,7 +207,7 @@ namespace KinskyDesktopWpf
             iProcessedOptions = true;
             AllowsTransparency = iTransparentOption.Native;
             this.Loaded += new RoutedEventHandler(KinskyDesktop_Loaded);
-            iNotificationController = new NotificationController(invoker, iHelper, new NotificationServerHttp(NotificationServerHttp.DefaultUri(iHelper.Product)), this);
+            iNotificationController = new NotificationController(invoker, iHelper, new NotificationServerHttp(NotificationServerHttp.DefaultUri(iHelper.Product)), this, NotificationController.DefaultTimespan);
             viewKinsky.ShowOptionsDialog = () =>
             {
                 ShowOptionsDialog(false);
@@ -1074,7 +1074,7 @@ namespace KinskyDesktopWpf
             {
                 iNotificationView = null;
             };
-            notificationView.Launch(aNotification, this, aNotification.DontShowAgain);
+            notificationView.Launch(aNotification, this);
             iNotificationView = notificationView;
         }
 

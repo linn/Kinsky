@@ -146,7 +146,7 @@ namespace KinskyDroid
             iSaveSupport = new SaveSupport(iHelperKinsky, iSharedPlaylists, optionSharedPlaylists, iLocalPlaylists, optionLocalPlaylists);
             iPlaySupport = new PlaySupport();
             iHelperKinsky.ProcessOptionsFileAndCommandLine();
-            iNotificationController = new NotificationController(iInvoker, iHelperKinsky, new NotificationServerHttp(NotificationServerHttp.DefaultUri(iHelperKinsky.Product)), iNotificationView);
+            iNotificationController = new NotificationController(iInvoker, iHelperKinsky, new NotificationServerHttp(NotificationServerHttp.DefaultUri(iHelperKinsky.Product)), iNotificationView, NotificationController.DefaultTimespan);
 
             Xamarin.Insights.Identify(iHelperKinsky.OptionInstallId.Value, null);
 

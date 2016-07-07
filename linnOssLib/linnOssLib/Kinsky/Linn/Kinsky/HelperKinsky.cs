@@ -39,6 +39,9 @@ namespace Linn.Kinsky
             iOptionLastNotificationVersion = new OptionUint("lastnotificationversion", "LastNotificationVersion", "last version of notification feed viewed", 0);
             AddOption(iOptionLastNotificationVersion);
 
+            iOptionLastNotificationDate = new OptionDateTime("lastnotificationdate", "LastNotificationDate", "last date notification feed viewed", DateTime.MinValue);
+            AddOption(iOptionLastNotificationDate);
+
             iOptionLastSelectedRoom = new OptionString("lastroom", "Last Selected Room", "The last room selected", string.Empty);
             AddOption(iOptionLastSelectedRoom);
 
@@ -159,6 +162,19 @@ namespace Linn.Kinsky
             }
         }
 
+        public DateTime LastShownNotification
+        {
+            get
+            {
+                return iOptionLastNotificationDate.Native;
+            }
+
+            set
+            {
+                iOptionLastNotificationDate.Native = value;
+            }
+        }
+
         public void SetStackExtender(IStack aStackExtender)
         {
             StackStatus status = Stack.Status;
@@ -222,6 +238,7 @@ namespace Linn.Kinsky
         private OptionListUri iOptionCloudServers;
         private OptionString iOptionInstallId;
         private OptionUint iOptionLastNotificationVersion;
+        private OptionDateTime iOptionLastNotificationDate;
 
         private BookmarkManager iBookmarkManager;
         private IInvoker iInvoker;
