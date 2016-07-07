@@ -12,6 +12,7 @@ body {
     padding:0;
     height:100%;
     background-color:#181E29;
+    overflow-x:hidden;
 }
 
 .text-right {
@@ -59,13 +60,14 @@ height: 12px; /* for horizontal scrollbars */
 }
 
 .header ol{
-    padding:10px 0 0 40px;
+    padding:10px 0 10px 40px;
     font-size:17px;
+    width:280px;
+    margin:0 auto;
 }
 
 .header li{
     padding-bottom:16px;
-
 }
 
 .section h1 {
@@ -84,12 +86,11 @@ height: 12px; /* for horizontal scrollbars */
 
 .feature  p {
     padding:10px 30px 40px 30px;
-    font-size:15px;
+    font-size:16px;
     margin:0px;
     margin: 0 auto;
     max-width: 600px;
 }
-
 
 .feature h1 {
     padding:20px 20px 5px 20px;
@@ -125,11 +126,16 @@ height: 12px; /* for horizontal scrollbars */
     background-color:#EEE;
 }
 
+.avail
+{
+    padding-bottom:5px;
+    text-align:center;
+        font-size:12px;
+}
+
 .footer {
     padding:15px;
 }
-
-
 
 .text-xs-left { text-align: left; }
 .text-xs-right { text-align: right; }
@@ -160,7 +166,34 @@ height: 12px; /* for horizontal scrollbars */
     }
 
     .feature h1 {
-    padding:90px 20px 5px 0px;
-}
+        padding:90px 20px 5px 0px;
+    }
 
+    .feature1 {
+        position:relative;
+       
+    }
+
+    .feature1 p {
+         padding:10px 30px 80px 30px;
+      
+    }
+
+    .avail
+    {
+        position: absolute;
+        bottom:5px;
+        
+        width:100%;
+        
+    }
+
+    .header ol {
+        padding-bottom:0px;
+        margin:0;
+    }
+
+    .platforms {
+        padding-bottom:10px;   
+    }
 }
