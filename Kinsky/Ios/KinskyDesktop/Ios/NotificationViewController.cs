@@ -22,12 +22,12 @@ namespace KinskyTouch
 		{
 			base.ViewDidLoad();
 			// give the dialog a border on iPad
-			if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-			{
-				this.View.Layer.BorderColor = UIColor.LightGray.CGColor;
-				this.View.Layer.BorderWidth = 3;
-				this.View.Layer.CornerRadius = 18;
-			}
+			//if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+			//{
+			//	this.View.Layer.BorderColor = UIColor.LightGray.CGColor;
+			//	this.View.Layer.BorderWidth = 3;
+			//	this.View.Layer.CornerRadius = 18;
+			//}
 			iGetKazooButton = new UIBarButtonItem();
 			iGetKazooButton.Title = "Try it now";
 
@@ -41,7 +41,7 @@ namespace KinskyTouch
 
 			NavigationItem.LeftBarButtonItem = iCloseButton;
 			NavigationItem.RightBarButtonItem = iGetKazooButton;
-			webView.LoadRequest(new Foundation.NSUrlRequest(new NSUrl(iNotification.Uri(true)));
+			webView.LoadRequest(new Foundation.NSUrlRequest(new NSUrl(iNotification.Uri(true))));
 			iNotification.Shown();
 		}
 

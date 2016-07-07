@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <subviews>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QgT-2E-dzS">
-                    <rect key="frame" x="0.0" y="40" width="600" height="507"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </webView>
             </subviews>
@@ -26,7 +26,7 @@
                 <constraint firstItem="QgT-2E-dzS" firstAttribute="bottom" secondItem="2" secondAttribute="bottom" id="88A-lx-hhf"/>
                 <constraint firstAttribute="trailing" secondItem="QgT-2E-dzS" secondAttribute="trailing" id="FdA-nh-7ZI"/>
                 <constraint firstItem="QgT-2E-dzS" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="SkL-kj-KCC"/>
-                <constraint firstItem="QgT-2E-dzS" firstAttribute="top" secondItem="2" secondAttribute="top" constant="40" id="u3i-Vs-gIP"/>
+                <constraint firstItem="QgT-2E-dzS" firstAttribute="top" secondItem="2" secondAttribute="top" id="u3i-Vs-gIP"/>
             </constraints>
             <point key="canvasLocation" x="529" y="436"/>
         </view>
