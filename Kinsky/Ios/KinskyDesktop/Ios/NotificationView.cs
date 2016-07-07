@@ -20,7 +20,7 @@ namespace KinskyTouch
 		public NotificationView(INotificationPersistence aPersistence, string aProduct, IInvoker aInvoker, UIViewController aParent)
 		{
 			iParent = aParent;
-			iNotificationController = new NotificationController(aInvoker, aPersistence, new NotificationServerHttp(NotificationServerHttp.DefaultUri(aProduct)), this);
+			iNotificationController = new NotificationController(aInvoker, aPersistence, new NotificationServerHttp(NotificationServerHttp.DefaultUri(aProduct)), this, NotificationController.DefaultTimespan);
 			NotificationView.Instance = this;
 		}
 

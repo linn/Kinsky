@@ -14,7 +14,7 @@ namespace KinskyDesktop
 
         public NotificationView (HelperKinsky aHelper)
         {
-            iNotificationController = new NotificationController (aHelper.Invoker, aHelper, new NotificationServerHttp (NotificationServerHttp.DefaultUri (aHelper.Product)), this);
+            iNotificationController = new NotificationController (aHelper.Invoker, aHelper, new NotificationServerHttp (NotificationServerHttp.DefaultUri (aHelper.Product)), this, NotificationController.DefaultTimespan);
         }
 
         public void Update (INotification aNotification, bool aShowNow)
