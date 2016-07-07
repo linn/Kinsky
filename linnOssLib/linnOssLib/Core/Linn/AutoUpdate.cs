@@ -43,7 +43,7 @@ namespace Linn
 
         public static string DefaultFeedLocation(string aAppName, string aPlatform)
         {
-            return "https://cloud.linn.co.uk/applications/" + aAppName.ToLowerInvariant() + "/" + aPlatform + "/updates.json";
+            return "https://cloud.linn.co.uk/applications/" + aAppName.ToLowerInvariant() + "/updates.json";
         }
 
         public static readonly string kTargetWindows = "win32";
