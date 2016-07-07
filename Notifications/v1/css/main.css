@@ -59,7 +59,7 @@ height: 12px; /* for horizontal scrollbars */
     padding:20px;
 }
 
-.header ol{
+.header ul{
     padding:10px 0 10px 20px;
     font-size:17px;
     width:260px;
@@ -152,7 +152,7 @@ height: 12px; /* for horizontal scrollbars */
     .text-sm-right { text-align: right; }
     .text-sm-center { text-align: center; }
     .text-sm-justify { text-align: justify; }
-    .header ol{
+    .header ul{
         padding:10px 0 0 20px;
         font-size:17px;
     }
@@ -195,7 +195,7 @@ height: 12px; /* for horizontal scrollbars */
         
     }
 
-    .header ol {
+    .header ul {
         padding-bottom:0px;
         margin:0;
     }
