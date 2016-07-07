@@ -84,7 +84,7 @@ namespace KinskyDesktop
 
         private void GetKazoo ()
         {
-            var appId = "848937349";
+            /*var appId = "848937349";
             var appName = "linn-kazoo";
 
             var appStoreLink = string.Format("macappstores://itunes.apple.com/app/{0}/id{1}?mt=12", appName, appId);
@@ -98,7 +98,9 @@ namespace KinskyDesktop
                 try { Process.Start (new ProcessStartInfo (httpsLink)); } catch {
                     UserLog.WriteLine ("failed to launch Kazoo store link");
                 } 
-            }
+            }*/
+            var link = "https://www.linn.co.uk/software#kazoo";
+            try { Process.Start (new ProcessStartInfo (link)); } catch { }
         }
 
         private bool IsAppStoreCapable

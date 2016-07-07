@@ -1080,13 +1080,15 @@ namespace KinskyDesktopWpf
 
         public static void GetKazoo()
         {
+            /*
             if (IsWindowsStoreCapable())
             {
                 System.Diagnostics.Process.Start(kAppstoreUri);
             }else
             {
                 System.Diagnostics.Process.Start(kLinnDownloadPageUri);
-            }
+            }*/
+            System.Diagnostics.Process.Start(kLinnDownloadPageUri);
         }
 
         // https://msdn.microsoft.com/library/windows/desktop/ms724832.aspx
