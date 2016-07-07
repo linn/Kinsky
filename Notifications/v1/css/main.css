@@ -71,17 +71,17 @@ height: 12px; /* for horizontal scrollbars */
 }
 
 .section h1 {
-    margin:0;
-    font-size:23px;
-    padding:30px 20px 5px 0px;
+    padding:20px 10px 5px 10px;
 }
 
-.header > h1 {
+
+.header h1 {
     font-size:26px;
 }
 
+
 .header .devices {
-    padding:30px;
+    padding:0px;
 }
 
 .feature  p {
@@ -195,5 +195,17 @@ height: 12px; /* for horizontal scrollbars */
 
     .platforms {
         padding-bottom:10px;   
+    }
+
+    
+    .header .devices {
+        padding:30px;
+    }
+
+    
+    .section h1 {
+        margin:0;
+        font-size:23px;
+        padding:30px 20px 5px 0px;
     }
 }
