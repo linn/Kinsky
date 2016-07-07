@@ -8284,7 +8284,7 @@ namespace KinskyDroid
         private void ShowPopup(Activity aActivity, INotification aNotification)
         {
             LayoutInflater inflater = (LayoutInflater)aActivity.GetSystemService(Context.LayoutInflaterService);
-            var popupFactory = new OverlayPopupFactory(aActivity, new Color(0, 0, 0, 200));
+            var popupFactory = new OverlayPopupFactory(aActivity, Color.Black);
 
             // create the view
             View popupView = inflater.Inflate(Resource.Layout.Notification, null, false);
@@ -8303,6 +8303,7 @@ namespace KinskyDroid
 
             // load the webview
             var browser = popupView.FindViewById<WebView>(Resource.Id.notificationwebview);
+            browser.SetBackgroundColor(Color.Black);
             browser.LoadUrl(aNotification.Uri(true));
 
             var closeButton = popupView.FindViewById<Button>(Resource.Id.notificationclose);
