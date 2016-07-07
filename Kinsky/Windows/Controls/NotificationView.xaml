@@ -15,7 +15,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Border BorderBrush="#111" Grid.Row="0" BorderThickness="1" Margin="10,10,10,0">
-                <cef:ChromiumWebBrowser x:Name="Browser"  Width="800" Height="600" />
+                <cef:ChromiumWebBrowser x:Name="Browser"  Width="800" Height="600" Background="Black" />
             </Border>
             <Grid Grid.Row="1" Margin="10,0,10,0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -27,6 +27,8 @@
                     </Button>
                 </StackPanel>
             </Grid>
+            <!-- hack: getting rid of the white flicker on load - cover the cefsharp browser with a black grid whilst it is loading - setting the browser background property to black doesnt seem to work -->
+            <Grid Grid.Row="0" Background="Black" Visibility="{Binding IsLoading, ElementName=Browser,Converter={StaticResource BooleanVisibilityValueConverter}}"/>
             <kd:IndeterminateProgressBar x:Name="progressBar" Width="40" Height="40" Grid.RowSpan="2" Visibility="{Binding IsLoading, ElementName=Browser,Converter={StaticResource BooleanVisibilityValueConverter}}" IsAnimating="True" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
     </Border>
