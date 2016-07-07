@@ -28,12 +28,12 @@
                 <TextBlock x:Name="txtStatus" Text="Checking for updates..." />
             </Button>
             <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" HorizontalAlignment="Stretch" Margin="0,0,5,5">
-                <Button x:Name="btnClose" Click="btnClose_Click" HorizontalContentAlignment="Stretch" DockPanel.Dock="Right">
+                <Button x:Name="btnClose" Click="btnClose_Click" HorizontalContentAlignment="Stretch" DockPanel.Dock="Right" Width="100">
                     <Label Margin="1" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
                         <TextBlock x:Name="txtClose" Margin="10,0,10,0" Text="Close" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Label>
                 </Button>
-                <Button x:Name="btnInstall" Click="btnInstall_Click" HorizontalContentAlignment="Stretch" DockPanel.Dock="Right" Visibility="Collapsed">
+                <Button x:Name="btnInstall" Click="btnInstall_Click" HorizontalContentAlignment="Stretch" DockPanel.Dock="Right" Visibility="Collapsed" Width="100">
                     <Label Margin="1" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
                         <TextBlock Margin="10,0,10,0" Text="Install" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Label>
