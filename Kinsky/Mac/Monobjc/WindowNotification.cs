@@ -45,6 +45,7 @@ namespace KinskyDesktop
         [ObjectiveCMessage("awakeFromNib")]
         public void AwakeFromNib()
         {
+            WebView.SetValueForKey (false, "drawsBackground"); // prevent white background on webview
             LoadUri (iNotification.Uri(true));
             iNotification.Shown();
 
