@@ -8224,6 +8224,7 @@ namespace KinskyDroid
                 {
                     if (iPopup != null)
                     {
+                        iShowOnActivityStart = true;
                         iPopup.EventDismissed -= PopupDismissed;
                         iPopup.Dismiss();
                         iPopup = null;

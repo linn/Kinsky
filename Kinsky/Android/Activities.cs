@@ -139,8 +139,14 @@ namespace KinskyDroid
             Assert.Check(!iStack.Invoker.InvokeRequired);
             UserLog.WriteLine("OnConfigurationChanged()");
             base.OnConfigurationChanged(newConfig);
-            iStack.NotificationView.Activity = this;
             RestartUI();
+            iStack.Invoker.BeginInvoke(new Action(() =>
+            {
+                if (!this.IsDestroyed)
+                {
+                    iStack.NotificationView.Activity = this;
+                }
+            }));
         }
 
         private void RestartUI()
