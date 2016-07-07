@@ -85,6 +85,11 @@ height: 12px; /* for horizontal scrollbars */
     padding:0px;
 }
 
+.feature 
+{
+        padding:15px;
+}
+
 .feature  p {
     padding:10px 30px 40px 30px;
     font-size:16px;
@@ -190,8 +195,8 @@ height: 12px; /* for horizontal scrollbars */
     {
         position: absolute;
         bottom:5px;
-        
-        width:100%;
+        left:0;
+        right:0;
         
     }
 
