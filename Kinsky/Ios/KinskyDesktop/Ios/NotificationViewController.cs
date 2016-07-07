@@ -41,7 +41,7 @@ namespace KinskyTouch
 
 			NavigationItem.LeftBarButtonItem = iCloseButton;
 			NavigationItem.RightBarButtonItem = iGetKazooButton;
-			webView.LoadRequest(new Foundation.NSUrlRequest(new NSUrl(iNotification.Uri)));
+			webView.LoadRequest(new Foundation.NSUrlRequest(new NSUrl(iNotification.Uri(true)));
 			iNotification.Shown();
 		}
 

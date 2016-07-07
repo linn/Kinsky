@@ -82,7 +82,7 @@ namespace Tests
             Assert.IsNotNull(iView.LastShown);
             Assert.AreEqual(iView.Current, iView.LastShown);
             Assert.AreEqual(iPersistence.LastNotificationVersion, 1); 
-            Assert.AreEqual(iNotificationVersion1.Uri, iView.Current.Uri);
+            Assert.AreEqual(iNotificationVersion1.Uri, iView.Current.Uri(false));
             Assert.AreEqual(iNotificationVersion1.Version, iView.Current.Version);
         }
 
@@ -191,7 +191,7 @@ namespace Tests
             Assert.IsNotNull(iView.LastShown);
             Assert.AreEqual(iView.Current, iView.LastShown);
             Assert.AreEqual(iPersistence.LastNotificationVersion, iNotificationVersion2.Version);
-            Assert.AreEqual(iNotificationVersion2.Uri, iView.Current.Uri);
+            Assert.AreEqual(iNotificationVersion2.Uri, iView.Current.Uri(false));
             Assert.AreEqual(iNotificationVersion2.Version, iView.Current.Version);
         }
 

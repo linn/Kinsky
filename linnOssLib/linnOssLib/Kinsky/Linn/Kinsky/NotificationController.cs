@@ -20,7 +20,7 @@ namespace Linn.Kinsky
     public interface INotification
     {
         uint Version { get; }
-        string Uri { get; }
+        string Uri(bool aAppendCacheBuster);
         void Shown();
         void Closed();
         void TrackUsageEventDismissed(bool aVisitedStorePage);
@@ -41,15 +41,19 @@ namespace Linn.Kinsky
     {
         private Action iClosed;
         private Action iShown;
+        private readonly string iUri;
         public Notification(uint aVersion, string aUri, Action aShown, Action aClosed)
         {
             Version = aVersion;
-            Uri = aUri;
+            iUri = aUri;
             iClosed = aClosed;
             iShown = aShown;
         }
 
-        public string Uri { get; private set; }
+        public string Uri(bool aAppendCacheBuster)
+        {
+             return aAppendCacheBuster ? CacheBuster(iUri) : iUri;
+        }
         public uint Version { get; private set; }
 
         public void Shown()
@@ -68,6 +72,11 @@ namespace Linn.Kinsky
             {
                 Insights.Track(string.Format("NotificationDismissedV{0}", Version), new Dictionary<string, string>() { { "VisitedStore", aVisitedStorePage.ToString() } });
             }
+        }
+        private string CacheBuster(string aUri)
+        {
+            var querySeparator = aUri.IndexOf("?") == -1 ? "?" : ":";
+            return string.Format("{0}{1}dontcache={2}", aUri, querySeparator, Guid.NewGuid());
         }
     }
 

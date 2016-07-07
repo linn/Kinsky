@@ -32,12 +32,13 @@ namespace KinskyDesktopWpf.Controls
         {
             iNotification = aNotification;
             iNotification.Shown();
-            UserLog.WriteLine("Launch: " + iNotification.Uri);
+            var uri = iNotification.Uri(true);
+            UserLog.WriteLine("Launch: " + uri);
             this.Owner = aOwner;
             this.ContentRendered += (s, e) =>
             {
-                UserLog.WriteLine("Loading: " + iNotification.Uri);
-                Browser.Address = iNotification.Uri;
+                UserLog.WriteLine("Loading: " + uri);
+                Browser.Address = uri;
             };
             this.ShowDialog();
         }

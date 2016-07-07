@@ -45,7 +45,7 @@ namespace KinskyDesktop
         [ObjectiveCMessage("awakeFromNib")]
         public void AwakeFromNib()
         {
-            LoadUri (iNotification.Uri);
+            LoadUri (iNotification.Uri(true));
             iNotification.Shown();
 
             ButtonClose.ActionEvent += ButtonCloseClicked;

@@ -8303,7 +8303,7 @@ namespace KinskyDroid
 
             // load the webview
             var browser = popupView.FindViewById<WebView>(Resource.Id.notificationwebview);
-            browser.LoadUrl(aNotification.Uri);
+            browser.LoadUrl(aNotification.Uri(true));
 
             var closeButton = popupView.FindViewById<Button>(Resource.Id.notificationclose);
             var getKazooButton = popupView.FindViewById<Button>(Resource.Id.notificationgetkazoo);
