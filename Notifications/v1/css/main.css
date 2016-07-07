@@ -83,6 +83,7 @@ height: 12px; /* for horizontal scrollbars */
 
 .header .devices {
     padding:0px;
+    width:230px;
 }
 
 .feature 
@@ -212,6 +213,7 @@ height: 12px; /* for horizontal scrollbars */
     
     .header .devices {
         padding:30px;
+        width:320px;
     }
 
     
