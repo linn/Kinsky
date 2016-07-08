@@ -64,5 +64,9 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>CFBundleName</key>
+	<string>Kinsky</string>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 </dict>
 </plist>
