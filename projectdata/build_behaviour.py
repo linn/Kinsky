@@ -71,7 +71,8 @@ class Builder(OpenHomeBuilder):
             f2 = open('Kinsky/Android/Properties/AndroidManifest.xml', 'w')
             f2.write(c)
             f2.close()
-        elif (self.platform == "Ios-armv7"):
+        elif (self.platform == "iOs-armv7"):
+            print 'here'
             f1 = open('Kinsky/Ios/Info.plist', 'r')
             r = re.compile('<key>CFBundleShortVersionString<\/key>\s*<string>.*<\/string>', re.M)
             c = r.sub('<key>CFBundleShortVersionString</key>\n\t<string>' + self.releaseversion + '</string>', f1.read())
