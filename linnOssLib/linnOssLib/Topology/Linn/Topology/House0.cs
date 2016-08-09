@@ -457,7 +457,7 @@ namespace Linn.Topology.Layer0
                     eventData.Add("Manufacturer", manufacturer);
                     eventData.Add("Model", device.Model);
                     eventData.Add("Model." + (device.IsLinn ? "Linn" : "Non_Linn"), device.Model);
-                    eventData.Add("Model." + manufacturer.Replace(" ", "_"), device.Model);
+                    eventData.Add("ManufacturerModel." + manufacturer.Replace(" ", "_"), device.Model);
                     deviceEvents.Add(eventData);
                 }
                 devicesCount = iOpenDevices.Count;
@@ -487,9 +487,16 @@ namespace Linn.Topology.Layer0
                 iOpened = aOpened;
 
                 Device.EventOpened += DeviceOpened;
-                if (aRequiresOpen)
+                if (Device.DeviceXml != null)
                 {
-                    Device.Open();
+                    iOpened();
+                }
+                else
+                {
+                    if (aRequiresOpen)
+                    {
+                        Device.Open();
+                    }
                 }
             }
 
