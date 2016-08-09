@@ -45,6 +45,7 @@
     <MtouchI18n>
     </MtouchI18n>
     <BuildIpa>true</BuildIpa>
+    <IpaPackageDir>$(OutputPath)</IpaPackageDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>full</DebugType>
@@ -77,6 +78,7 @@
     </MtouchI18n>
     <IpaPackageName>InstallerKinsky</IpaPackageName>
     <BuildIpa>true</BuildIpa>
+    <IpaPackageDir>$(OutputPath)</IpaPackageDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhone' ">
     <DebugType>full</DebugType>
@@ -96,6 +98,7 @@
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <IpaPackageDir>$(OutputPath)</IpaPackageDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>full</DebugType>
@@ -114,6 +117,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchI18n>
     </MtouchI18n>
+    <IpaPackageDir>$(OutputPath)</IpaPackageDir>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
