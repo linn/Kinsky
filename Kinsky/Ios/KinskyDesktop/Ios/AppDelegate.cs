@@ -101,10 +101,14 @@ namespace KinskyTouch
             });
         }
 
+		protected void CreateNotificationView()
+		{
+			iNotificationView = new NotificationView(Helper.Helper, Helper.Helper.Product, Helper.Helper.Invoker, ViewController);
+		}
+
         public override void OnActivated(UIApplication application)
         {
             Trace.WriteLine(Trace.kKinskyTouch, "AppDelegate.OnActivated");
-			iNotificationView = new NotificationView(Helper.Helper, Helper.Helper.Product, Helper.Helper.Invoker, ViewController);
 
             iScheduler.Schedule(()=>
 			{
