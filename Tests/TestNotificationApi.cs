@@ -210,6 +210,7 @@ namespace Tests
             bool? lastShowNowValue = null;
 
             var showCallCount = 0;
+            var expectedShowCallCount = 1;
 
             Action resetWatchedVars = () =>
             {
@@ -233,7 +234,10 @@ namespace Tests
                     notification.Closed(callbackWithAcknowledged);
                 }
                 showCallCount++;
-                waitHandle.Set();
+                if (showCallCount == expectedShowCallCount)
+                {
+                    waitHandle.Set();
+                }
             };
 
             // act
@@ -246,7 +250,7 @@ namespace Tests
                 Assert.That(lastNotification != null && lastNotification.HasBeenAcknowledged == false);
                 Assert.That(iPersistence.LastNotificationVersion == 1);
                 Assert.That(iPersistence.LastAcknowledgedNotificationVersion == 0);
-                Assert.AreEqual(showCallCount, 1);
+                Assert.AreEqual(showCallCount, expectedShowCallCount);
                 Assert.That(firstShowNowValue.HasValue && firstShowNowValue.Value == true);
                 Assert.That(lastShowNowValue.HasValue && lastShowNowValue.Value == true);
 
@@ -255,6 +259,7 @@ namespace Tests
                 resetWatchedVars();
                 iServer.SetDesiredResponse(iServerResponseV2);
                 callbackWithAcknowledged = true;
+                expectedShowCallCount = 2;
 
                 // act
                 controller.CheckNow(); // simulate timer fired
@@ -264,7 +269,7 @@ namespace Tests
                 Assert.That(lastNotification != null && lastNotification.HasBeenAcknowledged == true);
                 Assert.That(iPersistence.LastNotificationVersion == 2);
                 Assert.That(iPersistence.LastAcknowledgedNotificationVersion == 2);
-                Assert.AreEqual(showCallCount, 2);
+                Assert.AreEqual(showCallCount, expectedShowCallCount);
                 Assert.That(firstShowNowValue.HasValue && firstShowNowValue.Value == true);
                 Assert.That(lastShowNowValue.HasValue && lastShowNowValue.Value == false);
 
@@ -274,6 +279,7 @@ namespace Tests
                 iPersistence.LastNotificationVersion = 2;
                 iPersistence.LastAcknowledgedNotificationVersion = 1;
                 callbackWithAcknowledged = true;
+                expectedShowCallCount = 2;
 
 
                 // act
@@ -284,7 +290,7 @@ namespace Tests
                 Assert.That(lastNotification != null);
                 Assert.That(iPersistence.LastNotificationVersion == 2);
                 Assert.That(iPersistence.LastAcknowledgedNotificationVersion == 2);
-                Assert.AreEqual(showCallCount, 2);
+                Assert.AreEqual(showCallCount, expectedShowCallCount);
                 Assert.That(firstShowNowValue.HasValue && firstShowNowValue.Value == true); // true because last acknowledged version was set to 1
                 Assert.That(lastShowNowValue.HasValue && lastShowNowValue.Value == false);
 
@@ -295,6 +301,7 @@ namespace Tests
                 iPersistence.LastNotificationVersion = 2;
                 iPersistence.LastAcknowledgedNotificationVersion = 2;
                 callbackWithAcknowledged = true;
+                expectedShowCallCount = 1;
 
                 // act
                 controller.CheckNow(); // simulate timer fired
@@ -304,7 +311,7 @@ namespace Tests
                 Assert.That(lastNotification != null);
                 Assert.That(iPersistence.LastNotificationVersion == 2);
                 Assert.That(iPersistence.LastAcknowledgedNotificationVersion == 2);
-                Assert.AreEqual(showCallCount, 1);
+                Assert.AreEqual(showCallCount, expectedShowCallCount);
                 Assert.That(firstShowNowValue.HasValue && firstShowNowValue.Value == false); // false because last acknowledged version was set to 2
                 Assert.That(lastShowNowValue.HasValue && lastShowNowValue.Value == false);
             }
