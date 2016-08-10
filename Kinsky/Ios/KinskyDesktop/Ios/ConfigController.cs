@@ -12,6 +12,7 @@ namespace KinskyTouch
         public ConfigControllerIpad(Helper aHelper)
             : base(aHelper)
         {
+			NotificationView.Instance.EventCurrentChanged += NotificationChanged;
         }
 
         public override void OpenDialog(UIBarButtonItem aBarButtonItem)
@@ -28,9 +29,17 @@ namespace KinskyTouch
 			}));
 
             iOptionDialog.Open(aBarButtonItem);
-			iOptionDialog.NavigationController.ToolbarHidden = false;
+			iOptionDialog.NavigationController.ToolbarHidden = NotificationView.Instance.Current == null;
 			iOptionDialog.NavigationController.TopViewController.SetToolbarItems(new UIBarButtonItem[] { getKazooButton }, false);
         }
+
+		private void NotificationChanged(object sender, EventArgs e)
+		{
+			if (iOptionDialog != null)
+			{
+				iOptionDialog.NavigationController.ToolbarHidden = NotificationView.Instance.Current == null;
+			}
+		}
 
         public static string kManualUri = "http://oss.linn.co.uk/trac/wiki/KinskyIpadDavaarManual";
 
@@ -58,8 +67,16 @@ namespace KinskyTouch
 				NotificationView.Instance.ShowCurrent();
 			}));
             iOptionDialog.Open();
-			iOptionDialog.NavigationController.ToolbarHidden = false;
+			iOptionDialog.NavigationController.ToolbarHidden = NotificationView.Instance.Current == null;
 			iOptionDialog.NavigationController.TopViewController.SetToolbarItems(new UIBarButtonItem[] { getKazooButton }, false);
+		}
+
+		private void NotificationChanged(object sender, EventArgs e)
+		{
+			if (iOptionDialog != null)
+			{
+				iOptionDialog.NavigationController.ToolbarHidden = NotificationView.Instance.Current == null;
+			}
 		}
 
         public static string kManualUri = "http://oss.linn.co.uk/trac/wiki/KinskyIphoneDavaarManual";
