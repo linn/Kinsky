@@ -195,6 +195,123 @@ namespace Tests
             Assert.AreEqual(iNotificationVersion2.Version, iView.Current.Version);
         }
 
+        [Test]
+        public void TestNotificationDismissLogic()
+        {
+            // arrange
+            iPersistence.LastNotificationVersion = 0;
+            iPersistence.LastAcknowledgedNotificationVersion = 0;
+            iPersistence.LastShownNotification = DateTime.Now.Add(TimeSpan.FromDays(0)).AddMinutes(-5); // take 5 mins off to ensure days comparison works properly
+            iServer.SetDesiredResponse(iServerResponseV1);
+            var waitHandle = new ManualResetEvent(false);
+            var callbackWithAcknowledged = false;
+            INotification lastNotification = null;
+            bool? firstShowNowValue = null;
+            bool? lastShowNowValue = null;
+
+            var showCallCount = 0;
+
+            Action resetWatchedVars = () =>
+            {
+                lastNotification = null;
+                firstShowNowValue = null;
+                lastShowNowValue = null;
+                showCallCount = 0;
+                waitHandle.Reset();
+            };
+
+            iView.ShowCallback = (notification, shownow) =>
+            {
+                if (!firstShowNowValue.HasValue)
+                {
+                    firstShowNowValue = shownow;
+                }
+                lastShowNowValue = shownow;
+                lastNotification = notification;
+                if (shownow)
+                {
+                    notification.Closed(callbackWithAcknowledged);
+                }
+                showCallCount++;
+                waitHandle.Set();
+            };
+
+            // act
+            using (var controller = new NotificationController(iInvoker, iPersistence, iServer, iView, TimeSpan.FromDays(1)))
+            {
+                // wait
+                Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
+
+                // assert
+                Assert.That(lastNotification != null && lastNotification.HasBeenAcknowledged == false);
+                Assert.That(iPersistence.LastNotificationVersion == 1);
+                Assert.That(iPersistence.LastAcknowledgedNotificationVersion == 0);
+                Assert.AreEqual(showCallCount, 1);
+                Assert.That(firstShowNowValue.HasValue && firstShowNowValue.Value == true);
+                Assert.That(lastShowNowValue.HasValue && lastShowNowValue.Value == true);
+
+
+                // arrange
+                resetWatchedVars();
+                iServer.SetDesiredResponse(iServerResponseV2);
+                callbackWithAcknowledged = true;
+
+                // act
+                controller.CheckNow(); // simulate timer fired
+                Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
+
+                // assert
+                Assert.That(lastNotification != null && lastNotification.HasBeenAcknowledged == true);
+                Assert.That(iPersistence.LastNotificationVersion == 2);
+                Assert.That(iPersistence.LastAcknowledgedNotificationVersion == 2);
+                Assert.AreEqual(showCallCount, 2);
+                Assert.That(firstShowNowValue.HasValue && firstShowNowValue.Value == true);
+                Assert.That(lastShowNowValue.HasValue && lastShowNowValue.Value == false);
+
+                // arrange
+                resetWatchedVars();
+                iPersistence.LastShownNotification = DateTime.Now.Add(TimeSpan.FromDays(-1)).AddMinutes(-5); // set last shown in the past to force refresh
+                iPersistence.LastNotificationVersion = 2;
+                iPersistence.LastAcknowledgedNotificationVersion = 1;
+                callbackWithAcknowledged = true;
+
+
+                // act
+                controller.CheckNow(); // simulate timer fired
+                Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
+
+                // assert
+                Assert.That(lastNotification != null);
+                Assert.That(iPersistence.LastNotificationVersion == 2);
+                Assert.That(iPersistence.LastAcknowledgedNotificationVersion == 2);
+                Assert.AreEqual(showCallCount, 2);
+                Assert.That(firstShowNowValue.HasValue && firstShowNowValue.Value == true); // true because last acknowledged version was set to 1
+                Assert.That(lastShowNowValue.HasValue && lastShowNowValue.Value == false);
+
+
+                // arrange
+                resetWatchedVars();
+                iPersistence.LastShownNotification = DateTime.Now.Add(TimeSpan.FromDays(-1)).AddMinutes(-5); // set last shown in the past to force refresh
+                iPersistence.LastNotificationVersion = 2;
+                iPersistence.LastAcknowledgedNotificationVersion = 2;
+                callbackWithAcknowledged = true;
+
+                // act
+                controller.CheckNow(); // simulate timer fired
+                Assert.That(waitHandle.WaitOne(kTimeoutMilliseconds));
+
+                // assert
+                Assert.That(lastNotification != null);
+                Assert.That(iPersistence.LastNotificationVersion == 2);
+                Assert.That(iPersistence.LastAcknowledgedNotificationVersion == 2);
+                Assert.AreEqual(showCallCount, 1);
+                Assert.That(firstShowNowValue.HasValue && firstShowNowValue.Value == false); // false because last acknowledged version was set to 2
+                Assert.That(lastShowNowValue.HasValue && lastShowNowValue.Value == false);
+            }
+
+            // flush pending invocations
+            AwaitInvoker();            
+        }
 
         [Test]
         public void TestServerReadExceptionResultsInNoViewBeingShown()

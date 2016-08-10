@@ -237,6 +237,11 @@ namespace Linn.Kinsky
             }
         }
 
+        public void CheckNow() // for testing purposes
+        {
+            CheckForUpdates(this, EventArgs.Empty);
+        }
+
         private void CheckForUpdates(object sender, EventArgs e)
         {
             lock (iLock)
