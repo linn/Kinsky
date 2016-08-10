@@ -21,8 +21,9 @@ namespace Linn.Kinsky
     {
         uint Version { get; }
         string Uri(bool aAppendCacheBuster);
+        bool HasBeenAcknowledged { get; }
         void Shown();
-        void Closed();
+        void Closed(bool aAcknowledged);
         void TrackUsageEventDismissed(bool aVisitedStorePage);
     }
 
@@ -34,20 +35,23 @@ namespace Linn.Kinsky
     public interface INotificationPersistence
     {
         uint LastNotificationVersion { get; set; }
+        uint LastAcknowledgedNotificationVersion { get; set; }
         DateTime LastShownNotification { get; set; }
     }
 
     internal class Notification : INotification
     {
-        private Action iClosed;
+        private Action<bool> iClosed;
         private Action iShown;
         private readonly string iUri;
-        public Notification(uint aVersion, string aUri, Action aShown, Action aClosed)
+
+        public Notification(uint aVersion, string aUri, bool aHasBeenAcknowledged, Action aShown, Action<bool> aClosed)
         {
             Version = aVersion;
             iUri = aUri;
             iClosed = aClosed;
             iShown = aShown;
+            HasBeenAcknowledged = aHasBeenAcknowledged;
         }
 
         public string Uri(bool aAppendCacheBuster)
@@ -61,9 +65,9 @@ namespace Linn.Kinsky
             iShown();
         }
 
-        public void Closed()
+        public void Closed(bool aAcknowledged)
         {
-            iClosed();
+            iClosed(aAcknowledged);
         }
 
         public void TrackUsageEventDismissed(bool aVisitedStorePage)
@@ -78,6 +82,8 @@ namespace Linn.Kinsky
             var querySeparator = aUri.IndexOf("?") == -1 ? "?" : ":";
             return string.Format("{0}{1}dontcache={2}", aUri, querySeparator, Guid.NewGuid());
         }
+
+        public bool HasBeenAcknowledged { get; internal set; }
     }
 
     public sealed class NotificationServerResponse
@@ -263,21 +269,32 @@ namespace Linn.Kinsky
                                 var current = GetNextNotification(previousVersion, t.Result);
                                 if (current != null)
                                 {
-                                    var notification = new Notification(current.Version, current.Uri, ()=> 
+                                    Notification notification = null;
+                                    notification = new Notification(current.Version, current.Uri, current.Version <= iNotificationPersistence.LastAcknowledgedNotificationVersion, ()=> 
                                     {
                                         lock (iLock)
                                         {
                                             iNotificationPersistence.LastShownNotification = DateTime.Now;
                                         }
                                     },
-                                    () =>
+                                    (acknowledged) =>
                                     {
                                         if (iNotificationPersistence.LastNotificationVersion < current.Version)
                                         {
                                             iNotificationPersistence.LastNotificationVersion = current.Version;
                                         }
+                                        if (acknowledged)
+                                        {
+                                            if (iNotificationPersistence.LastAcknowledgedNotificationVersion < current.Version)
+                                            {
+                                                iNotificationPersistence.LastAcknowledgedNotificationVersion = current.Version;
+                                            }
+                                            // event out the changed acknowledgment status
+                                            notification.HasBeenAcknowledged = true;
+                                            iView.Update(notification, false); 
+                                        }
                                     });
-                                    iView.Update(notification, current.Version > previousVersion || TimespanElapsed());
+                                    iView.Update(notification, current.Version > previousVersion || (TimespanElapsed() && !notification.HasBeenAcknowledged));
                                     lock (iLock)
                                     {
                                         iCurrentVersion = current.Version;

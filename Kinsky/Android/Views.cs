@@ -1715,7 +1715,7 @@ namespace KinskyDroid
             iGetKazooButtonContainer.Visibility = iStack.NotificationView.HasNotification ? ViewStates.Visible : ViewStates.Gone;
             if (iSettingsButtonBadge != null)
             {
-                iSettingsButtonBadge.Visibility = iStack.NotificationView.HasNotification ? ViewStates.Visible : ViewStates.Gone;
+                iSettingsButtonBadge.Visibility = iStack.NotificationView.HasUnacknowledgedNotification ? ViewStates.Visible : ViewStates.Gone;
             }
         }
 
@@ -8276,6 +8276,14 @@ namespace KinskyDroid
             }
         }
 
+        public bool HasUnacknowledgedNotification
+        {
+            get
+            {
+                return HasNotification && !iNotification.HasBeenAcknowledged;
+            }
+        }
+
         public void ShowNow()
         {
             Assert.Check(HasNotification);
@@ -8313,12 +8321,12 @@ namespace KinskyDroid
             closeButton.Click += (s, e) => 
             {
                 iNotification.TrackUsageEventDismissed(false);
-                ClosePopup();
+                ClosePopup(false);
             };
             getKazooButton.Click += (s, e) =>
             {
                 iNotification.TrackUsageEventDismissed(true);
-                ClosePopup();
+                ClosePopup(true);
                 GetKazoo();
             };
             aNotification.Shown();
@@ -8392,9 +8400,9 @@ namespace KinskyDroid
             return url;
         }
 
-        private void ClosePopup()
+        private void ClosePopup(bool aAcknowledged)
         {
-            iNotification.Closed();
+            iNotification.Closed(aAcknowledged);
             iPopup.Dismiss();
         }
 

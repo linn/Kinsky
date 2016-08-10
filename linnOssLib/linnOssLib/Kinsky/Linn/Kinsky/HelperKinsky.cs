@@ -39,6 +39,9 @@ namespace Linn.Kinsky
             iOptionLastNotificationVersion = new OptionUint("lastnotificationversion", "LastNotificationVersion", "last version of notification feed viewed", 0);
             AddOption(iOptionLastNotificationVersion);
 
+            iOptionLastAcknowledgedNotificationVersion = new OptionUint("lastacknowledgednotificationversion", "LastAcknowledgedNotificationVersion", "last version of notification feed acknowledged", 0);
+            AddOption(iOptionLastAcknowledgedNotificationVersion);
+
             iOptionLastNotificationDate = new OptionDateTime("lastnotificationdate", "LastNotificationDate", "last date notification feed viewed", DateTime.MinValue);
             AddOption(iOptionLastNotificationDate);
 
@@ -162,6 +165,21 @@ namespace Linn.Kinsky
             }
         }
 
+        public uint LastAcknowledgedNotificationVersion
+        {
+            get
+            {
+                return iOptionLastAcknowledgedNotificationVersion.Native;
+            }
+
+            set
+            {
+                iOptionLastAcknowledgedNotificationVersion.Native = value;
+            }
+        }
+
+        
+
         public DateTime LastShownNotification
         {
             get
@@ -238,6 +256,7 @@ namespace Linn.Kinsky
         private OptionListUri iOptionCloudServers;
         private OptionString iOptionInstallId;
         private OptionUint iOptionLastNotificationVersion;
+        private OptionUint iOptionLastAcknowledgedNotificationVersion;
         private OptionDateTime iOptionLastNotificationDate;
 
         private BookmarkManager iBookmarkManager;

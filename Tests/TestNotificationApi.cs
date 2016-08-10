@@ -64,7 +64,7 @@ namespace Tests
 
             iView.ShowCallback = (notification, shownow) =>
             {
-                notification.Closed();
+                notification.Closed(false);
                 waitHandle.Set();
             };
 
@@ -173,7 +173,7 @@ namespace Tests
 
             iView.ShowCallback = (notification, shownow) =>
             {
-                notification.Closed();
+                notification.Closed(false);
                 waitHandle.Set();
             };
 
@@ -335,6 +335,7 @@ namespace Tests
     class MockPersistence : INotificationPersistence
     {
         public uint LastNotificationVersion { get; set; }
+        public uint LastAcknowledgedNotificationVersion { get; set; }
         public DateTime LastShownNotification { get; set; }
     }
 

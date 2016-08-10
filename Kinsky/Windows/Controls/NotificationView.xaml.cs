@@ -22,6 +22,7 @@ namespace KinskyDesktopWpf.Controls
     public partial class NotificationView : Window
     {
         private INotification iNotification;
+        private bool iAcknowledged;
         
         public NotificationView()
         {
@@ -32,6 +33,7 @@ namespace KinskyDesktopWpf.Controls
         {
             iNotification = aNotification;
             iNotification.Shown();
+            iAcknowledged = aNotification.HasBeenAcknowledged;
             var uri = iNotification.Uri(true);
             UserLog.WriteLine("Launch: " + uri);
             this.Owner = aOwner;
@@ -45,12 +47,13 @@ namespace KinskyDesktopWpf.Controls
 
         protected override void OnClosed(EventArgs e)
         {
-            iNotification.Closed();
+            iNotification.Closed(iAcknowledged);
             base.OnClosed(e);
         }
 
         private void Now_Click(object sender, RoutedEventArgs e)
         {
+            iAcknowledged = true;
             iNotification.TrackUsageEventDismissed(true);
             Close();
             KinskyDesktop.GetKazoo();

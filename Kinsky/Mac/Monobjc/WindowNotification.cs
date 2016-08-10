@@ -72,7 +72,7 @@ namespace KinskyDesktop
             if (!iDismissed) {
                 iDismissed = true;
                 iNotification.TrackUsageEventDismissed (aGetKazooClicked);
-                iNotification.Closed ();
+                iNotification.Closed (aGetKazooClicked);
             }
         }
 

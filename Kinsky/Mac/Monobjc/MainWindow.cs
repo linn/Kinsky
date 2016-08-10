@@ -524,7 +524,7 @@ namespace KinskyDesktop
         public void SetNotificationView (NotificationView aView)
         {
             aView.EventNotificationUpdated += (s, e) => {
-                iBadge.IsHidden = !aView.CanShow;
+                iBadge.IsHidden = !aView.HasUnacknowledgedNotification;
             };
         }
 

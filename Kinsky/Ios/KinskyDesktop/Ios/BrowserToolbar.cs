@@ -117,10 +117,10 @@ namespace KinskyTouch
 			iBadgeView.FillColor = UIColor.FromRGB(15, 151, 179); // #0F9783
 			iBadgeView.StrokeColor = UIColor.White;
 			iBadgeView.TextColor = UIColor.White;
-			iBadgeView.Hidden = NotificationView.Instance.Current == null;
+			iBadgeView.Hidden = NotificationView.Instance.Current == null || NotificationView.Instance.Current.HasBeenAcknowledged;
 			NotificationView.Instance.EventCurrentChanged += (s, e) => 
 			{
-				iBadgeView.Hidden = NotificationView.Instance.Current == null;
+				iBadgeView.Hidden = NotificationView.Instance.Current == null || NotificationView.Instance.Current.HasBeenAcknowledged;
 			};
 
 			iButtonPlay = new UIBarButtonItemPlay(aOptionInsertMode, UIBarButtonItemStyle.Bordered, null);

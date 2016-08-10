@@ -36,6 +36,14 @@ namespace KinskyDesktop
             }
         }
 
+        public bool HasUnacknowledgedNotification
+        {
+            get
+            {
+                return iNotification != null && !iNotification.HasBeenAcknowledged;
+            }
+        }
+
         public void Show ()
         {
             Assert.Check (iNotification != null);

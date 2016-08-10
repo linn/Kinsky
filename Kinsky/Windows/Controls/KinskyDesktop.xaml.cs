@@ -1056,7 +1056,7 @@ namespace KinskyDesktopWpf
             {
                 Show(aNotification);
             }
-            viewKinsky.NotificationsBadge.Visibility = Visibility.Visible;
+            viewKinsky.NotificationsBadge.Visibility = aNotification.HasBeenAcknowledged ? Visibility.Hidden : Visibility.Visible;
         }
 
         private void Show(INotification aNotification)

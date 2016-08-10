@@ -49,7 +49,7 @@ namespace KinskyTouch
 		private void GetKazoo(object sender, EventArgs args)
 		{
             iNotification.TrackUsageEventDismissed(true);
-			Dismiss(true, () =>
+			Dismiss(true, true, () =>
 			{
 				NotificationView.Instance.GetKazoo();
 			});
@@ -58,12 +58,12 @@ namespace KinskyTouch
 		private void Close(object sender, EventArgs args)
 		{
             iNotification.TrackUsageEventDismissed(false);
-			Dismiss(true, null);
+			Dismiss(true, false, null);
 		}
 
-		private void Dismiss(bool aAnimated, Action aCallback)
+		private void Dismiss(bool aAnimated, bool aAcknowledged, Action aCallback)
 		{
-			iNotification.Closed();
+			iNotification.Closed(aAcknowledged);
 			DismissViewController(aAnimated, aCallback);
 		}
 
