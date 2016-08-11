@@ -18,6 +18,7 @@ namespace KinskyDroid
         ConfigurationChanges = ConfigChanges.KeyboardHidden | ConfigChanges.Orientation | ConfigChanges.ScreenLayout)]
     public class MainActivity : ObservableActivity
     {
+        private bool iIsDestroyed;
         protected override void OnCreate(Bundle bundle)
         {
             Console.WriteLine(DateTime.Now + ": OnCreate()");
@@ -122,6 +123,7 @@ namespace KinskyDroid
 
         protected override void OnDestroy()
         {
+            iIsDestroyed = true;
             Console.WriteLine(DateTime.Now + ": OnDestroy()");
             iStack.StackStarted -= StackStarted;
             iStack.StackStopped -= StackStopped;
@@ -142,7 +144,7 @@ namespace KinskyDroid
             RestartUI();
             iStack.Invoker.BeginInvoke(new Action(() =>
             {
-                if (!this.IsDestroyed)
+                if (!iIsDestroyed)
                 {
                     iStack.NotificationView.Activity = this;
                 }
