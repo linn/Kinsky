@@ -424,6 +424,20 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Installer\icon.ico" />
+  </ItemGroup>  
+  <ItemGroup>
+    <None Include="..\..\packages\Microsoft.VC120.CRT.JetBrains.12.0.21005.2\DotFiles\msvcp120.dll">
+      <Link>msvcp120.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\packages\Microsoft.VC120.CRT.JetBrains.12.0.21005.2\DotFiles\msvcr120.dll">
+      <Link>msvcr120.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\packages\Microsoft.VC120.CRT.JetBrains.12.0.21005.2\DotFiles\vccorlib120.dll">
+      <Link>vccorlib120.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Insights.1.11.2\build\portable-win+net40\Xamarin.Insights.targets" Condition="Exists('..\..\packages\Xamarin.Insights.1.11.2\build\portable-win+net40\Xamarin.Insights.targets')" />
