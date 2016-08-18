@@ -572,57 +572,71 @@ namespace KinskyDesktopWpf
 
         void SetWindowDimensions()
         {
-            if (WindowChrome.GetIsMiniModeActive(mainWindowChrome))
+            try
             {
-                if (WindowState == WindowState.Maximized)
+                if (WindowChrome.GetIsMiniModeActive(mainWindowChrome))
                 {
-                    WindowState = WindowState.Normal;
+                    if (WindowState == WindowState.Maximized)
+                    {
+                        WindowState = WindowState.Normal;
+                    }
+                    AnimateHeight(kMiniModeHeight);
                 }
-                AnimateHeight(kMiniModeHeight);
+                else
+                {
+                    AnimateHeight(iUIOptions.WindowSize.Height);
+                    WindowState = iUIOptions.Fullscreen ? WindowState.Maximized : WindowState.Normal;
+                }
+                Width = iUIOptions.WindowSize.Width;
+                Top = iUIOptions.WindowLocation.Y;
+                Left = iUIOptions.WindowLocation.X;
             }
-            else
+            catch
             {
-                AnimateHeight(iUIOptions.WindowSize.Height);
-                WindowState = iUIOptions.Fullscreen ? WindowState.Maximized : WindowState.Normal;
+                // ignore issues in setting window dimensions
             }
-            Width = iUIOptions.WindowSize.Width;
-            Top = iUIOptions.WindowLocation.Y;
-            Left = iUIOptions.WindowLocation.X;
         }
 
         private void AnimateHeight(double aNewHeight)
         {
-            mainWindowChrome.IsAnimating = true;
-            MinHeight = 0;
-            ClearValue(Control.MaxHeightProperty);
-            Storyboard storyBoard = new Storyboard();
-            DoubleAnimation animation = new DoubleAnimation(Height, aNewHeight, new Duration(TimeSpan.FromMilliseconds(kAnimationTimeMilliseconds)), FillBehavior.Stop);
-
-            Storyboard.SetTarget(animation, this);
-            Storyboard.SetTargetProperty(animation, new PropertyPath("Height"));
-            storyBoard.Children.Add(animation);
-
-            EventHandler handler = null;
-            handler = (d, e) =>
+            try
             {
-                Height = aNewHeight;
-                var t = d as DispatcherTimer;
-                MinHeight = WindowChrome.GetIsMiniModeActive(mainWindowChrome) ? kMiniModeHeight : kMinHeight;
-                if (WindowChrome.GetIsMiniModeActive(mainWindowChrome))
-                {
-                    MaxHeight = kMiniModeHeight;
-                }
-                else
-                {
-                    ClearValue(Control.MaxHeightProperty);
-                }
-                storyBoard.Completed -= handler;
-                storyBoard.Remove();
-                mainWindowChrome.IsAnimating = false;
-            };
-            storyBoard.Completed += handler;
+                mainWindowChrome.IsAnimating = true;
+                MinHeight = 0;
+                ClearValue(Control.MaxHeightProperty);
+                Storyboard storyBoard = new Storyboard();
+                DoubleAnimation animation = new DoubleAnimation(Height, aNewHeight, new Duration(TimeSpan.FromMilliseconds(kAnimationTimeMilliseconds)), FillBehavior.Stop);
 
-            storyBoard.Begin();
+                Storyboard.SetTarget(animation, this);
+                Storyboard.SetTargetProperty(animation, new PropertyPath("Height"));
+                storyBoard.Children.Add(animation);
+
+                EventHandler handler = null;
+                handler = (d, e) =>
+                {
+                    Height = aNewHeight;
+                    var t = d as DispatcherTimer;
+                    MinHeight = WindowChrome.GetIsMiniModeActive(mainWindowChrome) ? kMiniModeHeight : kMinHeight;
+                    if (WindowChrome.GetIsMiniModeActive(mainWindowChrome))
+                    {
+                        MaxHeight = kMiniModeHeight;
+                    }
+                    else
+                    {
+                        ClearValue(Control.MaxHeightProperty);
+                    }
+                    storyBoard.Completed -= handler;
+                    storyBoard.Remove();
+                    mainWindowChrome.IsAnimating = false;
+                };
+                storyBoard.Completed += handler;
+
+                storyBoard.Begin();
+            }
+            catch
+            {
+                mainWindowChrome.IsAnimating = false;
+            }
         }
 
         private void SetThemeOverrides()
