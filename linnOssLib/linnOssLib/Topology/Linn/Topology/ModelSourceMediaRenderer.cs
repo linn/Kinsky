@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Linn.ControlPoint.Upnp;
 using Upnp;
+using Xamarin;
 
 namespace Linn.Topology
 {
@@ -47,6 +48,9 @@ namespace Linn.Topology
     public abstract class ModelSourceMediaRenderer : ModelSource, IMediaSupported, IModelSourceMediaRenderer
     {
         public event EventHandler<EventArgs> EventSubscriptionError;
+        private readonly string iModel;
+        private readonly string iManufacturer;
+
 
         public enum ETransportState
         {
@@ -57,8 +61,15 @@ namespace Linn.Topology
             eBuffering
         }
 
+        protected ModelSourceMediaRenderer(Source aSource)
+        {
+            iModel = aSource.Device.Model;
+            iManufacturer = aSource.Device.Manufacturer;
+        }
+
         public static ModelSourceMediaRenderer Create(Source aSource)
         {
+
             if (aSource != null)
             {
                 if (aSource.Type == "Playlist")
@@ -129,6 +140,17 @@ namespace Linn.Topology
 
         public abstract uint PlaylistTrackCount { get; }
         public abstract uint PlaylistTracksMax { get; }
+
+        protected void LogAction()
+        {
+            Insights.Track("DeviceInteraction",
+                new Dictionary<string, string>()
+            {
+                { "Model", iModel },
+                { "Manufacturer", iManufacturer },
+                { "ManufacturerModel." + iManufacturer.Replace(" ", "_"), iModel }
+            });
+        }
     }
 
 } // Linn.Topology

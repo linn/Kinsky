@@ -14,6 +14,7 @@ namespace Linn.Topology
     public class ModelSourceMediaRendererUpnpAv : ModelSourceMediaRenderer, IModelInfo, IModelTime
     {
         public ModelSourceMediaRendererUpnpAv(Source aSource)
+            : base(aSource)
         {
             DidlLite didl = new DidlLite();
             audioItem itemAudio = new audioItem();
@@ -352,6 +353,7 @@ namespace Linn.Topology
 
         public override void Play()
         {
+            LogAction();
             if (iTrackPlaylistItem == null && iPlaylist.Count > 0)
             {
                 SeekTrack(0);
@@ -382,17 +384,20 @@ namespace Linn.Topology
 
         public override void Pause()
         {
+            LogAction();
             iActionPause.PauseBegin(iInstanceId);
         }
 
         public override void Stop()
         {
+            LogAction();
             iExpectEventStop = true;
             iActionStop.StopBegin(iInstanceId);
         }
 
         public override void Previous()
         {
+            LogAction();
             if (iMaster)
             {
                 try
@@ -430,6 +435,7 @@ namespace Linn.Topology
 
         public override void Next()
         {
+            LogAction();
             if (iMaster)
             {
                 try
@@ -468,12 +474,14 @@ namespace Linn.Topology
 
         public override void SeekSeconds(uint aSeconds)
         {
+            LogAction();
             Time time = new Time((int)aSeconds);
             iActionSeek.SeekBegin(iInstanceId, ServiceAVTransport.kSeekModeRelTime, time.ToString());
         }
 
         public override void SeekTrack(uint aTrack)
         {
+            LogAction();
             MrItem track;
             try
             {
@@ -505,6 +513,7 @@ namespace Linn.Topology
 
         public override void ToggleRepeat()
         {
+            LogAction();
             iRepeat = !iRepeat;
             if (EventRepeatChanged != null)
             {
@@ -523,6 +532,7 @@ namespace Linn.Topology
 
         public override void ToggleShuffle()
         {
+            LogAction();
             iShuffle = !iShuffle;
             if (EventShuffleChanged != null)
             {
@@ -670,6 +680,7 @@ namespace Linn.Topology
 
         public override uint PlayNow(DidlLite aDidlLite)
         {
+            LogAction();
             uint count;
             try
             {
@@ -688,6 +699,7 @@ namespace Linn.Topology
 
         public override uint PlayNext(DidlLite aDidlLite)
         {
+            LogAction();
             uint count;
             try
             {
@@ -704,6 +716,7 @@ namespace Linn.Topology
 
         public override uint PlayLater(DidlLite aDidlLite)
         {
+            LogAction();
             uint count;
             try
             {

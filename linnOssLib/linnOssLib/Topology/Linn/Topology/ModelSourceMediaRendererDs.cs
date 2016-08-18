@@ -12,6 +12,7 @@ namespace Linn.Topology
     {
         
         public ModelSourceMediaRendererDs(Source aSource)
+            : base(aSource)
         {
             
             iSource = aSource;

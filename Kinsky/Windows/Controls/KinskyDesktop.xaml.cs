@@ -140,6 +140,7 @@ namespace KinskyDesktopWpf
         private bool iStackStarted;
         private bool iSessionHookAdded;
         private static readonly string kApiKey = "129c76d1b4043e568d19a9fea8a1f5534cdae703";
+        private static readonly string kApiKeyDummyProject = "7898d7061464381703ade7e3c9c305f64a9db1c4";
         private readonly NotificationController iNotificationController;
         private NotificationView iNotificationView;
         private INotification iNotification;
@@ -188,7 +189,7 @@ namespace KinskyDesktopWpf
             var invoker = new Invoker(this.Dispatcher);
             iHelper = new HelperKinsky(Environment.GetCommandLineArgs(), invoker);
 #if DEBUG
-            Xamarin.Insights.Initialize(Xamarin.Insights.DebugModeKey, iHelper.Version, iHelper.Product);
+            Xamarin.Insights.Initialize(kApiKeyDummyProject, iHelper.Version, iHelper.Product);
 #else
             Xamarin.Insights.Initialize(kApiKey, iHelper.Version, iHelper.Product);
 #endif
