@@ -190,7 +190,7 @@ namespace Linn
 
         protected override string Serialize(DateTime aValue)
         {
-            return aValue.ToString("s");
+            return aValue.ToString("s", System.Globalization.CultureInfo.InvariantCulture);
         }
 
         public override bool Set(string aValue)
@@ -391,6 +391,11 @@ namespace Linn
                 return false;
             }
         }
+
+        protected override string Serialize(uint aValue)
+        {
+            return aValue.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        }
     }
 
     public class OptionFloat : OptionSimple<float>
@@ -413,6 +418,10 @@ namespace Linn
                 return false;
             }
         }
+        protected override string Serialize(float aValue)
+        {
+            return aValue.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        }
     }
     public class OptionDouble : OptionSimple<double>
     {
@@ -433,6 +442,10 @@ namespace Linn
             {
                 return false;
             }
+        }
+        protected override string Serialize(double aValue)
+        {
+            return aValue.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
     }
     public class OptionNumber : OptionSimple<int>
@@ -462,6 +475,10 @@ namespace Linn
             {
             }
             return (false);
+        }
+        protected override string Serialize(int aValue)
+        {
+            return aValue.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
 
         private int iMin;
