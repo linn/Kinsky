@@ -438,6 +438,7 @@ namespace Linn.Topology.Layer0
         {
             var deviceEvents = new List<Dictionary<string, string>>();
             var allLinn = true;
+            var allNonLinn = true;
             var devicesCount = 0;
 
             lock (iLock)
@@ -450,6 +451,7 @@ namespace Linn.Topology.Layer0
                 {
                     var eventData = new Dictionary<string, string>();
                     allLinn &= device.IsLinn;
+                    allNonLinn &= !device.IsLinn;
                     var manufacturer = device.Manufacturer;
                     if (string.IsNullOrEmpty(device.Manufacturer)){
                         manufacturer = "Unspecified";
@@ -467,11 +469,11 @@ namespace Linn.Topology.Layer0
             {
                 foreach (var eventData in deviceEvents)
                 {
-                    Insights.Track("Device", eventData);
+                    Insights.Track("DeviceV2", eventData);
                 }
                 if (devicesCount > 0)
                 {
-                    Insights.Track("House", new Dictionary<string, string>() { { "IsAllLinn", allLinn.ToString() } });
+                  Insights.Track("HouseV2", new Dictionary<string, string>() { { "Makeup", devicesCount == 0 ? "Empty" : (allLinn ? "All Linn" : (allNonLinn ? "All Non Linn" : "Mixed")) } });
                 }
             }
         }
