@@ -22,9 +22,20 @@ namespace Linn.ControlPoint.Upnp
             udn = udn.Substring(0, udn.Length - 2);
             udn += "71";
 
+            string hostLocation = aHost.Find(kKeyUpnpLocation);
+            bool isVolkano1 = true;
+            if (hostLocation.Contains(aHost.Udn))
+            {
+                hostLocation = hostLocation.Replace(aHost.Udn, udn);
+                isVolkano1 = false;
+            }
 
-            Uri host = new Uri(aHost.Find(kKeyUpnpLocation));
-            Uri location = new Uri(host, "/MediaRenderer/device.xml");
+            Uri host = new Uri(hostLocation);
+            Uri location = host;
+            if (isVolkano1)
+            {
+                location = new Uri(host, "/MediaRenderer/device.xml");
+            }
 
             DeviceUpnp device = new DeviceUpnp(udn, location.AbsoluteUri);
 
