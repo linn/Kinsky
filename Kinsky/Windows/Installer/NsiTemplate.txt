@@ -11,6 +11,7 @@
   !insertmacro VersionCompare
 
   !define DOTNETURI "http://download.microsoft.com/download/1/B/E/1BE39E79-7E39-46A3-96FF-047F95396215/dotNetFx40_Full_setup.exe"
+  !define SONGCASTURI "http://oss.linn.co.uk/Releases/Songcast/Davaar/songcast_latest_win.exe"
   !define PRODUCT "%(product)s"
   !define VERSION "%(version)s"
   !define LAUNCHFILE "%(launch)s"
@@ -39,10 +40,7 @@
 ;Variables
 
   Var InstallDotNET
-  Var SongcastDialog
-  Var SongcastTitle
-  Var SongcastText
-  Var SongcastLink
+  Var InstallSongcast
 
 ;--------------------------------
 ;Default installation folder
@@ -72,8 +70,6 @@
   !insertmacro MUI_PAGE_DIRECTORY
   !insertmacro MUI_PAGE_INSTFILES  
 
-  Page custom SongcastOutOfDatePage
-
   ;FINISH page settings
   !define MUI_FINISHPAGE_TITLE "Completing the Setup Wizard for ${PRODUCT}"
   !define MUI_FINISHPAGE_TEXT "${PRODUCT} has been installed on your computer.\n\nClick Finish to close this wizard."
@@ -102,43 +98,6 @@
   
   !insertmacro MUI_UNPAGE_FINISH
 
-Function SongcastOutOfDatePage
-    ; abort creation if the broken songcast version is not installed
-    ReadRegStr $0 HKLM "Software\Linn\Songcast" "InstalledVersions"
-    StrCpy $1 $0 4
-    StrCmp $1 "4.4." +2 0
-    Abort
-
-    !insertmacro MUI_HEADER_TEXT "Checking For Songcast Updates" "Please wait while we check for available Songcast updates"
-
-    nsDialogs::Create 1018
-    Pop $SongcastDialog
-
-    ${If} $SongcastDialog == error
-        Abort
-    ${EndIf}
-
-    ${NSD_CreateLabel} 0 0 100%% 25u "Songcast is out of date"
-    Pop $SongcastTitle
-
-    CreateFont $0 "$(^Font)" "$(^FontSize)" "700"
-    SendMessage $SongcastTitle ${WM_SETFONT} $0 0
-
-    ${NSD_CreateLabel} 0 20u 100%% 25u "We have detected that you are running an old version of Songcast and recommend that you update your installation. Please visit the Linn website to get the latest version."
-    Pop $SongcastText
-
-    ${NSD_CreateLink} 0 60u 100%% 25u "http://www.linn.co.uk/software#songcast"
-    Pop $SongcastLink
-    ${NSD_OnClick} $SongcastLink SongcastLinkClicked
-
-    nsDialogs::Show
-
-FunctionEnd
-
-Function SongcastLinkClicked
-    ExecShell "open" "http://www.linn.co.uk/software#songcast"
-FunctionEnd
-
 Function LaunchLink
     ExecShell "open" "$INSTDIR\${LAUNCHFILE}"
 FunctionEnd
@@ -165,6 +124,23 @@ Function IsDotNETInstalled
 
   Pop $1
   Exch $0
+FunctionEnd
+
+Function IsBadSongcastInstalled
+    Push $0
+    Push $1
+
+    ReadRegStr $0 HKLM "Software\Linn\Songcast" "InstalledVersions"
+    StrCpy $1 $0 4
+
+    ${If} $1 == "4.4."
+        StrCpy $0 "installed"
+    ${Else}
+        StrCpy $0 "not installed"
+    ${EndIf}
+
+    Pop $1
+    Exch $0
 FunctionEnd
 
 Function AddToFirewallExceptions
@@ -379,7 +355,15 @@ Function .onInit
   ${Else}
     StrCpy $InstallDotNET "No"
   ${EndIf}
-  
+
+  Call IsBadSongcastInstalled
+  Pop $0
+  ${If} $0 == "installed"
+    StrCpy $InstallSongcast "Yes"
+  ${Else}
+    StrCpy $InstallSongcast "No"
+  ${EndIf}
+
 retry:
   ; The next code block tries to find if the application is currently running and alerts the user to close the app before retrying.
   ; FindWindow : 2nd param=window "class name" for the app, 3rd param="window caption" for the app 
@@ -529,6 +513,22 @@ Section "Linn" SecLinn
 
   ;MessageBox MB_OK|MB_ICONSTOP "The following versions are installed : $0"
 
+  ${If} $InstallSongcast == "Yes"
+    SetDetailsView hide
+    inetc::get /caption "Repairing broken Songcast installation..." /canceltext "Cancel" ${SONGCASTURI} "$TEMP\songcast_latest_win.exe" /end
+    Pop $1
+
+    ${If} $1 == "OK"
+      Push "Songcast"
+      Call UninstallPreviousVersions
+      ExecWait '"$TEMP\songcast_latest_win.exe" /S'
+    ${EndIf}
+
+     Delete "$TEMP\songcast_latest_win.exe"
+
+     SetDetailsView show
+  ${EndIf}
+  
 SectionEnd
 
 

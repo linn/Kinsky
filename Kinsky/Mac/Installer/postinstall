@@ -1,15 +1,35 @@
 #!/bin/sh
 
-osascript <<EOD
+UPDATE=$(osascript <<EOD
   try
-    if (version of application "Songcast") starts with "4.4." then
-      set result to display dialog "We have detected that you are running an old version of Songcast and recommend that you update your installation. Please visit the Linn website to get the latest version." with title "Songcast is out of date" buttons {"Skip", "Visit Linn Website"} cancel button "Skip" default button "Visit Linn Website"
-
-      if button returned of result is "Visit Linn Website" then
-        do shell script "open http://www.linn.co.uk/software#songcast"
-      end if
-    end if
+    return (version of application "Songcast") starts with "4.4."
   on error
+  	return false
   end try
-EOD
+EOD)
 
+if ! $UPDATE ; then exit 0 ; fi
+
+CURRUSER=`logname`
+SONGCAST_URI="http://oss.linn.co.uk/Releases/Songcast/Davaar/songcast_latest_osx.dmg"
+DMG_FILE="/Users/$CURRUSER/Downloads/songcast_latest_osx.dmg"
+MOUNT_POINT="/Volumes/LinnSongcast"
+PKG_FILE=$MOUNT_POINT/Installer.pkg
+
+# download songcast dmg file
+rm -f $DMG_FILE
+curl $SONGCAST_URI > $DMG_FILE
+
+# mount the dmg file
+hdiutil detach -quiet $MOUNT_POINT
+hdiutil attach $DMG_FILE -mountpoint $MOUNT_POINT
+
+# run the installer
+installer -pkg $PKG_FILE -target /
+
+# unmount the dmg and remove the downloaded file
+hdiutil detach -quiet $MOUNT_POINT
+rm -f $DMG_FILE
+
+# restart songcast for the current user
+su -l $CURRUSER -c 'launchctl load /Library/LaunchAgents/uk.co.linn.songcast.plist'
