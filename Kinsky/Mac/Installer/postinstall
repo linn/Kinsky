@@ -10,9 +10,9 @@ EOD)
 
 if ! $UPDATE ; then exit 0 ; fi
 
-CURRUSER=`logname`
 SONGCAST_URI="http://oss.linn.co.uk/Releases/Songcast/Davaar/songcast_latest_osx.dmg"
-DMG_FILE="/Users/$CURRUSER/Downloads/songcast_latest_osx.dmg"
+`mkdir -p /Users/Shared/Downloads`
+DMG_FILE="/Users/Shared/Downloads/songcast_latest_osx.dmg"
 MOUNT_POINT="/Volumes/LinnSongcast"
 PKG_FILE=$MOUNT_POINT/Installer.pkg
 
@@ -31,5 +31,10 @@ installer -pkg $PKG_FILE -target /
 hdiutil detach -quiet $MOUNT_POINT
 rm -f $DMG_FILE
 
-# restart songcast for the current user
-su -l $CURRUSER -c 'launchctl load /Library/LaunchAgents/uk.co.linn.songcast.plist'
+LOGGEDINUSERS=`who | awk '/console/ { print $1 }'`
+
+for CURRUSER in $LOGGEDINUSERS
+do
+	# restart songcast for the current users
+	su -l $CURRUSER -c 'launchctl load /Library/LaunchAgents/uk.co.linn.songcast.plist'
+done
