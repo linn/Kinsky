@@ -28,7 +28,7 @@ def main():
 
     if not os.path.exists(kNotificationsDirEng): os.makedirs(kNotificationsDirEng)
     rsync(os.path.join(script_path, '../Notifications/'), kNotificationsDirEng, options.debug) # sync with eng
-    rsync(kNotificationsDirEng, kNotificationsDirKiboko, options.debug, '--rsh="ssh -i /home/products/.ssh/volkano_products_rsa"') # sync eng with kiboko
+    rsync(kNotificationsDirEng, kNotificationsDirKiboko, options.debug) # sync eng with kiboko
 
 if __name__ == '__main__':
     main()
