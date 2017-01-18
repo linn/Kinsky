@@ -3,6 +3,10 @@
     {
       "Version": 1,
       "Uri": "https://cloud.linn.co.uk/applications/kinsky/notifications/v1/index.html"
+    },
+	{
+      "Version": 2,
+      "Uri": "https://cloud.linn.co.uk/applications/kinsky/notifications/v2/index.html"
     }
   ]
 }
