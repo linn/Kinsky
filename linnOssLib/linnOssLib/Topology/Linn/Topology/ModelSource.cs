@@ -94,6 +94,10 @@ namespace Linn.Topology
             iMimeTypeAliases.Add("audio/x-flac", new List<string>(new string[] { "audio/flac" }));
             iMimeTypeAliases.Add("audio/flac", new List<string>(new string[] { "audio/x-flac" }));
             iMimeTypeAliases.Add("audio/x-m4a-lossless", new List<string>(new string[] { "audio/mp4" }));
+            iMimeTypeAliases.Add("audio/dsf", new List<string>(new string[] { "audio/x-dsf" }));
+            iMimeTypeAliases.Add("audio/x-dsf", new List<string>(new string[] { "audio/x-dsf" }));
+            iMimeTypeAliases.Add("audio/dff", new List<string>(new string[] { "audio/x-dff" }));
+            iMimeTypeAliases.Add("audio/x-dff", new List<string>(new string[] { "audio/x-dff" }));
         }
 
         public abstract void Open();
@@ -177,6 +181,7 @@ namespace Linn.Topology
                     supportedList.Add(r);
                     supported = true;
                 }
+                
             }
 
             if (supportedList.Count > 0)
@@ -188,6 +193,17 @@ namespace Linn.Topology
             {
                 UserLog.WriteLine("No supported formats found for " + aObject.Title);
                 UserLog.WriteLine("Supported formats are " + aProtocolInfo + ", item supports " + supportedFormats);
+
+                // uncomment below code to loosen the restriction that we only match resources supported by protocol info and allow the first unsupported resource, if present, to be served
+                //if (aObject.Res.Count > 0)
+                //{
+                //    UserLog.WriteLine("Using first available resource instead");
+                //    return aObject.Res[0];
+                //}
+                //else
+                //{
+                //    UserLog.WriteLine("No resources were found for this object.");
+                //}
             }
 
             return null;

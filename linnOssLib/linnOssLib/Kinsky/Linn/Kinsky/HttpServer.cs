@@ -327,6 +327,8 @@ namespace Linn.Kinsky
                     case ".wav":
                     case ".wave":
                     case ".wma":
+                    case ".dsf":
+                    case ".dff":
 
                     // image types
                     case ".bmp":

@@ -172,6 +172,7 @@ namespace Linn.Kinsky
                         resource.ProtocolInfo = resource.ProtocolInfo.Replace("mp3", "mpeg");
                         resource.ProtocolInfo = resource.ProtocolInfo.Replace("mpeg3", "mpeg");
                         resource.ProtocolInfo = resource.ProtocolInfo.Replace("m4a", "x-m4a");
+                        resource.ProtocolInfo = resource.ProtocolInfo.Replace("dsf", "x-dsf");
 
                         if (!string.IsNullOrEmpty(aArtworkUri))
                         {
@@ -281,7 +282,15 @@ namespace Linn.Kinsky
 
                 resource.Size = aInfo.Length;
                 resource.Uri = aResourceUri;
-                resource.ProtocolInfo = string.Format("http-get:*:application/octet-stream:*");
+                // dff (dsdiff codec) files are not currently supported by Taglib, but we still want the correct mime type for the resource
+                if (aInfo.Extension != null && aInfo.Extension.ToLowerInvariant() == ".dff") 
+                {
+                    resource.ProtocolInfo = string.Format("http-get:*:audio/x-dff:*");
+                }
+                else
+                {
+                    resource.ProtocolInfo = string.Format("http-get:*:application/octet-stream:*");
+                }
 
                 if (!string.IsNullOrEmpty(aArtworkUri))
                 {
