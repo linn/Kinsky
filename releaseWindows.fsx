@@ -28,7 +28,7 @@ Target "Default" (fun _ ->
 
 // Clean
 Target "Clean" (fun _ ->
-    CleanDirs [ "./dependencies"; "./build" ]
+    CleanDirs [ "./packages"; "./build" ]
 )
 
 // Restore packages
@@ -38,7 +38,7 @@ Target "RestorePackages" (fun _ ->
     {
         p with
             ToolPath = nugetPath
-            OutputPath = "dependencies/nuget"
+            OutputPath = "packages"
     })
 )
 
