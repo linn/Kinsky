@@ -47,10 +47,7 @@ Target "Build" (fun _ ->
 
     UpdateAttributes "./Kinsky/Properties/AssemblyInfo.cs"
         [Attribute.Title ("Linn Kinsky" + BuildQuality quality)
-         Attribute.Version version
-         Attribute.FileVersion version]
-
-    //RegexReplaceInFileWithEncoding "VERSION \".*\"" ("VERSION \"" + version + "\"") System.Text.Encoding.ASCII "./src/Windows/App/Installer/NsiTemplate.txt"
+         Attribute.Version version]
 
     let setParams defaults =
         { defaults with
