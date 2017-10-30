@@ -21,6 +21,17 @@ let BuildQuality quality =
         " (" + quality + ")"
 
 
+let Exec command args =
+    let result = Shell.Exec(command, args)
+    if result <> 0 then failwithf "%s exited with error %d" command result
+
+
+let UpdatePlist plistPath shortVersion version =
+    Exec "/usr/libexec/PlistBuddy" ("-c 'Set :CFBundleShortVersionString " + shortVersion + "' " + plistPath)
+    Exec "/usr/libexec/PlistBuddy" ("-c 'Set :CFBundleVersion " + version + "' " + plistPath)
+
+
+
 // Default target
 Target "Default" (fun _ ->
     trace "Default build"
@@ -33,7 +44,7 @@ Target "Clean" (fun _ ->
 
 // Restore packages
 Target "RestorePackages" (fun _ ->
-    "./KinskyWindows.sln"
+    "./KinskyMac.sln"
     |> RestoreMSSolutionPackages(fun p ->
     {
         p with
@@ -46,8 +57,12 @@ Target "RestorePackages" (fun _ ->
 Target "Build" (fun _ ->
 
     UpdateAttributes "./Kinsky/Properties/AssemblyInfo.cs"
-        [Attribute.Title ("Linn Kinsky" + BuildQuality quality)
+        [Attribute.Title ("Linn Konfig" + BuildQuality quality)
          Attribute.Version version]
+
+    UpdatePlist "./Kinsky/Mac/Info.plist" version version
+
+    XmlPoke "./src/Mac/Updater/distribution.dist" "/installer-gui-script/pkg-ref/@version" version
 
     let setParams defaults =
         { defaults with
@@ -58,19 +73,18 @@ Target "Build" (fun _ ->
                     "Optimize", "True"
                     "DebugSymbols", "True"
                     "Configuration", "Release"
-                    "Platform", "x86"
+                    "Platform", "Any CPU"
                     "BuildVersion", version
                 ]
          }
     build setParams "KinskyWindows.sln"
         |> DoNothing
 
-
-
     CreateDir "./build/artifacts"
-    CopyFile ("./build/artifacts/Kinsky_" + version + "_win.exe") "./build/Kinsky/bin/Windows/Installer/InstallerKinsky.exe"
-    CopyFile ("./build/artifacts/Kinsky_" + version + "_win.dll") "./build/Kinsky/bin/Windows/Installer/UpdaterKinsky.dll"
+    CopyFile ("./build/artifacts/Konfig_" + version + "_osx.pkg") "./build/Konfig/Mac/bin/Release/Konfig.pkg"
+    CopyFile ("./build/artifacts/Konfig_" + version + "_osx.dll") "./build/KonfigUpdater/Mac/bin/Release/KonfigMacUpdater.dll"
 )
+
 
 // Dependencies
 "Clean"
