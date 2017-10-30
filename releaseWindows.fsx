@@ -58,7 +58,7 @@ Target "Build" (fun _ ->
                     "Optimize", "True"
                     "DebugSymbols", "True"
                     "Configuration", "Release"
-                    "Platform", "x86"
+                    "Platform", "Any CPU"
                     "BuildVersion", version
                 ]
          }
