@@ -3,6 +3,9 @@
 namespace Linn.FakeTools
 module Utils = 
     open Fake
+    open System
+    open System.Text
+    open System.Text.RegularExpressions
 
 
     let private kTagRegexBuilder = sprintf @"%s-[v]?0*([0-9]+)\.0*([0-9]+)\.0*([0-9]+)-(release|stable|development|beta|nightly|internal|developer).*"
