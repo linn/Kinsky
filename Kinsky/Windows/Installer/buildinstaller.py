@@ -97,9 +97,9 @@ def BuildUpdater(installerdir, installerexe):
 def main():
     (releasedir, installerdir, version) = GetArgs()
 
-    SignExe(os.path.join(releasedir, "Kinsky.exe"))
+    #SignExe(os.path.join(releasedir, "Kinsky.exe"))
     installerexe = MakeInstaller(releasedir, version, installerdir, "Kinsky")
-    SignExe(installerexe)
+    #SignExe(installerexe)
     BuildUpdater(installerdir, installerexe)
 
 
