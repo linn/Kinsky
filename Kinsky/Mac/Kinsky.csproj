@@ -47,8 +47,8 @@
     <UseSGen>true</UseSGen>
     <UseRefCounting>false</UseRefCounting>
     <Profiling>false</Profiling>
-    <CodeSigningKey>Developer ID Application: Linn Products Ltd</CodeSigningKey>
-    <PackageSigningKey>Developer ID Installer: Linn Products Ltd</PackageSigningKey>
+    <CodeSigningKey>Developer ID Application: Linn Products Ltd (N5UMY6A236)</CodeSigningKey>
+    <PackageSigningKey>Developer ID Installer: Linn Products Ltd (N5UMY6A236)</PackageSigningKey>
     <CodeSignExtraArgs></CodeSignExtraArgs>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />

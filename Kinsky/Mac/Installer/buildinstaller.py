@@ -154,7 +154,7 @@ def main():
 
     distFile = ProductBuildSynthesizeDistFile(installerdir, pkg)
     UpdateDistributionFile(distFile, version, title="%s" % appName, license='License.txt')
-    installer = ProductBuildCreateDistribution(installerdir, "Installer%s.pkg" % appName, [installerdir], resourcesdir, distFile, "Developer ID Installer: Linn Products Ltd")
+    installer = ProductBuildCreateDistribution(installerdir, "Installer%s.pkg" % appName, [installerdir], resourcesdir, distFile, "Developer ID Installer: Linn Products Ltd (N5UMY6A236)")
 
     BuildUpdater(installerdir, "Updater%s.dll" % appName, appName, installer, os.path.join(os.path.abspath(kScriptDir), 'Updater.cs'))
 
