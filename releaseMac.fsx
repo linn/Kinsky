@@ -77,7 +77,7 @@ Target "Build" (fun _ ->
         |> DoNothing
 
 
-    Utils.Exec "python" [ "./Kinsky/Mac/Installer/buildinstaller.py"; "Release"; buildVersion ]
+    Utils.Exec "python" (sprintf "%s %s %s" "./Kinsky/Mac/Installer/buildinstaller.py" "Release" buildVersion)
 
     CreateDir "./build/artifacts"
     CopyFile ("./build/artifacts/Kinsky_" + buildVersion + "_osx.pkg") "./build/Kinsky/bin/Mac/Installer/Release/InstallerKinsky.pkg"
