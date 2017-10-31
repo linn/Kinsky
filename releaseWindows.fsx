@@ -1,6 +1,6 @@
 // include Fake
 #r @"fake/FAKE/tools/FakeLib.dll"
-#r @"./Utils.fsx"
+#load @"./Utils.fsx"
 
 open Fake
 open Fake.AssemblyInfoFile
