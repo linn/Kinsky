@@ -1,8 +1,9 @@
-
 // include Fake
 #r @"fake/FAKE/tools/FakeLib.dll"
+#r @"./Utils.fsx"
 open Fake
 open Fake.AssemblyInfoFile
+open Linn.FakeTools
 
 
 // get command line args
@@ -10,25 +11,22 @@ open Fake.AssemblyInfoFile
 let nugetPath = getBuildParam "nugetpath"
 let version = getBuildParam "version"
 let quality = getBuildParam "quality"
+let buildTag = getBuildParam "tag"
 
+let isReleaseTag = 
+    match buildTag with
+    | "" -> false
+    | _ -> Utils.ShouldPublishReleaseFromTag "Kinsky" buildTag || Utils.ShouldPublishReleaseFromTag "KinskyMac" buildTag
 
-// helper functions that can be moved somewhere common later
+let buildVersion = 
+    match isReleaseTag with
+    | false -> version
+    | _ -> Utils.ParseReleaseVersionFromTag buildTag
 
-let BuildQuality quality =
-    if (quality = "Release" || quality = "") then
-        ""
-    else
-        " (" + quality + ")"
-
-
-let Exec command args =
-    let result = Shell.Exec(command, args)
-    if result <> 0 then failwithf "%s exited with error %d" command result
-
-
-let UpdatePlist plistPath shortVersion version =
-    Exec "/usr/libexec/PlistBuddy" ("-c 'Set :CFBundleShortVersionString " + shortVersion + "' " + plistPath)
-    Exec "/usr/libexec/PlistBuddy" ("-c 'Set :CFBundleVersion " + version + "' " + plistPath)
+let buildQuality =
+    match isReleaseTag with
+    | false -> quality
+    | _ -> Utils.ParseBuildQualityFromTag buildTag
 
 
 
@@ -57,12 +55,10 @@ Target "RestorePackages" (fun _ ->
 Target "Build" (fun _ ->
 
     UpdateAttributes "./Kinsky/Properties/AssemblyInfo.cs"
-        [Attribute.Title ("Linn Konfig" + BuildQuality quality)
-         Attribute.Version version]
+        [Attribute.Title (Utils.FormatTitle "Linn Kinsky" buildQuality)
+         Attribute.Version buildVersion]
 
-    UpdatePlist "./Kinsky/Mac/Info.plist" version version
-
-    XmlPoke "./src/Mac/Updater/distribution.dist" "/installer-gui-script/pkg-ref/@version" version
+    Utils.UpdatePlist "./Kinsky/Mac/Info.plist" buildVersion buildVersion
 
     let setParams defaults =
         { defaults with
@@ -74,15 +70,18 @@ Target "Build" (fun _ ->
                     "DebugSymbols", "True"
                     "Configuration", "Release"
                     "Platform", "Any CPU"
-                    "BuildVersion", version
+                    "BuildVersion", buildVersion
                 ]
          }
-    build setParams "KinskyWindows.sln"
+    build setParams "KinskyMac.sln"
         |> DoNothing
 
+
+    Utils.Exec "python" [ "./Kinsky/Mac/Installer/buildinstaller.py"; "Release"; buildVersion ]
+
     CreateDir "./build/artifacts"
-    CopyFile ("./build/artifacts/Konfig_" + version + "_osx.pkg") "./build/Konfig/Mac/bin/Release/Konfig.pkg"
-    CopyFile ("./build/artifacts/Konfig_" + version + "_osx.dll") "./build/KonfigUpdater/Mac/bin/Release/KonfigMacUpdater.dll"
+    CopyFile ("./build/artifacts/Kinsky_" + buildVersion + "_osx.pkg") "./build/Kinsky/bin/Mac/Installer/Release/InstallerKinsky.pkg"
+    CopyFile ("./build/artifacts/Kinsky_" + buildVersion + "_osx.dll") "./build/Kinsky/bin/Mac/Installer/Release/UpdaterKinsky.dll"
 )
 
 

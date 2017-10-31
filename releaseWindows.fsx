@@ -1,8 +1,10 @@
-
 // include Fake
 #r @"fake/FAKE/tools/FakeLib.dll"
+#r @"./Utils.fsx"
+
 open Fake
 open Fake.AssemblyInfoFile
+open Linn.FakeTools
 
 
 // get command line args
@@ -10,15 +12,22 @@ open Fake.AssemblyInfoFile
 let nugetPath = getBuildParam "nugetpath"
 let version = getBuildParam "version"
 let quality = getBuildParam "quality"
+let buildTag = getBuildParam "tag"
 
+let isReleaseTag = 
+    match buildTag with
+    | "" -> false
+    | _ -> Utils.ShouldPublishReleaseFromTag "Kinsky" buildTag || Utils.ShouldPublishReleaseFromTag "KinskyWindows" buildTag
 
-// helper functions that can be moved somewhere common later
+let buildVersion = 
+    match isReleaseTag with
+    | false -> version
+    | _ -> Utils.ParseReleaseVersionFromTag buildTag
 
-let BuildQuality quality =
-    if (quality = "Release" || quality = "") then
-        ""
-    else
-        " (" + quality + ")"
+let buildQuality =
+    match isReleaseTag with
+    | false -> quality
+    | _ -> Utils.ParseBuildQualityFromTag buildTag
 
 
 // Default target
@@ -46,8 +55,8 @@ Target "RestorePackages" (fun _ ->
 Target "Build" (fun _ ->
 
     UpdateAttributes "./Kinsky/Properties/AssemblyInfo.cs"
-        [Attribute.Title ("Linn Kinsky" + BuildQuality quality)
-         Attribute.Version version]
+        [Attribute.Title (Utils.FormatTitle "Linn Kinsky" buildQuality)
+         Attribute.Version buildVersion]
 
     let setParams defaults =
         { defaults with
@@ -59,7 +68,7 @@ Target "Build" (fun _ ->
                     "DebugSymbols", "True"
                     "Configuration", "Release"
                     "Platform", "Any CPU"
-                    "BuildVersion", version
+                    "BuildVersion", buildVersion
                 ]
          }
     build setParams "KinskyWindows.sln"
@@ -68,8 +77,8 @@ Target "Build" (fun _ ->
 
 
     CreateDir "./build/artifacts"
-    CopyFile ("./build/artifacts/Kinsky_" + version + "_win.exe") "./build/Kinsky/bin/Windows/Installer/InstallerKinsky.exe"
-    CopyFile ("./build/artifacts/Kinsky_" + version + "_win.dll") "./build/Kinsky/bin/Windows/Installer/UpdaterKinsky.dll"
+    CopyFile ("./build/artifacts/Kinsky_" + buildVersion + "_win.exe") "./build/Kinsky/bin/Windows/Installer/Release/InstallerKinsky.exe"
+    CopyFile ("./build/artifacts/Kinsky_" + buildVersion + "_win.dll") "./build/Kinsky/bin/Windows/Installer/Release/UpdaterKinsky.dll"
 )
 
 // Dependencies
