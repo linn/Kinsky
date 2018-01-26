@@ -89,7 +89,7 @@ namespace Linn
             iCrashLogDumpers = new List<ICrashLogDumper>();
             iCrashLogDumpers.Add(new CrashLogDumperStdout());
             // only add 1 crash file for several instances of the app
-            string[] filenames = System.IO.Directory.GetFiles(".", "*.crash");
+            string[] filenames = System.IO.Directory.GetFiles(iExePath.FullName, "*.crash");
             if (filenames.Length == 0)
             {
                 string exeNoExt = Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName);
