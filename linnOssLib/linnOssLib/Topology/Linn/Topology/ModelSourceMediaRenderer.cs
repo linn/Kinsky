@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Linn.ControlPoint.Upnp;
 using Upnp;
-using Xamarin;
 
 namespace Linn.Topology
 {
@@ -143,13 +142,7 @@ namespace Linn.Topology
 
         protected void LogAction()
         {
-            Insights.Track("DeviceInteraction",
-                new Dictionary<string, string>()
-            {
-                { "Model", iModel },
-                { "Manufacturer", iManufacturer },
-                { "ManufacturerModel." + iManufacturer.Replace(" ", "_"), iModel }
-            });
+
         }
     }
 

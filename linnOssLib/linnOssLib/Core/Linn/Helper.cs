@@ -5,7 +5,6 @@ using System.IO;
 using System.Reflection;
 using System.Collections.Generic;
 
-using Xamarin;
 
 namespace Linn
 {
@@ -211,9 +210,7 @@ namespace Linn
 
         public void ProcessOptionsFileAndCommandLine()
         {
-#if !DEBUG && !TRACE
-            Insights.DisableExceptionCatching = true;
-#endif
+
             
             AddOptionPage(iOptionPage);
             ProcessCommandLine();
@@ -369,18 +366,7 @@ namespace Linn
                         d.Dump(cl);
                     }
 
-                    if (Insights.IsInitialized)
-                    {
-                        var data = new Dictionary<string, string> { { "Logs", UserLog.Text } };
-                        string options = string.Empty;
-                        foreach (var o in iOptionManager.OptionValues)
-                        {
-                            options += string.Format("{0} : {1}\n", o.Key, o.Value);
-                        }
-                        data.Add("Options", options);
-                        Insights.Report(aException, data, Xamarin.Insights.Severity.Error);
-                        Insights.PurgePendingCrashReports().Wait();
-                    }
+
                 }
             }
 

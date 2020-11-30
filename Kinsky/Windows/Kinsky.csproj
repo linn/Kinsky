@@ -70,10 +70,6 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System.Web.Services" />
-    <Reference Include="Xamarin.Insights, Version=1.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Insights.1.11.2\lib\net40\Xamarin.Insights.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="App.xaml">
@@ -384,7 +380,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -395,10 +393,6 @@
     <ProjectReference Include="..\..\linnOssLib\Windows\linnOssLib.csproj">
       <Project>{8475CD6A-A901-4D38-BCB4-BA2B160B6D04}</Project>
       <Name>linnOssLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MediaProviderPlugins\OssKinskyMppBbc\OssKinskyMppBbc.Windows.csproj">
-      <Project>{72ab9915-1a27-43d0-b537-a4914726550d}</Project>
-      <Name>OssKinskyMppBbc.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MediaProviderPlugins\OssKinskyMppFolder\OssKinskyMppFolder.Windows.csproj">
       <Project>{1dc2067e-4de8-40a7-96e9-aff6145cb53f}</Project>
@@ -424,7 +418,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Installer\icon.ico" />
-  </ItemGroup>  
+  </ItemGroup>
   <ItemGroup>
     <None Include="..\..\packages\Microsoft.VC120.CRT.JetBrains.12.0.21005.2\DotFiles\msvcp120.dll">
       <Link>msvcp120.dll</Link>
@@ -440,12 +434,10 @@
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\packages\Xamarin.Insights.1.11.2\build\portable-win+net40\Xamarin.Insights.targets" Condition="Exists('..\..\packages\Xamarin.Insights.1.11.2\build\portable-win+net40\Xamarin.Insights.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Xamarin.Insights.1.11.2\build\portable-win+net40\Xamarin.Insights.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Insights.1.11.2\build\portable-win+net40\Xamarin.Insights.targets'))" />
     <Error Condition="!Exists('..\..\packages\cef.redist.x64.3.2623.1401\build\cef.redist.x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x64.3.2623.1401\build\cef.redist.x64.targets'))" />
     <Error Condition="!Exists('..\..\packages\cef.redist.x86.3.2623.1401\build\cef.redist.x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x86.3.2623.1401\build\cef.redist.x86.targets'))" />
     <Error Condition="!Exists('..\..\packages\CefSharp.Common.49.0.1\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.49.0.1\build\CefSharp.Common.props'))" />

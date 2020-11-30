@@ -8,7 +8,6 @@ using System.Collections.ObjectModel;
 using Linn.Control.Ssdp;
 using Linn.ControlPoint;
 using Linn.ControlPoint.Upnp;
-using Xamarin;
 
 namespace Linn.Topology.Layer0
 {
@@ -465,17 +464,7 @@ namespace Linn.Topology.Layer0
                 devicesCount = iOpenDevices.Count;
             }
 
-            if (Insights.IsInitialized)
-            {
-                foreach (var eventData in deviceEvents)
-                {
-                    Insights.Track("DeviceV2", eventData);
-                }
-                if (devicesCount > 0)
-                {
-                  Insights.Track("HouseV2", new Dictionary<string, string>() { { "Makeup", devicesCount == 0 ? "Empty" : (allLinn ? "All Linn" : (allNonLinn ? "All Non Linn" : "Mixed")) } });
-                }
-            }
+
         }
 
         class DeviceWatcher : IDisposable

@@ -7,7 +7,6 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Xamarin;
 
 namespace Linn.Kinsky
 {
@@ -72,10 +71,7 @@ namespace Linn.Kinsky
 
         public void TrackUsageEventDismissed(bool aVisitedStorePage)
         {
-            if (Insights.IsInitialized)
-            {
-                Insights.Track(string.Format("NotificationDismissedV{0}", Version), new Dictionary<string, string>() { { "VisitedStore", aVisitedStorePage.ToString() } });
-            }
+
         }
         private string CacheBuster(string aUri)
         {

@@ -188,11 +188,7 @@ namespace KinskyDesktopWpf
             iUpdateOnExit = false;
             var invoker = new Invoker(this.Dispatcher);
             iHelper = new HelperKinsky(Environment.GetCommandLineArgs(), invoker);
-#if DEBUG
-            Xamarin.Insights.Initialize(kApiKeyDummyProject, iHelper.Version, iHelper.Product);
-#else
-            Xamarin.Insights.Initialize(kApiKey, iHelper.Version, iHelper.Product);
-#endif
+
 
             ICrashLogDumper d = new CrashLogDumperForm(this,
                                                        iHelper.Title,
@@ -202,7 +198,6 @@ namespace KinskyDesktopWpf
             System.Windows.Forms.Application.SetUnhandledExceptionMode(System.Windows.Forms.UnhandledExceptionMode.ThrowException);
             iUIOptions = new UiOptions(iHelper);
             InitialiseStack();
-            Xamarin.Insights.Identify(iHelper.OptionInstallId.Value, null);
             WindowChrome.SetIsMiniModeActive(mainWindowChrome, iUIOptions.MiniMode);
             SetWindowDimensions();
             iProcessedOptions = true;
